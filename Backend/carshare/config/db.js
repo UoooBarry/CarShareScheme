@@ -1,3 +1,9 @@
+/* 
+    Author: Yongqian Huang, created at: 23/07/2020
+    updated: Yongqian Huang, 23/07/2020, Init creation
+*/
+
+
 const { Sequelize } = require('sequelize');
 
 const envConfigs =  require('../config/config');

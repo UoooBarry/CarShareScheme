@@ -3,21 +3,24 @@
     updated: Yongqian Huang, 23/07/2020, Creation to connect local database
 */
 
+const { Sequelize } = require('sequelize');
 
-const mongoose = require('mongoose');
+const envConfigs =  require('../config/config');
+const env = process.env.NODE_ENV || 'development';
+const config = envConfigs[env];
 
-const DBHOST = process.env.DBHOST || 'localhost';
-const DBPORT = process.env.DBPORT || '27017';
-const DBNAME = process.env.DBNAME || 'carshare';
 
-const url = `mongodb://${DBHOST}:${DBPORT}/${DBNAME}`;
+const db = new Sequelize(config.DBNAME, config.DBUSER, config.DBPASS, {
+    host: config.DBHOST,
+    port: config.DBPORT,
+    dialect: 'postgres',
 
-mongoose.connect(url, {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify:false});
-
-let db = mongoose.connection;
-
-db.on('error', function(err){
-    console.log(err);
+    pool: {
+        max: 5,
+        min: 0,
+        acquire: 30000,
+        idle: 10000
+    },
 });
 
 module.exports = db;
