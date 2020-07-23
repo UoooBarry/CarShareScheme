@@ -1,3 +1,8 @@
+/* 
+    Author: Yongqian Huang, created at: 23/07/2020
+    updated: Yongqian Huang, 23/07/2020, Creation of car model
+*/
+
 const mongoose = require('mongoose');
 
 const car = mongoose.Schema({

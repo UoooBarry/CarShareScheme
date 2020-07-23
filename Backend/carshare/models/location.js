@@ -1,3 +1,8 @@
+/* 
+    Author: Yongqian Huang, created at: 23/07/2020
+    updated: Yongqian Huang, 23/07/2020, Creation of location model
+*/
+
 const mongoose = require('mongoose');
 
 const location = mongoose.Schema({

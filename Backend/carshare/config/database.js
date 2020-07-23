@@ -1,3 +1,8 @@
+/* 
+    Author: Yongqian Huang, created at: 23/07/2020
+    updated: Yongqian Huang, 23/07/2020, Creation to connect local database
+*/
+
 const mongoose = require('mongoose');
 
 const DBHOST = process.env.DBHOST || 'localhost';

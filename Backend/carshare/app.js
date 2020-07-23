@@ -1,3 +1,8 @@
+/* 
+    Author: Yongqian Huang, created at: 23/07/2020
+    updated: Yongqian Huang, 23/07/2020, Init creation
+*/
+
 var createError = require('http-errors');
 var express = require('express');
 var cookieParser = require('cookie-parser');
