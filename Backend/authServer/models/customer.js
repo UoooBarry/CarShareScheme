@@ -3,43 +3,26 @@
     updated: Yongqian Huang, 23/07/2020, Creation of customer model
 */
 
-const mongoose = require('mongoose');
 
-//scheme
-const loginScheme = mongoose.Schema({
-    email: {
-        type: String,
-        unique: true,
-        required: true
-    },
-    password: {
-        type: String,
-        required: true
-    }
-});
+const Sequelize = require('sequelize');
+const db = require('../config/database');
 
-
-const customer = mongoose.Schema({
+const customer = db.define('customers',{
     first_name:{
-        type: String,
-        required: true
+        type: Sequelize.STRING
     },
     family_name:{
-        type: String,
-        required: true
+        type: Sequelize.STRING
     },
     date_of_birth:{
-        type: Date
+        type: Sequelize.DATE
     },
     contact:{
-        type: Number,
-        required: true
+        type: Sequelize.INTEGER
     },
     gender:{
-        type: String,
-        required: true
-    },
-    login: loginScheme
+        type: Sequelize.STRING
+    }
 })
 
-module.exports = mongoose.model('Customer', customer);
+module.exports = customer;

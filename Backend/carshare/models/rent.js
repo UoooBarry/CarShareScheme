@@ -3,32 +3,26 @@
     updated: Yongqian Huang, 23/07/2020, Creation of rent model
 */
 
-const mongoose = require('mongoose');
+const Sequelize = require('sequelize');
+const db = require('../config/db');
 
-const rent = mongoose.Schema({
+const rent =  db.define('rents',{
     car_id:{
-        type: mongoose.Types.ObjectId,
-        required: true
+        type: Sequelize.INTEGER
     },
     user_id:{
-        type: mongoose.Types.ObjectId,
-        required: true
+        type: Sequelize.INTEGER
     },
     location_id:{
-        type: mongoose.Types.ObjectId,
-        required: true
+        type: Sequelize.INTEGER
     },
     period: {
-        type: Number,
-        required: true
+        type: Sequelize.INTEGER
     },
     completed: {
-        type: Boolean,
-        Default: false
+        type: Sequelize.BOOLEAN
     }
-}, {
-    timestamps: true
 })
 
 
-module.exports = mongoose.model('Rent', rent);
+module.exports = rent;

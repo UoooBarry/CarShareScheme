@@ -1,6 +1,7 @@
 /* 
     Author: Yongqian Huang, created at: 23/07/2020
     updated: Yongqian Huang, 23/07/2020, Init creation
+             Yongqian Huang, 23/07/2020, Migrate to postgresql
 */
 
 const express = require('express');
@@ -9,12 +10,16 @@ const Car = require('../models/car');
 
 //GET: /api/cars
 router.get('/', (req,res) => {
-    Car.find({})
-        .exec()
+    Car.findAll()
         .then(
-            cars => res.json({cars})
+            cars => res.json(cars)
         )
-        .catch(() => res.sendStatus(403));
+        .catch(
+            (err) => {
+                res.sendStatus(403);
+                console.log(err);
+            }
+        )
 });
 
 module.exports = router;

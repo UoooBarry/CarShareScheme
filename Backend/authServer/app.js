@@ -8,7 +8,7 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 const JWT = require('jsonwebtoken');
-const mongo = require('./config/database');
+const db = require('./config/database');
 const Customer = require('./models/customer');
 const { check, validationResult } = require('express-validator');
 const cors = require('cors')
@@ -21,9 +21,9 @@ app.use(express.urlencoded({ extended: false }));
 
 
 //catch database connection
-mongo.once('open',function(){
-    console.log("Database connected successfully.");
-});
+db.authenticate()
+    .then(() => console.log('Database connected...'))
+    .catch( err => console.log(`DB err: ${err}`))
 
 // error handler
 app.use(function(err, req, res, next) {
