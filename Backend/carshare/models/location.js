@@ -3,18 +3,17 @@
     updated: Yongqian Huang, 23/07/2020, Creation of location model
 */
 
-const mongoose = require('mongoose');
+const Sequelize = require('sequelize');
+const db = require('../config/db');
 
-const location = mongoose.Schema({
+const location = db.define('locations',{
     name:{
-        type: String,
-        required: true
+        type: Sequelize.STRING
     },
     address:{
-        type: String,
-        required: true
+        type: Sequelize.STRING
     }
 })
 
 
-module.exports = mongoose.model('Location', location);
+module.exports = location;

@@ -7,8 +7,10 @@ var createError = require('http-errors');
 var express = require('express');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-const mongo = require('./config/database');
 const carsRouter = require('./routes/cars');
+
+// Database
+const db =require('./config/db');
 
 var app = express();
 
@@ -26,9 +28,9 @@ app.use(function(req, res, next) {
 });
 
 //catch database connection
-mongo.once('open',function(){
-  console.log("Database connected successfully.");
-});
+db.authenticate()
+    .then(() => console.log('Database connected...'))
+    .catch( err => console.log(`DB err: ${err}`))
 
 // error handler
 app.use(function(err, req, res, next) {

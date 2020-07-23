@@ -1,34 +1,31 @@
 /* 
     Author: Yongqian Huang, created at: 23/07/2020
     updated: Yongqian Huang, 23/07/2020, Creation of car model
+             Yongqian Huang, 23/07/2020, Migration to postgresql database
 */
 
-const mongoose = require('mongoose');
+const Sequelize = require('sequelize');
+const db = require('../config/db');
 
-const car = mongoose.Schema({
+const car = db.define('cars',{
     name:{
-        type: String,
-        required: true
+        type: Sequelize.STRING
     },
     brand:{
-        type: String,
-        required: true
+        type: Sequelize.STRING
     },
     model:{
-        type: String,
-        required: true
+        type: Sequelize.STRING
     },
     purchase_date:{
-        type: Date,
-        default: new Date()
+        type: Sequelize.DATE
     },
     location_id:{
-        type: mongoose.Types.ObjectId
+        type: Sequelize.INTEGER
     },
     available:{
-        type: Boolean,
-        default: false
+        type: Sequelize.BOOLEAN
     }
 });
 
-module.exports = mongoose.model('Car', car);
+module.exports = car;
