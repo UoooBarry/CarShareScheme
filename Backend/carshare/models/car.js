@@ -17,10 +17,13 @@ const car = mongoose.Schema({
         type: Date,
         default: new Date()
     },
+    location_id:{
+        type: mongoose.Types.ObjectId
+    },
     available:{
         type: Boolean,
         default: false
     }
 });
 
-module.exports = mongoose.model('Car', order);
+module.exports = mongoose.model('Car', car);
