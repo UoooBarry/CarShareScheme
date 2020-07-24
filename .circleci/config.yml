@@ -9,8 +9,9 @@ jobs:
       - checkout
       - node/with-cache:
           steps:
+            - run: cd Backend/carshare/
             - run: npm install
-            - run: npm test
+            
 workflows:
     build-and-test:
       jobs:
