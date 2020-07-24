@@ -5,7 +5,7 @@ const chai = require('chai');
 const assert = chai.assert;
 
 describe('model/car', ()=> {
-    var location;
+    const location;
     /* Clean up all data before test */
     before(async () => {
         Car.sequelize.sync();
@@ -29,6 +29,9 @@ describe('model/car', ()=> {
                 .then((car) => {
                     assert.equal(car.name, 'Test Car'); //Car name should be equal to Test Car after created
                 })
+                .catch( (err) => {
+                    assert.lengthOf(err,0); //No errors should be found
+                } )
         })
     });
 
