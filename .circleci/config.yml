@@ -27,7 +27,6 @@ jobs:
       - image: circleci/node:lts
       - image: circleci/postgres:latest
         environment:
-          MOCHA_FILE: "./test-output/unit-result.xml"
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: password
           POSTGRES_DB: CarShareTest
@@ -41,7 +40,7 @@ jobs:
             mkdir -p ../test-output
             npm run unit-test
       - store_test_results:
-          path: src/test-output
+          path: src/Backend/test-results.xml
             
 workflows:
     build-and-test:

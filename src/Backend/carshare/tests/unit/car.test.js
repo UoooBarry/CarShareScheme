@@ -13,11 +13,10 @@ describe('model/car', ()=> {
         location = await Location.create({
             name: "First",
             address: "1 Ad road"
-        })
+        });
     });
 
-    describe("Create a car", () => {
-        it("creates a car", () => {
+    it("creates a car", () => {
             Car.create({
                 name: "Test Car",
                 brand: "Test brand",
@@ -31,11 +30,6 @@ describe('model/car', ()=> {
                 })
                 .catch( (err) => {
                     assert.lengthOf(err,0); //No errors should be found
-                } )
-        })
-    });
-
-
-
-    
-})
+                });
+        });
+});
