@@ -1,8 +1,6 @@
 const Car = require('../../models/car');
 const Location = require('../../models/location');
 const chai = require('chai');
-var SequelizeMock = require('sequelize-mock');
-var DBConnectionMock = new SequelizeMock();
 //Assertion style
 const assert = chai.assert;
 
