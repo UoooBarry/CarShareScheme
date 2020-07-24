@@ -8,7 +8,8 @@ describe('model/car', ()=> {
     var location;
     /* Clean up all data before test */
     before(async () => {
-        Car.sync();
+        Car.sequelize.sync();
+        Location.sequelize.sync();
         location = await Location.create({
             name: "First",
             address: "1 Ad road"
@@ -27,9 +28,6 @@ describe('model/car', ()=> {
             })
                 .then((car) => {
                     assert.equal(car.name, 'Test Car'); //Car name should be equal to Test Car after created
-                })
-                .catch( (err) => {
-                    assert.lengthOf(err, 0); //expect 0 err
                 })
         })
     });
