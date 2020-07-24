@@ -1,18 +1,46 @@
 version: 2.1
-orbs:
-  node: circleci/node@1.1.6
+commands:
+  install_deps:
+    steps:
+      - run:
+          name: Install dependencies
+          command: |
+            cd src/Backend/carshare/
+            npm install
+
+
 jobs:
-  build-and-test:
-    executor:
-      name: node/default
+  build:
+    docker:
+      - image: circleci/node:lts
+      - image: circleci/postgres:12
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: CarShareTest
     steps:
       - checkout
-      - node/with-cache:
-          steps:
-            - run: cd Backend/carshare/
-            - run: npm install
+      - install_deps
+    
+  unit-tests:
+    docker:
+      - image: circleci/node:lts
+    environment:
+      MOCHA_FILE: "./test-output/unit-result.xml"
+    steps:
+      - checkout
+      - install_deps
+      - run:
+        name: run unit tests
+        command: |
+          cd src/Backend/carshare/
+          mkdir test-output
+          npm run unit-test
             
 workflows:
     build-and-test:
       jobs:
-        - build-and-test
+        - build
+        - unit-tests:
+            requires:
+              - build

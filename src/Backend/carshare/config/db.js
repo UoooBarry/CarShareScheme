@@ -14,7 +14,7 @@ const config = envConfigs[env];
 const db = new Sequelize(config.DBNAME, config.DBUSER, config.DBPASS, {
     host: config.DBHOST,
     port: config.DBPORT,
-    dialect: 'postgres',
+    dialect: config.dialect,
 
     pool: {
         max: 5,
