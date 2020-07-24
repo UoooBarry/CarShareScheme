@@ -25,8 +25,12 @@ jobs:
   unit-tests:
     docker:
       - image: circleci/node:lts
+      - image: circleci/postgres:12
     environment:
       MOCHA_FILE: "./test-output/unit-result.xml"
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: CarShareTest
     steps:
       - checkout
       - install_deps
