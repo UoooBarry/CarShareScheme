@@ -10,18 +10,17 @@ const chai = require('chai');
 const assert = chai.assert;
 
 describe('model/car', ()=> {
-    var location;
     /* Clean up all data before test */
     before(async () => {
-        Car.sequelize.sync();
-        Location.sequelize.sync();
-        location = await Location.create({
+        await Location.sequelize.sync();
+        await Car.sequelize.sync();
+    });
+
+    it("creates a car", async () => {
+        var location = await Location.create({
             name: "First",
             address: "1 Ad road"
         });
-    });
-
-    it("creates a car", () => {
             Car.create({
                 name: "Test Car",
                 brand: "Test brand",
