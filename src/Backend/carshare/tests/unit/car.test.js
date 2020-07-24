@@ -1,3 +1,8 @@
+/* 
+    Author: Yongqian Huang, created at: 23/07/2020
+    updated: Yongqian Huang, 24/07/2020, Init creation for model unit testing
+*/
+
 const Car = require('../../models/car');
 const Location = require('../../models/location');
 const chai = require('chai');
