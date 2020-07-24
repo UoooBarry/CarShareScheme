@@ -40,7 +40,7 @@ jobs:
             mkdir -p ../test-output
             npm run unit-test
       - store_test_results:
-          path: src/Backend/test-results.xml
+          path: src/Backend/carshare/test-results.xml
             
 workflows:
     build-and-test:
