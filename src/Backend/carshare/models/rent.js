@@ -4,6 +4,8 @@
 */
 
 const Sequelize = require('sequelize');
+const Location = require('./location');
+const Car = require('./car');
 const db = require('../config/db');
 
 const rent =  db.define('rents',{
@@ -24,5 +26,7 @@ const rent =  db.define('rents',{
     }
 })
 
+rent.belongsTo(Location, {foreignKey: 'location_id'});
+rent.belongsTo(Car, {foreignKey: 'car_id'});
 
 module.exports = rent;
