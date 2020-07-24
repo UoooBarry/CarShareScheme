@@ -32,4 +32,5 @@ const car = db.define('cars',{
 
 car.belongsTo(Location, {foreignKey: 'location_id'});
 
+
 module.exports = car;

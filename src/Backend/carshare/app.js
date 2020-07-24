@@ -1,6 +1,7 @@
 /* 
     Author: Yongqian Huang, created at: 23/07/2020
     updated: Yongqian Huang, 23/07/2020, Init creation
+             Yongqian Huang, 24/07/2020, Seed database
 */
 
 var createError = require('http-errors');
@@ -11,6 +12,8 @@ const carsRouter = require('./routes/cars');
 
 // Database
 const db =require('./config/db');
+const Car = require('./models/car');
+const seed = require('./data/seed');
 
 var app = express();
 
@@ -32,6 +35,13 @@ db.authenticate()
     .then(() => console.log('Database connected...'))
     .catch( err => console.log(`DB err: ${err}`))
 
+const cars = Car.findAll({});
+if(cars.length === 0 || process.env.NODE_ENV != "production"){
+  seed.up()
+        .then( () => console.log("Database seeded"));
+}
+
+    
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
@@ -40,7 +50,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.sendStatusCode(500);
+  res.sendStatus(403);
 });
 
 module.exports = app;
