@@ -5,7 +5,9 @@
 */
 
 const Sequelize = require('sequelize');
+const Location = require('./location');
 const db = require('../config/db');
+
 
 const car = db.define('cars',{
     name:{
@@ -27,5 +29,7 @@ const car = db.define('cars',{
         type: Sequelize.BOOLEAN
     }
 });
+
+car.belongsTo(Location, {foreignKey: 'location_id'});
 
 module.exports = car;
