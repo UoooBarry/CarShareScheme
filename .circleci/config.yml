@@ -31,11 +31,13 @@ jobs:
       - checkout
       - install_deps
       - run:
-        name: run unit tests
-        command: |
-          cd src/Backend/carshare/
-          mkdir test-output
-          npm run unit-test
+          name: run unit tests  
+          command: |
+            cd src/Backend/carshare/
+            mkdir -p ../test-output
+            npm run unit-test
+      - store_test_results:
+          path: src/test-output
             
 workflows:
     build-and-test:
