@@ -5,7 +5,7 @@ const chai = require('chai');
 const assert = chai.assert;
 
 describe('model/car', ()=> {
-    const location;
+    var location;
     /* Clean up all data before test */
     before(async () => {
         Car.sequelize.sync();
