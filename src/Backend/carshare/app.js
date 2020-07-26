@@ -13,6 +13,7 @@ const carsRouter = require('./routes/cars');
 // Database
 const db =require('./config/db');
 const Car = require('./models/car');
+const Location = require('./models/location');
 const seed = require('./data/seed');
 
 var app = express();
@@ -35,11 +36,16 @@ db.authenticate()
     .then(() => console.log('Database connected...'))
     .catch( err => console.log(`DB err: ${err}`))
 
-const cars = Car.findAll({});
-if(cars.length === 0 || process.env.NODE_ENV != "production"){
-  seed.up()
-        .then( () => console.log("Database seeded"));
+Location.sync().then( () => {
+  const cars = Car.findAll({})
+  if(cars.length === 0 && process.env.NODE_ENV != "production"){
+    seed.up()
+          .then( () => console.log("Database seeded"));
+  }
 }
+);
+
+
 
     
 // error handler
