@@ -43,7 +43,7 @@ Location.sync()
           Car.sync();
           Rent.sync();
           const cars = Car.findAll({});
-          if(cars.length === 0 || process.env.NODE_ENV != "production"){
+          if(cars.length === 0 && process.env.NODE_ENV != "production"){
             seed.up()
                   .then( () => console.log("Database seeded"));
           }
