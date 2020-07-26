@@ -1,6 +1,7 @@
 /* 
     Author: Yongqian Huang, created at: 26/07/2020
     updated: Yongqian Huang, 26/07/2020, Init creation for model unit testing
+    updated: Shuyuan, 26/07/2020, Add a deleting test for location
 */
 
 const Location = require('../../models/location');
@@ -23,4 +24,13 @@ describe('models/location', () => {
         assert.equal(rmit.name, "RMIT");
         assert.equal(rmit.address, "330 Swanston St, Melbourne, VIC");
     });
+    it("delete a location", async () => {
+        await Location.destroy({
+        where: {
+            name: "RMIT",
+        }});
+        var location = await Location.findAll({ where: { name: 'RMIT' } });
+        assert.equal(location.length,0);
+    })
 })
+     
