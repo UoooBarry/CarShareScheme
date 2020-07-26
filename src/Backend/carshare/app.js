@@ -2,6 +2,7 @@
     Author: Yongqian Huang, created at: 23/07/2020
     updated: Yongqian Huang, 23/07/2020, Init creation
              Yongqian Huang, 24/07/2020, Seed database
+             Yongqian Huang, 26/07/2020, Sync database
 */
 
 var createError = require('http-errors');
@@ -13,6 +14,7 @@ const carsRouter = require('./routes/cars');
 // Database
 const db =require('./config/db');
 const Car = require('./models/car');
+const Rent = require('./models/rent');
 const Location = require('./models/location');
 const seed = require('./data/seed');
 
@@ -38,6 +40,8 @@ db.authenticate()
 
 Location.sync()
         .then(() => {
+          Car.sync();
+          Rent.sync();
           const cars = Car.findAll({});
           if(cars.length === 0 || process.env.NODE_ENV != "production"){
             seed.up()
