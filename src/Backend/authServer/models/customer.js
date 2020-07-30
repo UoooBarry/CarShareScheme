@@ -17,12 +17,13 @@ const customer = db.define('customers',{
     date_of_birth:{
         type: Sequelize.DATE
     },
-    contact:{
+    contact_number:{
         type: Sequelize.INTEGER
     },
     gender:{
         type: Sequelize.STRING
     }
 })
+
 
 module.exports = customer;
