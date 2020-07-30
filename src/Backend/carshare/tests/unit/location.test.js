@@ -3,6 +3,7 @@
     updated: Yongqian Huang, 26/07/2020, Init creation for model unit testing
 */
 
+
 const Location = require('../../models/location');
 
 const chai = require('chai');

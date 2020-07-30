@@ -25,6 +25,8 @@ db.authenticate()
     .then(() => console.log('Database connected...'))
     .catch( err => console.log(`DB err: ${err}`))
 
+
+    
 // error handler
 app.use(function(err, req, res, next) {
     // set locals, only providing error in development
