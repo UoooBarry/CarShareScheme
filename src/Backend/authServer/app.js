@@ -33,10 +33,9 @@ app.post('/api/register',
         check('password').isLength({min: 6}).withMessage('Password should at least 6 digits long'),
         check('first_name').not().isEmpty().withMessage('FirstName cannot be empty'),
         check('family_name').not().isEmpty().withMessage('FamilyName cannot be empty'),
-        check('contact_number').not().isEmpty().withMessage('Contact cannot be empty')
+        check('contact_number').isLength({min:10, max:10}).withMessage('Contact number should be 10 digits').matches(/^[0][0-9]*$/).withMessage('Contact must be numbers start with 0')
     ]
     , async (req,res) => {
-        
         const errs = validationResult(req);
          //check and return errors
         if(!errs.isEmpty()){
