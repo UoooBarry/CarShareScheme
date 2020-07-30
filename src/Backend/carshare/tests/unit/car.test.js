@@ -3,6 +3,7 @@
     updated: Yongqian Huang, 24/07/2020, Init creation for model unit testing
 */
 
+
 const Car = require('../../models/car');
 const Location = require('../../models/location');
 const chai = require('chai');
@@ -12,8 +13,8 @@ const assert = chai.assert;
 describe('model/car', ()=> {
     /* Clean up all data before test */
     before(async () => {
-        await Location.sequelize.sync();
-        await Car.sequelize.sync();
+        await Location.sync();
+        await Car.sync();
     });
 
     it("creates a car", async () => {

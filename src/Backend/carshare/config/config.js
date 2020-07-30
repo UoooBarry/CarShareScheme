@@ -29,5 +29,5 @@ module.exports = {
     DBUSER: process.env.PROD_DBUSER,
     DBPASS: process.env.PROD_DBPASS,
     dialect: 'postgres',
-  },
+  }
 }

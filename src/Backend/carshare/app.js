@@ -49,7 +49,6 @@ Location.sync()
           }
         })
 
-
     
 // error handler
 app.use(function(err, req, res, next) {
