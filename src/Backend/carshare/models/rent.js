@@ -10,20 +10,20 @@ const Car = require('./car');
 const Bill = require('./bill');
 const db = require('../config/db');
 
-const rent =  db.define('rents',{
-    car_id:{
+const rent = db.define('rents', {
+    car_id: {
         type: Sequelize.INTEGER
     },
-    user_id:{
+    user_id: {
         type: Sequelize.INTEGER
     },
-    location_id:{
+    location_id: {
         type: Sequelize.INTEGER
     },
     period: {
         type: Sequelize.INTEGER
     },
-    bill_id:{
+    bill_id: {
         type: Sequelize.INTEGER
     },
     completed: {
@@ -31,8 +31,14 @@ const rent =  db.define('rents',{
     }
 })
 
-rent.hasOne(Bill,{foreignKey: 'bill_id'});
-rent.hasOne(Location, {foreignKey: 'location_id'});
-rent.hasOne(Car, {foreignKey: 'car_id'});
+rent.hasOne(Bill, {
+    foreignKey: 'bill_id'
+});
+rent.hasOne(Location, {
+    foreignKey: 'location_id'
+});
+rent.hasOne(Car, {
+    foreignKey: 'car_id'
+});
 
 module.exports = rent;

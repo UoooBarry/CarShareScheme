@@ -9,28 +9,30 @@ const Location = require('./location');
 const db = require('../config/db');
 
 
-const car = db.define('cars',{
-    name:{
+const car = db.define('cars', {
+    name: {
         type: Sequelize.STRING
     },
-    brand:{
+    brand: {
         type: Sequelize.STRING
     },
-    model:{
+    model: {
         type: Sequelize.STRING
     },
-    purchase_date:{
+    purchase_date: {
         type: Sequelize.DATE
     },
-    location_id:{
+    location_id: {
         type: Sequelize.INTEGER
     },
-    available:{
+    available: {
         type: Sequelize.BOOLEAN
     }
 });
 
-car.belongsTo(Location, {foreignKey: 'location_id'});
+car.belongsTo(Location, {
+    foreignKey: 'location_id'
+});
 
 
 module.exports = car;
