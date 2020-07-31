@@ -1,11 +1,11 @@
 const Sequelize = require('sequelize');
 const db = require('../config/db');
 
-const bill =  db.define('rents',{
-    id:{
+const bill = db.define('rents', {
+    id: {
         type: Sequelize.INTEGER
     },
-    fee:{
+    fee: {
         type: Sequelize.DOUBLE
     }
 });

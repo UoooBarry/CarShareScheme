@@ -7,20 +7,20 @@
 const Sequelize = require('sequelize');
 const db = require('../config/database');
 
-const customer = db.define('customers',{
-    first_name:{
+const customer = db.define('customers', {
+    first_name: {
         type: Sequelize.STRING
     },
-    family_name:{
+    family_name: {
         type: Sequelize.STRING
     },
-    date_of_birth:{
+    date_of_birth: {
         type: Sequelize.DATE
     },
-    contact_number:{
+    contact_number: {
         type: Sequelize.INTEGER
     },
-    gender:{
+    gender: {
         type: Sequelize.STRING
     }
 })

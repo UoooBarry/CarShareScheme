@@ -9,7 +9,7 @@ const router = express.Router();
 const Car = require('../models/car');
 
 //GET: /api/cars
-router.get('/', (req,res) => {
+router.get('/', (req, res) => {
     Car.findAll()
         .then(
             cars => res.json(cars)
