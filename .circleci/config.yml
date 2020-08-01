@@ -49,7 +49,7 @@ jobs:
       - run:
           name: run authentication server unit tests
           command: |
-            cd src/Backend/authSever/
+            cd src/Backend/authServer/
             npm run unit-test
       - store_test_results:
           path: src/Backend/authSever/test-results.xml
