@@ -39,7 +39,7 @@ jobs:
       - checkout
       - install_deps
       - run:
-          name: run car share sever unit tests  
+          name: run car share server unit tests  
           command: |
             cd src/Backend/carshare/
             mkdir -p ../test-output
@@ -52,7 +52,7 @@ jobs:
             cd src/Backend/authServer/
             npm run unit-test
       - store_test_results:
-          path: src/Backend/authSever/test-results.xml
+          path: src/Backend/authServer/test-results.xml
     
   integration-tests:
     docker:
