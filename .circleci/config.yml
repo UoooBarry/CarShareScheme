@@ -3,9 +3,14 @@ commands:
   install_deps:
     steps:
       - run:
-          name: Install dependencies
+          name: Install dependencies in car share server
           command: |
             cd src/Backend/carshare/
+            npm install
+      - run:
+          name: Install dependencies in authentication server
+          command: |
+            cd src/Backend/authSever/
             npm install
 
 
@@ -34,13 +39,37 @@ jobs:
       - checkout
       - install_deps
       - run:
-          name: run unit tests  
+          name: run car share sever unit tests  
           command: |
             cd src/Backend/carshare/
             mkdir -p ../test-output
             npm run unit-test
       - store_test_results:
           path: src/Backend/carshare/test-results.xml
+      - run:
+          name: run authentication server unit tests
+          command: |
+            cd src/Backend/authSever/
+            npm run unit-test
+      - store_test_results:
+        path: src/Backend/authSever/test-results.xml
+    
+  integration-tests:
+    docker:
+      - image: circleci/node:lts
+      - image: circleci/postgres:latest
+        environment:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: password
+          POSTGRES_DB: CarShareTest
+    steps:
+        - checkout
+        - install_deps
+        - run:
+          name: run authentication server integration tests
+          command: |
+            cd src/Backend/authServer/
+            npm run integration-test
             
 workflows:
     build-and-test:

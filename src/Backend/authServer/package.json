@@ -4,12 +4,17 @@
   "description": "Authentication server for car share scheme",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start:dev": "nodemon",
+    "integration-test:dev": "cross-env NODE_ENV=test TEST_DBHOST=localhost TEST_DBPORT=5433 TEST_DBNAME=CarShareTest TEST_DBUSER=postgres TEST_DBPASS=mbk83v mocha tests/integration",
+    "unit-test:dev": "cross-env NODE_ENV=test mocha tests/unit",
+    "unit-test": "cross-env NODE_ENV=test TEST_DBHOST=localhost TEST_DBNAME=CarShareTest TEST_DBUSER=postgres TEST_DBPASS=password mocha tests/unit  --reporter mocha-junit-reporter",
+    "integration-test": "cross-env NODE_ENV=test TEST_DBHOST=localhost TEST_DBNAME=CarShareTest TEST_DBUSER=postgres TEST_DBPASS=password mocha tests/integration"
   },
   "author": "Yongqian Huang",
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
+    "cross-env": "^7.0.2",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-validator": "^6.6.0",
@@ -19,5 +24,11 @@
     "pg": "^8.3.0",
     "pg-hstore": "^2.3.3",
     "sequelize": "^6.3.3"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "mocha": "^8.1.0",
+    "mocha-junit-reporter": "^2.0.0"
   }
 }
