@@ -52,7 +52,7 @@ jobs:
             cd src/Backend/authSever/
             npm run unit-test
       - store_test_results:
-        path: src/Backend/authSever/test-results.xml
+          path: src/Backend/authSever/test-results.xml
     
   integration-tests:
     docker:
