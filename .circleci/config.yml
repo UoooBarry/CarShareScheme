@@ -66,10 +66,10 @@ jobs:
       - checkout
       - install_deps
       - run:
-        name: run authentication server integration tests
-        command: |
-          cd src/Backend/authServer/
-          npm run integration-test
+          name: run authentication server integration tests
+          command: |
+            cd src/Backend/authServer/
+            npm run integration-test
             
 workflows:
     build-and-test:
