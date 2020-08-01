@@ -63,18 +63,21 @@ jobs:
           POSTGRES_PASSWORD: password
           POSTGRES_DB: CarShareTest
     steps:
-        - checkout
-        - install_deps
-        - run:
-          name: run authentication server integration tests
-          command: |
-            cd src/Backend/authServer/
-            npm run integration-test
+      - checkout
+      - install_deps
+      - run:
+        name: run authentication server integration tests
+        command: |
+          cd src/Backend/authServer/
+          npm run integration-test
             
 workflows:
     build-and-test:
       jobs:
         - build
         - unit-tests:
+            requires:
+              - build
+        - integration-test:
             requires:
               - build
