@@ -10,7 +10,7 @@ commands:
       - run:
           name: Install dependencies in authentication server
           command: |
-            cd src/Backend/authSever/
+            cd src/Backend/authServer/
             npm install
 
 
