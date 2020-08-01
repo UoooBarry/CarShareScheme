@@ -23,10 +23,10 @@ describe('POST /register', () => {
         await Login.sync();
     })
 
-    after((done) => {
-        db.close()
-            .then(() => done())
-            .catch(err => done(err));
+    after(async () => {
+        await Login.destroy({where:{}});
+        await Customer.destroy({where: {}});
+        db.close();
     })
 
     it('Register an account with valid information', (done) => {
