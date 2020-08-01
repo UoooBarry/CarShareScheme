@@ -78,6 +78,6 @@ workflows:
         - unit-tests:
             requires:
               - build
-        - integration-test:
+        - integration-tests:
             requires:
               - build
