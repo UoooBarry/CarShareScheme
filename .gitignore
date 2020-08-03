@@ -2,3 +2,5 @@
 */*/node_modules/
 */*/authServer/node_modules/
 src/*/*/test-results.xml
+src/*/*/.env
+infra/.env

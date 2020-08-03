@@ -1,18 +1,17 @@
 /* 
     Author: Yongqian Huang, created at: 23/07/2020
     updated: Yongqian Huang, 23/07/2020, Npm Init
+             Yongqian Huang, 30/07/2020, register and login handler
 */
 
 
 require('dotenv').config();
 const express = require('express');
 const app = express();
-const JWT = require('jsonwebtoken');
 const db = require('./config/database');
-const Customer = require('./models/customer');
-const { check, validationResult } = require('express-validator');
+const indexRouter = require('./routes/index.js');
 const cors = require('cors')
-const passwordHash = require('password-hash');
+
 
 app.use(cors());
 
@@ -23,7 +22,9 @@ app.use(express.urlencoded({ extended: false }));
 //catch database connection
 db.authenticate()
     .then(() => console.log('Database connected...'))
-    .catch( err => console.log(`DB err: ${err}`))
+    .catch( err => console.log(`DB connected fail: ${err}`))
+
+app.use('/api', indexRouter);
 
 // error handler
 app.use(function(err, req, res, next) {
@@ -36,4 +37,6 @@ app.use(function(err, req, res, next) {
     res.json(err);
   });
 
-app.listen(4000, ()=> console.log("Auth sever is running on port 4000"))
+app.listen(4000, ()=> console.log("Car share scheme system authentication sever is running on port 4000 ..."));
+
+module.exports = app;

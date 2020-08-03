@@ -6,11 +6,11 @@
 const Sequelize = require('sequelize');
 const db = require('../config/db');
 
-const location = db.define('locations',{
-    name:{
+const location = db.define('locations', {
+    name: {
         type: Sequelize.STRING
     },
-    address:{
+    address: {
         type: Sequelize.STRING
     }
 })

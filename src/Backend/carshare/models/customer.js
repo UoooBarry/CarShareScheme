@@ -5,7 +5,7 @@
 
 
 const Sequelize = require('sequelize');
-const db = require('../config/database');
+const db = require('../config/db');
 
 const customer = db.define('customers', {
     first_name: {

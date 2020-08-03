@@ -4,6 +4,7 @@
     updated:Shuyuan Zhang,28/07/2020, add a delete test case
 */
 
+
 const Location = require('../../models/location');
 
 const chai = require('chai');
