@@ -10,6 +10,8 @@ const express = require('express');
 const app = express();
 const db = require('./config/database');
 const indexRouter = require('./routes/index.js');
+const Customer = require('./models/customer');
+const Login = require('./models/login');
 const cors = require('cors')
 
 
@@ -21,7 +23,11 @@ app.use(express.urlencoded({ extended: false }));
 
 //catch database connection
 db.authenticate()
-    .then(() => console.log('Database connected...'))
+    .then(() =>{
+      Customer.sync()
+              .then(Login.sync());
+      console.log('Database connected...');
+    })
     .catch( err => console.log(`DB connected fail: ${err}`))
 
 app.use('/api', indexRouter);

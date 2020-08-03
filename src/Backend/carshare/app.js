@@ -3,6 +3,7 @@
     updated: Yongqian Huang, 23/07/2020, Init creation
              Yongqian Huang, 24/07/2020, Seed database
              Yongqian Huang, 26/07/2020, Sync database
+             Yongqian Huang, 03/08/2020, Make auto migration and seed to database
 */
 
 var createError = require('http-errors');
