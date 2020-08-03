@@ -36,8 +36,6 @@
 </template>
 
 <script>
-import SessionHelper from '../helpers/session_helper.js';
-
 export default {
     name: "RegisterForm",
     methods: {
@@ -51,7 +49,6 @@ export default {
             })
                 .then( (res) => {
                     if(res.data.message == "fail"){
-                        SessionHelper.login();
                         this.flashMessage.setStrategy('multiple');
                         res.data.errors.forEach(error => {
                             this.flashMessage.error({title: 'Register detail', message: error});

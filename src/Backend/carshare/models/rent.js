@@ -9,6 +9,7 @@ const Location = require('./location');
 const Car = require('./car');
 const Bill = require('./bill');
 const db = require('../config/db');
+const Customer = require('../models/customer');
 
 const rent = db.define('rents', {
     car_id: {
@@ -31,14 +32,17 @@ const rent = db.define('rents', {
     }
 })
 
-rent.hasOne(Bill, {
-    foreignKey: 'bill_id'
+rent.belongsTo(Bill, {
+    foreignKey: 'car_id'
 });
-rent.hasOne(Location, {
+rent.belongsTo(Location, {
     foreignKey: 'location_id'
 });
-rent.hasOne(Car, {
+rent.belongsTo(Car, {
     foreignKey: 'car_id'
+});
+rent.belongsTo(Customer, {
+    foreignKey: 'user_id'
 });
 
 module.exports = rent;

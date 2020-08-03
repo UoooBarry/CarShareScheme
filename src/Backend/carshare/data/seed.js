@@ -5,23 +5,33 @@
 
 const Location = require('../models/location');
 const Car = require('../models/car');
+const Bill = require('../models/bill');
+const Rent = require('../models/rent');
 
 module.exports = {
+    sync: async() => {
+        await Location.sync();
+        await Car.sync();
+        await Bill.sync();
+        await Rent.sync();
+    },
     up: async() => {
-
-        const rmit = await Location.create({
-            name: "RMIT",
-            address: "330 Swanston St"
-        });
-
-        await Car.create({
-            name: "Test Car",
-            brand: "Test brand",
-            model: "T1",
-            location_id: rmit.id,
-            purchase_date: new Date(),
-            available: false
-        });
+        const cars = await Car.findAll({where:{}});
+        if(cars.length === 0){
+            const rmit = await Location.create({
+                name: "RMIT",
+                address: "330 Swanston St"
+            });
+    
+            await Car.create({
+                name: "Test Car",
+                brand: "Test brand",
+                model: "T1",
+                location_id: rmit.id,
+                purchase_date: new Date(),
+                available: false
+            });
+        }
     },
 
     down: async() => {
