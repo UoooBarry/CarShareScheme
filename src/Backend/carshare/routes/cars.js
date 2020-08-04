@@ -1,8 +1,11 @@
-/* 
-    Author: Yongqian Huang, created at: 23/07/2020
-    updated: Yongqian Huang, 23/07/2020, Init creation
-             Yongqian Huang, 23/07/2020, Migrate to postgresql
-*/
+
+/*******************************************************
+ *   @AUTHOR: YONGQIAN HUANG, CREATED AT: 23/07/2020   *
+ * @UPDATED: YONGQIAN HUANG, 23/07/2020, INIT CREATION *
+ *  YONGQIAN HUANG, 23/07/2020, MIGRATE TO POSTGRESQL  *
+ *******************************************************/
+
+
 
 const express = require('express');
 const router = express.Router();

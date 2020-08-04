@@ -1,8 +1,11 @@
-/* 
-    Author: Yongqian Huang, created at: 23/07/2020
-    updated: Yongqian Huang, 23/07/2020, Creation of car model
-             Yongqian Huang, 23/07/2020, Migration to postgresql database
-*/
+
+/****************************************************************
+ *       @AUTHOR: YONGQIAN HUANG, CREATED AT: 23/07/2020        *
+ * @UPDATED: YONGQIAN HUANG, 23/07/2020, CREATION OF CAR MODEL  *
+ * YONGQIAN HUANG, 23/07/2020, MIGRATION TO POSTGRESQL DATABASE *
+ ****************************************************************/
+             
+
 
 const Sequelize = require('sequelize');
 const Location = require('./location');
