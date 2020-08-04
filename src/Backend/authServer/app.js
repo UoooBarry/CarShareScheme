@@ -1,8 +1,10 @@
-/* 
-    Author: Yongqian Huang, created at: 23/07/2020
-    updated: Yongqian Huang, 23/07/2020, Npm Init
-             Yongqian Huang, 30/07/2020, register and login handler
-*/
+ 
+/**********************************************************
+ *    @AUTHOR: YONGQIAN HUANG, CREATED AT: 23/07/2020     *
+ *     @UPDATED: YONGQIAN HUANG, 23/07/2020, NPM INIT     *
+ * YONGQIAN HUANG, 30/07/2020, REGISTER AND LOGIN HANDLER *
+ **********************************************************/
+
 
 
 require('dotenv').config();

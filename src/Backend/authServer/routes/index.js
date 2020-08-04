@@ -1,8 +1,10 @@
-/* 
-    Author: Yongqian Huang, created at: 23/07/2020
-    updated: Yongqian Huang, 23/07/2020, Router for register and login
-             Yongqian Huang, 04/08/2020, Apply data repository pattern
-*/
+ 
+/***********************************************************************
+ *           @AUTHOR: YONGQIAN HUANG, CREATED AT: 23/07/2020           *
+ * @UPDATED: YONGQIAN HUANG, 23/07/2020, ROUTER FOR REGISTER AND LOGIN *
+ *      YONGQIAN HUANG, 04/08/2020, APPLY DATA REPOSITORY PATTERN      *
+ ***********************************************************************/
+
 require('dotenv').config();
 const express = require('express');
 const router = express.Router();

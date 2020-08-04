@@ -1,7 +1,11 @@
-/* 
-    Author: Yongqian Huang, created at: 23/07/2020
-    updated: Yongqian Huang, 24/07/2020, Init creation for model unit testing
-*/
+ 
+
+/******************************************************************************
+ *              @AUTHOR: YONGQIAN HUANG, CREATED AT: 23/07/2020               *
+ * @UPDATED: YONGQIAN HUANG, 24/07/2020, INIT CREATION FOR MODEL UNIT TESTING *
+ ******************************************************************************/
+
+
 
 
 const Car = require('../../models/car');

@@ -1,7 +1,9 @@
-/* 
-    Author: Yongqian Huang, created at: 04/07/2020
-    updated: Yongqian Huang, 04/08/2020, Apply data repository pattern
-*/
+ 
+/***********************************************************************
+ *           @AUTHOR: YONGQIAN HUANG, CREATED AT: 04/07/2020           *
+ * @UPDATED: YONGQIAN HUANG, 04/08/2020, APPLY DATA REPOSITORY PATTERN *
+ ***********************************************************************/
+
 
 const Login = require('../models/login');
 const Customer = require('../models/customer');

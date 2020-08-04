@@ -1,10 +1,11 @@
-/* 
-    Author: Yongqian Huang, created at: 23/07/2020
-    updated: Yongqian Huang, 23/07/2020, Init creation
-             Yongqian Huang, 24/07/2020, Seed database
-             Yongqian Huang, 26/07/2020, Sync database
-             Yongqian Huang, 03/08/2020, Make auto migration and seed to database
-*/
+ /************************************************************************
+ *           @AUTHOR: YONGQIAN HUANG, CREATED AT: 23/07/2020            *
+ *         @UPDATED: YONGQIAN HUANG, 23/07/2020, INIT CREATION          *
+ *              YONGQIAN HUANG, 24/07/2020, SEED DATABASE               *
+ *              YONGQIAN HUANG, 26/07/2020, SYNC DATABASE               *
+ * YONGQIAN HUANG, 03/08/2020, MAKE AUTO MIGRATION AND SEED TO DATABASE *
+ ************************************************************************/
+
 
 var createError = require('http-errors');
 var express = require('express');
@@ -14,7 +15,6 @@ const carsRouter = require('./routes/cars');
 
 // Database
 const db = require('./config/db');
-const Car = require('./models/car');
 const seed = require('./data/seed');
 
 var app = express();
