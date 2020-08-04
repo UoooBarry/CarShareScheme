@@ -14,7 +14,6 @@ const Customer = require('./models/customer');
 const Login = require('./models/login');
 const cors = require('cors')
 
-
 app.use(cors());
 
 app.use(express.json());
