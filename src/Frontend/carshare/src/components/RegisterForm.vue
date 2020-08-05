@@ -68,7 +68,8 @@ export default {
             email: '',
             contact: '',
             first_name: '',
-            family_name: ''
+            family_name: '',
+            password: ''
         }
     }
 }

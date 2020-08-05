@@ -2,7 +2,7 @@
   <div id="app">
     <FlashMessage></FlashMessage>
     <router-view class name="header"></router-view>
-    <router-view name="main" />
+    <router-view class="main" name="main" />
     <DarkFooter />
   </div>
 </template>
@@ -13,7 +13,7 @@ import DarkFooter from "@/components/layouts/DarkFooter.vue";
 
 export default {
   components: {
-    DarkFooter,
+    DarkFooter
   },
 };
 </script>
@@ -37,5 +37,10 @@ export default {
 
 #nav a.router-link-exact-active {
   color: #42b983;
+}
+
+.main{
+  height: 100%;
+  margin-bottom: 180px;
 }
 </style>
