@@ -1,10 +1,10 @@
- /************************************************************************
- *           @AUTHOR: YONGQIAN HUANG, CREATED AT: 23/07/2020            *
- *         @UPDATED: YONGQIAN HUANG, 23/07/2020, INIT CREATION          *
- *              YONGQIAN HUANG, 24/07/2020, SEED DATABASE               *
- *              YONGQIAN HUANG, 26/07/2020, SYNC DATABASE               *
- * YONGQIAN HUANG, 03/08/2020, MAKE AUTO MIGRATION AND SEED TO DATABASE *
- ************************************************************************/
+/************************************************************************
+*           @AUTHOR: YONGQIAN HUANG, CREATED AT: 23/07/2020            *
+*         @UPDATED: YONGQIAN HUANG, 23/07/2020, INIT CREATION          *
+*              YONGQIAN HUANG, 24/07/2020, SEED DATABASE               *
+*              YONGQIAN HUANG, 26/07/2020, SYNC DATABASE               *
+* YONGQIAN HUANG, 03/08/2020, MAKE AUTO MIGRATION AND SEED TO DATABASE *
+************************************************************************/
 
 
 var createError = require('http-errors');
@@ -41,11 +41,11 @@ db.authenticate()
 
 
 seed.sync()
-    .then(() => {
-      seed.up().then(() => {
-        console.log('Database seeded.');
-      })
+  .then(() => {
+    seed.up().then(() => {
+      console.log('Database seeded.');
     })
+  })
 
 
 // error handler
