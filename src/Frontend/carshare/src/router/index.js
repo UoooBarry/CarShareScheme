@@ -1,24 +1,42 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+// import Home from '@/views/Home.vue'
+import Header from '@/components/layouts/Header';
 
 Vue.use(VueRouter)
 
 const routes = [{
-    path: '/',
-    name: 'Home',
-    component: Home
-  },
-  {
-    path: '/about',
-    name: 'About',
-    component: () => import('../views/About.vue')
-  },
-  {
-    path: '/register',
-    name: 'Register',
-    component: () => import('../views/Register.vue')
+  path: '/',
+  name: 'Home',
+  components: {
+    header: null,
+    main: () => import('@/components/layouts/BlueHeader')
   }
+},
+{
+  path: '/about',
+  name: 'About',
+  components: {
+    header: Header,
+    main: () => import('../views/About.vue')
+  }
+},
+{
+  path: '/register',
+  name: 'Register',
+  components: {
+    header: Header,
+    main: () => import('../views/Register.vue')
+  }
+},
+{
+  path: '/login',
+  name: 'Login',
+  components: {
+    header: Header,
+    main: () => import('../views/Login.vue')
+  }
+}
 ]
 
 const router = new VueRouter({
