@@ -28,6 +28,14 @@ class customerRepository{
 
         return customer;
     }
+
+    async removeById(){
+        await Customer.destroy({
+            where: {
+                id: id
+            }
+        });
+    }
 }
 
 module.exports = new customerRepository();
