@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="parallax" style="margin-bottom: 60px;">
         <div class="row">
             <div class="container">
                 <form @submit.prevent="register">

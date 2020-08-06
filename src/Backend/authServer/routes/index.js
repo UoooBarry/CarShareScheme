@@ -84,12 +84,14 @@ router.post('/login', (req, res) => {
                     }
                     res.json({
                         token,
-                        message: 'success'
+                        message: 'success',
+                        customer_name: customer.first_name
                     });
                 })
             } else {
                 res.json({
-                    message: 'Information unmatched'
+                    message: 'fail',
+                    reason: 'Information unmatched'
                 });
             }
         })

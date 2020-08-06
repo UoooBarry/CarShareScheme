@@ -1,6 +1,6 @@
 <template>
   <!-- Start: Footer Dark -->
-  <div class="footer-dark">
+  <div class="footer-dark parallax">
     <footer>
       <div class="container">
         <div class="row">
