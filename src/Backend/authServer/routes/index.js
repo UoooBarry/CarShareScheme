@@ -85,6 +85,7 @@ router.post('/login', (req, res) => {
                     res.json({
                         token,
                         message: 'success',
+                        customer_id: customer.id,
                         customer_name: customer.first_name
                     });
                 })

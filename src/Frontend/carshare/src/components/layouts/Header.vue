@@ -29,11 +29,11 @@ export default {
   name: "Header",
   data() {
       return{
-          username: this.$session.get('username')
+          id: this.$session.get('id')
       }
   },
   mounted() {
-     if(!(this.username)){
+     if(!(this.id)){
             document.getElementById('login').style.display = 'inline-block';
             document.getElementById('account').style.display = 'none';
         }
