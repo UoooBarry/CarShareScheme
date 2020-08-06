@@ -12,6 +12,7 @@ var express = require('express');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const carsRouter = require('./routes/cars');
+const customerRouter = require('./routes/customers');
 
 // Database
 const db = require('./config/db');
@@ -28,6 +29,7 @@ app.use(express.urlencoded({
 app.use(cookieParser());
 
 app.use('/api/cars', carsRouter);
+app.use('/api/customers', customerRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

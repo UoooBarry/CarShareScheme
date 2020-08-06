@@ -2,7 +2,7 @@
   <!-- Start: Header Blue -->
   <div>
     <!-- Start: Header -->
-    <div class="header-blue">
+    <div class="header-blue parallax">
       <nav class="navbar navbar-light navbar-expand-md navigation-clean-search">
         <div class="container-fluid">
           <a class="navbar-brand" href="#">PBD Car Share</a>

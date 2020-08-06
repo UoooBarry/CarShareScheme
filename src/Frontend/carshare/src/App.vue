@@ -39,8 +39,4 @@ export default {
   color: #42b983;
 }
 
-.main{
-  height: 100%;
-  margin-bottom: 180px;
-}
 </style>
