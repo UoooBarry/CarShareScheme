@@ -20,7 +20,8 @@ const customer = db.define('customers', {
         type: Sequelize.DATE
     },
     contact_number: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        unique : true
     },
     gender: {
         type: Sequelize.STRING

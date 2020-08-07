@@ -1,5 +1,6 @@
 /**********************************************************************
  * @AUTHOR YONGQIAN HUANG, CREATED AT 07/08/2020 MANAGE MICROSERVICES *
+ *         Yongqian Huang, Added 2FA validation                       *
  **********************************************************************/
 require('dotenv').config();
 const axios = require('axios').default;

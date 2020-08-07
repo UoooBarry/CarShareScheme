@@ -4,6 +4,7 @@
  * @UPDATED: YONGQIAN HUANG, 23/07/2020, ROUTER FOR REGISTER AND LOGIN *
  *      YONGQIAN HUANG, 04/08/2020, APPLY DATA REPOSITORY PATTERN      *
  *      Yongqian Huang, 07/08/2020, Add email existed validation       *
+ *      Yongqian Huang, 07/08/2020, Added SMS based 2FA                *
  ***********************************************************************/
 
 require('dotenv').config();
@@ -25,7 +26,19 @@ router.get('/getCode', [
     check('contact_number').isLength({
     min: 9,
     max: 9
-}).withMessage('Contact number should be 9 digits').matches(/^[4][0-9]*$/).withMessage('Contact must be numbers start with 4')]
+}).withMessage('Contact number should be 9 digits').matches(/^[4][0-9]*$/).withMessage('Contact must be numbers start with 4'),
+check('contact_number').custom((contact) => {
+    return new Promise(async (resolve,reject) => {
+        const row = await _customer.getByContact(contact)
+        //if no rows are fetched
+        if (row === null) {
+            resolve(true);
+        } else {
+            reject(new Error('Contact number already exists'));
+        }
+    })
+})
+]
 ,async (req,res) => {
     const errs = validationResult(req);
     //check and return errors
