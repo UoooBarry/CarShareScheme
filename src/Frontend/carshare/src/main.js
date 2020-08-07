@@ -26,4 +26,6 @@ Vue.use(VueSession);
 // Flash messages
 Vue.use(FlashMessage);  
 //Recaptcha
-Vue.use(VueReCaptcha, { siteKey: '6LcTY7sZAAAAAJeN_bq5d-F7S-I2Qq9yPTCMQmoA' })
+Vue.use(VueReCaptcha, { siteKey: '6LcTY7sZAAAAAJeN_bq5d-F7S-I2Qq9yPTCMQmoA',loaderOptions:{
+  autoHideBadge: true
+} })

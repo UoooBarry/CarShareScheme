@@ -14,7 +14,7 @@ import DarkFooter from "@/components/layouts/DarkFooter.vue";
 export default {
   components: {
     DarkFooter
-  },
+  }
 };
 </script>
 <style>
