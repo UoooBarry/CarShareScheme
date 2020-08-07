@@ -22,11 +22,16 @@ class loginRepository {
     }
 
     async create(email, password, user_id){
-        return await Login.create({
+        const exist = Login.count({where: {Email: email}});
+        if(exist >= 1)
+            return Promise.reject("Email already existed");
+
+        const login = await Login.create({
             Email: email,
             password: password,
             user_id: user_id
         });
+        return Promise.resolve(login);
     }
 }
 

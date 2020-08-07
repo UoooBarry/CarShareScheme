@@ -12,6 +12,11 @@
                         <label for="password">Password: </label>
                         <input class="form-control" v-model="password" id="password" name="password" type="password">
                     </div>
+
+                    <div class="form-group">
+                        <label for="retype">Retype Password: </label>
+                        <input class="form-control" v-model="retype" id="retype" name="retype" type="password">
+                    </div>
                     
                     <div class="form-group">
                         <label for="first_name">First Name: </label>
@@ -27,7 +32,6 @@
                         <label for="contact_number">Contact number: </label>
                         <input class="form-control" v-model="contact" id="contact" name="contact" type="number">
                     </div>
-
                     <input class="btn btn-primary" type="submit" value="Register">
                 </form>
             </div>
@@ -39,13 +43,22 @@
 export default {
     name: "RegisterForm",
     methods: {
-        register() {
+        async register() {
+            await this.$recaptchaLoaded();
+            const token = await this.$recaptcha('register');
+
+            if(this.password != this.retype){
+                this.flashMessage.error({title: 'Register detail', message: 'Password and retype password not matched.'});
+                return;
+            }
+
             this.$axios.post(`${this.$auth}/register`,{
                 email: this.email,
                 password: this.password,
                 first_name: this.first_name,
                 family_name: this.family_name,
-                contact_number: this.contact
+                contact_number: this.contact,
+                recaptcha_token: token
             })
                 .then( (res) => {
                     if(res.data.message == "fail"){
@@ -57,7 +70,7 @@ export default {
                     }
 
                     this.flashMessage.success({title: 'Register success!', message: "Register successfully!"});
-                    this.$router.push({name: "home"});
+                    this.$router.push({name: "Home"});
                     
                 })
                 .catch(err => console.log(err));
@@ -69,7 +82,8 @@ export default {
             contact: '',
             first_name: '',
             family_name: '',
-            password: ''
+            password: '',
+            retype: ''
         }
     }
 }
