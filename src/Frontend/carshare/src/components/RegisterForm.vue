@@ -124,6 +124,8 @@ export default {
     },
     created(){
         this.flashMessage.setStrategy('multiple');
+        const recaptcha = this.$recaptchaInstance
+        recaptcha.showBadge();
     }
 }
 </script>
