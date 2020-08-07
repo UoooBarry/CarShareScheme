@@ -17,6 +17,10 @@ class customerRepository{
         return await Customer.findAll({where: {id: id}});
     }
 
+    async getByContact(contact){
+        return await Customer.findAll({where: {contact_number: contact}});
+    }
+
     async create(first_name, family_name, gender, date_of_birth, contact_number){
         const customer = await Customer.create({
             first_name: first_name,

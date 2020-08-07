@@ -14,6 +14,9 @@ module.exports = {
     DBNAME: process.env.DEV_DBNAME,
     DBUSER: process.env.DEV_DBUSER,
     DBPASS: process.env.DEV_DBPASS,
+    NEXMO_KEY: process.env.NEXMO_KEY,
+    NEXMO_SECRET: process.env.NEXMO_SECRET,
+    NEXMO_ID: process.env.NEXMO_ID,
     dialect: 'postgres',
   },
   test: {
@@ -22,6 +25,9 @@ module.exports = {
     DBNAME: process.env.TEST_DBNAME,
     DBUSER: process.env.TEST_DBUSER,
     DBPASS: process.env.TEST_DBPASS,
+    NEXMO_KEY: process.env.NEXMO_KEY,
+    NEXMO_SECRET: process.env.NEXMO_SECRET,
+    NEXMO_ID: process.env.NEXMO_ID,
     dialect: 'postgres',
   },
   production: {
@@ -30,6 +36,9 @@ module.exports = {
     DBNAME: process.env.PROD_DBNAME,
     DBUSER: process.env.PROD_DBUSER,
     DBPASS: process.env.PROD_DBPASS,
+    NEXMO_KEY: process.env.NEXMO_KEY,
+    NEXMO_SECRET: process.env.NEXMO_SECRET,
+    NEXMO_ID: process.env.NEXMO_ID,
     dialect: 'postgres',
   },
 }

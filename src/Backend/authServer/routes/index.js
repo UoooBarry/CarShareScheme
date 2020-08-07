@@ -4,6 +4,7 @@
  * @UPDATED: YONGQIAN HUANG, 23/07/2020, ROUTER FOR REGISTER AND LOGIN *
  *      YONGQIAN HUANG, 04/08/2020, APPLY DATA REPOSITORY PATTERN      *
  *      Yongqian Huang, 07/08/2020, Add email existed validation       *
+ *      Yongqian Huang, 07/08/2020, Added SMS based 2FA                *
  ***********************************************************************/
 
 require('dotenv').config();
@@ -12,12 +13,48 @@ const router = express.Router();
 const passwordHash = require('password-hash');
 const _login = require('../repository/loginRepository');
 const _customer = require('../repository/customerRepository');
-const axios = require('axios').default;
+const _services = require('../repository/serviceRepository');
+
 const {
     check,
     validationResult
 } = require('express-validator');
 const JWT = require('jsonwebtoken');
+
+
+router.get('/getCode', [
+    check('contact_number').isLength({
+    min: 9,
+    max: 9
+}).withMessage('Contact number should be 9 digits').matches(/^[4][0-9]*$/).withMessage('Contact must be numbers start with 4'),
+check('contact_number').custom((contact) => {
+    return new Promise(async (resolve,reject) => {
+        const row = await _customer.getByContact(contact)
+        //if no rows are fetched
+        if (row === null) {
+            resolve(true);
+        } else {
+            reject(new Error('Contact number already exists'));
+        }
+    })
+})
+]
+,async (req,res) => {
+    const errs = validationResult(req);
+    //check and return errors
+    try{
+        await validate(errs);
+    }catch(msg){
+        res.json(msg);
+        return;
+    }
+
+    await _services.putOneCode(req.query.contact_number);
+    res.json({
+        message: 'success',
+        description: 'Register code has been sent to your phone. The code will expire in 1 minute.'
+    });
+});
 
 router.post('/register',
     [
@@ -39,17 +76,23 @@ router.post('/register',
         check('first_name').not().isEmpty().withMessage('FirstName cannot be empty'),
         check('family_name').not().isEmpty().withMessage('FamilyName cannot be empty'),
         check('contact_number').isLength({
-            min: 10,
-            max: 10
-        }).withMessage('Contact number should be 10 digits').matches(/^[0][0-9]*$/).withMessage('Contact must be numbers start with 0')
+            min: 9,
+            max: 9
+        }).withMessage('Contact number should be 9 digits').matches(/^[4][0-9]*$/).withMessage('Contact must be numbers start with 4')
     ], async (req, res) => {
-        const params = new URLSearchParams();
-        params.append('secret', '6LcTY7sZAAAAAGZNzQgsa1Q9uZWpP8EThE5-tYaQ');
-        params.append('response', req.body.recaptcha_token);
+        const verifiedResult = await _services.verifyOneCode(req.body.contact_number, req.body.code);
+        //check mobile code
+        if(!verifiedResult && process.env.NODE_ENV != 'test'){
+            res.json({
+                message: "fail",
+                errors: ["One time code verified failed", "One time code is not correct"]
+            });
+            return;
+        }
 
-        const captcha = await axios.post("https://www.google.com/recaptcha/api/siteverify", params, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } })
-
-        if (!captcha.data.success) {
+        //check captcha response
+        const captchaResponse = await _services.getRecaptchaRes(req.body.recaptcha_token);
+        if (!captchaResponse  && process.env.NODE_ENV != 'test') {
             res.json({
                 message: "fail",
                 errors: ["Captcha verified failed", captcha.data]
@@ -59,18 +102,13 @@ router.post('/register',
 
         const errs = validationResult(req);
         //check and return errors
-        if (!errs.isEmpty()) {
-            let errors = [];
-            errs.array().forEach(
-                err => errors.push(err.msg)
-            )
-            res.json({
-                message: "fail",
-                errors
-            });
-
+        try{
+            await validate(errs);
+        }catch(msg){
+            res.json(msg);
             return;
         }
+
         //Create a new user if it is correct
         var customer = await _customer.create(
             req.body.first_name,
@@ -131,5 +169,22 @@ router.post('/validate', (req, res) => {
         res.json(data);
     })
 });
+
+function validate(errs){
+    //check and return errors
+    if (!errs.isEmpty()) {
+        let errors = [];
+        errs.array().forEach(
+            err => errors.push(err.msg)
+        )
+
+        return Promise.reject({
+            message: "fail",
+            errors
+        })
+    }
+
+    return Promise.resolve(true);
+}
 
 module.exports = router;

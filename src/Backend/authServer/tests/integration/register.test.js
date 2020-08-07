@@ -38,7 +38,7 @@ describe('POST /register', () => {
                         password: "123456",
                         first_name: "Dummy",
                         family_name: "Dummy",
-                        contact_number: "0433838111"
+                        contact_number: "433838111"
                     })
                     .end((err, res) => {
                         res.should.have.status(200);
