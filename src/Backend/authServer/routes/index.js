@@ -27,7 +27,7 @@ router.get('/getCode', [
     min: 9,
     max: 9
 }).withMessage('Contact number should be 9 digits').matches(/^[4][0-9]*$/).withMessage('Contact must be numbers start with 4'),
-check('contact_number').custom((contact) => {
+check('contact_number').custom((contact) => { //check unique contact number
     return new Promise(async (resolve,reject) => {
         const row = await _customer.getByContact(contact)
         //if no rows are fetched
@@ -43,12 +43,13 @@ check('contact_number').custom((contact) => {
     const errs = validationResult(req);
     //check and return errors
     try{
-        await validate(errs);
+        await validate(errs); //try to organize errors into a json
     }catch(msg){
         res.json(msg);
         return;
     }
 
+    //put the code and send SMS
     await _services.putOneCode(req.query.contact_number);
     res.json({
         message: 'success',
