@@ -46,13 +46,6 @@ jobs:
             npm run unit-test
       - store_test_results:
           path: src/Backend/carshare/test-results.xml
-      - run:
-          name: run authentication server unit tests
-          command: |
-            cd src/Backend/authServer/
-            npm run unit-test
-      - store_test_results:
-          path: src/Backend/authServer/test-results.xml
     
   integration-tests:
     docker:
