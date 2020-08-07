@@ -100,12 +100,13 @@ export default {
             const btn = document.getElementById('get_code');
             btn.disabled = true;
             var time = 60;
-            setInterval(() => {
+            const timer = setInterval(() => {
                 time --;
                 btn.innerHTML = `${time}s Reamin`;
                 if(time <= 0){
                     btn.disabled = false;
                     btn.innerHTML = "Get Validation Code";
+                    clearInterval(timer);
                 }
             }, 1000);
             
@@ -124,8 +125,6 @@ export default {
     },
     created(){
         this.flashMessage.setStrategy('multiple');
-        const recaptcha = this.$recaptchaInstance
-        recaptcha.showBadge();
     }
 }
 </script>
