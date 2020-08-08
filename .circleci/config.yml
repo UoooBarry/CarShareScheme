@@ -98,13 +98,17 @@ jobs:
       - image: cimg/base:2020.01
     steps:
       - checkout
+
+      - attach_workspace:
+          at: ./
+
       - add_ssh_keys:
           fingerprints:
             - "b1:cf:89:18:4e:f2:2b:2b:b6:d2:5c:2d:81:d4:a9:8c"
 
       - run:
           name: Run ansible playbook to deploy the app
-          commands: |
+          command: |
             cd ansible
             sh run_ansible.sh
 
