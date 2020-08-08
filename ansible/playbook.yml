@@ -1,0 +1,29 @@
+- name: Deploy Application
+  hosts: webservers
+  vars:
+    home_dir: "/home/"
+    user: "ec2-user"
+    systemd_dir: "/etc/systemd/system"
+  tasks:    
+    - name: Ensure nodejs is installed
+      become: yes
+      package:
+        name: nodejs
+        state: present
+
+    - name: Upload configured AuthServer
+      become: yes
+      copy:
+        src: "./src/server.zip"
+        dest: "{{home_dir}}"
+    
+    - name: Extract AuthServer
+      become: yes
+      unarchive: 
+        src: "{{home_dir}}/server.zip"
+        dest: "/usr/local/bin"
+        copy: no
+
+
+
+    

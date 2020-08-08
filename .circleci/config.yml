@@ -63,6 +63,29 @@ jobs:
           command: |
             cd src/Backend/authServer/
             npm run integration-test
+  
+  package:
+    machine: true
+    environment:
+      NODE_ENV: production
+    steps:
+      - checkout
+      - run:
+          name: Config dot env
+          command: |
+            cd infra
+            sh prod.env.sh
+            cp .env ../src/Backend/authServer
+            cp .env ../src/Backend/carshare
+      
+      - run: 
+          name: Compress backend applications
+          command: /
+            cd src/
+            rm -r Backend/authServer/node_modules
+            rm -r Backend/carshare/node_modules
+            zip -r backend server
+
             
 workflows:
     build-and-test:
@@ -74,3 +97,7 @@ workflows:
         - integration-tests:
             requires:
               - build
+        - package:
+            requires:
+              - unit-tests
+              - integration-tests

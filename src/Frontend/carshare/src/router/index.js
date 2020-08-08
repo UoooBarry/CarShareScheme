@@ -36,6 +36,14 @@ const routes = [{
     header: Header,
     main: () => import('../views/Login.vue')
   }
+},
+{
+  path: '/user/profile',
+  name: 'Profile',
+  components: {
+    header: Header,
+    main: () => import('../views/Profile.vue')
+  }
 }
 ]
 
