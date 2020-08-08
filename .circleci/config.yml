@@ -126,7 +126,6 @@ jobs:
           command: |
             cd ansible
             sudo sh run_ansible.sh
-
             
 workflows:
     build-test-package-deploy:
