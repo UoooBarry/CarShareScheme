@@ -83,9 +83,29 @@ jobs:
           command: |
             cd src
             zip -r server Backend
+            mv server.zip ../artifacts/server.zip
+
+      - persist_to_workspace:
+        root: ./
+        paths:
+          - artifacts
 
       - store_artifacts:
-          path: src/server.zip
+          path: artifacts/server.zip
+  
+  deploy:
+    docker:
+      - image: cimg/base:2020.01
+    steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "b1:cf:89:18:4e:f2:2b:2b:b6:d2:5c:2d:81:d4:a9:8c"
+
+      - run:
+          name: Run ansible playbook to deploy the app
+          commands: |
+            cd ansible
+            sh run_ansible.sh
 
             
 workflows:
@@ -102,3 +122,13 @@ workflows:
             requires:
               - unit-tests
               - integration-tests
+        - approval:
+            type: approval
+            requires:
+              - package
+            filters:
+              branches:
+                only: deploy_test
+        - deploy:
+            requires:
+              - approval
