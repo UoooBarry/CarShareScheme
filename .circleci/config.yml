@@ -82,7 +82,7 @@ jobs:
           name: Compress backend applications
           command: |
             cd src
-            zip -r backend server
+            zip -r server Backend
 
       - store_artifacts:
           path: src/server.zip
