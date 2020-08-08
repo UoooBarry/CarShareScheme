@@ -103,7 +103,7 @@ jobs:
   
   deploy:
     docker:
-      - image: circleci/python:latest
+      - image: cimg/base:2020.01
     steps: 
       - checkout
 
@@ -115,9 +115,12 @@ jobs:
             - "b1:cf:89:18:4e:f2:2b:2b:b6:d2:5c:2d:81:d4:a9:8c"
       
       - run:
-          name: Install ansible
-          command: |
-            pip install ansible
+        name: Install ansible
+        command: |
+          sudo apt update
+          sudo apt install software-properties-common
+          sudo apt-add-repository --yes --update ppa:ansible/ansible
+          sudo apt -y install ansible
           
       - run:
           name: Run ansible playbook to deploy the app
