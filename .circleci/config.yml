@@ -103,8 +103,7 @@ jobs:
   
   deploy:
     docker:
-      - image: cimg/base:2020.01
-      - image: circleci/python:3.6.2
+      - image: circleci/python:latest
     steps: 
       - checkout
 
