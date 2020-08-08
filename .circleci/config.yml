@@ -125,7 +125,8 @@ jobs:
           name: Run ansible playbook to deploy the app
           command: |
             cd ansible
-            sudo sh run_ansible.sh
+            sudo chmod a-x inventory.yml
+            sudo ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i inventory.yml -e 'record_host_keys=True' -u ec2-user playbook.yml
             
 workflows:
     build-test-package-deploy:

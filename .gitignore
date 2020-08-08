@@ -5,4 +5,3 @@ src/*/*/test-results.xml
 src/*/*/.env
 infra/.env
 src/server.zip
-ansible/inventory.yml
