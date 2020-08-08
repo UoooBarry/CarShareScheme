@@ -1,9 +1,9 @@
 #!/bin/bash
 
 instance_public_ip=$PROD_EC2
-db_endpoint= $PROD_DBHOST
-DbUser= $PROD_DBUSER
-DbPassword= $PROD_DBPASS
+db_endpoint=$PROD_DBHOST
+DbUser=$PROD_DBUSER
+DbPassword=$PROD_DBPASS
 
 
 echo 'all:'

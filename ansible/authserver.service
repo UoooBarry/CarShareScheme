@@ -1,0 +1,14 @@
+[Unit]
+Description=Authenticator service
+ConditionPathExists=/usr/local/bin/Backend/authServer
+After=network.target
+
+[Service]
+WorkingDirectory=/usr/local/bin/Backend/authServer
+ExecStart=NODE_ENV=production npm run start
+User=root
+Group=root
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
