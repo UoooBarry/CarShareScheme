@@ -1,4 +1,6 @@
 version: 2.1
+orbs:
+  ansible-playbook: orbss/ansible-playbook@0.0.5
 commands:
   install_deps:
     steps:
@@ -100,12 +102,7 @@ jobs:
           path: artifacts/server.zip
   
   deploy:
-    machine:
-      python:
-        version: 2.7.10 
-    dependencies:
-      pre:
-        - pip install ansible
+    machine: true
     steps:
       - checkout
 
