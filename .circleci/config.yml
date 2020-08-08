@@ -82,8 +82,6 @@ jobs:
           name: Compress backend applications
           command: |
             cd src
-            rm -r Backend/authServer/node_modules
-            rm -r Backend/carshare/node_modules
             zip -r backend server
 
       - store_artifacts:
