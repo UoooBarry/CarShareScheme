@@ -103,7 +103,7 @@ jobs:
   
   deploy:
     machine: true
-    steps:
+    steps: 
       - checkout
 
       - attach_workspace:
