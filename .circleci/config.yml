@@ -70,6 +70,12 @@ jobs:
       NODE_ENV: production
     steps:
       - checkout
+
+      - run:
+          name: Setup
+          command: |
+            mkdir -p artifacts
+
       - run:
           name: Config dot env
           command: |
@@ -83,7 +89,7 @@ jobs:
           command: |
             cd src
             zip -r server Backend
-            mv server.zip ../artifacts/server.zip
+            mv  server.zip ../artifacts/server.zip
 
       - persist_to_workspace:
           root: ./
@@ -133,7 +139,7 @@ workflows:
               - package
             filters:
               branches:
-                only: deploy_test
+                only: f/deploy_test
         - deploy:
             requires:
               - approval
