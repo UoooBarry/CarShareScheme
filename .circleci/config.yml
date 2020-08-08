@@ -102,7 +102,9 @@ jobs:
           path: artifacts/server.zip
   
   deploy:
-    machine: true
+    docker:
+      - image: cimg/base:2020.01
+      - image: circleci/python:3.6.2
     steps: 
       - checkout
 
@@ -112,6 +114,11 @@ jobs:
       - add_ssh_keys:
           fingerprints:
             - "b1:cf:89:18:4e:f2:2b:2b:b6:d2:5c:2d:81:d4:a9:8c"
+      
+      - run:
+          name: Install ansible
+          command: |
+            pip install ansible
           
       - run:
           name: Run ansible playbook to deploy the app
