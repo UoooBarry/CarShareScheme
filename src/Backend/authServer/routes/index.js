@@ -23,15 +23,16 @@ const JWT = require('jsonwebtoken');
 
 
 router.get('/getCode', [
+    check('contact_number').not().isEmpty().withMessage('Contact number cannot be empty'),
     check('contact_number').isLength({
     min: 9,
     max: 9
 }).withMessage('Contact number should be 9 digits').matches(/^[4][0-9]*$/).withMessage('Contact must be numbers start with 4'),
 check('contact_number').custom((contact) => { //check unique contact number
     return new Promise(async (resolve,reject) => {
-        const row = await _customer.getByContact(contact)
+        const rows = await _customer.getByContact(contact);
         //if no rows are fetched
-        if (row === null) {
+        if (rows.length === 0) {
             resolve(true);
         } else {
             reject(new Error('Contact number already exists'));
@@ -76,10 +77,12 @@ router.post('/register',
         }).withMessage('Password should at least 6 digits long'),
         check('first_name').not().isEmpty().withMessage('FirstName cannot be empty'),
         check('family_name').not().isEmpty().withMessage('FamilyName cannot be empty'),
+        check('contact_number').not().isEmpty().withMessage('Contact number cannot be empty'),
         check('contact_number').isLength({
             min: 9,
             max: 9
-        }).withMessage('Contact number should be 9 digits').matches(/^[4][0-9]*$/).withMessage('Contact must be numbers start with 4')
+        }).withMessage('Contact number should be 9 digits').matches(/^[4][0-9]*$/).withMessage('Contact must be numbers start with 4'),
+        check('code').not().isEmpty().withMessage('Please enter your SMS validation code')
     ], async (req, res) => {
         const verifiedResult = await _services.verifyOneCode(req.body.contact_number, req.body.code);
         //check mobile code
@@ -140,8 +143,8 @@ router.post('/login', (req, res) => {
         email
     )
         .then(async (login) => {
-            const customer = await login.getCustomer();
             if (customer != null && passwordHash.verify(req.body.password, login.password)) {
+                const customer = await login.getCustomer();
                 JWT.sign({
                     customer
                 }, process.env.ACCESS_TOKEN_SECRET, (err, token) => {
