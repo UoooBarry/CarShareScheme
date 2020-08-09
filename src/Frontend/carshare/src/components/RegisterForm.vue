@@ -50,6 +50,7 @@ export default {
     name: "RegisterForm",
     methods: {
         async register() {
+            //Genrate a recaptcha token to verify user's identity
             await this.$recaptchaLoaded();
             const token = await this.$recaptcha('register');
 
