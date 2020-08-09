@@ -63,9 +63,9 @@ router.post('/register',
         check('email').isEmail().withMessage("Email format unmatched"),
         check('email').custom(async (email) => {
             return new Promise(async (resolve, reject) => {
-                const row = await _login.getByEmail(email);
+                const rows = await _login.getByEmail(email);
                 //if no rows are fetched
-                if (row === null) {
+                if (rows.length === 0) {
                     resolve(true);
                 } else {
                     reject(new Error('Email already exists'));
