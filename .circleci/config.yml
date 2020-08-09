@@ -63,9 +63,72 @@ jobs:
           command: |
             cd src/Backend/authServer/
             npm run integration-test
+  
+  package:
+    machine: true
+    environment:
+      NODE_ENV: production
+    steps:
+      - checkout
+
+      - run:
+          name: Setup
+          command: |
+            mkdir -p artifacts
+
+      - run:
+          name: Config dot env
+          command: |
+            cd infra
+            sh prod.env.sh > .env
+            cp .env ../src/Backend/authServer
+            cp .env ../src/Backend/carshare
+      
+      - run: 
+          name: Compress backend applications
+          command: |
+            cd src
+            zip -r server Backend
+            mv  server.zip ../artifacts/server.zip
+
+      - persist_to_workspace:
+          root: ./
+          paths:
+            - artifacts
+
+      - store_artifacts:
+          path: artifacts/server.zip
+  
+  deploy:
+    docker:
+      - image: cimg/base:2020.01
+    steps: 
+      - checkout
+
+      - attach_workspace:
+          at: ./
+
+      - add_ssh_keys:
+          fingerprints:
+            - "b1:cf:89:18:4e:f2:2b:2b:b6:d2:5c:2d:81:d4:a9:8c"
+      
+      - run:
+          name: Install ansible
+          command: |
+            sudo apt update
+            sudo apt-add-repository --yes --update ppa:ansible/ansible
+            sudo apt install --yes ansible
+          
+      - run:
+          name: Run ansible playbook to deploy the app
+          command: |
+            cd ansible
+            echo -e $PRIVATE_KEY > carshare.pem
+            sudo chmod a-x inventory.yml
+            sudo ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i inventory.yml -e 'record_host_keys=True' -u ec2-user --private-key=carshare.pem playbook.yml 
             
 workflows:
-    build-and-test:
+    build-test-package-deploy:
       jobs:
         - build
         - unit-tests:
@@ -74,3 +137,17 @@ workflows:
         - integration-tests:
             requires:
               - build
+        - package:
+            requires:
+              - unit-tests
+              - integration-tests
+        - approval:
+            type: approval
+            requires:
+              - package
+            filters:
+              branches:
+                only: release
+        - deploy:
+            requires:
+              - approval

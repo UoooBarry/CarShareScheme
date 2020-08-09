@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www",
+    "start": "NODE_ENV=production node ./bin/www",
     "start:dev": "nodemon",
     "unit-test:dev": "cross-env NODE_ENV=test TEST_DBHOST=localhost TEST_DBPORT=5432 TEST_DBNAME=CarShareTest TEST_DBUSER=postgres TEST_DBPASS=mbk83v mocha tests/unit",
     "unit-test": "cross-env NODE_ENV=test TEST_DBHOST=localhost TEST_DBNAME=CarShareTest TEST_DBUSER=postgres TEST_DBPASS=password mocha tests/unit --reporter mocha-junit-reporter"

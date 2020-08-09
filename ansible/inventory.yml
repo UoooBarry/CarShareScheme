@@ -1,0 +1,7 @@
+all:
+  hosts:
+      13.239.114.199
+  children:
+      webservers:
+          hosts:
+              13.239.114.199
