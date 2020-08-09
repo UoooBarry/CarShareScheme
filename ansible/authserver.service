@@ -1,11 +1,11 @@
 [Unit]
-Description=Authenticator service
+Description=Authentication service
 ConditionPathExists=/usr/local/bin/Backend/authServer
 After=network.target
 
 [Service]
 WorkingDirectory=/usr/local/bin/Backend/authServer
-ExecStart=/usr/local/bin/Backend/authServer npm run start
+ExecStart=/usr/bin/npm run start
 User=root
 Group=root
 Restart=always

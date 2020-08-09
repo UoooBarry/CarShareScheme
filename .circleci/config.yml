@@ -147,7 +147,7 @@ workflows:
               - package
             filters:
               branches:
-                only: f/deploy_test
+                only: release
         - deploy:
             requires:
               - approval
