@@ -5,7 +5,7 @@ After=network.target
 
 [Service]
 WorkingDirectory=/usr/local/bin/Backend/authServer
-ExecStart=NODE_ENV=production npm run start
+ExecStart=npm run start
 User=root
 Group=root
 Restart=always
