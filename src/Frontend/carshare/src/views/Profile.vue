@@ -3,7 +3,7 @@
     <h1>This is a Profile page</h1>
     <AvatarHolder />
 
-    <InformationProfile />
+    <InformationProfile v-bind:customer="this.customer"/>
     </div>
 </template>
 <style>
@@ -27,5 +27,15 @@ export default {
     AvatarHolder,
     InformationProfile
   },
+  data(){
+    return{
+      customer: ""
+    }
+  },
+  async created(){
+    const response = await this.$axios.get(`${this.$carshare}/customers/${this.$session.get('id')}`);
+    this.customer = response.data[0];
+    console.log(this.customer);
+  }
 };
 </script>

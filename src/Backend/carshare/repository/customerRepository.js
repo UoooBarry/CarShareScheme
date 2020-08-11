@@ -19,6 +19,16 @@ class customerRepository{
         return await Customer.findAll({where: {id: id}});
     }
 
+    async update(id, data){
+        const customer = await Customer.findOne({where:{id: id}});
+        try{
+            await customer.update(data);
+            return Promise.resolve(true);
+        }catch(error){
+            return Promise.reject(error);
+        }
+    }
+
 }
 
 module.exports = new customerRepository();
