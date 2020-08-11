@@ -56,7 +56,7 @@ export default {
       })
       .then( (res) => {
         if(res.data.message === 'success'){
-          this.$session.set('id', res.data.id);
+          this.$session.set('id', res.data.customer_id);
           localStorage.setItem('authToken', res.data.token);
           this.flashMessage.success({
             title: 'Login success',

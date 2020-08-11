@@ -12,6 +12,7 @@ import { VueReCaptcha } from 'vue-recaptcha-v3'
 // global variable
 Vue.prototype.$axios = axios;
 Vue.prototype.$auth = config.authenticationURL;
+Vue.prototype.$carshare = config.carshareURL;
 Vue.config.productionTip = false
 
 new Vue({
