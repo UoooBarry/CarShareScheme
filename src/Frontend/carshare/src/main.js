@@ -8,6 +8,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import config from '../config/variables';
 import FlashMessage from '@smartweb/vue-flash-message';
 import { VueReCaptcha } from 'vue-recaptcha-v3'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { fas } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+
+//font awesome icons
+library.add(fas)
+Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 // global variable
 Vue.prototype.$axios = axios;
