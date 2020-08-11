@@ -11,7 +11,7 @@
                     <li class="nav-item" role="presentation"><a class="nav-link" href="#">Third Item</a></li>
                     <li class="nav-item dropdown" id="account"><a data-toggle="dropdown" aria-expanded="false" class="dropdown-toggle nav-link" href="#">Account</a>
                         <div class="dropdown-menu" role="menu">
-                            <a class="dropdown-item" role="presentation" href="#">Profile</a>
+                            <a class="dropdown-item" role="presentation" href="/user/profile">Profile</a>
                             <a class="dropdown-item" role="presentation" href="#">Rent History</a>
                             <a class="dropdown-item" role="presentation" href="#" v-on:click="logout">Logout</a>
                         </div>

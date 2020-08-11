@@ -12,14 +12,17 @@
         </div>About
       </div>
       <div class="form-group">
-        <label for="Email" class="control-label" >Email</label>
-        <input type="text" name="name" class="form-control" id="name" value="example@mail.com" />
+        <label for="fname" class="control-label" >First Name: </label>
+        <input type="text" name="fname" class="form-control" id="fname" :value="customer.first_name" />
 
-        <label for="Phone" class="control-label" >Phone</label>
-        <input type="text" name="name" class="form-control" id="name" value="8888-8888" />
+        <label for="sname" class="control-label" >Family Name: </label>
+        <input type="text" name="sname" class="form-control" id="sname" :value="customer.family_name" />
 
-           <label for="Address" class="control-label" >Address</label>
-        <input type="text" name="name" class="form-control" id="name" value="Burke st, Melbourne" />
+        <label for="phone" class="control-label" >Phone</label>
+        <input type="text" name="phone" class="form-control" id="phone" :value="customer.contact_number" />
+
+        <label for="dob" class="control-label" >Date of birth:</label>
+        <input type="date" name="dob" class="form-control" id="dob" :value="customer.date_of_birth" />
       </div>
     </div>
  
@@ -29,6 +32,7 @@
 <script>
 export default {
   name: "AvatarHolder",
+  props: ['customer']
 };
 </script>
 

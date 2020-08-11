@@ -1,48 +1,84 @@
 <template>
-    <div class="parallax" style="margin-bottom: 60px;">
-        <div class="container">
-            <form @submit.prevent="register">
-                <div class="form-group">
-                    <label for="email">Email: </label>
-                    <input class="form-control" v-model="email" id="email" name="email" type="text">
-                </div>
-
-                <div class="form-group">
-                    <label for="password">Password: </label>
-                    <input class="form-control" v-model="password" id="password" name="password" type="password">
-                </div>
-
-                <div class="form-group">
-                    <label for="retype">Retype Password: </label>
-                    <input class="form-control" v-model="retype" id="retype" name="retype" type="password">
-                </div>
-                
-                <div class="form-group">
-                    <label for="first_name">First Name: </label>
-                    <input class="form-control" v-model="first_name" id="first_name" name="first_name" type="text">
-                </div>
-
-                <div class="form-group">
-                    <label for="family_name">Family Name: </label>
-                    <input class="form-control" v-model="family_name" id="family_name" name="family_name" type="text">
-                </div>
-                
-                
-                <div class="form-group mb-3">
-                    <label for="contact_number">Contact number: </label>
-                    <input class="form-control" v-model="contact" id="contact" name="contact" type="number" placeholder="Put an australian conatct number start with 4" >
-                    <button type="button" class="btn btn-primary float-right" id="get_code" v-on:click="get_code" > Get Validation Code </button>
-                </div>
-                
-                <br>
-                <div class="form-group">
-                    <label for="validation_code">Validation code: </label>
-                    <input class="form-control" v-model="validation_code" id="validation_code" name="validation_code" type="number" required>
-                </div>
-                <input class="btn btn-primary" type="submit" value="Register">
-            </form>
+  <div class="parallax" style="margin-bottom: 60px;">
+    <div class="container">
+      <form @submit.prevent="register">
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input class="form-control" v-model="email" id="email" name="email" type="text" />
         </div>
+
+        <div class="form-group">
+          <label for="password">Password:</label>
+          <input
+            class="form-control"
+            v-model="password"
+            id="password"
+            name="password"
+            type="password"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="retype">Retype Password:</label>
+          <input class="form-control" v-model="retype" id="retype" name="retype" type="password" />
+        </div>
+
+        <div class="form-group">
+          <label for="first_name">First Name:</label>
+          <input
+            class="form-control"
+            v-model="first_name"
+            id="first_name"
+            name="first_name"
+            type="text"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="family_name">Family Name:</label>
+          <input
+            class="form-control"
+            v-model="family_name"
+            id="family_name"
+            name="family_name"
+            type="text"
+          />
+        </div>
+
+        <div class="form-group mb-3">
+          <label for="contact_number">Contact number:</label>
+          <input
+            class="form-control"
+            v-model="contact"
+            id="contact"
+            name="contact"
+            type="number"
+            placeholder="Put an australian conatct number start with 4"
+          />
+          <button
+            type="button"
+            class="btn btn-primary float-right"
+            id="get_code"
+            v-on:click="get_code"
+          >Get Validation Code</button>
+        </div>
+
+        <br />
+        <div class="form-group">
+          <label for="validation_code">Validation code:</label>
+          <input
+            class="form-control"
+            v-model="validation_code"
+            id="validation_code"
+            name="validation_code"
+            type="number"
+            required
+          />
+        </div>
+        <input class="btn btn-primary" type="submit" value="Register" />
+      </form>
     </div>
+  </div>
 </template>
 
 <script>

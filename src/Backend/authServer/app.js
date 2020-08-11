@@ -14,7 +14,7 @@ const db = require('./config/database');
 const indexRouter = require('./routes/index.js');
 const Customer = require('./models/customer');
 const Login = require('./models/login');
-const cors = require('cors')
+const cors = require('cors');
 
 app.use(cors());
 
