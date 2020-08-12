@@ -1,7 +1,9 @@
-/* 
-    Author: Yongqian Huang, created at: 23/07/2020
-    updated: Yongqian Huang, 23/07/2020, Creation of customer model
-*/
+ 
+/********************************************************************
+ *         @AUTHOR: YONGQIAN HUANG, CREATED AT: 23/07/2020          *
+ * @UPDATED: YONGQIAN HUANG, 23/07/2020, CREATION OF CUSTOMER MODEL *
+ ********************************************************************/
+
 
 
 const Sequelize = require('sequelize');
@@ -18,7 +20,8 @@ const customer = db.define('customers', {
         type: Sequelize.DATE
     },
     contact_number: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        unique : true
     },
     gender: {
         type: Sequelize.STRING

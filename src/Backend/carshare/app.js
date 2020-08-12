@@ -1,19 +1,23 @@
-/* 
-    Author: Yongqian Huang, created at: 23/07/2020
-    updated: Yongqian Huang, 23/07/2020, Init creation
-             Yongqian Huang, 24/07/2020, Seed database
-             Yongqian Huang, 26/07/2020, Sync database
-*/
+/************************************************************************
+*           @AUTHOR: YONGQIAN HUANG, CREATED AT: 23/07/2020            *
+*         @UPDATED: YONGQIAN HUANG, 23/07/2020, INIT CREATION          *
+*              YONGQIAN HUANG, 24/07/2020, SEED DATABASE               *
+*              YONGQIAN HUANG, 26/07/2020, SYNC DATABASE               *
+* YONGQIAN HUANG, 03/08/2020, MAKE AUTO MIGRATION AND SEED TO DATABASE *
+* Yongqian Huang,11/08/2020, Use cors                                  *
+************************************************************************/
+
 
 var createError = require('http-errors');
 var express = require('express');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const carsRouter = require('./routes/cars');
+const customerRouter = require('./routes/customers');
+const cors = require('cors')
 
 // Database
 const db = require('./config/db');
-const Car = require('./models/car');
 const seed = require('./data/seed');
 
 var app = express();
@@ -25,8 +29,10 @@ app.use(express.urlencoded({
   extended: false
 }));
 app.use(cookieParser());
+app.use(cors());
 
 app.use('/api/cars', carsRouter);
+app.use('/api/customers', customerRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -40,11 +46,11 @@ db.authenticate()
 
 
 seed.sync()
-    .then(() => {
-      seed.up().then(() => {
-        console.log('Database seeded.');
-      })
+  .then(() => {
+    seed.up().then(() => {
+      console.log('Database seeded.');
     })
+  })
 
 
 // error handler

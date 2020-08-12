@@ -1,0 +1,49 @@
+- name: Deploy Application
+  hosts: webservers
+  vars:
+    home_dir: "/home/"
+    user: "ec2-user"
+    systemd_dir: "/etc/systemd/system"
+  tasks:    
+    - name: Upload configured AuthServer
+      become: yes
+      copy:
+        src: "../artifacts/server.zip"
+        dest: "{{home_dir}}"
+    
+    - name: Extract AuthServer
+      become: yes
+      unarchive: 
+        src: "{{home_dir}}/server.zip"
+        dest: "/usr/local/bin"
+        copy: no
+    
+    - name: Install auth server dependencies
+      become: yes
+      npm:
+        path: "/usr/local/bin/Backend/authServer"
+    
+    - name: Install carshare server dependencies
+      become: yes
+      npm: 
+        path: "/usr/local/bin/Backend/carshare"
+    
+    - name: Copy auth service systemd service file to server
+      become: yes
+      copy:
+        src: authserver.service
+        dest: "{{systemd_dir}}"
+        owner: root
+        group: root
+    
+    - name: Ensure authentication service is running
+      become: yes
+      systemd:
+        name: authserver
+        state: started
+        enabled: yes
+
+
+
+
+    

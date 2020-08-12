@@ -1,7 +1,9 @@
-/* 
-    Author: Yongqian Huang, created at: 01/08/2020
-    updated: Yongqian Huang, 24/07/2020, Init creation for api testing
-*/
+ 
+/**********************************************************************
+ *           AUTHOR: YONGQIAN HUANG, CREATED AT: 01/08/2020           *
+ * UPDATED: YONGQIAN HUANG, 24/07/2020, INIT CREATION FOR API TESTING *
+ **********************************************************************/
+
 
 
 const chai = require('chai');
@@ -36,7 +38,8 @@ describe('POST /register', () => {
                         password: "123456",
                         first_name: "Dummy",
                         family_name: "Dummy",
-                        contact_number: "0433838111"
+                        contact_number: "433838111",
+                        code: "123"
                     })
                     .end((err, res) => {
                         res.should.have.status(200);

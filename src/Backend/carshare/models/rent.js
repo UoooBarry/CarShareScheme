@@ -1,8 +1,10 @@
-/* 
-    Author: Yongqian Huang, created at: 23/07/2020
-    updated: Yongqian Huang, 23/07/2020, Creation of rent model
-             Yongqian Huang, 30/07/2020, Create bill model
-*/
+ 
+/****************************************************************
+ *       @AUTHOR: YONGQIAN HUANG, CREATED AT: 23/07/2020        *
+ * @UPDATED: YONGQIAN HUANG, 23/07/2020, CREATION OF RENT MODEL *
+ *        YONGQIAN HUANG, 30/07/2020, CREATE BILL MODEL         *
+ ****************************************************************/
+
 
 const Sequelize = require('sequelize');
 const Location = require('./location');

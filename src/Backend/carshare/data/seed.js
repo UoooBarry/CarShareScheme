@@ -7,9 +7,11 @@ const Location = require('../models/location');
 const Car = require('../models/car');
 const Bill = require('../models/bill');
 const Rent = require('../models/rent');
+const Customer =require('../models/customer');
 
 module.exports = {
     sync: async() => {
+        await Customer.sync();
         await Location.sync();
         await Car.sync();
         await Bill.sync();

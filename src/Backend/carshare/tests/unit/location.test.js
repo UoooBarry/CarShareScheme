@@ -1,8 +1,9 @@
-/* 
-    Author: Yongqian Huang, created at: 26/07/2020
-    updated: Yongqian Huang, 26/07/2020, Init creation for model unit testing
-    updated:Shuyuan Zhang,28/07/2020, add a delete test case
-*/
+ /******************************************************************************
+ *              @AUTHOR: YONGQIAN HUANG, CREATED AT: 26/07/2020               *
+ * @UPDATED: YONGQIAN HUANG, 26/07/2020, INIT CREATION FOR MODEL UNIT TESTING *
+ *              SHUYUAN ZHANG,28/07/2020, ADD A DELETE TEST CASE              *
+ ******************************************************************************/
+
 
 
 const Location = require('../../models/location');

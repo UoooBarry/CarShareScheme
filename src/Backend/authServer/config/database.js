@@ -1,7 +1,9 @@
-/* 
-    Author: Yongqian Huang, created at: 23/07/2020
-    updated: Yongqian Huang, 23/07/2020, Creation to connect local database
-*/
+
+/****************************************************************************
+ *             @AUTHOR: YONGQIAN HUANG, CREATED AT: 23/07/2020              *
+ * @UPDATED: YONGQIAN HUANG, 23/07/2020, CREATION TO CONNECT LOCAL DATABASE *
+ ****************************************************************************/
+
 
 const { Sequelize } = require('sequelize');
 
