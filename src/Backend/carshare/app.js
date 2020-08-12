@@ -4,6 +4,7 @@
 *              YONGQIAN HUANG, 24/07/2020, SEED DATABASE               *
 *              YONGQIAN HUANG, 26/07/2020, SYNC DATABASE               *
 * YONGQIAN HUANG, 03/08/2020, MAKE AUTO MIGRATION AND SEED TO DATABASE *
+* Yongqian Huang,11/08/2020, Use cors                                  *
 ************************************************************************/
 
 
@@ -13,6 +14,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const carsRouter = require('./routes/cars');
 const customerRouter = require('./routes/customers');
+const cors = require('cors')
 
 // Database
 const db = require('./config/db');
@@ -27,6 +29,7 @@ app.use(express.urlencoded({
   extended: false
 }));
 app.use(cookieParser());
+app.use(cors());
 
 app.use('/api/cars', carsRouter);
 app.use('/api/customers', customerRouter);

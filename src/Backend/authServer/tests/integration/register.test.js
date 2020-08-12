@@ -25,12 +25,6 @@ describe('POST /register', () => {
         await Login.sync();
     })
 
-    after(async () => {
-        await Login.destroy({where:{}});
-        await Customer.destroy({where: {}});
-        db.close();
-    })
-
     it('Register an account with valid information', (done) => {
         chai.request(app).post('/api/register')
                     .send({
@@ -38,7 +32,7 @@ describe('POST /register', () => {
                         password: "123456",
                         first_name: "Dummy",
                         family_name: "Dummy",
-                        contact_number: "433838111",
+                        contact_number: "433838112",
                         code: "123"
                     })
                     .end((err, res) => {
@@ -59,4 +53,9 @@ describe('POST /register', () => {
                         done();
                     })
     })
-})
+
+    after(async() => {
+        await Login.destroy({where:{Email: "dummy@gmail.com"}});
+        await Customer.destroy({where: {first_name: "Dummy"}});
+    })
+});
