@@ -990,3 +990,7 @@ ul.main-nav > li ul.sub-menu-lists > li > a {
     border-top: 1px solid #ccc;
   }
 }
+
+._vue-flash-msg-body {
+  z-index: 1;
+}
