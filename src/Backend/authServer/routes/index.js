@@ -135,7 +135,7 @@ router.post('/register',
 
     });
 
-router.post('/login', (req, res) => {
+router.post('/authorize', (req, res) => {
     const email = req.body.email;
     if (!email) res.sendStatus(403);
 
@@ -154,7 +154,6 @@ router.post('/login', (req, res) => {
                     res.json({
                         token,
                         message: 'success',
-                        customer_id: customer.id,
                         customer_name: customer.first_name
                     });
                 })
