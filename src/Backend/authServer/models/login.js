@@ -20,6 +20,10 @@ const login = db.define('logins', {
     },
     user_id: {
         type: Sequelize.INTEGER
+    },
+    activate: {
+        type: Sequelize.DataTypes.BOOLEAN,
+        defaultValue: true
     }
 });
 
