@@ -9,7 +9,7 @@
 const Sequelize = require('sequelize');
 const db = require('../config/database');
 
-const customer = db.define('users', {
+const customer = db.define('customers', {
     first_name: {
         type: Sequelize.STRING
     },
