@@ -1,7 +1,7 @@
 <template>
   <div class="profile" style>
-    <h1>This is a Profile page</h1>
-    <AvatarHolder />
+    <br><br><br><br>
+    <AvatarHolder v-bind:customer="this.customer" />
 
     <InformationProfile v-bind:customer="this.customer"/>
     </div>
@@ -32,10 +32,15 @@ export default {
       customer: ""
     }
   },
+  methods:{
+    // ...
+  dateToYYYYMMDD(d) {
+    return d && new Date(d.getTime()-(d.getTimezoneOffset()*60*1000)).toISOString().split('T')[0];
+  }
+  },
   async created(){
     const response = await this.$axios.get(`${this.$carshare}/customers/${this.$session.get('id')}`);
     this.customer = response.data[0];
-    console.log(this.customer);
   }
 };
 </script>

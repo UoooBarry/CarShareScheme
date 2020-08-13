@@ -23,6 +23,9 @@
 
         <label for="dob" class="control-label" >Date of birth:</label>
         <input type="date" name="dob" class="form-control" id="dob" :value="customer.date_of_birth" />
+
+        <input type="submit" class="form-control" id="update" value="update" />
+        
       </div>
     </div>
  
@@ -31,12 +34,17 @@
 
 <script>
 export default {
-  name: "AvatarHolder",
+  name: "InformationProfile",
   props: ['customer']
 };
 </script>
 
 <style scoped>
+#update{
+  margin: 20px 200px 20px;
+  width: 80px;
+  float: right;
+  }
 #second-container {
   border-radius: 8px;
   box-shadow: 0 0 32px rgba(0, 0, 0, 0.5);

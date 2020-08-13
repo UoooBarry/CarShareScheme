@@ -1,15 +1,21 @@
 .navbar {
-  min-height: 90px;
+  min-height: 50px;
   box-shadow: none;
   border: none;
   margin: 0;
+  padding: 0 !important;
   border-radius: 0;
   font-size: 16px;
+  box-shadow: 0 2px 2px -2px rgba(0,0,0,.2);
 }
+.navbar .navbar-nav > li:hover{
+  background-color: #867a7a80;
+}
+
 .navbar .navbar-nav > li > a,
 .navbar a.navbar-brand.navbar-link {
-  min-height: 90px;
-  line-height: 90px;
+  min-height: 50px;
+  line-height: 50px;
   padding-top: 0;
   padding-bottom: 0;
   box-shadow: none !important;
@@ -28,12 +34,12 @@
   line-height: 60px;
 }
 .navbar-brand img {
-  margin: 20px 0;
+  margin: 0;
   max-height: 50px;
 }
 .navbar-fixed-bottom .navbar-brand img,
 .navchange .navbar-brand img {
-  margin: 10px 0;
+  margin:  0;
   max-height: 40px;
   width: auto;
 }
