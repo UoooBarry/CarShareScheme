@@ -33,7 +33,7 @@ describe('POST /login', () => {
     })
 
     it('Login with validate information', (done) => {
-        chai.request(app).post('/api/login')
+        chai.request(app).post('/api/authorize')
             .send({
                 email: "dummy2@gmail.com",
                 password: "123456"
@@ -46,7 +46,7 @@ describe('POST /login', () => {
     })
 
     it('Login with invalidate information', (done) => {
-        chai.request(app).post('/api/login')
+        chai.request(app).post('/api/authorize')
             .send({
                 email: "dummy2@gmail.com",
                 password: "123455"

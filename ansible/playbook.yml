@@ -43,6 +43,21 @@
         state: started
         enabled: yes
 
+    - name: Copy auth car share service systemd service file to server
+      become: yes
+      copy:
+        src: carshare.service
+        dest: "{{systemd_dir}}"
+        owner: root
+        group: root
+      
+    - name: Ensure authentication service is running
+      become: yes
+      systemd:
+        name: carshare
+        state: started
+        enabled: yes
+
 
 
 
