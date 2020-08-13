@@ -144,7 +144,7 @@ router.post('/authorize', (req, res) => {
         email
     )
         .then(async (login) => {
-            if (login != null && passwordHash.verify(req.body.password, login.password)) {
+            if (login != null && login.activate === true && passwordHash.verify(req.body.password, login.password)) {
                 const customer = await login.getCustomer();
                 JWT.sign({
                     customer
