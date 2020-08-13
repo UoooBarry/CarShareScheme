@@ -5,7 +5,7 @@
     user: "ec2-user"
     systemd_dir: "/etc/systemd/system"
   tasks:    
-    - name: Upload configured AuthServer
+    - name: Upload configured Server
       become: yes
       copy:
         src: "../artifacts/server.zip"

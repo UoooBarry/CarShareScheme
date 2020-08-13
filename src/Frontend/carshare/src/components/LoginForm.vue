@@ -50,13 +50,12 @@ export default {
   },
   methods:{
     login() {
-      this.$axios.post(`${this.$auth}/login`,{
+      this.$axios.post(`${this.$auth}/authorize`,{
         email: this.email,
         password: this.password
       })
       .then( (res) => {
         if(res.data.message === 'success'){
-          this.$session.set('id', res.data.customer_id);
           localStorage.setItem('authToken', res.data.token);
           this.flashMessage.success({
             title: 'Login success',

@@ -5,6 +5,7 @@
  *      YONGQIAN HUANG, 04/08/2020, APPLY DATA REPOSITORY PATTERN      *
  *      Yongqian Huang, 07/08/2020, Add email existed validation       *
  *      Yongqian Huang, 07/08/2020, Added SMS based 2FA                *
+ *      Yongqian Huang, 13/08/2020, Improve security                   *
  ***********************************************************************/
 
 require('dotenv').config();
@@ -135,7 +136,7 @@ router.post('/register',
 
     });
 
-router.post('/login', (req, res) => {
+router.post('/authorize', (req, res) => {
     const email = req.body.email;
     if (!email) res.sendStatus(403);
 
@@ -154,7 +155,6 @@ router.post('/login', (req, res) => {
                     res.json({
                         token,
                         message: 'success',
-                        customer_id: customer.id,
                         customer_name: customer.first_name
                     });
                 })

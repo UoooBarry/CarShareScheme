@@ -33,9 +33,21 @@ export default {
     }
   },
   async created(){
-    const response = await this.$axios.get(`${this.$carshare}/customers/${this.$session.get('id')}`);
-    this.customer = response.data[0];
-    console.log(this.customer);
+    const header = {
+      authorization: `PBD ${localStorage.getItem('authToken')}`
+    }
+
+    const response = await this.$axios.get(`${this.$carshare}/customers/`,{headers: header});
+    if(response.data.message === "success"){
+      this.customer = response.data.customer;
+    }else{
+      this.flashMessage.error({
+            title: 'Error',
+            message: 'Authentication error !'
+          });
+          this.$router.push({name: 'Home'});
+    }
+    
   }
 };
 </script>
