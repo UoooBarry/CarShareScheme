@@ -1,5 +1,6 @@
 /***********************************************************************
  *           @AUTHOR: SHUYUAN ZHANG, CREATED AT: 11/08/2020           *
+ *           @AUTHOR: Bach Dao, Updated AT: 15/08/2020                *
  ***********************************************************************/
 <template>
      <div id="first-container" class="container">
@@ -11,8 +12,8 @@
       <div class="col-md-9" style=" display: inline-block;  vertical-align: top;padding: 50px 0 0 200px"> 
         <div class="row"><a>Hello {{ customer.first_name }} {{ customer.family_name }}</a></div>
         <div class="row">You have joined Car Share since {{ customer.createdAt | formatDate }}</div> 
-        <div class="row">You last updated your Profile on {{ customer.updatedAt}}</div> 
-        <div class="row">You last updated your Profile on {{ customer.date_of_birth }}</div> 
+        <div class="row">You last updated your Profile on {{ customer.updatedAt | formatDate }}</div> 
+        <div class="row">Your personal information is completely save with us!</div> 
       </div>
     </div>
 
