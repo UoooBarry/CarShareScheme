@@ -28,7 +28,7 @@ export default {
   name: "Header",
   data() {
       return{
-          id: this.$session.get('id')
+          id: localStorage.getItem('authToken')
       }
   },
   mounted() {

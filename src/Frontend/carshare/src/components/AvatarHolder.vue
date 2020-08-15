@@ -10,7 +10,7 @@
       </div>
       <div class="col-md-9" style=" display: inline-block;  vertical-align: top;padding: 50px 0 0 200px"> 
         <div class="row"><a>Hello {{ customer.first_name }} {{ customer.family_name }}</a></div>
-        <div class="row">You have joined Car Share since {{ customer.createdAt}}</div> 
+        <div class="row">You have joined Car Share since {{ customer.createdAt | formatDate }}</div> 
         <div class="row">You last updated your Profile on {{ customer.updatedAt}}</div> 
         <div class="row">You last updated your Profile on {{ customer.date_of_birth }}</div> 
       </div>

@@ -16,7 +16,7 @@ class customerRepository{
     }
 
     async getById(id){
-        return await Customer.findAll({where: {id: id}});
+        return await Customer.findOne({where: {id: id}});
     }
 
     async update(id, data){

@@ -33,6 +33,15 @@ class loginRepository {
         });
         return Promise.resolve(login);
     }
+
+    async activate(user_id){
+        let login = Login.findOne({where: {user_id: user_id}});
+        try{
+            Login.update(login.email, !login.activate);
+        }catch(error){
+            return Promise.reject(error);
+        }
+    }
 }
 
 module.exports = new loginRepository();

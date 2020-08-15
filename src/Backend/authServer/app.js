@@ -32,6 +32,7 @@ db.authenticate()
     .catch( err => console.log(`DB connected fail: ${err}`))
 
 app.use('/api', indexRouter);
+app.use('/api/admin', indexRouter);
 
 // error handler
 app.use(function(err, req, res, next) {

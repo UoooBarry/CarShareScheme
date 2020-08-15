@@ -1,0 +1,14 @@
+[Unit]
+Description=Car Share Scheme service
+ConditionPathExists=/usr/local/bin/Backend/authServer
+After=network.target
+
+[Service]
+WorkingDirectory=/usr/local/bin/Backend/carshare
+ExecStart=/usr/bin/npm run start
+User=root
+Group=root
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

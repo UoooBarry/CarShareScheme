@@ -15,7 +15,7 @@ const db = new Sequelize(config.DBNAME, config.DBUSER, config.DBPASS, {
     host: config.DBHOST,
     port: config.DBPORT,
     dialect: config.dialect,
-
+    logging: false,
     pool: {
         max: 5,
         min: 0,

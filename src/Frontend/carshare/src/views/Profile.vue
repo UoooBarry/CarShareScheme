@@ -1,3 +1,7 @@
+/***********************************************************************
+ *           @AUTHOR: Bach Dao, CREATED AT: 11/08/2020           *
+ *           @AUTHOR: Bach Dao, Updated AT: 15/08/2020                *
+ ***********************************************************************/
 <template>
   <div class="profile" style>
     <br><br><br><br>
@@ -32,18 +36,23 @@ export default {
       customer: ""
     }
   },
-  methods:{
-    // ...
-  dateToYYYYMMDD(d) {
-    return d && new Date(d.getTime()-(d.getTimezoneOffset()*60*1000)).toISOString().split('T')[0];
-  }
-  ,
+ 
   async created(){
-    const response = await this.$axios.get(`${this.$carshare}/customers/${this.$session.get('id')}`);
-    this.customer = response.data[0];
-    console.log("test");
-    console.log(this.customer);
-  }
+    const header = {
+      authorization: `PBD ${localStorage.getItem('authToken')}`
+    }
+    
+    const response = await this.$axios.get(`${this.$carshare}/customers/`,{headers: header});
+    if(response.data.message === "success"){
+      this.customer = response.data.customer;
+    }else{
+      this.flashMessage.error({
+            title: 'Error',
+            message: 'Authentication error !'
+          });
+          this.$router.push({name: 'Home'});
+    }
+    
   }
 };
 </script>
