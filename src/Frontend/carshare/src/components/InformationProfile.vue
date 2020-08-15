@@ -35,6 +35,15 @@
 <script>
 export default {
   name: "InformationProfile",
+  method: {
+  async submit(){
+        this.$axios.update("/:id/", {
+                first_name: this.first_name,
+                family_name: this.family_name,
+                contact_number: this.contact
+            })
+    }
+  },
   props: ['customer']
 };
 </script>

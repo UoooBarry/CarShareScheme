@@ -37,10 +37,13 @@ export default {
   dateToYYYYMMDD(d) {
     return d && new Date(d.getTime()-(d.getTimezoneOffset()*60*1000)).toISOString().split('T')[0];
   }
-  },
+  ,
   async created(){
     const response = await this.$axios.get(`${this.$carshare}/customers/${this.$session.get('id')}`);
     this.customer = response.data[0];
+    console.log("test");
+    console.log(this.customer);
+  }
   }
 };
 </script>
