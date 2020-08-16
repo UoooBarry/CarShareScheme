@@ -35,9 +35,11 @@ class loginRepository {
     }
 
     async activate(user_id){
-        let login = Login.findOne({where: {user_id: user_id}});
+        let login = await Login.findOne({where: {user_id: user_id}});
         try{
-            Login.update(login.email, !login.activate);
+            login.update({
+                activate: !login.activate
+            })
         }catch(error){
             return Promise.reject(error);
         }

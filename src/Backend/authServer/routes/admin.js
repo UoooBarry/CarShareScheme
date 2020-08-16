@@ -7,8 +7,13 @@ const express = require('express');
 const router = express.Router();
 const _Customer = require('../repository/customerRepository');
 const _Login = require('../repository/loginRepository');
+const JWT = require('jsonwebtoken');
 
-router.patch('activate/:id/', verifyToken, (req,res) => {
+router.get('/test',(req,res) => {
+    res.json("hello world");
+})
+
+router.patch('/activate/:id/', verifyToken, (req,res) => {
     if(req.user.admin != true)
         res.sendStatus(403);
 
@@ -18,7 +23,7 @@ router.patch('activate/:id/', verifyToken, (req,res) => {
                 res.json({message: 'success'})
             )
             .catch((error) => {
-                res.json({message: 'success', reason: error})
+                res.json({message: 'fail', reason: error})
             })
 });
 
@@ -46,3 +51,6 @@ function verifyToken(req,res,next){
       res.sendStatus(403);
     }
 }
+
+
+module.exports = router;
