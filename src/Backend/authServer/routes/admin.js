@@ -10,10 +10,10 @@ const _Login = require('../repository/loginRepository');
 const JWT = require('jsonwebtoken');
 
 router.get('/verify', verifyToken, (req,res) => {
-  if(req.user.admin != true){
-    res.json({authorize: false});
-  }else{
+  if(req.user.admin){
     res.json({authorize: true});
+  }else{
+    res.json({authorize: false});
   }
 })
 
@@ -31,42 +31,6 @@ router.patch('/activate/:id/', verifyToken, (req,res) => {
             })
 });
 
-router.post('/authorize', (req, res) => {
-  const email = req.body.email;
-  if (!email) res.sendStatus(403);
-
-  _login.getByEmail(
-      email
-  )
-      .then(async (login) => {
-          if (login != null && login.activate === true && passwordHash.verify(req.body.password, login.password)) {
-            if(login.admin){
-              const customer = await login.getCustomer();
-              JWT.sign({
-                  customer
-              }, process.env.ACCESS_TOKEN_SECRET, (err, token) => {
-                  if (err) {
-                      console.log(err);
-                  }
-                  res.json({
-                      token,
-                      message: 'success',
-                      customer_name: customer.first_name
-                  });
-              })
-            }else{
-              res.json({
-              message: 'fail',
-              reason: 'This account is not admin'
-          });}
-          } else {
-              res.json({
-                  message: 'fail',
-                  reason: 'Information unmatched'
-              });
-          }
-      })
-});
 
 function verifyToken(req,res,next){
     //Get auth header

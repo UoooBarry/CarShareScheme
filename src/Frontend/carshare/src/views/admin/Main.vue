@@ -25,14 +25,13 @@
             placeholder="Password"
             v-model="password"
           />
-          
+
           <button
             class="btn btn-primary btn-block btn-lg btn-signin"
             type="submit"
             style="background-color: rgb(126,184,208);"
           >Sign in</button>
         </form>
-        
       </div>
     </div>
   </div>
@@ -46,39 +45,59 @@ export default {
   components: {
     AdminHeader
   },
-  data(){
-    return{
-      email: '',
-      password: ''
-    }
+  data() {
+    return {
+      email: "",
+      password: ""
+    };
   },
-  methods:{
-    login() {
-      this.$axios.post(`/api/admin/authorize`,{
-        email: this.email,
-        password: this.password
-      })
-      .then( (res) => {
-        if(res.data.message === 'success'){
-          localStorage.setItem('authToken', res.data.token);
-          this.flashMessage.success({
-            title: 'Login as Admin success',
-            message: `Welcome! ${res.data.customer_name}`
-          });
-          this.$router.push({name: 'User'});
-        }else{
-          this.flashMessage.warning({
-            title: 'Login fail',
-            message: res.data.reason
-          })
-        }
-      })
-      .catch((err) => {
-        this.flashMessage.error({
-          title: 'Internal error',
-          message: err
+  methods: {
+    async login() {
+      this.$axios
+        .post(`${this.$auth}/authorize`, {
+          email: this.email,
+          password: this.password
         })
-      })
+        .then(res => {
+          if (res.data.message === "success") {
+            localStorage.setItem("authToken", res.data.token);
+            
+            const header = {
+              authorization: `PBD ${localStorage.getItem("authToken")}`
+            };
+            this.$axios
+              .get(`http://localhost:4000/api/admin/verify`, {
+                headers: header
+              })
+              .then(res => {
+                if (res.data.authorize) {
+                    
+                  this.flashMessage.success({
+                    title: "Login as Admin success",
+                    message: `Welcome admin!`
+                  });
+                  this.$router.push({ name: "User" });
+                } else {
+                    console.log(res.data.message);
+                  this.flashMessage.warning({
+                    title: "Login fail",
+                    message: res.data.reason
+                  });
+                }
+              });
+          } else {
+            this.flashMessage.warning({
+              title: "Login fail",
+              message: res.data.reason
+            });
+          }
+        })
+        .catch(err => {
+          this.flashMessage.error({
+            title: "Internal error",
+            message: err
+          });
+        });
     }
   }
 };
@@ -89,10 +108,10 @@ header#header {
   display: none !important;
 }
 #dark-footer {
-    display: none !important;
+  display: none !important;
 }
 
-.main{
-    height: 930px;
+.main {
+  height: 930px;
 }
 </style>
