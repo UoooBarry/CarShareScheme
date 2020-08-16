@@ -31,6 +31,7 @@ new Vue({
   render: h => h(App)
 }).$mount('#app')
 
+
 axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 Vue.filter('formatDate', function(value) {
   if (value) {

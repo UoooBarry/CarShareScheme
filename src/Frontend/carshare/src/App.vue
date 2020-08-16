@@ -3,7 +3,7 @@
     <FlashMessage></FlashMessage>
     <router-view class name="header"></router-view>
     <router-view class="main" name="main" />
-    <DarkFooter />
+    <DarkFooter id="dark-footer" />
   </div>
 </template>
 
