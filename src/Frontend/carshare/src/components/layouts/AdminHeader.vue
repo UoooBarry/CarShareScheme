@@ -6,7 +6,7 @@
             <div class="collapse navbar-collapse"
                 id="navcol-1">
                 <ul class="nav navbar-nav ml-auto">
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="#">Search</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="#">User list</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="#">Car list</a></li>
                    
                     <li class="nav-item" role="presentation" id="login" style="display: none"><a class="nav-link" href="/">Login</a></li>
