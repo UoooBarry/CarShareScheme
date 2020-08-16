@@ -25,6 +25,10 @@ const customer = db.define('customers', {
     },
     gender: {
         type: Sequelize.STRING
+    },
+    admin:{
+        type: Sequelize.BOOLEAN,
+        defaultValue: false
     }
 })
 

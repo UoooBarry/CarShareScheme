@@ -26,7 +26,7 @@ router.get('/', verifyToken, async (req, res) => {
 });
 
 
-router.patch('/:id/', [
+router.patch('/', [
     check('first_name').not().isEmpty().withMessage('FirstName cannot be empty'),
     check('family_name').not().isEmpty().withMessage('FamilyName cannot be empty'),
     check('contact_number').not().isEmpty().withMessage('Contact number cannot be empty'),
