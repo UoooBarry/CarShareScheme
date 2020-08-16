@@ -11,7 +11,8 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 const db = require('./config/database');
-const indexRouter = require('./routes/index.js');
+const indexRouter = require('./routes/index');
+const adminRouter = require('./routes/admin');
 const Customer = require('./models/customer');
 const Login = require('./models/login');
 const cors = require('cors');
@@ -32,7 +33,7 @@ db.authenticate()
     .catch( err => console.log(`DB connected fail: ${err}`))
 
 app.use('/api', indexRouter);
-app.use('/api/admin', indexRouter);
+app.use('/api/admin', adminRouter);
 
 // error handler
 app.use(function(err, req, res, next) {
