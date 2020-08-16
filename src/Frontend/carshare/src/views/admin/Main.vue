@@ -54,7 +54,7 @@ export default {
   },
   methods:{
     login() {
-      this.$axios.post(`${this.$auth}/authorize`,{
+      this.$axios.post(`/api/admin/authorize`,{
         email: this.email,
         password: this.password
       })
