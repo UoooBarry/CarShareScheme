@@ -9,8 +9,12 @@ const _Customer = require('../repository/customerRepository');
 const _Login = require('../repository/loginRepository');
 const JWT = require('jsonwebtoken');
 
-router.get('/test',(req,res) => {
-    res.json("hello world");
+router.get('/verify', verifyToken, (req,res) => {
+  if(req.user.admin != true){
+    res.json({authorize: false});
+  }else{
+    res.json({authorize: true});
+  }
 })
 
 router.patch('/activate/:id/', verifyToken, (req,res) => {
