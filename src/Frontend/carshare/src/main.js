@@ -7,10 +7,13 @@ import VueSession from 'vue-session';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import config from '../config/variables';
 import FlashMessage from '@smartweb/vue-flash-message';
-import { VueReCaptcha } from 'vue-recaptcha-v3'
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { fas } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { VueReCaptcha } from 'vue-recaptcha-v3';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { fas } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import moment from 'moment';
+
+
 
 //font awesome icons
 library.add(fas)
@@ -22,13 +25,18 @@ Vue.prototype.$auth = config.authenticationURL;
 Vue.prototype.$carshare = config.carshareURL;
 Vue.config.productionTip = false
 
+
 new Vue({
   router,
   render: h => h(App)
 }).$mount('#app')
 
 axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
-
+Vue.filter('formatDate', function(value) {
+  if (value) {
+    return moment(String(value)).format('MM/DD/YYYY hh:mm')
+  }
+});
 // Session storage
 Vue.use(VueSession);
 // Flash messages

@@ -1,7 +1,11 @@
+/***********************************************************************
+ *           @AUTHOR: Bach Dao, CREATED AT: 11/08/2020           *
+ *           @AUTHOR: Bach Dao, Updated AT: 15/08/2020                *
+ ***********************************************************************/
 <template>
   <div class="profile" style>
-    <h1>This is a Profile page</h1>
-    <AvatarHolder />
+    <br><br><br><br>
+    <AvatarHolder v-bind:customer="this.customer" />
 
     <InformationProfile v-bind:customer="this.customer"/>
     </div>
@@ -32,11 +36,12 @@ export default {
       customer: ""
     }
   },
+ 
   async created(){
     const header = {
       authorization: `PBD ${localStorage.getItem('authToken')}`
     }
-
+    
     const response = await this.$axios.get(`${this.$carshare}/customers/`,{headers: header});
     if(response.data.message === "success"){
       this.customer = response.data.customer;

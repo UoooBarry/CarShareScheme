@@ -2,13 +2,12 @@
   <header>
     <nav class="navbar navbar-light navbar-expand-md navbar-transparency">
         <div class="container">
-            <div><a class="navbar-brand" href="#">PBD Car Share</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button></div>
+            <div><a class="navbar-brand" href="/about">PBD Car Share</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button></div>
             <div class="collapse navbar-collapse"
                 id="navcol-1">
                 <ul class="nav navbar-nav ml-auto">
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="/user/profile">Your Profile</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="#">Second Item</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="#">Third Item</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="#">Search</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="#">Car list</a></li>
                     <li class="nav-item dropdown" id="account"><a data-toggle="dropdown" aria-expanded="false" class="dropdown-toggle nav-link" href="#">Account</a>
                         <div class="dropdown-menu" role="menu">
                             <a class="dropdown-item" role="presentation" href="/user/profile">Profile</a>
