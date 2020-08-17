@@ -58,33 +58,29 @@ export default {
           email: this.email,
           password: this.password
         })
-        .then(res => {
+        .then(async (res) => {
           if (res.data.message === "success") {
             localStorage.setItem("authToken", res.data.token);
             
             const header = {
-              authorization: `PBD ${localStorage.getItem("authToken")}`
+              authorization: `PBD ${res.data.token}`
             };
-            this.$axios
-              .get(`http://localhost:4000/api/admin/verify`, {
-                headers: header
-              })
-              .then(res => {
-                if (res.data.authorize) {
-                    
-                  this.flashMessage.success({
-                    title: "Login as Admin success",
-                    message: `Welcome admin!`
-                  });
-                  this.$router.push({ name: "User" });
-                } else {
-                    console.log(res.data.message);
-                  this.flashMessage.warning({
-                    title: "Login fail",
-                    message: res.data.reason
-                  });
-                }
+
+            const verfication = await this.$axios.get(`http://localhost:4000/api/admin/verify`, { headers: header}).data.authorize;
+            if (verfication) {
+              //if the requested user is an admin   
+              this.flashMessage.success({
+                title: "Login as Admin success",
+                message: `Welcome admin!`
               });
+              this.$router.push({ name: "User" });
+            } else {
+              this.flashMessage.warning({
+                title: "Login fail",
+                message: res.data.reason
+              });
+            }
+
           } else {
             this.flashMessage.warning({
               title: "Login fail",

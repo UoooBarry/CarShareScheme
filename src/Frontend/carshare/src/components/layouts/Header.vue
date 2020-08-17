@@ -24,8 +24,11 @@
 </template>
 
 <script>
+import authorizeMixin from '@/mixins/authorizeMixin';
+
 export default {
   name: "Header",
+  mixins: [authorizeMixin],
   data() {
       return{
           id: localStorage.getItem('authToken')

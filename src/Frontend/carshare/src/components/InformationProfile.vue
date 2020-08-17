@@ -51,6 +51,8 @@
 </template>
 
 <script>
+import authorizeMixin from '@/mixins/authorizeMixin';
+
 export default {
   name: "InformationProfile",
   data() {
@@ -58,12 +60,9 @@ export default {
       firstName: ""
     };
   },
+  mixins: [authorizeMixin],
   methods: {
     submit() {
-      const header = {
-        authorization: `PBD ${localStorage.getItem("authToken")}`
-      };
-
       this.$axios
         .patch(
           `${this.$carshare}/customers/`,
@@ -73,7 +72,7 @@ export default {
             contact_number: document.getElementById("phone").value,
             date_of_birth: document.getElementById("dob").value
           },
-          { headers: header }
+          { headers: this.header }
         )
         .then(res => {
           if (res.data.message == "fail") {
@@ -96,7 +95,6 @@ export default {
   },
   created() {
     this.firstName = this.customer.first_name;
-    console.log(this.firstName);
   },
   props: ["customer"]
 };
