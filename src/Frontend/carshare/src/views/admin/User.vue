@@ -15,6 +15,17 @@ export default {
   components: {
     AdminHeader
   },
+  data() {
+    return {
+      customers: ""
+    };
+  },
+  async created(){  
+    const response = await this.$axios.get(`http://localhost:4000/api/admin/customers`);
+    this.customers = response.data.customer;
+    console.log(this.customers);
+    
+  }
 };
 </script>
 

@@ -67,6 +67,7 @@ export default {
             };
 
             const verfication = await this.$axios.get(`http://localhost:4000/api/admin/verify`, { headers: header}).data.authorize;
+            console.log(verfication.authorize);
             if (verfication) {
               //if the requested user is an admin   
               this.flashMessage.success({

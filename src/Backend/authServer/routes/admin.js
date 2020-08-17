@@ -15,6 +15,22 @@ router.get('/verify', verifyToken, (req,res) => {
   }else{
     res.json({authorize: false});
   }
+});
+
+
+router.get('/customers', res => {
+  _Customer.getAll()
+            .then(customers => {
+              res.json({
+                customers
+              })
+            })
+            .catch(err => {
+              res.json({
+                err
+              })
+            });
+
 })
 
 
