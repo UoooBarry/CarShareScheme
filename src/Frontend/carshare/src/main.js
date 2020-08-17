@@ -23,6 +23,7 @@ Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.prototype.$axios = axios;
 Vue.prototype.$auth = config.authenticationURL;
 Vue.prototype.$carshare = config.carshareURL;
+Vue.prototype.$admin = config.adminURL;
 Vue.config.productionTip = false
 
 

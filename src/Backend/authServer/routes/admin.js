@@ -18,20 +18,20 @@ router.get('/verify', verifyToken, (req,res) => {
 });
 
 
-router.get('/customers', res => {
+router.get('/customers', (req,res) => {
   _Customer.getAll()
-            .then(customers => {
+           .then(customers => {
               res.json({
                 customers
               })
-            })
-            .catch(err => {
-              res.json({
-                err
-              })
-            });
-
+           })
+           .catch((error) => {
+            res.json({message: 'fail', reason: error});
+        }).
+  
+  
 })
+
 
 
 

@@ -10,7 +10,18 @@ const Customer = require('../models/customer');
 class customerRepository{
 
     async getAll(){
-        return await Customer.findAll({where: {}});
+        const login = await Login.findAll({
+            include: [{
+                model: Customer
+            }]
+        });
+        const customers = await login.getCustomer();
+
+        const result = {
+            customers,
+            activate: login.activate
+        }
+        return result;
     }
 
     async getById(id){

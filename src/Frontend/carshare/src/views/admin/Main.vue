@@ -39,7 +39,6 @@
 
 <script>
 import AdminHeader from "@/components/layouts/AdminHeader.vue";
-
 export default {
   name: "Admin",
   components: {
@@ -65,10 +64,8 @@ export default {
             const header = {
               authorization: `PBD ${res.data.token}`
             };
-
-            const verfication = await this.$axios.get(`http://localhost:4000/api/admin/verify`, { headers: header}).data.authorize;
-            console.log(verfication.authorize);
-            if (verfication) {
+            const authRes = await this.$axios.get(`${this.$admin}/verify`, { headers: header});
+            if (authRes.data.authorize) {
               //if the requested user is an admin   
               this.flashMessage.success({
                 title: "Login as Admin success",
@@ -81,7 +78,6 @@ export default {
                 message: res.data.reason
               });
             }
-
           } else {
             this.flashMessage.warning({
               title: "Login fail",
@@ -107,7 +103,6 @@ header#header {
 #dark-footer {
   display: none !important;
 }
-
 .main {
   height: 930px;
 }
