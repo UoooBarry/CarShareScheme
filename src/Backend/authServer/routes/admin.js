@@ -17,6 +17,9 @@ router.get('/verify', verifyToken, (req,res) => {
   }
 })
 
+
+
+
 router.patch('/activate/:id/', verifyToken, (req,res) => {
     if(req.user.admin != true)
         res.sendStatus(403);
