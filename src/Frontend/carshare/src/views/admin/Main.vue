@@ -66,8 +66,8 @@ export default {
               authorization: `PBD ${res.data.token}`
             };
 
-            const verfication = await this.$axios.get(`http://localhost:4000/api/admin/verify`, { headers: header}).data.authorize;
-            if (verfication) {
+            const authRes = await this.$axios.get(`http://localhost:4000/api/admin/verify`, { headers: header});
+            if (authRes.data.authorize) {
               //if the requested user is an admin   
               this.flashMessage.success({
                 title: "Login as Admin success",

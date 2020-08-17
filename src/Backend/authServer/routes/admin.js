@@ -15,7 +15,24 @@ router.get('/verify', verifyToken, (req,res) => {
   }else{
     res.json({authorize: false});
   }
+});
+
+
+router.get('/customers', (req,res) => {
+  _Customer.getAll()
+            .then(customers => {
+              res.json({
+                customers
+              })
+            })
+            .catch(err => {
+              res.json({
+                err
+              })
+            });
+
 })
+
 
 router.patch('/activate/:id/', verifyToken, (req,res) => {
     if(req.user.admin != true)
