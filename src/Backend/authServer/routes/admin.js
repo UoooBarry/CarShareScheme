@@ -27,10 +27,8 @@ router.get('/customers', (req,res) => {
            })
            .catch((error) => {
             res.json({message: 'fail', reason: error});
-        }).
-  
-  
-})
+        })
+});
 
 
 
