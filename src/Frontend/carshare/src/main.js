@@ -42,6 +42,9 @@ Vue.filter('formatDate', function(value) {
     return moment(String(value)).format('MM/DD/YYYY hh:mm')
   }
 });
+
+
+
 // Session storage
 Vue.use(VueSession);
 // Flash messages
@@ -50,3 +53,20 @@ Vue.use(FlashMessage);
 Vue.use(VueReCaptcha, { siteKey: '6LcTY7sZAAAAAJeN_bq5d-F7S-I2Qq9yPTCMQmoA',loaderOptions:{
   autoHideBadge: true
 } })
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    // this route requires auth, check if logged in
+    // if not, redirect to login page.
+    console.log('required logged in');
+    if (localStorage.getItem('authToken') === null) {
+      next({
+        path: '/'
+      })
+    } else {
+      next()
+    }
+  } else {
+    next() // make sure to always call next()!
+  }
+})

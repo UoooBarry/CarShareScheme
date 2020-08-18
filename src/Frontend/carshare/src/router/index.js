@@ -35,6 +35,9 @@ const routes = [{
   components: {
     header: Header,
     main: () => import('../views/Profile.vue')
+  },
+  meta: {
+    requiresAuth: true
   }
 },
 {
@@ -51,6 +54,9 @@ const routes = [{
   components: {
     header: () => import('@/components/layouts/AdminHeader'),
     main: () => import('../views/admin/User.vue')
+  },
+  meta: {
+    requiresAuth: true
   }
 }
 ]
@@ -60,5 +66,4 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 })
-
 export default router

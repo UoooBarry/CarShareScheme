@@ -82,12 +82,11 @@ function verifyToken(req,res,next){
     //Get auth header
     const header = req.headers['authorization'];
     //Check exsit
-    if(typeof header !== 'undefined'){
+    if(typeof header !== 'undefined' || header === null){
       //Spilt at the space 
       var token = header.split(' ')[1];
       JWT.verify(token,process.env.ACCESS_TOKEN_SECRET, (err, data) => {
         if(err){
-          console.log(err);
           return res.json({message: 'fail'})
         } 
          // Set the token

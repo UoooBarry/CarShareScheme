@@ -12,7 +12,7 @@
                         <div class="dropdown-menu" role="menu">
                             <a class="dropdown-item" role="presentation" href="/user/profile">Profile</a>
                             <a class="dropdown-item" role="presentation" href="#">Rent History</a>
-                            <a class="dropdown-item" role="presentation" href="#" v-on:click="logout">Logout</a>
+                            <a class="dropdown-item" role="presentation" href="#" v-on:click="this.logout">Logout</a>
                         </div>
                     </li>
                     <li class="nav-item" role="presentation" id="login" style="display: none"><a class="nav-link" href="/">Login</a></li>
@@ -44,16 +44,7 @@ export default {
       getActive(expected) {
             if (expected == this.$route.name) return true;
             return false;
-        },
-      logout() {
-          localStorage.removeItem('authToken');
-          this.$session.remove('username');
-          this.flashMessage.info({
-            title: 'Logout success',
-            message: `See you!`
-          });
-          this.$router.push({name: 'Home'});
-      }
+        }
   }
 };
 </script>
