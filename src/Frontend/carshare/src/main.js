@@ -54,11 +54,11 @@ Vue.use(VueReCaptcha, { siteKey: '6LcTY7sZAAAAAJeN_bq5d-F7S-I2Qq9yPTCMQmoA',load
   autoHideBadge: true
 } })
 
+// Make a router check, required logged in when meta has requiresAuth
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
     // this route requires auth, check if logged in
     // if not, redirect to login page.
-    console.log('required logged in');
     if (localStorage.getItem('authToken') === null) {
       next({
         path: '/'

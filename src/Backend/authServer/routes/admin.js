@@ -9,6 +9,7 @@ const _Customer = require('../repository/customerRepository');
 const _Login = require('../repository/loginRepository');
 const JWT = require('jsonwebtoken');
 
+//GET /api/admin/verify return if an token holder is an admin
 router.get('/verify', verifyToken, (req,res) => {
   if(req.user.admin){
     res.json({authorize: true});
@@ -17,7 +18,7 @@ router.get('/verify', verifyToken, (req,res) => {
   }
 });
 
-
+//GET /api/admin/customers, return all customers with activate status
 router.get('/customers', (req,res) => {
   _Customer.getAll()
            .then(customers => {
@@ -33,8 +34,9 @@ router.get('/customers', (req,res) => {
 
 
 
-
+//PATCH api/admin/activate/:id/
 router.patch('/activate/:id/', verifyToken, (req,res) => {
+  //If the token holder is not admin, return forbidden
     if(req.user.admin != true)
         res.sendStatus(403);
 

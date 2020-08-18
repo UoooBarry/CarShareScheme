@@ -35,12 +35,14 @@ export default {
       }
   },
   mounted() {
+      //Show login if not logged in
      if(!(this.id)){
             document.getElementById('login').style.display = 'inline-block';
             document.getElementById('account').style.display = 'none';
         }
   },
   methods:{
+      //Make the nav item activate if route name = expected input.
       getActive(expected) {
             if (expected == this.$route.name) return true;
             return false;

@@ -52,7 +52,9 @@ export default {
     RegisterForm
   },
   methods: {
+    /*When clicked the login button*/
     showLogin() {
+      //Hide the picture and register, show login
       document.getElementById("picture").style.display = "none";
       document.getElementById("register").style.display = "none";
       document.getElementById("login").style.display = "inline-block";
