@@ -25,34 +25,32 @@
 <script>
 import AvatarHolder from "@/components/AvatarHolder";
 import InformationProfile from "@/components/InformationProfile";
+import authorizeMixin from '@/mixins/authorizeMixin';
+
 export default {
   name: "Profile",
   components: {
     AvatarHolder,
     InformationProfile
   },
+  mixins: [authorizeMixin],
   data(){
     return{
       customer: ""
     }
   },
  
-  async created(){
-    const header = {
-      authorization: `PBD ${localStorage.getItem('authToken')}`
-    }
-    
-    const response = await this.$axios.get(`${this.$carshare}/customers/`,{headers: header});
+  async created(){  
+    const response = await this.$axios.get(`${this.$carshare}/customers/`,{headers: this.header});
     if(response.data.message === "success"){
       this.customer = response.data.customer;
     }else{
       this.flashMessage.error({
             title: 'Error',
-            message: 'Authentication error !'
+            message: 'Need to sign in first!'
           });
           this.$router.push({name: 'Home'});
     }
-    
   }
 };
 </script>

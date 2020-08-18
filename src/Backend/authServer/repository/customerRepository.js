@@ -1,26 +1,31 @@
- 
 /***********************************************************************
  *           @AUTHOR: YONGQIAN HUANG, CREATED AT: 04/07/2020           *
  * @UPDATED: YONGQIAN HUANG, 04/08/2020, APPLY DATA REPOSITORY PATTERN *
  ***********************************************************************/
-
-
+ 
 const Customer = require('../models/customer');
-
+const Login = require('../models/login');
+ 
 class customerRepository{
-
+ 
     async getAll(){
-        return await Customer.findAll({where: {}});
+        const customersWithActivate = await Login.findAll({
+            attributes: ['activate'],
+            include: [
+                {model: Customer}
+            ]
+        });
+        return customersWithActivate;
     }
-
+ 
     async getById(id){
         return await Customer.findAll({where: {id: id}});
     }
-
+ 
     async getByContact(contact){
         return await Customer.findAll({where: {contact_number: contact}});
     }
-
+ 
     async create(first_name, family_name, gender, date_of_birth, contact_number){
         const customer = await Customer.create({
             first_name: first_name,
@@ -29,10 +34,10 @@ class customerRepository{
             date_of_birth: date_of_birth,
             contact_number: contact_number
         });
-
+ 
         return customer;
     }
-
+ 
     async removeById(){
         await Customer.destroy({
             where: {
@@ -41,5 +46,5 @@ class customerRepository{
         });
     }
 }
-
+ 
 module.exports = new customerRepository();

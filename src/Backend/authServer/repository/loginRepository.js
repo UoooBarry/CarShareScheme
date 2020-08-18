@@ -21,6 +21,10 @@ class loginRepository {
         });
     }
 
+    async getActivate() {
+        
+    }
+
     async create(email, password, user_id){
         const exist = Login.count({where: {Email: email}});
         if(exist >= 1)

@@ -1,5 +1,6 @@
 /***********************************************************************
  *           @AUTHOR: SHUYUAN ZHANG, CREATED AT: 11/08/2020           *
+ *           @AUTHOR: Bach Dao, Updated AT: 15/08/2020                *
  ***********************************************************************/
 <template>
   <div id="second-container" class="container">
@@ -50,28 +51,29 @@
 </template>
 
 <script>
+import authorizeMixin from '@/mixins/authorizeMixin';
+
 export default {
   name: "InformationProfile",
-  data(){
-    return{
-      firstName: "",
-      
-    }
+  data() {
+    return {
+      firstName: ""
+    };
   },
+  mixins: [authorizeMixin],
   methods: {
     submit() {
-      const header = {
-      authorization: `PBD ${localStorage.getItem('authToken')}`
-        }
-    
-      
       this.$axios
-        .patch(`${this.$carshare}/customers/`, {
-          first_name: document.getElementById("fname").value,
-          family_name: document.getElementById("sname").value,
-          contact_number: document.getElementById("phone").value,
-          date_of_birth: document.getElementById("dob").value
-        }, {headers: header})
+        .patch(
+          `${this.$carshare}/customers/`,
+          {
+            first_name: document.getElementById("fname").value,
+            family_name: document.getElementById("sname").value,
+            contact_number: document.getElementById("phone").value,
+            date_of_birth: document.getElementById("dob").value
+          },
+          { headers: this.header }
+        )
         .then(res => {
           if (res.data.message == "fail") {
             res.data.errors.forEach(error => {
@@ -87,14 +89,12 @@ export default {
             title: "Update success!",
             message: "Update successfully!"
           });
-         
         })
         .catch(err => console.log(err));
     }
   },
-  created(){
+  created() {
     this.firstName = this.customer.first_name;
-    console.log(this.firstName)
   },
   props: ["customer"]
 };

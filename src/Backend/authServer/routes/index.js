@@ -6,6 +6,7 @@
  *      Yongqian Huang, 07/08/2020, Add email existed validation       *
  *      Yongqian Huang, 07/08/2020, Added SMS based 2FA                *
  *      Yongqian Huang, 13/08/2020, Improve security                   *
+ *      Bach Dao, 18/08/2020, Change register router                   *
  ***********************************************************************/
 
 require('dotenv').config();
@@ -120,7 +121,9 @@ router.post('/register',
             req.body.family_name,
             req.body.gender,
             req.body.date_of_birth,
-            req.body.contact_number
+            req.body.contact_number,
+            req.body.gender,
+            req.body.date_of_birth
         )
         //Create login for user
         await _login.create(

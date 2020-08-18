@@ -9,9 +9,30 @@ const _Customer = require('../repository/customerRepository');
 const _Login = require('../repository/loginRepository');
 const JWT = require('jsonwebtoken');
 
-router.get('/test',(req,res) => {
-    res.json("hello world");
-})
+router.get('/verify', verifyToken, (req,res) => {
+  if(req.user.admin){
+    res.json({authorize: true});
+  }else{
+    res.json({authorize: false});
+  }
+});
+
+
+router.get('/customers', (req,res) => {
+  _Customer.getAll()
+           .then(customers => {
+              res.json({
+                customers
+              })
+           })
+           .catch((error) => {
+            res.json({message: 'fail', reason: error});
+        })
+});
+
+
+
+
 
 router.patch('/activate/:id/', verifyToken, (req,res) => {
     if(req.user.admin != true)
