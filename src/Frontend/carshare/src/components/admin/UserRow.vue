@@ -11,7 +11,10 @@
         <div class="item">
          
           <div class="form-check pl-0">
-            <input class="form-check-input" type="checkbox" :checked="customer.activate" v-on:click="activate" />
+              <toggle-button :value="customer.activate"
+               color="#82C7EB"
+               v-on:change="activate"
+               :labels="true"/>
           </div>
         </div>
     </div>

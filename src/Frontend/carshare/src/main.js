@@ -12,13 +12,15 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import moment from 'moment';
+import { ToggleButton } from 'vue-js-toggle-button'
+ 
 
 
 
 //font awesome icons
 library.add(fas)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
-
+Vue.component('ToggleButton', ToggleButton)
 // global variable
 Vue.prototype.$axios = axios;
 Vue.prototype.$auth = config.authenticationURL;
@@ -31,6 +33,7 @@ new Vue({
   router,
   render: h => h(App)
 }).$mount('#app')
+
 
 
 axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
