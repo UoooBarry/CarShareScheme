@@ -242,7 +242,7 @@
               class="help-block"
             >By clicking Create my account, you agree to our Terms and that you have read our Data Use Policy, including our Cookie Use.</span>
             <button
-              class="btn btn-lg btn-primary btn-block signup-btn"
+              class="btn btn-lg btn-primary btn-block signup-btn register-button"
               type="submit"
             >Create my account</button>
           </form>
@@ -430,5 +430,11 @@ legend {
 }
 .radio-inline {
   padding-right: 8px;
+}
+.register-button{
+  background: rgb(126, 184, 208);
+}
+.register-button:hover{
+  background: rgb(55, 128, 160);
 }
 </style>  
