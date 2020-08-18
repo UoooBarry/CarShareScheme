@@ -1,22 +1,18 @@
 <template >
   <div>
-    <AdminHeader />
     <div class="container">
-      <h1>USER LIST PAGE</h1>
-      <UserList v-bind:customers="this.customers" />
+      <UserList v-bind:customers="this.customers" class='user-list'/>
     </div>
   </div>
 </template>
 
 <script>
-import AdminHeader from "@/components/layouts/AdminHeader.vue";
 import authorizeMixin from "@/mixins/authorizeMixin";
 import UserList from "@/components/admin/UserList";
 
 export default {
   name: "User",
   components: {
-    AdminHeader,
     UserList
   },
   mixins: [authorizeMixin],
@@ -41,13 +37,13 @@ export default {
   margin: 10px;
   width: 125px;
 }
-.user {
-  padding: 20px;
-  border-bottom: 1px solid black;
+.user-list{
+  margin-top: 40px;
+  border: 1px solid #9D9B9B;
+  border-radius: 10px;
 }
-header#header {
-  display: none !important;
-}
+
+
 #dark-footer {
   display: none !important;
 }

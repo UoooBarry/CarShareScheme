@@ -7,8 +7,8 @@
                 id="navcol-1">
                 <ul class="nav navbar-nav ml-auto">
                     <li class="nav-item" role="presentation"><a class="nav-link" href="#">Search</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="#">Car list</a></li>
-                    <li class="nav-item dropdown" id="account"><a data-toggle="dropdown" aria-expanded="false" class="dropdown-toggle nav-link" href="#">Account</a>
+                    <li class="nav-item" role="presentation"  v-bind:class="{'nav-item active': getActive('About')}"><a class="nav-link" href="#">Car list</a></li>
+                    <li class="nav-item dropdown" id="account"  v-bind:class="{'nav-item active': getActive('Profile')}"><a data-toggle="dropdown" aria-expanded="false" class="dropdown-toggle nav-link" href="#" >Account</a>
                         <div class="dropdown-menu" role="menu">
                             <a class="dropdown-item" role="presentation" href="/user/profile">Profile</a>
                             <a class="dropdown-item" role="presentation" href="#">Rent History</a>
@@ -41,6 +41,10 @@ export default {
         }
   },
   methods:{
+      getActive(expected) {
+            if (expected == this.$route.name) return true;
+            return false;
+        },
       logout() {
           localStorage.removeItem('authToken');
           this.$session.remove('username');

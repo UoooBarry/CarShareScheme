@@ -1,16 +1,19 @@
 <template>
     <div>
-      <div class="user">
-        <div class="item">first name</div>
-        <div class="item">family name</div>
-        <div class="item">date of birth</div>
-        <div class="item">contact number</div>
-        <div class="item">created at</div>
-        <div class="item">updated at</div>
-        <div class="item">activate</div>
+      <div class="container">
+        <div class='user-list-title'>USER LIST</div>
+        <hr class='user'>
+        <div class="item">First name</div>
+        <div class="item">Family name</div>
+        <div class="item">Date of birth</div>
+        <div class="item">Contact number</div>
+        <div class="item">Created at</div>
+        <div class="item">Updated at</div>
+        <div class="item">Activate</div>
+        <hr class='user'>
       </div>
-
-      <div v-for="customer in customers" v-bind:key="customer.customer.id" class="user">
+      
+      <div v-for="customer in customers" v-bind:key="customer.customer.id" class="container">
         <UserRow v-bind:customer="customer" />
       </div>
     </div>
@@ -30,14 +33,27 @@ export default {
 
 
 <style>
+
+hr.user{
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.user-list-title{
+  text-align: left;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+}
 .item {
   display: inline-block;
   margin: 10px;
   width: 125px;
 }
 .user {
-  padding: 20px;
-  border-bottom: 1px solid black;
+  padding-left: 20px;
 }
 header#header {
   display: none !important;

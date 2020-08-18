@@ -1,6 +1,5 @@
 <template>
   <div>
-    <AdminHeader />
     <div class="container">
       <div class="login-card">
         <img class="profile-img-card" src="@/assets/img/avatar_2x.png" />
@@ -38,11 +37,10 @@
 </template>
 
 <script>
-import AdminHeader from "@/components/layouts/AdminHeader.vue";
 export default {
   name: "Admin",
-  components: {
-    AdminHeader
+  created(){
+    localStorage.removeItem('authToken');
   },
   data() {
     return {
@@ -71,7 +69,7 @@ export default {
                 title: "Login as Admin success",
                 message: `Welcome admin!`
               });
-              this.$router.push({ name: "User" });
+              this.$router.push({ name: "AdminUser" });
             } else {
               this.flashMessage.warning({
                 title: "Login fail",
@@ -97,9 +95,7 @@ export default {
 </script>
 
 <style>
-header#header {
-  display: none !important;
-}
+
 #dark-footer {
   display: none !important;
 }
