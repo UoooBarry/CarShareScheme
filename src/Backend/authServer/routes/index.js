@@ -16,13 +16,11 @@ const passwordHash = require('password-hash');
 const _login = require('../repository/loginRepository');
 const _customer = require('../repository/customerRepository');
 const _services = require('../repository/serviceRepository');
-
+const authorize = require('../helpers/authorizationHelper');
 const {
     check,
     validationResult
 } = require('express-validator');
-const JWT = require('jsonwebtoken');
-
 
 router.get('/getCode', [
     check('contact_number').not().isEmpty().withMessage('Contact number cannot be empty'),
@@ -115,27 +113,30 @@ router.post('/register',
             return;
         }
 
-        //Create a new user if it is correct
-        var customer = await _customer.create(
-            req.body.first_name,
-            req.body.family_name,
-            req.body.gender,
-            req.body.date_of_birth,
-            req.body.contact_number,
-            req.body.gender,
-            req.body.date_of_birth
-        )
-        //Create login for user
-        await _login.create(
-            req.body.email,
-            passwordHash.generate(req.body.password),
-            customer.id
-        )
+        try{
+            //Create a new user if it is correct
+            var customer = await _customer.create(
+                req.body.first_name,
+                req.body.family_name,
+                req.body.gender,
+                req.body.date_of_birth,
+                req.body.contact_number,
+                req.body.gender,
+                req.body.date_of_birth
+            )
+            //Create login for user
+            await _login.create(
+                req.body.email,
+                passwordHash.generate(req.body.password),
+                customer.id
+            )
 
-        res.json({
-            message: 'success'
-        });
-
+            res.json({
+                message: 'success'
+            });
+        }catch(err){
+            console.log(err);
+        }
 
     });
 
@@ -149,18 +150,12 @@ router.post('/authorize', (req, res) => {
         .then(async (login) => {
             if (login != null && login.activate === true && passwordHash.verify(req.body.password, login.password)) {
                 const customer = await login.getCustomer();
-                JWT.sign({
-                    customer
-                }, process.env.ACCESS_TOKEN_SECRET, (err, token) => {
-                    if (err) {
-                        console.log(err);
-                    }
-                    res.json({
-                        token,
-                        message: 'success',
-                        customer_name: customer.first_name
-                    });
-                })
+                const token = authorize.generateAccessToken(customer);
+                res.json({
+                    token,
+                    message: 'success',
+                    customer_name: customer.first_name
+                });
             } else {
                 res.json({
                     message: 'fail',
@@ -168,13 +163,6 @@ router.post('/authorize', (req, res) => {
                 });
             }
         })
-});
-
-router.post('/validate', (req, res) => {
-    const token = req.body.token;
-    JWT.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, data) => {
-        res.json(data);
-    })
 });
 
 function validate(errs){

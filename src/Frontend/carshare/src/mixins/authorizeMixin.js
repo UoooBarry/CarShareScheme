@@ -7,7 +7,7 @@ export default  {
     methods: {
         getHeader(){
             const header = {
-                authorization: `PBD ${localStorage.getItem("authToken")}`
+                authorization: `Bearer ${localStorage.getItem("authToken")}`
             };
             return header;
         },
