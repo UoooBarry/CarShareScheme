@@ -103,8 +103,16 @@ img {
   margin-top: 150px;
 }
 .login-card {
-  max-width: 350px;
+  max-width: 450px;
   padding: 40px;
+  background-color: #f7f7f7;
+  margin: 50px auto 25px;
+  border-radius: 2px;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
+}
+.register-card {
+  max-width: 550px;
+  padding: 0 40px 20px 40px;
   background-color: #f7f7f7;
   margin: 50px auto 25px;
   border-radius: 2px;
@@ -136,8 +144,12 @@ img {
   white-space: nowrap;
   box-sizing: border-box;
 }
-.iphone-mockup{
-  min-height: 520px;
+.phone-holder{
+  min-height: 650px;
+}
+#picture img{
+  width: 60%;
+  height:60%;
 }
 .login-card .form-signin button,
 .login-card .form-signin input[type="email"],
@@ -179,6 +191,7 @@ img {
 }
 .login-card .forgot-password {
   color: #6891a2;
+  
 }
 .login-card .forgot-password:active,
 .login-card .forgot-password:focus,
@@ -188,7 +201,7 @@ img {
 .header-blue {
   background: linear-gradient(135deg, #172a74, #21a9af);
   background-color: #184e8e;
-  padding-bottom: 80px;
+  padding-bottom: 30px;
   font-family: "Source Sans Pro", sans-serif;
 }
 .header-blue .navbar {
@@ -231,9 +244,7 @@ img {
   .navbar .navbar-nav > li > a {
     margin: 0 0 0 1px;
   }
-  .header-blue {
-    padding-bottom: 120px;
-  }
+ 
   .header-blue .navbar {
     padding-top: 1rem;
     padding-bottom: 1rem;

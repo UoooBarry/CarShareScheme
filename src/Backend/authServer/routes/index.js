@@ -120,7 +120,9 @@ router.post('/register',
             req.body.family_name,
             req.body.gender,
             req.body.date_of_birth,
-            req.body.contact_number
+            req.body.contact_number,
+            req.body.gender,
+            req.body.date_of_birth
         )
         //Create login for user
         await _login.create(
