@@ -1,4 +1,6 @@
-
+/**************
+ * Unit tested by QINGKAI YI  *
+ **************/
 const Customer = require('../../models/customer');
 const chai = require('chai');
 //Assertion style
