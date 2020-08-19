@@ -47,11 +47,10 @@ export default {
     }else{
       this.flashMessage.error({
             title: 'Error',
-            message: 'Authentication error !'
+            message: 'Need to sign in first!'
           });
           this.$router.push({name: 'Home'});
     }
-    
   }
 };
 </script>

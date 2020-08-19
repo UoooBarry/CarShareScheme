@@ -1,32 +1,53 @@
-<template>
+<template >
   <div>
-    <AdminHeader />
     <div class="container">
-      USER LIST PAGE
+      <UserList v-bind:customers="this.customers" class='user-list'/>
     </div>
   </div>
 </template>
 
 <script>
-import AdminHeader from "@/components/layouts/AdminHeader.vue";
+import authorizeMixin from "@/mixins/authorizeMixin";
+import UserList from "@/components/admin/UserList";
 
 export default {
   name: "User",
   components: {
-    AdminHeader
+    UserList
   },
+  mixins: [authorizeMixin],
+  data() {
+    return {
+      customers: []
+    }
+  },
+  async created() {
+    const response = await this.$axios.get(`${this.$admin}/customers/`, {
+      headers: this.header
+    });
+    this.customers = response.data.customers;
+  }
 };
 </script>
 
 <style>
-header#header {
-  display: none !important;
+.item {
+  display: inline-block;
+  margin: 10px;
+  width: 125px;
 }
-#dark-footer {
-    display: none !important;
+.user-list{
+  margin-top: 40px;
+  border: 1px solid #9D9B9B;
+  border-radius: 10px;
 }
 
-.main{
-    height: 930px;
+
+#dark-footer {
+  display: none !important;
+}
+
+.main {
+  height: 930px;
 }
 </style>

@@ -1,6 +1,5 @@
 <template>
   <div>
-    <AdminHeader />
     <div class="container">
       <div class="login-card">
         <img class="profile-img-card" src="@/assets/img/avatar_2x.png" />
@@ -38,12 +37,10 @@
 </template>
 
 <script>
-import AdminHeader from "@/components/layouts/AdminHeader.vue";
-
 export default {
   name: "Admin",
-  components: {
-    AdminHeader
+  created(){
+    localStorage.removeItem('authToken');
   },
   data() {
     return {
@@ -65,22 +62,20 @@ export default {
             const header = {
               authorization: `PBD ${res.data.token}`
             };
-
-            const authRes = await this.$axios.get(`http://localhost:4000/api/admin/verify`, { headers: header});
+            const authRes = await this.$axios.get(`${this.$admin}/verify`, { headers: header});
             if (authRes.data.authorize) {
               //if the requested user is an admin   
               this.flashMessage.success({
                 title: "Login as Admin success",
                 message: `Welcome admin!`
               });
-              this.$router.push({ name: "User" });
+              this.$router.push({ name: "AdminUser" });
             } else {
               this.flashMessage.warning({
                 title: "Login fail",
                 message: res.data.reason
               });
             }
-
           } else {
             this.flashMessage.warning({
               title: "Login fail",
@@ -100,13 +95,10 @@ export default {
 </script>
 
 <style>
-header#header {
-  display: none !important;
-}
+
 #dark-footer {
   display: none !important;
 }
-
 .main {
   height: 930px;
 }

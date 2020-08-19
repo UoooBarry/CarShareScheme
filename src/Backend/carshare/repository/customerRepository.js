@@ -10,7 +10,7 @@ var JWT = require('jsonwebtoken');
 
 
 class customerRepository{
-
+    
     async getAll(){
         return await Customer.findAll({where: {}});
     }
@@ -19,6 +19,7 @@ class customerRepository{
         return await Customer.findOne({where: {id: id}});
     }
 
+    /*Update customer with json array */
     async update(id, data){
         const customer = await Customer.findOne({where:{id: id}});
         try{

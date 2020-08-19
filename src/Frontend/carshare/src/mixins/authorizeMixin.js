@@ -4,13 +4,10 @@ export default  {
             header: this.getHeader()
         }
     },
-    created() {
-        console.log('hello world');
-    },
     methods: {
         getHeader(){
             const header = {
-                authorization: `PBD ${localStorage.getItem("authToken")}`
+                authorization: `Bearer ${localStorage.getItem("authToken")}`
             };
             return header;
         },
@@ -19,7 +16,7 @@ export default  {
             this.$session.remove('username');
             this.flashMessage.info({
               title: 'Logout success',
-              message: `See you!`
+              message: 'See you!'
             });
             this.$router.push({name: 'Home'});
         }

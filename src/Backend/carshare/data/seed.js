@@ -29,6 +29,7 @@ module.exports = {
                 name: "Test Car",
                 brand: "Test brand",
                 model: "T1",
+                seats: 4 ,
                 location_id: rmit.id,
                 purchase_date: new Date(),
                 available: false

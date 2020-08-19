@@ -7,6 +7,7 @@ const {
     validationResult
 } = require('express-validator');
 
+//GET /api/customers/:id
 router.get('/:id/', async (req, res) => {
     const customer = await _Customer.getById(req.params.id);
     if (customer) {
@@ -16,6 +17,7 @@ router.get('/:id/', async (req, res) => {
     }
 });
 
+//GET /api/customers/
 router.get('/', verifyToken, async (req, res) => {
     const customer = await _Customer.getById(req.user.id);
     if (customer) {
@@ -45,6 +47,7 @@ router.patch('/', [
         return;
     }
 
+    /*Update customer information and return message */
     _Customer.update(req.user.id, req.body)
         .then(() => {
             res.json({
@@ -60,7 +63,7 @@ router.patch('/', [
 
 });
 
-
+//Mange and return the array of errors
 function validate(errs) {
     //check and return errors
     if (!errs.isEmpty()) {
@@ -82,12 +85,11 @@ function verifyToken(req,res,next){
     //Get auth header
     const header = req.headers['authorization'];
     //Check exsit
-    if(typeof header !== 'undefined'){
+    if(typeof header !== 'undefined' || header === null){
       //Spilt at the space 
       var token = header.split(' ')[1];
       JWT.verify(token,process.env.ACCESS_TOKEN_SECRET, (err, data) => {
         if(err){
-          console.log(err);
           return res.json({message: 'fail'})
         } 
          // Set the token
