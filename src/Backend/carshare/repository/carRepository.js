@@ -19,6 +19,15 @@ class loginRepository{
             return Promise.reject(err);
         }
     }
+
+    async create(car){
+        try{
+            await Car.create(car);
+            return Promise.resolve(true);
+        }catch(err){
+            return Promise.reject(err);
+        }
+    }
 }
 
 

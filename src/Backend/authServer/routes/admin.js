@@ -37,8 +37,7 @@ router.get('/customers', (req,res) => {
 //PATCH api/admin/activate/:id/
 router.patch('/activate/:id/', authorize.verifyToken, (req,res) => {
   //If the token holder is not admin, return forbidden
-    if(req.user.admin != true)
-        res.sendStatus(403);
+    if(!req.user.admin) res.sendStatus(403);
 
 
     _Login.activate(req.params.id) 
