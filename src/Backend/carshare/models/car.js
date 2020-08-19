@@ -23,7 +23,8 @@ const car = db.define('cars', {
         type: Sequelize.STRING
     },
     purchase_date: {
-        type: Sequelize.DATE
+        type: 'DATE',
+        defaultValue: new Date()
     },
     location_id: {
         type: Sequelize.INTEGER
@@ -38,6 +39,10 @@ const car = db.define('cars', {
     },
     description:{
         type: Sequelize.STRING
+    },
+    air_condition:{
+        type: Sequelize.BOOLEAN,
+        defaultValue: true
     },
     viewed:{
         type: Sequelize.INTEGER,
