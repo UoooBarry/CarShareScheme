@@ -1,22 +1,34 @@
 const express = require('express');
 const router = express.Router();
+const JWT = require('jsonwebtoken');
 const _Customer = require('../repository/customerRepository');
 const {
     check,
     validationResult
 } = require('express-validator');
 
+//GET /api/customers/:id
 router.get('/:id/', async (req, res) => {
     const customer = await _Customer.getById(req.params.id);
-    if(customer){
+    if (customer) {
         res.json(customer);
-    }else{
+    } else {
+        res.sendStatus(403);
+    }
+});
+
+//GET /api/customers/
+router.get('/', verifyToken, async (req, res) => {
+    const customer = await _Customer.getById(req.user.id);
+    if (customer) {
+        res.json({ message: "success", customer });
+    } else {
         res.sendStatus(403);
     }
 });
 
 
-router.patch('/:id/',[
+router.patch('/', [
     check('first_name').not().isEmpty().withMessage('FirstName cannot be empty'),
     check('family_name').not().isEmpty().withMessage('FamilyName cannot be empty'),
     check('contact_number').not().isEmpty().withMessage('Contact number cannot be empty'),
@@ -25,33 +37,34 @@ router.patch('/:id/',[
         max: 9
     }).withMessage('Contact number should be 9 digits').matches(/^[4][0-9]*$/).withMessage('Contact must be numbers start with 4'),
     verifyToken
-],async (req, res) => {
+], async (req, res) => {
     const errs = validationResult(req);
     //check and return errors
-    try{
+    try {
         await validate(errs);
-    }catch(msg){
+    } catch (msg) {
         res.json(msg);
         return;
     }
-    
+
+    /*Update customer information and return message */
     _Customer.update(req.user.id, req.body)
-            .then(() => {
-                res.json({
-                    message: "success"
-                })
+        .then(() => {
+            res.json({
+                message: "success"
             })
-            .catch((err) => {
-                console.log(err);
-                res.json({
-                    message: "fail"
-                })
+        })
+        .catch((err) => {
+            console.log(err);
+            res.json({
+                message: "fail"
             })
+        })
 
 });
 
-
-function validate(errs){
+//Mange and return the array of errors
+function validate(errs) {
     //check and return errors
     if (!errs.isEmpty()) {
         let errors = [];
@@ -72,16 +85,15 @@ function verifyToken(req,res,next){
     //Get auth header
     const header = req.headers['authorization'];
     //Check exsit
-    if(typeof header !== 'undefined'){
+    if(typeof header !== 'undefined' || header === null){
       //Spilt at the space 
       var token = header.split(' ')[1];
       JWT.verify(token,process.env.ACCESS_TOKEN_SECRET, (err, data) => {
         if(err){
-          console.log(err);
-          return res.sendStatus(403);
+          return res.json({message: 'fail'})
         } 
          // Set the token
-        req.user = data.user;
+        req.user = data.customer;
         // Next
         next();
       });

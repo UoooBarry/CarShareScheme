@@ -5,7 +5,7 @@
     user: "ec2-user"
     systemd_dir: "/etc/systemd/system"
   tasks:    
-    - name: Upload configured AuthServer
+    - name: Upload configured Server
       become: yes
       copy:
         src: "../artifacts/server.zip"
@@ -40,6 +40,21 @@
       become: yes
       systemd:
         name: authserver
+        state: started
+        enabled: yes
+
+    - name: Copy auth car share service systemd service file to server
+      become: yes
+      copy:
+        src: carshare.service
+        dest: "{{systemd_dir}}"
+        owner: root
+        group: root
+      
+    - name: Ensure authentication service is running
+      become: yes
+      systemd:
+        name: carshare
         state: started
         enabled: yes
 

@@ -10,12 +10,12 @@ const envConfigs =  require('../config/config');
 const env = process.env.NODE_ENV || 'development';
 const config = envConfigs[env];
 
-
+/*Create Sequelize obj connect to db with current environment variables */
 const db = new Sequelize(config.DBNAME, config.DBUSER, config.DBPASS, {
     host: config.DBHOST,
     port: config.DBPORT,
     dialect: config.dialect,
-
+    logging: false,
     pool: {
         max: 5,
         min: 0,

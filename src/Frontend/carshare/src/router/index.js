@@ -22,14 +22,6 @@ const routes = [{
   }
 },
 {
-  path: '/register',
-  name: 'Register',
-  components: {
-    header: Header,
-    main: () => import('../views/Register.vue')
-  }
-},
-{
   path: '/login',
   name: 'Login',
   components: {
@@ -43,6 +35,28 @@ const routes = [{
   components: {
     header: Header,
     main: () => import('../views/Profile.vue')
+  },
+  meta: {
+    requiresAuth: true
+  }
+},
+{
+  path: '/admin36737123719368365255336327043632505/',
+  name: 'Admin',
+  components: {
+    header: () => import('@/components/layouts/AdminHeader'),
+    main: () => import('../views/admin/Main.vue')
+  }
+},
+{
+  path: '/admin36737123719368365255336327043632505/users',
+  name: 'AdminUser',
+  components: {
+    header: () => import('@/components/layouts/AdminHeader'),
+    main: () => import('../views/admin/User.vue')
+  },
+  meta: {
+    requiresAuth: true
   }
 }
 ]
@@ -52,5 +66,4 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 })
-
 export default router

@@ -17,7 +17,7 @@ const customer = db.define('customers', {
         type: Sequelize.STRING
     },
     date_of_birth: {
-        type: Sequelize.DATE
+        type: 'DATE'
     },
     contact_number: {
         type: Sequelize.INTEGER,
@@ -25,6 +25,10 @@ const customer = db.define('customers', {
     },
     gender: {
         type: Sequelize.STRING
+    },
+    admin:{
+        type: Sequelize.BOOLEAN,
+        defaultValue: false
     }
 })
 

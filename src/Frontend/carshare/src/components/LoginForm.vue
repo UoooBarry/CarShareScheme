@@ -35,6 +35,7 @@
         >Sign in</button>
       </form>
       <a class="forgot-password" href="#">Forgot your password?</a>
+      <a class="forgot-password" style="margin-left:15px;" href="#" v-on:click="showRegister()">Sign up for free</a>
     </div>
   </div>
 </template>
@@ -49,14 +50,18 @@ export default {
     }
   },
   methods:{
+    showRegister() {
+      document.getElementById("picture").style.display = "none";
+      document.getElementById("login").style.display = "none";
+      document.getElementById("register").style.display = "inline-block";
+    },
     login() {
-      this.$axios.post(`${this.$auth}/login`,{
+      this.$axios.post(`${this.$auth}/authorize`,{
         email: this.email,
         password: this.password
       })
       .then( (res) => {
         if(res.data.message === 'success'){
-          this.$session.set('id', res.data.customer_id);
           localStorage.setItem('authToken', res.data.token);
           this.flashMessage.success({
             title: 'Login success',
