@@ -20,10 +20,10 @@ class customerRepository{
     }
 
     /*Update customer with json array */
-    async update(id, customer){
+    async update(id, data){
         const customer = await Customer.findOne({where:{id: id}});
         try{
-            await customer.update(customer);
+            await customer.update(data);
             return Promise.resolve(true);
         }catch(error){
             return Promise.reject(error);

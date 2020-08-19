@@ -28,8 +28,24 @@ const car = db.define('cars', {
     location_id: {
         type: Sequelize.INTEGER
     },
+    seats:{
+        type: Sequelize.INTEGER,
+        allowNull: false
+    },
+    luggages:{
+        type: Sequelize.INTEGER,
+        defaultValue: 3
+    },
+    description:{
+        type: Sequelize.STRING
+    },
+    viewed:{
+        type: Sequelize.INTEGER,
+        defaultValue: 0
+    },
     available: {
-        type: Sequelize.BOOLEAN
+        type: Sequelize.BOOLEAN,
+        defaultValue: true
     }
 });
 
