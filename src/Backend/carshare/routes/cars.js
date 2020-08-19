@@ -16,7 +16,7 @@ const authorize = require('../helpers/authorizationHelper');
 
 //GET: /api/cars
 router.get('/', (req, res) => {
-    _Car.getAll()
+    _Car.getAll(req.query.sortItem, req.query.sort)
         .then(cars => {
             res.json({cars})
         })
@@ -44,8 +44,8 @@ router.get('/:id/',(req,res) => {
 })
 
 //POST: /api/cars/create
-router.post('/create',authorize.verifyToken, (req,res) => {
-    if(!req.user.admin) res.sendStatus(403); //Forbidden if the request user is not an admin
+router.post('/create', authorize.verifyToken, (req,res) => {
+    if(!req.user.admin) res.sendStatus(403);
 
     const car = {
         name: req.body.name,
@@ -54,8 +54,9 @@ router.post('/create',authorize.verifyToken, (req,res) => {
         purchase_date: req.body.purchase_date,
         location_id: req.body.location_id,
         seats: req.body.seats,
+        air_condition: req.body.air_condition,
         luggages: req.body.luggages,
-        description: req.body.description,
+        description: req.body.description
     }
 
     _Car.create(car)

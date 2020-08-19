@@ -40,6 +40,10 @@ const car = db.define('cars', {
     description:{
         type: Sequelize.STRING
     },
+    air_condition:{
+        type: Sequelize.BOOLEAN,
+        defaultValue: true
+    },
     viewed:{
         type: Sequelize.INTEGER,
         defaultValue: 0

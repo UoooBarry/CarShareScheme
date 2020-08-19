@@ -7,8 +7,9 @@ module.exports={
     verifyToken: (req,res,next) => {
         const header = req.headers['authorization'];
         //Check exsit
-        if(typeof header !== 'undefined') res.sendStatus(403); //Forbidden
+        if(typeof header === 'undefined') res.sendStatus(403); //Forbidden
         
+        var token = header.split(' ')[1];
         JWT.verify(token,process.env.ACCESS_TOKEN_SECRET, (err, data) => {
             if(err){
                 console.log(err);

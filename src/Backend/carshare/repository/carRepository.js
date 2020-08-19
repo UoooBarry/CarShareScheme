@@ -1,14 +1,28 @@
+/******************************************************
+ * @AUTHOR YONGQIAN HUANG, 19/08/2020, CAR SORT LOGIC *
+ ******************************************************/
+
+
 const Car = require('../models/car');
 
-class loginRepository{
-    async getAll(){
+class carRepository{
+    async getAll(sort, order){
         try{
-            const cars = await Car.findAll({where: {}});
+            var cars;
+            /**If sortItem and sort is set, return a sorted result */
+            if(sort && order){
+                cars = await Car.findAll({
+                    order: [
+                        [sort, order], //sort by query item, query order
+                    ]
+                });
+            }else{
+                cars = await Car.findAll({});
+            }
             return Promise.resolve(cars);
         }catch(err){
             return Promise.reject(err);
         }
-        
     }
 
     async get(id){
@@ -31,4 +45,4 @@ class loginRepository{
 }
 
 
-module.exports = new loginRepository();
+module.exports = new carRepository();
