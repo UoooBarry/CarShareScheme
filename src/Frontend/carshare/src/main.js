@@ -7,6 +7,7 @@ import VueSession from 'vue-session';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import config from '../config/variables';
 import FlashMessage from '@smartweb/vue-flash-message';
+import { VueReCaptcha } from 'vue-recaptcha-v3';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
@@ -48,6 +49,10 @@ Vue.filter('formatDate', function(value) {
 Vue.use(VueSession);
 // Flash messages
 Vue.use(FlashMessage);  
+//Recaptcha
+Vue.use(VueReCaptcha, { siteKey: '6LcTY7sZAAAAAJeN_bq5d-F7S-I2Qq9yPTCMQmoA',loaderOptions:{
+  autoHideBadge: true
+} })
 
 // Make a router check, required logged in when meta has requiresAuth
 router.beforeEach((to, from, next) => {
