@@ -94,16 +94,6 @@ router.post('/register',
             return;
         }
 
-        //check captcha response
-        const captchaResponse = await _services.getRecaptchaRes(req.body.recaptcha_token);
-        if (!captchaResponse  && process.env.NODE_ENV != 'test') {
-            res.json({
-                message: "fail",
-                errors: ["Captcha verified failed", captcha.data]
-            });
-            return;
-        }
-
         const errs = validationResult(req);
         //check and return errors
         try{
