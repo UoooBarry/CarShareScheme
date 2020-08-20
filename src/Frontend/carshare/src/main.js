@@ -5,7 +5,6 @@ import axios from 'axios';
 import 'bootstrap';
 import VueSession from 'vue-session';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import config from '../config/variables';
 import FlashMessage from '@smartweb/vue-flash-message';
 import { VueReCaptcha } from 'vue-recaptcha-v3';
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -23,11 +22,12 @@ Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.component('ToggleButton', ToggleButton)
 // global variable
 Vue.prototype.$axios = axios;
-Vue.prototype.$auth = config.authenticationURL;
-Vue.prototype.$carshare = config.carshareURL;
-Vue.prototype.$admin = config.adminURL;
+Vue.prototype.$auth = process.env.VUE_APP_AUTH;
+Vue.prototype.$carshare = process.env.VUE_APP_CARSHARE;
+Vue.prototype.$admin = process.env.VUE_APP_ADMIN;
 Vue.config.productionTip = false
 
+console.log(process.env.VUE_APP_AUTH);
 
 new Vue({
   router,

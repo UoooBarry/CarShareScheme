@@ -4,7 +4,7 @@
         <div class="item">{{ customer.customer.family_name }}</div>
         <div
           class="item"
-        >{{ customer.customer.date_of_birth === null? "null" : customer.date_of_birth }}</div>
+        >{{ customer.customer.date_of_birth === null? "null" : customer.customer.date_of_birth }}</div>
         <div class="item">{{ customer.customer.contact_number }}</div>
         <div class="item">{{ customer.customer.createdAt | formatDate }}</div>
         <div class="item">{{ customer.customer.updatedAt | formatDate}}</div>
