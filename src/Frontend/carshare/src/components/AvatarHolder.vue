@@ -5,8 +5,9 @@
 <template>
      <div id="first-container" class="container">
       <div class="col-md-3" style="display: inline-block;">
-        <img src="../assets/img/Johndoe.png" alt="Avatar" />
-        <button type="button" class="btn btn-light" style="margin-top:20px; margin-bottom:10px; border: 1px solid #ada7a7;">Upload Picture</button>
+        <img :src=" 'https://carshare-image-pbd.s3-ap-southeast-2.amazonaws.com/' + customer.id" alt="Avatar" />
+       
+        <AvatarUploader />
         
       </div>
       <div class="col-md-9" style=" display: inline-block;  vertical-align: top;padding: 50px 0 0 200px"> 
@@ -20,9 +21,13 @@
 </template>
 
 <script>
+import AvatarUploader from '@/components/AvatarUploader';
 export default {
   name: "AvatarHolder",
-  props: ['customer']
+  props: ['customer'],
+  components:{
+    AvatarUploader
+  }
 };
 </script>
 

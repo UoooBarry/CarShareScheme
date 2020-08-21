@@ -3,5 +3,6 @@
 */*/authServer/node_modules/
 src/*/*/test-results.xml
 src/*/*/.env
+src/*/*/uploads
 infra/.env
 src/server.zip

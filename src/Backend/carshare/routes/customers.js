@@ -2,10 +2,17 @@ const express = require('express');
 const router = express.Router();
 const JWT = require('jsonwebtoken');
 const _Customer = require('../repository/customerRepository');
+const uploadFile = require('../helpers/Uploader');
 const {
     check,
     validationResult
 } = require('express-validator');
+const authorize = require('../helpers/authorizationHelper');
+const multer  = require('multer')
+const avatarUpload = multer({ 
+    dest: 'uploads/'
+ })
+
 
 //GET /api/customers/:id
 router.get('/:id/', async (req, res) => {
@@ -16,6 +23,28 @@ router.get('/:id/', async (req, res) => {
         res.sendStatus(403);
     }
 });
+
+//Use multer middleware to handle image
+router.patch('/avatar', [authorize.verifyToken, avatarUpload.single('image')], (req,res) => {
+        //Get the file type
+        const fileName = req.file.originalname;
+        const fileType = fileName.split('.')[1];
+
+        if(req.file.size > 2048 && (fileType != 'png' || fileType != 'jpg')){
+            res.json({message: "fail"});
+            return;
+        }
+
+        uploadFile(req.user.id, req.file.path)
+            .then(() => {
+                console.log('change');
+                res.json({message: "success"})
+            })
+            .catch((err) => {
+                console.log(err);
+                res.json({message: "fail"})
+            })
+})
 
 //GET /api/customers/
 router.get('/', verifyToken, async (req, res) => {
