@@ -1,6 +1,9 @@
 <template>
   <div>
       <Loading />
+      <h1>Showing car listing result</h1>
+      <CarFilterHeader />
+      <CarDisplay v-bind:cars="this.cars"/>
   </div>
   
 
@@ -8,77 +11,38 @@
 
 <script>
 import Loading from '@/components/Loading';
+import CarFilterHeader from '@/components/layouts/CarFilterHeader.vue';
+import CarDisplay from '@/components/CarDisplay.vue'
+import authorizeMixin from "@/mixins/authorizeMixin";
 export default {
   name: "About",
   components:{
-    Loading
+    Loading,
+    CarFilterHeader,
+    CarDisplay
+  },
+  mixins: [authorizeMixin],
+  data() {
+    return {
+      cars: []
+    }
+  },
+  async created() {
+    const response = await this.$axios.get(`${this.$carshare}/cars/`, {
+      headers: this.header
+    });
+    this.cars = response.data.cars;
+    console.log(this.cars);
   }
 }
 </script>
 
 
 <style>
-#wrap {
-  /* background: linear-gradient(135deg, #172a74, #21a9af);
-  background-color: #184e8e; */
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  /* height: 700px; */
-  /* color: #fff; */
+body{
+  background-color:#F0F8FF;
 }
-legend {
-  margin-top:30px;
-  /* color: #fff; */
-  font-size: 30px;
-  font-weight: bold;
-}
-.signup-btn {
-  background: #79bc64;
-
-  background-image: linear-gradient(to bottom, #79bc64, #578843);
-  -webkit-border-radius: 4;
-  -moz-border-radius: 4;
-  border-radius: 4px;
-  text-shadow: 0px 1px 0px #898a88;
-  -webkit-box-shadow: 0px 0px 0px #a4e388;
-  -moz-box-shadow: 0px 0px 0px #a4e388;
-  box-shadow: 0px 0px 0px #a4e388;
-  font-family: Arial;
-  color: #ffffff;
-  font-size: 20px;
-  padding: 10px 20px 10px 20px;
-  border: solid #3b6e22 1px;
-  text-decoration: none;
-}
-
-.signup-btn:hover {
-  background: #79bc64;
-  background-image: -webkit-linear-gradient(top, #79bc64, #5e7056);
-  background-image: -moz-linear-gradient(top, #79bc64, #5e7056);
-  background-image: -ms-linear-gradient(top, #79bc64, #5e7056);
-  background-image: -o-linear-gradient(top, #79bc64, #5e7056);
-  background-image: linear-gradient(to bottom, #79bc64, #5e7056);
-  text-decoration: none;
-}
-.navbar-default .navbar-brand {
-  color: #fff;
-  font-size: 30px;
-  font-weight: bold;
-}
-.form .form-control {
-  margin-bottom: 10px;
-}
-@media (min-width: 768px) {
-  #home {
-    margin-top: 50px;
-  }
-  #home .slogan {
-    color: #0e385f;
-    line-height: 29px;
-    font-weight: bold;
-  }
-}
-.radio-inline{
-  padding-right:8px;
+.main{
+  min-height: 600px;
 }
 </style>  
