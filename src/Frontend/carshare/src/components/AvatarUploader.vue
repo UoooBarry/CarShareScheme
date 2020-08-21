@@ -1,6 +1,6 @@
 <template>
     <div class="custom-file" style="margin-top: 10px">
-        <input type="file" id="file" ref="file" name="file" style="margin-top:20px; margin-bottom:10px; border: 1px solid #ada7a7;" class="custom-file-input" v-on:change="upload()">
+        <input type="file" id="file" accept='image/*' ref="file" name="file" style="margin-top:20px; margin-bottom:10px; border: 1px solid #ada7a7;" class="custom-file-input" v-on:change="upload()">
         <label class="custom-file-label" for="file">Choose file</label>
     </div>
 </template>
