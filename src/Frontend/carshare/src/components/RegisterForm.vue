@@ -255,18 +255,23 @@
 export default {
   name: "RegisterForm1",
   methods: {
+    showLogin() {
+      //Hide the picture and register, show login
+      document.getElementById("picture").style.display = "none";
+      document.getElementById("register").style.display = "none";
+      document.getElementById("login").style.display = "inline-block";
+    },
     async register() {
-      console.log("1");
       //Genrate a recaptcha token to verify user's identity
       await this.$recaptchaLoaded();
       const token = await this.$recaptcha("register");
     //   var dob = new Date(document.getElementById("year").value, document.getElementById("month").value - 1, document.getElementById("day").value); 
-      var dob =
-        document.getElementById("year").value +
-        "-" +
-        document.getElementById("month").value +
-        "-" +
-        document.getElementById("day").value ;
+      // var dob =
+      //   document.getElementById("year").value +
+      //   "-" +
+      //   document.getElementById("month").value +
+      //   "-" +
+      //   document.getElementById("day").value ;
       if (this.password != this.retype) {
         this.flashMessage.error({
           title: "Register detail",
@@ -274,7 +279,7 @@ export default {
         });
         return;
       }
-      console.log("2");
+
       this.$axios
         .post(`${this.$auth}/register`, {
           email: this.email,
@@ -285,7 +290,7 @@ export default {
           recaptcha_token: token,
           code: this.validation_code,
           gender: this.gender,
-          date_of_birth: dob
+          // date_of_birth: dob
         })
         .then(res => {
           if (res.data.message == "fail") {
@@ -297,16 +302,15 @@ export default {
             });
             return;
           }
-          console.log("3");
+
           this.flashMessage.success({
             title: "Register success!",
             message: "Register successfully!"
           });
-          this.$router.push({ name: "Home" });
-          console.log("4");
+          this.showLogin();
+
         })
         .catch(err => console.log(err));
-      console.log("5");
     },
     get_code() {
       this.btn_countdown();
