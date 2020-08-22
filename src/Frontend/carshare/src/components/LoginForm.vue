@@ -67,7 +67,7 @@ export default {
             title: 'Login success',
             message: `Welcome! ${res.data.customer_name}`
           });
-          this.$router.push({name: 'About'});
+          this.$router.push({name: 'Cars'});
         }else{
           this.flashMessage.warning({
             title: 'Login fail',

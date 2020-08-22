@@ -14,11 +14,11 @@ const routes = [{
   }
 },
 {
-  path: '/about',
-  name: 'About',
+  path: '/Home',
+  name: 'Cars',
   components: {
     header: Header,
-    main: () => import('../views/About.vue')
+    main: () => import('../views/Cars.vue')
   }
 },
 {

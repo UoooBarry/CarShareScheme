@@ -15,7 +15,7 @@ import CarFilterHeader from '@/components/layouts/CarFilterHeader.vue';
 import CarDisplay from '@/components/CarDisplay.vue'
 import authorizeMixin from "@/mixins/authorizeMixin";
 export default {
-  name: "About",
+  name: "Cars",
   components:{
     Loading,
     CarFilterHeader,
@@ -32,7 +32,6 @@ export default {
       headers: this.header
     });
     this.cars = response.data.cars;
-    console.log(this.cars);
   }
 }
 </script>
