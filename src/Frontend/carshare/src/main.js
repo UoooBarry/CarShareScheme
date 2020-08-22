@@ -26,9 +26,7 @@ Vue.prototype.$axios = axios;
 Vue.prototype.$auth = process.env.VUE_APP_AUTH;
 Vue.prototype.$carshare = process.env.VUE_APP_CARSHARE;
 Vue.prototype.$admin = process.env.VUE_APP_ADMIN;
-Vue.config.productionTip = false
-
-console.log(process.env.VUE_APP_AUTH);
+Vue.config.productionTip = false;
 
 new Vue({
   router,
