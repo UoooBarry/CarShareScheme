@@ -1,6 +1,22 @@
 <template>
-  <h1>This is about page</h1>
+  <div>
+      <Loading />
+  </div>
+  
+
 </template>
+
+<script>
+import Loading from '@/components/Loading';
+export default {
+  name: "About",
+  components:{
+    Loading
+  }
+}
+</script>
+
+
 <style>
 #wrap {
   /* background: linear-gradient(135deg, #172a74, #21a9af);
