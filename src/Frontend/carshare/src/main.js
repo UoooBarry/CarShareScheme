@@ -12,7 +12,6 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import moment from 'moment';
 import { ToggleButton } from 'vue-js-toggle-button'
-import { TooltipPlugin } from "@syncfusion/ej2-vue-popups";
 
 
 
@@ -42,8 +41,6 @@ Vue.filter('formatDate', function(value) {
   }
 });
 
-//tool tip
-Vue.use(TooltipPlugin);
 
 // Session storage
 Vue.use(VueSession);

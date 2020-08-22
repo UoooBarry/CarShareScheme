@@ -1,9 +1,9 @@
 <template>
   <div>
       <Loading />
-      <h1>Showing car listing result</h1>
+      <h4>SHOWING CAR LIST RESULT</h4>
       <CarFilterHeader />
-      <CarDisplay v-bind:cars="this.cars"/>
+      <CarList v-bind:cars="this.cars"/>
   </div>
   
 
@@ -12,14 +12,14 @@
 <script>
 import Loading from '@/components/Loading';
 import CarFilterHeader from '@/components/layouts/CarFilterHeader.vue';
-import CarDisplay from '@/components/CarDisplay.vue'
+import CarList from '@/components/cars/CarList.vue'
 import authorizeMixin from "@/mixins/authorizeMixin";
 export default {
   name: "Cars",
   components:{
     Loading,
     CarFilterHeader,
-    CarDisplay
+    CarList
   },
   mixins: [authorizeMixin],
   data() {

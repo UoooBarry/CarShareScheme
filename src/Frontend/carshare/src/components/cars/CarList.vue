@@ -1,20 +1,20 @@
 <template>
   <div class="carlist container">
     <div class="row">
-      <div v-for="car in cars" v-bind:key="car.id" class="col-sm-4">
-        <CarList v-bind:car="car" />
+      <div v-for="(car) in cars" v-bind:key="car.id" class="col-sm-4 car">
+        <CarCard v-bind:car="car" />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import CarList from "@/components/CarList.vue";
+import CarCard from "./CarCard.vue";
 
 export default {
-  name: "CarDisplay",
+  name: "CarList",
   components: {
-    CarList
+    CarCard
   },
   props: ["cars"]
 };
@@ -22,7 +22,11 @@ export default {
 
 
 <style>
-.col-sm-4{
+.col-sm-4.car{
   margin-bottom:40px;
+}
+
+.carlist{
+  min-height: 1000px;
 }
 </style>
