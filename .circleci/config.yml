@@ -65,7 +65,7 @@ jobs:
             npm run integration-test
       - run:
           name: run car share system server integration tests
-          commands: |
+          command: |
             cd src/Backend/carshare/
             npm run integration-test
   
