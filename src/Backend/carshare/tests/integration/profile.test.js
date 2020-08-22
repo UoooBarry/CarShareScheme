@@ -7,6 +7,7 @@ const chai = require('chai');
 const assert = chai.assert;
 const app = require('../../app');
 const Customer = require('../../models/customer');
+const db = require('../../config/db');
 const chaiHttp = require('chai-http');
 const {generateAccessToken} = require('../../helpers/authorizationHelper');
 chai.use(chaiHttp);
@@ -16,6 +17,7 @@ describe('/api/customers', () => {
     before(async() => {
         try{
             //Sync all database before start testing
+            await db.authenticate();
             await Customer.sync();
             //Pre create a customer
             const customer = await Customer.create({
