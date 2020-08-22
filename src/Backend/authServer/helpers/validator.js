@@ -10,18 +10,7 @@ const mobileValidator = [
     check('contact_number').isLength({
     min: 9,
     max: 9
-    }).withMessage('Contact number should be 9 digits').matches(/^[4][0-9]*$/).withMessage('Contact must be numbers start with 4'),
-    check('contact_number').custom((contact) => { //check unique contact number
-        return new Promise(async (resolve,reject) => {
-            const rows = await _customer.getByContact(contact);
-            //if no rows are fetched
-            if (rows.length === 0) {
-                resolve(true);
-            } else {
-                reject(new Error('Contact number already exists'));
-            }
-        })
-    })
+    }).withMessage('Contact number should be 9 digits').matches(/^[4][0-9]*$/).withMessage('Contact must be numbers start with 4')
 ]
 
 

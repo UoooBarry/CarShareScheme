@@ -30,6 +30,8 @@ router.get('/getCode', mobileValidator ,(req,res) => {
                         message: 'success',
                         description: 'Register code has been sent to your phone. The code will expire in 1 minute.'
                     });
+                }).catch((err)=>{
+                    console.log(err);
                 })
         })
         .catch(errors => {

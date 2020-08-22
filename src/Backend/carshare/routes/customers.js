@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const JWT = require('jsonwebtoken');
 const _Customer = require('../repository/customerRepository');
 const uploadFile = require('../helpers/Uploader');
 const authorize = require('../helpers/authorizationHelper');
