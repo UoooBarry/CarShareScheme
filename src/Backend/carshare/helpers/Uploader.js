@@ -1,8 +1,7 @@
 require('dotenv').config()
 
 const AWS = require('aws-sdk');
-const { promisify } = require('util');
-const { readFile, readFileSync,unlinkSync } = require('fs');
+const { readFileSync,unlinkSync } = require('fs');
 
 // Enter copied or downloaded access ID and secret key here
 const ID = process.env.AWS_ACCESS_ID;
