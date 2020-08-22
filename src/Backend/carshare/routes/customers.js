@@ -41,7 +41,7 @@ router.patch('/avatar', [authorize.verifyToken, avatarUpload.single('image')], (
             })
 })
 
-//GET /api/customers/
+//GET /api/customers/ for single customer profile
 router.get('/', authorize.verifyToken, async (req, res) => {
     const customer = await _Customer.getById(req.user.id);
     if (customer) {
