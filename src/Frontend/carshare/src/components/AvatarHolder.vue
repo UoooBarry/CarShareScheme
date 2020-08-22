@@ -5,7 +5,7 @@
 <template>
      <div id="first-container" class="container">
       <div class="col-md-3" style="display: inline-block;">
-        <img :src=" 'https://carshare-image-pbd.s3-ap-southeast-2.amazonaws.com/' + customer.id" alt="Avatar" />
+        <img :src=" 'https://carshare-image-pbd.s3-ap-southeast-2.amazonaws.com/Avatar/' + customer.id" alt="Avatar" />
        
         <AvatarUploader />
         

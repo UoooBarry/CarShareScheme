@@ -1,7 +1,8 @@
 require('dotenv').config()
 
 const AWS = require('aws-sdk');
-const { readFile, readFileSync } = require('fs');
+const { promisify } = require('util');
+const { readFile, readFileSync,unlinkSync } = require('fs');
 
 // Enter copied or downloaded access ID and secret key here
 const ID = process.env.AWS_ACCESS_ID;
@@ -16,22 +17,23 @@ const s3 = new AWS.S3({
     secretAccessKey: SECRET
 });
 
-const uploadFile = async(id,fileName) => {
+const uploadFile = async(id, path, fileName) => {
     // Read content from the file
     const fileContent = await readFileSync(fileName);
-
     // Setting up S3 upload parameters
     const params = {
         Bucket: BUCKET_NAME,
-        Key: `${id}`, // File name you want to save as in S3
+        Key: `${path}/${id}`, // Save save file as id, so it can be retrieve by user id
         Body: fileContent
     };
 
      // Uploading files to the bucket
-     s3.upload(params, function(err, data) {
+     s3.upload(params, (err, data) => {
         if (err) {
             return Promise.reject(err);
         }
+        //Remove the file after uploaded;
+        unlinkSync(fileName);
         return Promise.resolve(true);
     });
 }
