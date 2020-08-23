@@ -1,6 +1,5 @@
 <p align="center">
-    <a href="https://img.shields.io/github/contributors/UoooBarry/CarShareScheme" alt="Contributors">
-        <img src="https://img.shields.io/github/contributors/UoooBarry/CarShareScheme" /></a>
+    <a> <img src='https://circleci.com/gh/UoooBarry/CarShareScheme.svg?style=svg&circle-token=00e3ee925caf65e6a13475f4adf60e2c6d2585eb' />  </a>
 </p>
 # CarShareScheme
 Capstone project
