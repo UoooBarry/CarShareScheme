@@ -8,7 +8,6 @@
       <div class="card-body">
         <h5 class="card-title">{{car.name}}</h5>
         <h6 class="card-subtitle mb-2 text-muted">{{car.brand}}</h6>
-        <p class="card-text">The car is {{car.model}} model which bought in {{car.purchase_date}}</p>
         <a href="#" class="btn btn-primary">Get now</a>
       </div>
     </div>
@@ -72,14 +71,15 @@ export default {
   border-radius: 10px;
 }
 
-.card.car.hover{
-  top: -18px;
-}
-
 .card.car{
-  animation-delay: .1s;
-  box-shadow: 0 5px 10px 0 rgba(0,0,0,.12);
   border-radius: 16px;
   overflow: hidden;
+	-webkit-transition: margin 0.5s ease-out;
+  -moz-transition: margin 0.5s ease-out;
+  -o-transition: margin 0.5s ease-out;
+}
+.card.car:hover {
+	/* cursor:pointer; */
+  margin-top: -15px;
 }
 </style>
