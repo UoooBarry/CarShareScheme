@@ -1,33 +1,65 @@
 <template>
   <div class="carlist container">
     <div class="row">
-      <div v-for="(car) in cars" v-bind:key="car.id" class="col-sm-3 car">
+      <div v-for="(car) in pageOfItems" v-bind:key="car.id" class="col-sm-3 car">
         <CarCard v-bind:car="car" />
       </div>
     </div>
+    <div class="page-footer">
+            <jw-pagination :items="cars" :pageSize=8 @changePage="onChangePage" :labels="customLabels"></jw-pagination>
+      </div>
   </div>
 </template>
 
 <script>
 import CarCard from "./CarCard.vue";
 
+const customLabels = {
+    first: 'First',
+    last: 'Last',
+    previous: '<',
+    next: '>'
+};
 export default {
   name: "CarList",
   components: {
     CarCard
   },
-  props: ["cars"]
+  props: ["cars"],
+  data() {
+    return {
+      pageOfItems: [],
+      customLabels
+    };
+  },
+  methods: {
+    onChangePage(pageOfItems) {
+      // update page of items
+      this.pageOfItems = pageOfItems;
+    }
+  }
 };
 </script>
 
 
 <style>
-.col-sm-4.car{
-  margin-bottom:40px;
+.page-footer{
+  border-top: 1px solid lightgrey;
+  padding-top:10px;
+  width: 96%;
+}
+.col-sm-3.car {
+  margin-bottom: 40px;
 }
 
-.carlist{
-  min-height: 1000px;
+.carlist {
+  min-height: 800px;
   max-width: 1500px;
+}
+.page-item.active .page-link {
+    z-index: 3;
+    color: #fff;
+    background: linear-gradient(to right, #6782b4 0%, #b1bfd8 100%);
+    border-color:  #b1bfd8;
 }
 </style>
