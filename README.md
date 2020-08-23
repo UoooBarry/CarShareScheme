@@ -1,16 +1,24 @@
 <p align="center">
     <a> <img src='https://circleci.com/gh/UoooBarry/CarShareScheme.svg?style=svg&circle-token=00e3ee925caf65e6a13475f4adf60e2c6d2585eb' />  </a>
     <br>
-    <a> <img src='https://img.shields.io/badge/Contributor-UoooBarry-brightgreen' /> </a>
+    <a href='https://github.com/UoooBarry'> <img src='https://img.shields.io/badge/Contributor-UoooBarry-brightgreen' /> </a>
     <br>
      <a> <img src='https://img.shields.io/badge/Language-Javascript-yellow' /> </a>
+     <a> <img src='https://img.shields.io/badge/Database-Postgresql-blue' /> </a>
      <a> <img src='https://img.shields.io/badge/Runtime-Node.Js-green' /> </a>
      <a> <img src='https://img.shields.io/badge/Framework-Express.Js-lightgrey' /> </a>
-    <a> <img src='https://img.shields.io/badge/Framework-Vue.Js-brightgreen' /> </a>
+     <a> <img src='https://img.shields.io/badge/Framework-Vue.Js-brightgreen' /> </a>
 </p>
 
 # CarShareScheme
-Capstone project
+Capstone project Rmit.
+
+## Run the servers in development mode
+Under windows environment, you can just run `make up` to start up 2 backend servers locally.<br>
+Before running the servers, ensure postgres is running. And config the .env files in the project, <a href='https://rmiteduau-my.sharepoint.com/:u:/r/personal/s3719368_student_rmit_edu_au/Documents/Capstone%20Project/secertkeys/Backend%20varibles/.env?csf=1&web=1&e=OhtbVB'>sample file</a> is in our team's onedrive.
+### Manually start servers
+In `src/Backend/authServer` and `src/Backend/carshare`, run `npm run start:dev` to start backend servers in development mode.
+In `src/Frontend/carshare` to start client side app in development mode.
 
 ## Endpoints
 ### Customer information: 
