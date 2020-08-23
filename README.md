@@ -1,5 +1,5 @@
 <p align="center">
-    <a> <img src='https://circleci.com/gh/UoooBarry/CarShareScheme.svg?style=svg&circle-token=00e3ee925caf65e6a13475f4adf60e2c6d2585eb' />  </a>
+    <a> <img src='https://circleci.com/gh/UoooBarry/CarShareScheme.svg?style=badge&circle-token=00e3ee925caf65e6a13475f4adf60e2c6d2585eb' />  </a>
     <br>
     <a> <img src='https://img.shields.io/badge/Contributor-UoooBarry-brightgreen' /> </a>
     <br>
@@ -8,6 +8,7 @@
      <a> <img src='https://img.shields.io/badge/Framework-Express.Js-lightgrey' /> </a>
     <a> <img src='https://img.shields.io/badge/Framework-Vue.Js-brightgreen' /> </a>
 </p>
+
 # CarShareScheme
 Capstone project
 
