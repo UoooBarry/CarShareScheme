@@ -1,6 +1,6 @@
 <p align="center">
-    <a href="https://github.com/badges/shields/graphs/contributors" alt="Contributors">
-        <img src="https://img.shields.io/github/contributors/badges/shields" /></a>
+    <a href="https://img.shields.io/github/contributors/UoooBarry/CarShareScheme" alt="Contributors">
+        <img src="https://img.shields.io/github/contributors/UoooBarry/CarShareScheme" /></a>
 </p>
 # CarShareScheme
 Capstone project
