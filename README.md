@@ -1,4 +1,4 @@
-[release-badge]: http://img.shields.io/github/release/UoooBarry/CarShareScheme/all.svg?style=flat
+[npm-badge]: https://img.shields.io/npm/v/latest
 # CarShareScheme
 Capstone project
 
