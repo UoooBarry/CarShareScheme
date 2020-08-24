@@ -47,7 +47,10 @@ class carRepository{
     async get(id){
         try{
             const car = await Car.findOne({where: {id: id}});
-            return Promise.resolve(car)
+            car.update({
+                viewed: car.viewed += 1
+            })
+            return Promise.resolve(car);
         }catch(err){
             return Promise.reject(err);
         }
