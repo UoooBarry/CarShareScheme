@@ -19,7 +19,7 @@
           <div class="col-sm-5 col-md-6">
             <h1>The new car share system is there</h1>
             <p>Get your&nbsp;favorite car anytime, any where, everything as you want</p>
-            <button class="btn btn-light btn-lg action-button" type="button" v-on:click="showLogin()">Get A Car Now</button>
+            <button class="btn btn-light btn-lg action-button" type="button" v-on:click="showLogin()">LOGIN NOW</button>
             
           </div>
           <!-- End: Text -->

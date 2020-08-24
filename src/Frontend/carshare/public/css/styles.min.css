@@ -67,14 +67,27 @@ html, body {
 }
 
 .parallax{
-      /* Full height */
-      height: 30%;
-      /* Create the parallax scrolling effect */
-      background-attachment: fixed;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: cover;
+        /* Set a specific height */
+  height: 800px;
+
+  /* Create the parallax scrolling effect */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  
 }
+
+.p1{
+  background-image: url('../img/b1.png');
+}
+.p2{
+  background-image: url('../img/b2.png');
+}
+.p3{
+  background-image: url('../img/b3.png');
+}
+
 
 
 
