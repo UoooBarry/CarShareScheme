@@ -51,8 +51,8 @@ export default {
             this.sort = "brand";
             this.order = "ASC";
           }else if ((i === 5)) {
-            this.sort = "model";
-            this.order = "ASC";
+            this.sort = "view";
+            this.order = "DESC";
           }
         }
         i++;
