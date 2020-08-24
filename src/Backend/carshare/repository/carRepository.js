@@ -47,6 +47,7 @@ class carRepository{
     async get(id){
         try{
             const car = await Car.findOne({where: {id: id}});
+            //Update the view number by 1
             car.update({
                 viewed: car.viewed += 1
             })
