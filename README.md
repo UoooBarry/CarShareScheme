@@ -1,6 +1,6 @@
 <p align="center">
     <a> <img src='https://github.com/UoooBarry/CarShareScheme/blob/master/src/Frontend/carshare/public/img/brand.png' />  </a>
-    <h1>Car Share Scheme</h1>
+    <h1 style="text-align:center">Car Share Scheme</h1>
 </p>
 <p align="center">
     <a> <img src='https://circleci.com/gh/UoooBarry/CarShareScheme.svg?style=svg&circle-token=00e3ee925caf65e6a13475f4adf60e2c6d2585eb' />  </a>
@@ -14,8 +14,7 @@
      <a> <img src='https://img.shields.io/badge/Framework-Vue.Js-brightgreen' /> </a>
 </p>
 
-# CarShareScheme
-Capstone project Rmit.
+
 
 ## Run the servers in development mode
 Under windows environment, you can just run `make up` to start up 2 backend servers locally.<br>
