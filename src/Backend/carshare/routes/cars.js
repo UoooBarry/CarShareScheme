@@ -16,7 +16,7 @@ const authorize = require('../helpers/authorizationHelper');
 
 //GET: /api/cars
 router.get('/', (req, res) => {
-    _Car.getAll(req.query.sortItem, req.query.sort)
+    _Car.getAll(req.query.sort, req.query.order)
         .then(cars => {
             res.json({cars})
         })
@@ -54,6 +54,7 @@ router.post('/create', authorize.verifyToken, (req,res) => {
         purchase_date: req.body.purchase_date,
         location_id: req.body.location_id,
         seats: req.body.seats,
+        price: req.body.price,
         air_condition: req.body.air_condition,
         luggages: req.body.luggages,
         description: req.body.description

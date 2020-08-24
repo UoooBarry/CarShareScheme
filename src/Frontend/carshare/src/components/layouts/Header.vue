@@ -15,7 +15,7 @@
                             <a class="dropdown-item" role="presentation" href="#" v-on:click="this.logout">Logout</a>
                         </div>
                     </li>
-                    <li class="nav-item" role="presentation" id="login" style="display: none"><a class="nav-link" href="/">Login</a></li>
+                    <li class="nav-item" role="presentation" id="login" style="display: none"><a class="nav-link" href="/login">Login</a></li>
                 </ul>
             </div>
         </div>

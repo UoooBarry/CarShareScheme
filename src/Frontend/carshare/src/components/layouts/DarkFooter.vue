@@ -1,6 +1,6 @@
 <template>
   <!-- Start: Footer Dark -->
-  <div class="footer-dark parallax">
+  <div class="footer-dark">
     <footer>
       <div class="container">
         <div class="row">
@@ -10,10 +10,10 @@
             <ul>
               <li>Car share</li>
               <li>
-                <a href="#">Development</a>
+                <a href="https://github.com/UoooBarry/CarShareScheme">Development</a>
               </li>
               <li>
-                <a href="#">Hosting</a>
+                <a href="http://carshare-vue-pbd.s3-website-ap-southeast-2.amazonaws.com/">Hosting</a>
               </li>
             </ul>
           </div>
@@ -23,13 +23,13 @@
             <h3>About</h3>
             <ul>
               <li>
-                <a href="#">Rmit</a>
+                <a href="https://rmit.instructure.com/">Rmit</a>
               </li>
               <li>
-                <a href="#">Team</a>
+                <a href="https://rmiteduau.sharepoint.com/:f:/r/sites/PP2050GroupPBD/Shared%20Documents/General?csf=1&web=1&e=svmA1s">Team</a>
               </li>
               <li>
-                <a href="#">GitHub</a>
+                <a href="https://github.com/UoooBarry/CarShareScheme">GitHub</a>
               </li>
             </ul>
           </div>
@@ -43,16 +43,16 @@
           <!-- Start: Social Icons -->
           <div class="col item social">
             <a href="#">
-              <i class="icon ion-social-facebook"></i>
+              <i class="icon ion-social-facebook with-font">F</i>
             </a>
             <a href="#">
-              <i class="icon ion-social-twitter"></i>
+              <i class="icon ion-social-twitter with-font">T</i>
             </a>
             <a href="#">
-              <i class="icon ion-social-snapchat"></i>
+              <i class="icon ion-social-snapchat with-font">S</i>
             </a>
             <a href="#">
-              <i class="icon ion-social-instagram"></i>
+              <i class="icon ion-social-instagram with-font">I</i>
             </a>
           </div>
           <!-- End: Social Icons -->
@@ -74,3 +74,11 @@ export default {
   name: "DarkFooter",
 };
 </script>
+
+<style scoped>
+.with-font{
+  font-style: normal !important;
+  font-family: 'Suisseintl webm', sans-serif !important;
+  font-weight: 500;
+}
+</style>

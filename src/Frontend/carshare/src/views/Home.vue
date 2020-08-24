@@ -1,16 +1,17 @@
 <template>
   <div>
-    <BlueHeader />
+    <Introduction />
   </div>
 </template>
 
 <script>
-import BlueHeader from "@/components/layouts/BlueHeader.vue";
 
+import Introduction from '@/components/Home/Introduction';
 export default {
   name: "Home",
   components: {
-    BlueHeader,
+
+    Introduction
   },
 };
 </script>

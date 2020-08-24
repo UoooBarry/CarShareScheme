@@ -85,6 +85,7 @@ export default {
 
 
 .card-title.car{
+
   margin-top: 8px;
     font-family: AvenirLTStd-Black;
     letter-spacing: .125rem;
