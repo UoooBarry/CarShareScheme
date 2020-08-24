@@ -36,7 +36,7 @@ export default {
     margin: 0;
     font-weight: bold;
     color: white;
-    background: linear-gradient(to right,  #29293d 0%, #3d3d5c 100%);
+    background: linear-gradient(to right,  #011352 0%, #1f78b6 100%);
 }
 .tip {
   min-width: 250px;
