@@ -1,6 +1,7 @@
 <p align="center">
     <a> <img src='https://github.com/UoooBarry/CarShareScheme/blob/master/src/Frontend/carshare/public/img/brand.png' />  </a>
-    <b style="font-size:26px; font-weight:bold;">Car Share Scheme</b>
+    <br>
+    <b style="font-size:56px; font-weight:bold;">Car Share Scheme</b>
 </p>
 <p align="center">
     <a> <img src='https://circleci.com/gh/UoooBarry/CarShareScheme.svg?style=svg&circle-token=00e3ee925caf65e6a13475f4adf60e2c6d2585eb' />  </a>
