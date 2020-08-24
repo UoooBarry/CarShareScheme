@@ -37,9 +37,6 @@
               <input type="radio" name="sort" autocomplete="off" /> By Brand
             </label>
 
-            <label class="btn btn-outline-dark">
-              <input type="radio" name="sort" autocomplete="off" /> By Model
-            </label>
 
             <label class="btn btn-outline-dark">
               <input type="radio" name="sort" autocomplete="off" /> By popular
