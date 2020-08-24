@@ -28,6 +28,20 @@ router.get('/', (req, res) => {
         )
 });
 
+//GET: /api/cars/:brand
+router.get('/search', (req,res) => {
+    _Car.getBy(req.query.query)
+        .then(cars => {
+            res.json({cars})
+        })
+        .catch(
+            (err) => {
+                console.log(err);
+                res.sendStatus(403);
+            }
+        )
+})
+
 
 //GET: /api/cars/:id
 router.get('/:id/',(req,res) => {

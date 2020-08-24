@@ -4,6 +4,8 @@
 
 
 const Car = require('../models/car');
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
 
 class carRepository{
     async getAll(sort, order){
@@ -19,6 +21,23 @@ class carRepository{
             }else{
                 cars = await Car.findAll({});
             }
+            return Promise.resolve(cars);
+        }catch(err){
+            return Promise.reject(err);
+        }
+    }
+
+    /**Get by column and value */
+    async getBy(value){
+        try{
+            const cars = await Car.findAll({
+                where: {
+                    [Op.or]:{
+                        brand: {[Op.like]: '%' + value + '%'},
+                        model: {[Op.like]: '%' + value + '%'}
+                    }
+                }
+            })
             return Promise.resolve(cars);
         }catch(err){
             return Promise.reject(err);
