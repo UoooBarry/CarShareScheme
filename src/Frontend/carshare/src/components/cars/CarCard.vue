@@ -2,10 +2,11 @@
   <div>
     <div
       class="card car"
-      style="width: 18rem;"
+      style="width: 18rem;cursor: pointer;"
       @mouseover="cardHover = true"
       @mouseleave="cardHover = false"
       :class="{hover: cardHover}"
+      onclick="location.href='#';" 
     >
       <div class="hover-info" v-on:mousemove="draw" v-on:mouseover="hover" v-on:mouseleave="hover">
         <img class="card-img-top" src="../../../public/img/defaultcar.png" alt="Card image cap" />
@@ -14,7 +15,7 @@
       <div class="card-body">
         <h5 class="card-title">{{car.name}}</h5>
         <h6 class="card-subtitle mb-2 text-muted">{{car.brand}}</h6>
-        <a href="#" class="button skew-forward-on-hover">Get now</a>
+        <p>${{car.price}}/day</p>
       </div>
     </div>
     <CarPreview :id="`preview${car.id}`" v-if="hovering" v-bind:car="this.car" />
@@ -81,36 +82,8 @@ export default {
 	color: white;
   background: linear-gradient(to right, #b1bfd8 0%,  #6782b4 100%);
 }
-.button {
-  color: white;
-  background: linear-gradient(to right, #6782b4 0%, #b1bfd8 100%);
-  padding: 15px 30px;
-  margin: 10px;
-  display: inline-block;
-  text-decoration: none;
-}
 
-/*===================*/
-/* SKEW FORWARD
-/*===================*/
 
-.skew-forward-on-hover {
-  display: inline-block;
-  vertical-align: middle;
-  -webkit-transform: perspective(1px) translateZ(0);
-  transform: perspective(1px) translateZ(0);
-  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
-  -webkit-transition-duration: 0.3s;
-  transition-duration: 0.3s;
-  -webkit-transition-property: transform;
-  transition-property: transform;
-  -webkit-transform-origin: 0 100%;
-  transform-origin: 0 100%;
-}
-.skew-forward-on-hover:hover, .skew-forward-on-hover:focus, .skew-forward-on-hover:active {
-  -webkit-transform: skew(-10deg);
-  transform: skew(-10deg);
-}
 
 .card.car {
   border-radius: 16px;

@@ -59,7 +59,7 @@ export default {
 .page-item.active .page-link {
     z-index: 3;
     color: #fff;
-    background: linear-gradient(to right, #6782b4 0%, #b1bfd8 100%);
+    background: #6782b4 ;
     border-color:  #b1bfd8;
 }
 </style>

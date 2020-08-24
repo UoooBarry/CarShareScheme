@@ -51,6 +51,10 @@ const car = db.define('cars', {
     available: {
         type: Sequelize.BOOLEAN,
         defaultValue: true
+    },
+    price: {
+        type: Sequelize.DOUBLE,
+        allowNull: false
     }
 });
 
