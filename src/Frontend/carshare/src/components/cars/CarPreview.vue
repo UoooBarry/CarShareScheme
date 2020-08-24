@@ -22,7 +22,6 @@ export default {
     splitedFeatures() {
       let newArr = [];
       newArr = this.car.addons.split(",");
-      console.log("newArr is: " + newArr);
       return newArr;
     }
   }
@@ -37,7 +36,7 @@ export default {
     margin: 0;
     font-weight: bold;
     color: white;
-    background: linear-gradient(to right, #6782B4 0%, #B1BFD8 100%);
+    background: linear-gradient(to right,  #29293d 0%, #3d3d5c 100%);
 }
 .tip {
   min-width: 250px;

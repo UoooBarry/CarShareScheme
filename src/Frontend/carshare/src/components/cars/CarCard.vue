@@ -13,9 +13,9 @@
       </div>
 
       <div class="card-body">
-        <h5 class="card-title">{{car.name}}</h5>
+        <h5 class="card-title car">{{car.name}}</h5>
         <h6 class="card-subtitle mb-2 text-muted">{{car.brand}}</h6>
-        <p>${{car.price}}/day</p>
+        <p class="price">${{car.price}}/day</p>
       </div>
     </div>
     <CarPreview :id="`preview${car.id}`" v-if="hovering" v-bind:car="this.car" />
@@ -84,6 +84,12 @@ export default {
 }
 
 
+.card-title.car{
+  margin-top: 8px;
+    font-family: AvenirLTStd-Black;
+    letter-spacing: .125rem;
+    width: 100%;
+}
 
 .card.car {
   border-radius: 16px;
@@ -91,6 +97,7 @@ export default {
   -webkit-transition: margin 0.5s ease-out;
   -moz-transition: margin 0.5s ease-out;
   -o-transition: margin 0.5s ease-out;
+  box-shadow: 0 5px 10px 0 rgba(0,0,0,.12);
 }
 .card.car:hover {
   /* cursor:pointer; */

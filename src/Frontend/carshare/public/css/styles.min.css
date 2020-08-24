@@ -6,6 +6,10 @@ html, body {
   padding: 0px;
   overflow-x: hidden; 
   scroll-behavior: smooth;
+  font-family: AvenirLTStd-Book,Arial,sans-serif;
+    font-size: .875rem;
+    letter-spacing: .03125rem;
+    line-height: 1.4;
 }
 .navbar {
   font-family: 'Suisseintl webm', sans-serif;
@@ -23,6 +27,12 @@ html, body {
 
 .form-check{
   margin-bottom: 10px;
+}
+
+.price{
+  text-transform: uppercase;
+  letter-spacing: .125rem;
+  width: 100%;
 }
 
 .footer-dark {
