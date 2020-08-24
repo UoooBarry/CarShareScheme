@@ -39,7 +39,7 @@ html, body {
   padding: 20px 0;
   color: #f0f9ff;
   background-color: #282d32;
-  height: 250px;
+  height: 200px;
   width: 100%;
   overflow: hidden;
   position: relative;
@@ -283,7 +283,7 @@ img {
 .header-blue .action-button:hover,
 .header-blue .navbar .navbar-collapse span .login:hover,
 .header-dark .navbar .navbar-collapse span .login:hover {
-  color: #fff;
+  color: black;
 }
 .header-blue .navbar .navbar-toggler {
   border-color: rgba(255, 255, 255, 0.3);

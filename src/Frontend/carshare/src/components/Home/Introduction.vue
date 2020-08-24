@@ -1,83 +1,140 @@
 <template>
-    <div>
-        <div class="parallax p1">
-            <div class="description main">
-                <h1>The new car share syetem is there</h1>
-                <p>Get your favorite car anytime, anywhere, <br>
-                    everything as you want</p>
-                <a class="btn btn-light btn-lg action-button car-list-btn"  href='/Home'>Get A Car Now</a>                     
-            </div>
-        </div>
-         <div class="parallax p2" >
-            <div class="description family">
-                <h1>Top pick for family car renting</h1>
-                <p>We have the best renting policies with insurance <br>
-                 covered in the renting package, Users can enjoy a<br>
-                  self-driving weekends with the family to a new location<br>
-                   without and worry!</p>
-            </div>
-        </div>
-         <div class="parallax p3">
-            <div class="description purpose">
-                <h1>Easy Renting process <br>
-                supports all purpose of <br>
-                renting</h1>
-                <p>Our company has wide range of cars and many<br>
-                 off-site locations for users to rent the cars easily<br>
-                  for all kinds of renting purpose.</p>
-            </div>
-        </div>
+  <div v-on:scroll.native="scrollFunction">
+    <div class="parallax p1">
+      <div class="description main">
+        <h1>The new car share system is there</h1>
+        <p>
+          Get your favorite car anytime, anywhere,
+          <br />everything as you want
+        </p>
+      </div>
     </div>
+    <div class="parallax p2">
+      <div class="description family">
+        <h1>Top pick for family car renting</h1>
+        <p>
+          We have the best renting policies with insurance
+          <br />covered in the renting package, Users can enjoy a
+          <br />self-driving weekends with the family to a new location
+          <br />without and worry!
+        </p>
+      </div>
+    </div>
+    <div class="parallax p3">
+      <div class="description purpose">
+        <h1>
+          Easy Renting process
+          supports all purpose of
+          renting
+        </h1>
+        <p>
+          Our company has wide range of cars and many
+          <br />off-site locations for users to rent the cars easily
+          <br />for all kinds of renting purpose.
+        </p>
+        <a class="btn btn-light btn-lg action-button car-list-btn" href="/Login">Get A Car Now</a>
+      </div>
+    </div>
+    <a
+      id="back-to-top"
+      href="#"
+      class="btn btn-light btn-lg back-to-top"
+      role="button"
+        v-on:click="topFunction()" 
+    >
+      <font-awesome-icon icon="arrow-up" />
+    </a>
+  </div>
 </template>
 
 <style scoped>
-.description{
-position: relative;
-  
+.p1,
+.p2,
+.p3 {
+  height: 900px;
+}
+.description {
+  position: relative;
+
   transform: translate(-50%, -50%);
   color: whitesmoke;
   padding: 10px;
   font-size: 20px;
   font-weight: 500;
   font-family: Montserrat;
-font-style: normal;
-font-weight: 500;
-font-size: 20px;
-line-height: 24px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
 }
 
-.description.main{
+.description.main {
   left: 50%;
   top: 50%;
 }
-
-.car-list-btn{
-    border: 1px solid rgba(255, 255, 255, 0.7);
-    border-radius: 40px;
-    color: #ebeff1;
-    box-shadow: none;
-    text-shadow: none;
-    padding: 0.3rem 0.8rem;
-    background: 0 0;
-    transition: background-color 0.25s;
-    outline: 0;
+.description.main,
+.description.family,
+.description.purpose {
+  box-shadow: 0 0 32px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  background-color: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(5px);
+}
+.car-list-btn {
+  border: 1px solid black;
+  border-radius: 40px;
+  color: black;
+  box-shadow: none;
+  text-shadow: none;
+  padding: 0.3rem 0.8rem;
+  background: 0 0;
+  transition: background-color 0.25s;
+  outline: 0;
 }
 
-.description.family{
-  text-align:left;
+.description.family {
+  text-align: left;
   top: 20%;
   left: 100%;
-  color:#2F3737;
+  color: black;
 }
 
-.description.purpose{
-  text-align:left;
-  color:#2F3737;
-  top: 20%;
-  left: 55%;
+.description.purpose {
+  text-align: right;
+  color: black;
+  top: 25%;
 }
 
-.description.purpose h1{
-    margin-bottom: 50px;
+h1 {
+  margin-bottom: 25px;
+}
+#back-to-top {
+  display: block;
+  position: fixed;
+  bottom: 20px;
+  right: 30px;
+  z-index: 99999;
+  font-size: 18px;
+  border: none;
+  outline: none;
+  background-color: rgba(255, 255, 255, 0.15);
+  color: black;
+  cursor: pointer;
+  padding: 15px;
+  border-radius: 4px;
 }
 </style>
+<script>
+//Get the button
+
+
+export default {
+  name: "Home",
+  methods: {
+    topFunction() {
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
+    }
+  }
+};
+</script>

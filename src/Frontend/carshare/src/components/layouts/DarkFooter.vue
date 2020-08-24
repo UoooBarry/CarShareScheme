@@ -40,22 +40,7 @@
             <p>Praesent sed lobortis mi. Suspendisse vel placerat ligula. Vivamus ac sem lacus. Ut vehicula rhoncus elementum. Etiam quis tristique lectus. Aliquam in arcu eget velit pulvinar dictum vel in justo.</p>
           </div>
           <!-- End: Footer Text -->
-          <!-- Start: Social Icons -->
-          <div class="col item social">
-            <a href="#">
-              <i class="icon ion-social-facebook with-font">F</i>
-            </a>
-            <a href="#">
-              <i class="icon ion-social-twitter with-font">T</i>
-            </a>
-            <a href="#">
-              <i class="icon ion-social-snapchat with-font">S</i>
-            </a>
-            <a href="#">
-              <i class="icon ion-social-instagram with-font">I</i>
-            </a>
-          </div>
-          <!-- End: Social Icons -->
+ 
         </div>
         <!-- Start: Copyright -->
         <p class="copyright">PBD Car Share System © 2020</p>
