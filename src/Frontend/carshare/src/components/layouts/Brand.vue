@@ -1,6 +1,6 @@
 <template>
     <div>
-        <a class="navbar-brand" href="/about"> <img class="brand-img" src="../../public/img/brand.png" alt="">    PBD Car Share</a> 
+        <a class="navbar-brand" href="/"> <img class="brand-img" src="../../../public/img/brand.png" alt="">    PBD Car Share</a> 
     </div>
 </template>
 

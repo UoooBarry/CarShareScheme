@@ -25,7 +25,7 @@
 
 <script>
 import authorizeMixin from '@/mixins/authorizeMixin';
-import Brand from '@/components/Brand';
+import Brand from '@/components/layouts/Brand';
 
 export default {
   name: "Header",

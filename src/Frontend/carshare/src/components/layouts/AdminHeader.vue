@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import Brand from '@/components/Brand';
+import Brand from '@/components/layouts/Brand';
 
 export default {
   name: "AdminHeader",

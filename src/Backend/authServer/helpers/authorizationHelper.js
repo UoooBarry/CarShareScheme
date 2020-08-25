@@ -2,7 +2,7 @@ const JWT = require('jsonwebtoken');
 
 module.exports={
     generateAccessToken: (customer) => {
-        return JWT.sign({customer}, process.env.ACCESS_TOKEN_SECRET);
+        return JWT.sign({customer}, process.env.ACCESS_TOKEN_SECRET, {expiresIn: '3h'});
     },
     verifyToken: (req,res,next) => {
         const header = req.headers['authorization'];
