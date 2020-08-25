@@ -52,9 +52,19 @@ router.get('/:id/',(req,res) => {
         .catch( (err) => {
             console.log(err);
             res.sendStatus(403);
-        }
+        })
+})
 
-        )
+//GET: /api/cars/attribute/brands
+router.get('/attribute/brands',(req,res) => {
+    _Car.getBrands()
+        .then(brands => {
+            res.json({brands});
+        })
+        .catch((err) => {
+            console.log(err);
+            res.sendStatus(403);
+        })
 })
 
 //POST: /api/cars/create

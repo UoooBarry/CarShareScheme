@@ -5,6 +5,7 @@
 
 const Car = require('../models/car');
 const Sequelize = require('sequelize');
+const { sequelize } = require('../models/car');
 const Op = Sequelize.Op;
 
 class carRepository{
@@ -61,6 +62,20 @@ class carRepository{
         try{
             await Car.create(car);
             return Promise.resolve(true);
+        }catch(err){
+            return Promise.reject(err);
+        }
+    }
+
+    async getBrands(){
+        try{
+            const brands = await Car.findAll({
+                attributes: [Sequelize.fn('DISTINCT',Sequelize.col('brand')),'brand'],
+                order: [
+                    ['brand', 'ASC']
+                ]
+            })
+            return Promise.resolve(brands);
         }catch(err){
             return Promise.reject(err);
         }

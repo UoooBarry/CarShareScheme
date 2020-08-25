@@ -40,10 +40,10 @@ export default {
           }
           else if ((i === 1)) {
             this.sort = "price";
-            this.order = "ASC";
+            this.order = "DESC";
           } else if ((i === 2)) {
             this.sort = "price";
-            this.order = "DESC";
+            this.order = "ASC";
           }else if ((i === 3)) {
             this.sort = "purchase_date";
             this.order = "DESC";

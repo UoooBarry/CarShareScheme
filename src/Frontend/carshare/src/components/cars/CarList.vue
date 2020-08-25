@@ -26,6 +26,9 @@ export default {
     CarCard
   },
   props: ["cars"],
+  destory(){
+    console.log('des');
+  },
   data() {
     return {
       pageOfItems: [],
@@ -59,7 +62,7 @@ export default {
 .page-item.active .page-link {
     z-index: 3;
     color: #fff;
-    background: #6782b4 ;
+    background: #a9a0a0 ;
     border-color:  #b1bfd8;
 }
 </style>

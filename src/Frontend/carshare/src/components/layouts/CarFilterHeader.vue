@@ -18,45 +18,46 @@
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
           <div class="btn-group btn-group-toggle" data-toggle="buttons">
             <label class="btn btn-outline-dark">
-              <input type="radio" name="sort" checked value="default" /> Default (By name)
+              <input type="radio" name="sort" checked value="default" @click="filter('name','ASC')" /> Default (By name)
             </label>
 
             <label class="btn btn-outline-dark">
-              <input type="radio" name="sort" autocomplete="off" /> By Price (High to Low)
+              <input type="radio" name="sort" autocomplete="off"  @click="filter('price','DESC')" /> By Price (High to Low)
             </label>
 
             <label class="btn btn-outline-dark">
-              <input type="radio" name="sort" autocomplete="off" /> By Price (Low to High)
+              <input type="radio" name="sort" autocomplete="off" @click="filter('price','ASC')"/> By Price (Low to High)
             </label>
 
             <label class="btn btn-outline-dark">
-              <input type="radio" name="sort" autocomplete="off" /> By Newest
+              <input type="radio" name="sort" autocomplete="off" @click="filter('createdAt','DESC')" /> By Newest
             </label>
 
             <label class="btn btn-outline-dark">
-              <input type="radio" name="sort" autocomplete="off" /> By Brand
+              <input type="radio" name="sort" autocomplete="off" @click="filter('brand','DESC')" /> By Brand
             </label>
 
 
             <label class="btn btn-outline-dark">
-              <input type="radio" name="sort" autocomplete="off" /> By popular
+              <input type="radio" name="sort" autocomplete="off" @click="filter('viewed','DESC');" /> By popular
             </label>
           </div>
         </ul>
-        <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search" />
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        <form class="form-inline my-2 my-lg-0"  @submit.prevent="search">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" v-model="searchItem" />
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit"  v-on:click="update">Search</button>
         </form>
+
       </div>
     </nav>
   </header>
 </template>
 
 <script>
+import CarMixin from '@/mixins/carMixin';
 export default {
   name: "CarFilterHeader",
-  components: {},
-  methods: {}
+  mixins:[CarMixin]
 };
 </script>
 
