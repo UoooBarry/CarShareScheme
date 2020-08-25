@@ -1,6 +1,6 @@
 <template>
   <!-- Start: Footer Dark -->
-  <div class="footer-dark parallax">
+  <div class="footer-dark">
     <footer>
       <div class="container">
         <div class="row">
@@ -10,10 +10,10 @@
             <ul>
               <li>Car share</li>
               <li>
-                <a href="#">Development</a>
+                <a href="https://github.com/UoooBarry/CarShareScheme">Development</a>
               </li>
               <li>
-                <a href="#">Hosting</a>
+                <a href="http://carshare-vue-pbd.s3-website-ap-southeast-2.amazonaws.com/">Hosting</a>
               </li>
             </ul>
           </div>
@@ -23,13 +23,13 @@
             <h3>About</h3>
             <ul>
               <li>
-                <a href="#">Rmit</a>
+                <a href="https://rmit.instructure.com/">Rmit</a>
               </li>
               <li>
-                <a href="#">Team</a>
+                <a href="https://rmiteduau.sharepoint.com/:f:/r/sites/PP2050GroupPBD/Shared%20Documents/General?csf=1&web=1&e=svmA1s">Team</a>
               </li>
               <li>
-                <a href="#">GitHub</a>
+                <a href="https://github.com/UoooBarry/CarShareScheme">GitHub</a>
               </li>
             </ul>
           </div>
@@ -40,22 +40,7 @@
             <p>Praesent sed lobortis mi. Suspendisse vel placerat ligula. Vivamus ac sem lacus. Ut vehicula rhoncus elementum. Etiam quis tristique lectus. Aliquam in arcu eget velit pulvinar dictum vel in justo.</p>
           </div>
           <!-- End: Footer Text -->
-          <!-- Start: Social Icons -->
-          <div class="col item social">
-            <a href="#">
-              <i class="icon ion-social-facebook"></i>
-            </a>
-            <a href="#">
-              <i class="icon ion-social-twitter"></i>
-            </a>
-            <a href="#">
-              <i class="icon ion-social-snapchat"></i>
-            </a>
-            <a href="#">
-              <i class="icon ion-social-instagram"></i>
-            </a>
-          </div>
-          <!-- End: Social Icons -->
+ 
         </div>
         <!-- Start: Copyright -->
         <p class="copyright">PBD Car Share System © 2020</p>
@@ -74,3 +59,11 @@ export default {
   name: "DarkFooter",
 };
 </script>
+
+<style scoped>
+.with-font{
+  font-style: normal !important;
+  font-family: 'Suisseintl webm', sans-serif !important;
+  font-weight: 500;
+}
+</style>

@@ -7,7 +7,7 @@
                 id="navcol-1">
                 <ul class="nav navbar-nav ml-auto">
                     <li class="nav-item" role="presentation"><a class="nav-link" href="#">Search</a></li>
-                    <li class="nav-item" role="presentation"  v-bind:class="{'nav-item active': getActive('About')}"><a class="nav-link" href="#">Car list</a></li>
+                    <li class="nav-item" role="presentation"  v-bind:class="{'nav-item active': getActive('Cars')}"><a class="nav-link" href="/Home">Car list</a></li>
                     <li class="nav-item dropdown" id="account"  v-bind:class="{'nav-item active': getActive('Profile')}"><a data-toggle="dropdown" aria-expanded="false" class="dropdown-toggle nav-link" href="#" >Account</a>
                         <div class="dropdown-menu" role="menu">
                             <a class="dropdown-item" role="presentation" href="/user/profile">Profile</a>
@@ -15,7 +15,7 @@
                             <a class="dropdown-item" role="presentation" href="#" v-on:click="this.logout">Logout</a>
                         </div>
                     </li>
-                    <li class="nav-item" role="presentation" id="login" style="display: none"><a class="nav-link" href="/">Login</a></li>
+                    <li class="nav-item" role="presentation" id="login" style="display: none"><a class="nav-link" href="/login">Login</a></li>
                 </ul>
             </div>
         </div>

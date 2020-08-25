@@ -12,10 +12,11 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import moment from 'moment';
 import { ToggleButton } from 'vue-js-toggle-button'
- 
+import JwPagination  from 'jw-vue-pagination'
 
 
-
+//add paginate
+Vue.component('jw-pagination', JwPagination);
 //font awesome icons
 library.add(fas)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
@@ -40,7 +41,6 @@ Vue.filter('formatDate', function(value) {
     return moment(String(value)).format('MM/DD/YYYY hh:mm')
   }
 });
-
 
 
 // Session storage

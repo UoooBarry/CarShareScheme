@@ -40,9 +40,9 @@ const car = db.define('cars', {
     description:{
         type: Sequelize.STRING
     },
-    air_condition:{
-        type: Sequelize.BOOLEAN,
-        defaultValue: true
+    addons:{
+        type: Sequelize.STRING,
+        allowNull: false
     },
     viewed:{
         type: Sequelize.INTEGER,
@@ -51,6 +51,10 @@ const car = db.define('cars', {
     available: {
         type: Sequelize.BOOLEAN,
         defaultValue: true
+    },
+    price: {
+        type: Sequelize.DOUBLE,
+        allowNull: false
     }
 });
 
