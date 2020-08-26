@@ -5,7 +5,6 @@ import axios from 'axios';
 import 'bootstrap';
 import VueSession from 'vue-session';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import config from '../config/variables';
 import FlashMessage from '@smartweb/vue-flash-message';
 import { VueReCaptcha } from 'vue-recaptcha-v3';
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -13,21 +12,21 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import moment from 'moment';
 import { ToggleButton } from 'vue-js-toggle-button'
- 
+import JwPagination  from 'jw-vue-pagination'
 
 
-
+//add paginate
+Vue.component('jw-pagination', JwPagination);
 //font awesome icons
 library.add(fas)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.component('ToggleButton', ToggleButton)
 // global variable
 Vue.prototype.$axios = axios;
-Vue.prototype.$auth = config.authenticationURL;
-Vue.prototype.$carshare = config.carshareURL;
-Vue.prototype.$admin = config.adminURL;
-Vue.config.productionTip = false
-
+Vue.prototype.$auth = process.env.VUE_APP_AUTH;
+Vue.prototype.$carshare = process.env.VUE_APP_CARSHARE;
+Vue.prototype.$admin = process.env.VUE_APP_ADMIN;
+Vue.config.productionTip = false;
 
 new Vue({
   router,
@@ -42,7 +41,6 @@ Vue.filter('formatDate', function(value) {
     return moment(String(value)).format('MM/DD/YYYY hh:mm')
   }
 });
-
 
 
 // Session storage

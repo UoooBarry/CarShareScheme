@@ -63,6 +63,11 @@ jobs:
           command: |
             cd src/Backend/authServer/
             npm run integration-test
+      - run:
+          name: run car share system server integration tests
+          command: |
+            cd src/Backend/carshare/
+            npm run integration-test
   
   package:
     machine: true

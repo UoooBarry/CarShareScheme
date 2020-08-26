@@ -9,24 +9,24 @@ const routes = [{
   path: '/',
   name: 'Home',
   components: {
-    header: null,
-    main: () => import('@/components/layouts/BlueHeader')
+    header: Header,
+    main: () => import('@/views/Home')
   }
 },
 {
-  path: '/about',
-  name: 'About',
+  path: '/Home',
+  name: 'Cars',
   components: {
     header: Header,
-    main: () => import('../views/About.vue')
+    main: () => import('../views/Cars.vue')
   }
 },
 {
   path: '/login',
   name: 'Login',
   components: {
-    header: Header,
-    main: () => import('../views/Login.vue')
+    header: null,
+    main: () => import('../components/layouts/BlueHeader')
   }
 },
 {

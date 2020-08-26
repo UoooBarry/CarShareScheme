@@ -23,13 +23,38 @@ const car = db.define('cars', {
         type: Sequelize.STRING
     },
     purchase_date: {
-        type: Sequelize.DATE
+        type: 'DATE',
+        defaultValue: new Date()
     },
     location_id: {
         type: Sequelize.INTEGER
     },
+    seats:{
+        type: Sequelize.INTEGER,
+        allowNull: false
+    },
+    luggages:{
+        type: Sequelize.INTEGER,
+        defaultValue: 3
+    },
+    description:{
+        type: Sequelize.STRING
+    },
+    addons:{
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+    viewed:{
+        type: Sequelize.INTEGER,
+        defaultValue: 0
+    },
     available: {
-        type: Sequelize.BOOLEAN
+        type: Sequelize.BOOLEAN,
+        defaultValue: true
+    },
+    price: {
+        type: Sequelize.DOUBLE,
+        allowNull: false
     }
 });
 

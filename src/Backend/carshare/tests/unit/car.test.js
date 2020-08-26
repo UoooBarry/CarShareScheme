@@ -31,6 +31,7 @@ describe('model/car', ()=> {
                 brand: "Test brand",
                 model: "T1",
                 location_id: location.id,
+                seats: 4,
                 purchase_date: new Date(),
                 available: false
             })

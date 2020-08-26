@@ -5,10 +5,13 @@
   "scripts": {
     "start": "node ./bin/www",
     "start:dev": "nodemon",
+    "integration-test:dev": "cross-env NODE_ENV=test TEST_DBHOST=localhost TEST_DBPORT=5433 TEST_DBNAME=CarShareTest TEST_DBUSER=postgres TEST_DBPASS=mbk83v mocha tests/integration --recursive --exit",
     "unit-test:dev": "cross-env NODE_ENV=test TEST_DBHOST=localhost TEST_DBPORT=5432 TEST_DBNAME=CarShareTest TEST_DBUSER=postgres TEST_DBPASS=mbk83v mocha tests/unit",
-    "unit-test": "cross-env NODE_ENV=test TEST_DBHOST=localhost TEST_DBNAME=CarShareTest TEST_DBUSER=postgres TEST_DBPASS=password mocha tests/unit --reporter mocha-junit-reporter"
+    "unit-test": "cross-env NODE_ENV=test TEST_DBHOST=localhost TEST_DBNAME=CarShareTest TEST_DBUSER=postgres TEST_DBPASS=password mocha tests/unit --reporter mocha-junit-reporter",
+    "integration-test": "cross-env NODE_ENV=test TEST_DBHOST=localhost TEST_DBNAME=CarShareTest TEST_DBUSER=postgres TEST_DBPASS=password mocha tests/integration --recursive --exit"
   },
   "dependencies": {
+    "aws-sdk": "^2.738.0",
     "cookie-parser": "~1.4.4",
     "cors": "^2.8.5",
     "cross-env": "^7.0.2",
@@ -16,10 +19,13 @@
     "dotenv": "^8.2.0",
     "express": "~4.16.1",
     "express-validator": "^6.6.1",
+    "fs": "0.0.1-security",
     "http-errors": "~1.6.3",
     "jsonwebtoken": "^8.5.1",
     "morgan": "~1.9.1",
+    "multer": "^1.4.2",
     "nodemon": "^2.0.4",
+    "path": "^0.12.7",
     "pg": "^8.3.0",
     "pg-hstore": "^2.3.3",
     "sequelize": "^6.3.3"
@@ -27,9 +33,11 @@
   "devDependencies": {
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
-    "mocha": "^8.0.1",
+    "mocha": "^8.1.1",
     "mocha-junit-reporter": "^2.0.0",
+    "sequelize-auto": "^0.5.3",
     "sequelize-cli": "^6.2.0",
-    "sequelize-auto": "^0.5.3"
+    "ts-node": "^9.0.0",
+    "typescript": "^4.0.2"
   }
 }
