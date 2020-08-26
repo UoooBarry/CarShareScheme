@@ -16,7 +16,7 @@ const authorize = require('../helpers/authorizationHelper');
 
 //GET: /api/cars
 router.get('/', (req, res) => {
-    _Car.getAll(req.query.sortItem, req.query.sort)
+    _Car.getAll(req.query.sort, req.query.order)
         .then(cars => {
             res.json({cars})
         })
@@ -28,6 +28,20 @@ router.get('/', (req, res) => {
         )
 });
 
+//GET: /api/cars/:brand
+router.get('/search', (req,res) => {
+    _Car.getBy(req.query.query)
+        .then(cars => {
+            res.json({cars})
+        })
+        .catch(
+            (err) => {
+                console.log(err);
+                res.sendStatus(403);
+            }
+        )
+})
+
 
 //GET: /api/cars/:id
 router.get('/:id/',(req,res) => {
@@ -38,9 +52,19 @@ router.get('/:id/',(req,res) => {
         .catch( (err) => {
             console.log(err);
             res.sendStatus(403);
-        }
+        })
+})
 
-        )
+//GET: /api/cars/attribute/brands
+router.get('/attribute/brands',(req,res) => {
+    _Car.getBrands()
+        .then(brands => {
+            res.json({brands});
+        })
+        .catch((err) => {
+            console.log(err);
+            res.sendStatus(403);
+        })
 })
 
 //POST: /api/cars/create
@@ -54,6 +78,7 @@ router.post('/create', authorize.verifyToken, (req,res) => {
         purchase_date: req.body.purchase_date,
         location_id: req.body.location_id,
         seats: req.body.seats,
+        price: req.body.price,
         air_condition: req.body.air_condition,
         luggages: req.body.luggages,
         description: req.body.description

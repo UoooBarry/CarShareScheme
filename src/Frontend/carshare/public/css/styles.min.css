@@ -1,45 +1,93 @@
 html, body {
   height: 100%;
   margin: 0;
+  width: 100%;
+  margin: 0px;
+  padding: 0px;
+  overflow-x: hidden; 
+  scroll-behavior: smooth;
+  font-family: AvenirLTStd-Book,Arial,sans-serif;
+    font-size: .875rem;
+    letter-spacing: .03125rem;
+    line-height: 1.4;
 }
 .navbar {
+  font-family: 'Suisseintl webm', sans-serif;
   min-height: 40px;
   box-shadow: none;
   border: none;
   margin: 0;
-  padding: 0 !important;
   border-radius: 0;
   font-size: 16px;
+  margin-right: auto;
+  margin-left: auto;
   box-shadow: 0 2px 2px -2px rgba(0,0,0,.2);
-}
-.navbar .navbar-nav > li:hover{
-  background-color: #867a7a80;
-}
+  padding-bottom: 50px;
+} 
+
 .form-check{
   margin-bottom: 10px;
+}
+
+.price{
+  text-transform: uppercase;
+  letter-spacing: .125rem;
+  width: 100%;
 }
 
 .footer-dark {
   padding: 20px 0;
   color: #f0f9ff;
   background-color: #282d32;
-  height: 250px;
+  height: 200px;
   width: 100%;
   overflow: hidden;
   position: relative;
-  
+}
 
+.nav-item{
+  font-family: 'Suisseintl webm', sans-serif;
+  color: #1b212c;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  text-transform: none;
+}
+
+.brand-img{
+  margin-top: 0;
+  margin-right: 10px;
+  max-width: 60%;
+  max-height: 60%;
+}
+
+.brand{
+  display: inline;
 }
 
 .parallax{
-      /* Full height */
-      height: 30%;
-      /* Create the parallax scrolling effect */
-      background-attachment: fixed;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: cover;
+        /* Set a specific height */
+  height: 800px;
+
+  /* Create the parallax scrolling effect */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  
 }
+
+.p1{
+  background-image: url('../img/b1.png');
+}
+.p2{
+  background-image: url('../img/b2.png');
+}
+.p3{
+  background-image: url('../img/b3.png');
+}
+
 
 
 
@@ -235,7 +283,7 @@ img {
 .header-blue .action-button:hover,
 .header-blue .navbar .navbar-collapse span .login:hover,
 .header-dark .navbar .navbar-collapse span .login:hover {
-  color: #fff;
+  color: black;
 }
 .header-blue .navbar .navbar-toggler {
   border-color: rgba(255, 255, 255, 0.3);

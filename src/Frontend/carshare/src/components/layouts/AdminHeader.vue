@@ -1,8 +1,8 @@
 <template>
   <header>
     <nav class="navbar navbar-light navbar-expand-md navbar-transparency">
+        <Brand />
         <div class="container">
-            <div><a class="navbar-brand" href="/about">PBD Car Share</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button></div>
             <div class="collapse navbar-collapse"
                 id="navcol-1">
                 <ul class="nav navbar-nav ml-auto">
@@ -18,8 +18,13 @@
 </template>
 
 <script>
+import Brand from '@/components/layouts/Brand';
+
 export default {
   name: "AdminHeader",
+  components:{
+      Brand
+  },
   methods:{
        getActive(expected) {
             if (expected == this.$route.name) return true;
