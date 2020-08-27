@@ -58,10 +58,6 @@ router.beforeEach((to, from, next) => {
     // this route requires auth, check if logged in
     // if not, redirect to login page.
     if (localStorage.getItem('authToken') === null) {
-      this.flashMessage.warning({
-        title: 'Login request',
-        message: `You are login for too long, please resign in.`
-      });
       next({
         path: '/'
       })

@@ -42,17 +42,31 @@ describe('POST /register', () => {
                     })
     });
 
-    it('Register an account with invalid information', (done) => {
+    it('Register an account with invalid email', (done) => {
         chai.request(app).post('/api/register')
                     .send({
-                        email: "Not an email"
+                        email: "Not an email",
+                        password: "123456"
                     })
                     .end((err, res) => {
                         res.should.have.status(200);
                         res.body.should.have.property('message').eql('fail');
                         done();
                     })
-    })
+    });
+
+    it('Register an account with invalid password', (done) => {
+        chai.request(app).post('/api/register')
+                    .send({
+                        email: "dummy3@gmail.com",
+                        password: "12345"
+                    })
+                    .end((err, res) => {
+                        res.should.have.status(200);
+                        res.body.should.have.property('message').eql('fail');
+                        done();
+                    })
+    });
 
     after(async() => {
         await Login.destroy({where:{Email: "dummy@gmail.com"}});
