@@ -22,6 +22,14 @@ const routes = [{
   }
 },
 {
+  path: '/car/:id',
+  name: 'CarDetail',
+  components:{
+    header: Header,
+    main: () => import('../views/CarsDetail.vue')
+  }
+},
+{
   path: '/login',
   name: 'Login',
   components: {
@@ -39,6 +47,14 @@ const routes = [{
   meta: {
     requiresAuth: true
   }
+},
+{
+  path: '/about',
+  name: 'About',
+  components: {
+    header: Header,
+    main: () => import('../views/About.vue')
+  },
 },
 {
   path: '/admin36737123719368365255336327043632505/',

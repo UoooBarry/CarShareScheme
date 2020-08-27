@@ -1,24 +1,26 @@
 <template>
   <div>
-    <div
-      class="card car"
-      style="width: 18rem;cursor: pointer;"
-      @mouseover="cardHover = true"
-      @mouseleave="cardHover = false"
-      :class="{hover: cardHover}"
-      onclick="location.href='#';" 
-    >
-      <div class="hover-info" v-on:mousemove="draw" v-on:mouseover="hover" v-on:mouseleave="hover">
-        <img class="card-img-top" src="../../../public/img/defaultcar.png" alt="Card image cap" />
-      </div>
+    <router-link :to="{name: 'CarDetail', params:{ id }}">
+      <div
+        class="card car"
+        style="width: 18rem;cursor: pointer;"
+        @mouseover="cardHover = true"
+        @mouseleave="cardHover = false"
+        :class="{hover: cardHover}"
+        onclick="location.href='#';" 
+      >
+        <div class="hover-info" v-on:mousemove="draw" v-on:mouseover="hover" v-on:mouseleave="hover">
+          <img class="card-img-top" src="../../../public/img/defaultcar.png" alt="Card image cap" />
+        </div>
 
-      <div class="card-body">
-        <h5 class="card-title car">{{car.name}}</h5>
-        <h6 class="card-subtitle mb-2 text-muted">{{car.brand}}</h6>
-        <p class="price">${{car.price}}/day</p>
+        <div class="card-body">
+          <h5 class="card-title car">{{car.name}}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">{{car.brand}}</h6>
+          <p class="price">${{car.price}}/day</p>
+        </div>
       </div>
-    </div>
-    <CarPreview :id="`preview${car.id}`" v-if="hovering" v-bind:car="this.car" />
+      <CarPreview :id="`preview${car.id}`" v-if="hovering" v-bind:car="this.car" />
+    </router-link>
   </div>
 </template>
 
@@ -30,7 +32,8 @@ export default {
   data() {
     return {
       cardHover: false,
-      hovering: false
+      hovering: false,
+      id: this.car.id
     };
   },
   components: {
@@ -57,6 +60,9 @@ export default {
 </script>
 
 <style scoped>
+a{
+  color: black;
+}
 .card-img-top {
   margin-top: 0;
 }

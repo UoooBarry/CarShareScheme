@@ -1,89 +1,58 @@
 <template>
-  <div>
-    <Loading />
-    <h4>SHOWING CAR LIST RESULT</h4>
-    <CarFilterHeader v-bind:cars="this.cars" @click.native="filter" />
-    <CarList v-bind:cars="cars" />
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <div class="product-image">
+          <img src="../../public/img/elephant.jpg" alt="">
+        </div>
+      </div>
+      <div class="col">
+        <ProductContent :car="car" />
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import Loading from "@/components/Loading";
-import CarFilterHeader from "@/components/layouts/CarFilterHeader.vue";
-import CarList from "@/components/cars/CarList.vue";
-import authorizeMixin from "@/mixins/authorizeMixin";
+import ProductContent from '@/components/cars/ProductContent';
 export default {
-  name: "Cars",
+  name: "CarDetail",
   components: {
-    Loading,
-    CarFilterHeader,
-    CarList
+    ProductContent
   },
-  mixins: [authorizeMixin],
-  data() {
-    return {
-      cars: [],
-      sort: "name",
-      order: "ASC"
-    };
-  },
-  methods: {
-    async filter() {
-      var radios = document.getElementsByName("sort");
-      var i = 0;
-      console.log(radios);
-      while ( i < radios.length) {
-        if (radios[i].checked) {
-          if ((i === 0)) {
-            this.sort = "name";
-            this.order = "ASC";
-          }
-          else if ((i === 1)) {
-            this.sort = "price";
-            this.order = "DESC";
-          } else if ((i === 2)) {
-            this.sort = "price";
-            this.order = "ASC";
-          }else if ((i === 3)) {
-            this.sort = "purchase_date";
-            this.order = "DESC";
-          }else if ((i === 4)) {
-            this.sort = "brand";
-            this.order = "ASC";
-          }else if ((i === 5)) {
-            this.sort = "view";
-            this.order = "DESC";
-          }
-        }
-        i++;
-      }
-      const response = await this.$axios.get(
-        `${this.$carshare}/cars/?sort=${this.sort}&order=${this.order}`,
-        {
-          headers: this.header
-        }
-      );
-      this.cars = response.data.cars;
+  data(){
+    return{
+      car: ''
     }
   },
-  async created() {
-    const response = await this.$axios.get(
-      `${this.$carshare}/cars/?sort=${this.sort}&order=${this.order}`,
-      {
-        headers: this.header
-      }
-    );
-    this.cars = response.data.cars;
+  created(){
+    this.$axios.get(`${this.$carshare}/cars/${this.$route.params.id}`)
+              .then((res) => {
+                this.car = res.data.car;
+              })
+              .catch(() => {
+                this.flashMessage.error({
+                  title: 'Fail',
+                  message: 'Get car data incorrectly!'
+                });
+                this.$router.push({name: 'Cars'});
+              })
   }
-};
+}
 </script>
 
 
-<style>
-body {
-  background-color: #f0f8ff;
+<style scoped>
+.row{
+  min-height: 800px;
 }
-.main {
-  min-height: 600px;
+.product-image{
+  @media (min-width: 1024px)
+  .single-product__content__image {
+      width: 60%;
+      float: left;
+      padding-top: 60%;
+      padding-right: 40px;
+  }
 }
 </style>  
