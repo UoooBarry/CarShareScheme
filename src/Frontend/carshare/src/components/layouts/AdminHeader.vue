@@ -1,6 +1,6 @@
 <template>
   <header>
-    <nav class="navbar navbar-light navbar-expand-md navbar-transparency">
+    <nav class="navbar navbar-light navbar-expand-md navbar-transparency adminheader">
         <Brand />
         <div class="container">
             <div class="collapse navbar-collapse"
@@ -33,3 +33,11 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.adminheader{
+    background: #648CB5;
+    color: whitesmoke;
+}
+
+</style>

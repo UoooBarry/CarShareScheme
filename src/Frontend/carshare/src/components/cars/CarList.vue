@@ -45,7 +45,7 @@ export default {
 </script>
 
 
-<style>
+<style scoped>
 .page-footer{
   border-top: 1px solid lightgrey;
   padding-top:10px;
