@@ -51,9 +51,13 @@ app.listen(4000, () =>
     "Car share scheme system authentication sever is running on port 4000 ..."
   )
 );
-seed.sync().then(() => {
-  seed.up().then(() => {
-    console.log("Database seeded.");
+
+if(process.env.NODE_ENV != "test"){
+  seed.sync().then(() => {
+    seed.up().then(() => {
+      console.log("Database seeded.");
+    });
   });
-});
+ 
+}
 module.exports = app;
