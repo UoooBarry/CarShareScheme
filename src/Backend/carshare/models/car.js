@@ -62,5 +62,8 @@ car.belongsTo(Location, {
     foreignKey: 'location_id'
 });
 
+Location.hasMany(car, {
+    foreignKey: 'location_id'
+});
 
 module.exports = car;

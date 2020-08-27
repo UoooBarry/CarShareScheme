@@ -13,7 +13,6 @@
 
 <script>
 import CarCard from "./CarCard.vue";
-
 const customLabels = {
     first: 'First',
     last: 'Last',
@@ -59,10 +58,10 @@ export default {
   min-height: 800px;
   max-width: 1500px;
 }
-.page-item.active .page-link {
+.page-item.active .page-link{
     z-index: 3;
     color: #fff;
-    background: #a9a0a0 ;
+    background: #a9a0a0 !important;
     border-color:  #b1bfd8;
 }
 </style>
