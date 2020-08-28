@@ -29,7 +29,6 @@ router.patch('/avatar', [authorize.verifyToken, avatarUpload.single('image')], (
         //Get the file type
         const fileName = req.file.originalname;
         const fileType = fileName.split('.')[1];
-        console.log(fileType + " " + req.file.size);
         if(req.file.size > 20000 && (fileType != 'png' || fileType != 'jpg')){
             res.json({message: "fail"});
             return;
@@ -37,7 +36,6 @@ router.patch('/avatar', [authorize.verifyToken, avatarUpload.single('image')], (
 
         uploadFile(req.user.id, 'Avatar', req.file.path) //upload file to avatar path
             .then(() => {
-                console.log('change');
                 res.json({message: "success"})
             })
             .catch((err) => {

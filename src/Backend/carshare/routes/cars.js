@@ -4,8 +4,9 @@
  * @UPDATED: YONGQIAN HUANG, 23/07/2020, INIT CREATION *
  *  YONGQIAN HUANG, 23/07/2020, MIGRATE TO POSTGRESQL  *
  *  Yongqian Huang. 17/08/2020, Car listing and description  
- *  Yongqian Huang. 19/08/2020, Car creating endpoint 
- * Yongqian Huang. 28/08/2020, Car creating Validation *
+ *  Yongqian Huang. 19/08/2020, Car creating endpoint   *
+ * Yongqian Huang. 28/08/2020, Car creating Validation  *
+ * Yongqian Huang, 29/08/2020, Add car share image upload*
  *******************************************************/
 
 
@@ -15,6 +16,11 @@ const _Car = require('../repository/carRepository');
 const _Location = require('../repository/locationRepository');
 const authorize = require('../helpers/authorizationHelper');
 const {carValidator,validateResult} = require('../helpers/validator');
+const uploadFile = require('../helpers/Uploader');
+const multer  = require('multer')
+const carImageUpload = multer({ 
+    dest: 'uploads/'
+ })
 
 //GET: /api/cars
 router.get('/', (req, res) => {
@@ -115,18 +121,26 @@ router.post('/create', [carValidator, authorize.verifyToken], (req,res) => {
 });
 
 
-router.post('/test/', async (req,res) => {
-    _Location.getAllValidateCars(req.body.from)
-                .then((results) => {
-                    res.json({results})
-                })
-                .catch(err => {
-                    res.json(err);
-                })
-    
-    
-});
+//POST: /api/cars/:id/image
+router.post('/:id/image', [authorize.verifyToken,carImageUpload.single('image')], (req,res) =>{
+    if(!req.user.admin) res.sendStatus(403);
+    //Get the file type
+    const fileName = req.file.originalname;
+    const fileType = fileName.split('.')[1];
+    if(req.file.size > 20000 && (fileType != 'png' || fileType != 'jpg')){
+        res.json({message: "fail"});
+        return;
+    }
 
+    uploadFile(req.params.id, 'Car', req.file.path) //upload file to avatar path
+        .then(() => {
+            res.json({message: "success"})
+        })
+        .catch((err) => {
+            console.log(err);
+            res.json({message: "fail"})
+        })
+});
 
 
 
