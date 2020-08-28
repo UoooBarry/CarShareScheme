@@ -86,4 +86,3 @@ Vue.mixin({
       return allCars;
     }
   }
-})
