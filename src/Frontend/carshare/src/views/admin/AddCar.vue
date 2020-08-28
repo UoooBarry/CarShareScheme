@@ -40,6 +40,7 @@ export default {
   margin-top: 40px;
   border: 1px solid #9d9b9b;
   border-radius: 10px;
+  padding: 20px 50px;
 }
 
 #dark-footer {
