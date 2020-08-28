@@ -15,6 +15,15 @@ const profileValidator = [
 ]
 
 
+const carValidator = [
+    check('name').not().isEmpty().withMessage('Name cannot be empty'),
+    check('model').not().isEmpty().withMessage('Model cannot be empty'),
+    check('brand').not().isEmpty().withMessage('Brand cannot be empty'),
+    check('location_id').not().isEmpty().withMessage('Location id cannot be empty'),
+    check('seats').matches(/^[2-9]*$/).withMessage('Seats cannot be less than 2'),
+    check('addons').not().isEmpty().withMessage('Addons cannot be empty'),
+    check('price').not().isEmpty().withMessage('Price cannot be empty')
+]
 
 const validateResult = (req) => {
     const errs = validationResult(req);
@@ -31,4 +40,5 @@ const validateResult = (req) => {
     return Promise.resolve(true);
 }
 
-module.exports = {profileValidator, validateResult}
+
+module.exports = {profileValidator, validateResult, carValidator}

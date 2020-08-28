@@ -4,7 +4,8 @@
  * @UPDATED: YONGQIAN HUANG, 23/07/2020, INIT CREATION *
  *  YONGQIAN HUANG, 23/07/2020, MIGRATE TO POSTGRESQL  *
  *  Yongqian Huang. 17/08/2020, Car listing and description  
- *  Yongqian Huang. 19/08/2020, Car creating endpoint  *
+ *  Yongqian Huang. 19/08/2020, Car creating endpoint 
+ * Yongqian Huang. 28/08/2020, Car creating Validation *
  *******************************************************/
 
 
@@ -13,6 +14,7 @@ const router = express.Router();
 const _Car = require('../repository/carRepository');
 const _Location = require('../repository/locationRepository');
 const authorize = require('../helpers/authorizationHelper');
+const {carValidator,validateResult} = require('../helpers/validator');
 
 //GET: /api/cars
 router.get('/', (req, res) => {
@@ -70,34 +72,47 @@ router.get('/attribute/brands',(req,res) => {
 })
 
 //POST: /api/cars/create
-router.post('/create', authorize.verifyToken, (req,res) => {
+router.post('/create', [carValidator, authorize.verifyToken], (req,res) => {
     if(!req.user.admin) res.sendStatus(403);
 
-    const car = {
-        name: req.body.name,
-        brand: req.body.brand,
-        model: req.body.model,
-        purchase_date: req.body.purchase_date,
-        location_id: req.body.location_id,
-        seats: req.body.seats,
-        price: req.body.price,
-        air_condition: req.body.air_condition,
-        luggages: req.body.luggages,
-        description: req.body.description
-    }
-
-    _Car.create(car)
-        .then(() => {
+    validateResult(req)
+        .then(()=> {
+            const car = {
+                name: req.body.name,
+                brand: req.body.brand,
+                model: req.body.model,
+                purchase_date: req.body.purchase_date,
+                location_id: req.body.location_id,
+                seats: req.body.seats,
+                price: req.body.price,
+                doors: req.body.doors,
+                gear: req.body.gear,
+                air_condition: req.body.air_condition,
+                luggages: req.body.luggages,
+                description: req.body.description,
+                addons: req.body.addons
+            }
+        
+            _Car.create(car)
+                .then(() => {
+                    res.json({
+                        message: 'success'
+                    })
+                })
+                .catch((err) => {
+                    res.json({
+                        message: 'fail',
+                        err
+                    })
+                });
+        })
+        .catch(errors => {
             res.json({
-                message: 'success'
+                message: "fail",
+                errors
             })
         })
-        .catch((err) => {
-            res.json({
-                message: 'fail',
-                err
-            })
-        });
+   
 });
 
 

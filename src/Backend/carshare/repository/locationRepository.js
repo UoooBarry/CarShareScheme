@@ -1,4 +1,6 @@
-
+/**************************
+ * @AUTHOR YONGQIAN HUANG *
+ **************************/
 const Location = require('../models/location');
 const Car = require('../models/car');
 const {calculateDistance} = require('../helpers/distanceHelper');

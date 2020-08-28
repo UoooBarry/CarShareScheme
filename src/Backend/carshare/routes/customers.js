@@ -1,3 +1,8 @@
+/*******************************************************
+ *   @AUTHOR: YONGQIAN HUANG, CREATED AT: 23/07/2020   *
+ * @UPDATED: YONGQIAN HUANG, 23/07/2020, INIT CREATION *
+ * *******************************************************/
+
 const express = require('express');
 const router = express.Router();
 const _Customer = require('../repository/customerRepository');
@@ -75,9 +80,6 @@ router.patch('/', [profileValidator,authorize.verifyToken], async (req, res) => 
                 errors
             })
         })
-
-    
-
 });
 
 
