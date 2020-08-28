@@ -27,6 +27,9 @@ const routes = [{
   components:{
     header: Header,
     main: () => import('../views/CarsDetail.vue')
+  },
+  meta: {
+    requiresAuth: true
   }
 },
 {

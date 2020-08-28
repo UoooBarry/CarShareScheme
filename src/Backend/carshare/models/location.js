@@ -7,6 +7,7 @@
 
 const Sequelize = require('sequelize');
 const db = require('../config/db');
+const Car = require('./car');
 
 const location = db.define('locations', {
     name: {
@@ -16,6 +17,5 @@ const location = db.define('locations', {
         type: Sequelize.STRING
     }
 })
-
 
 module.exports = location;

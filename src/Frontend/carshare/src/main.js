@@ -11,9 +11,9 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import moment from 'moment';
-import { ToggleButton } from 'vue-js-toggle-button'
-import JwPagination  from 'jw-vue-pagination'
-import gsap from "gsap";
+import { ToggleButton } from 'vue-js-toggle-button';
+import JwPagination  from 'jw-vue-pagination';
+
 
 //add paginate
 Vue.component('jw-pagination', JwPagination);
@@ -26,6 +26,7 @@ Vue.prototype.$axios = axios;
 Vue.prototype.$auth = process.env.VUE_APP_AUTH;
 Vue.prototype.$carshare = process.env.VUE_APP_CARSHARE;
 Vue.prototype.$admin = process.env.VUE_APP_ADMIN;
+Vue.prototype.$google_api_key = process.env.VUE_APP_GOOGLE_API;
 Vue.config.productionTip = false;
 
 new Vue({
@@ -51,6 +52,8 @@ Vue.use(FlashMessage);
 Vue.use(VueReCaptcha, { siteKey: '6LcTY7sZAAAAAJeN_bq5d-F7S-I2Qq9yPTCMQmoA',loaderOptions:{
   autoHideBadge: true
 } })
+//Google places
+
 
 // Make a router check, required logged in when meta has requiresAuth
 router.beforeEach((to, from, next) => {
@@ -66,5 +69,22 @@ router.beforeEach((to, from, next) => {
     }
   } else {
     next() // make sure to always call next()!
+  }
+})
+
+
+//Global Mixin
+Vue.mixin({
+  methods:{
+    getCarData(res){
+      let allCars = [];
+      const locations = res.data.locations;
+      for(const location of locations){
+        for(const car of location.cars){
+            allCars.push(car);
+        }
+      }
+      return allCars;
+    }
   }
 })
