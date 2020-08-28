@@ -77,6 +77,17 @@ const routes = [{
   meta: {
     requiresAuth: true
   }
+},
+{
+  path: '/admin36737123719368365255336327043632505/addcar',
+  name: 'AddCar',
+  components: {
+    header: () => import('@/components/layouts/AdminHeader'),
+    main: () => import('../views/admin/AddCar.vue')
+  },
+  meta: {
+    requiresAuth: true
+  }
 }
 ]
 
