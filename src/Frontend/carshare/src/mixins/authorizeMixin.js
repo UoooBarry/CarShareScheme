@@ -4,12 +4,10 @@ export default  {
             header: this.getHeader()
         }
     },
-    created() {
-    },
     methods: {
         getHeader(){
             const header = {
-                authorization: `PBD ${localStorage.getItem("authToken")}`
+                authorization: `Bearer ${localStorage.getItem("authToken")}`
             };
             return header;
         },
@@ -18,18 +16,9 @@ export default  {
             this.$session.remove('username');
             this.flashMessage.info({
               title: 'Logout success',
-              message: `See you!`
+              message: 'See you!'
             });
             this.$router.push({name: 'Home'});
-        },
-        checkLoggedIn(){
-            if(localStorage.getItem('authToken') === null){
-                this.flashMessage.info({
-                    title: 'Login is requested',
-                    message: `See you!`
-                  });
-                this.$router.push({name: 'Home'});
-            }
         }
     }
 }

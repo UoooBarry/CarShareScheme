@@ -9,24 +9,35 @@ const routes = [{
   path: '/',
   name: 'Home',
   components: {
-    header: null,
-    main: () => import('@/components/layouts/BlueHeader')
+    header: Header,
+    main: () => import('@/views/Home')
   }
 },
 {
-  path: '/about',
-  name: 'About',
+  path: '/Home',
+  name: 'Cars',
   components: {
     header: Header,
-    main: () => import('../views/About.vue')
+    main: () => import('../views/Cars.vue')
+  }
+},
+{
+  path: '/car/:id',
+  name: 'CarDetail',
+  components:{
+    header: Header,
+    main: () => import('../views/CarsDetail.vue')
+  },
+  meta: {
+    requiresAuth: true
   }
 },
 {
   path: '/login',
   name: 'Login',
   components: {
-    header: Header,
-    main: () => import('../views/Login.vue')
+    header: null,
+    main: () => import('../components/layouts/BlueHeader')
   }
 },
 {
@@ -35,7 +46,18 @@ const routes = [{
   components: {
     header: Header,
     main: () => import('../views/Profile.vue')
+  },
+  meta: {
+    requiresAuth: true
   }
+},
+{
+  path: '/about',
+  name: 'About',
+  components: {
+    header: Header,
+    main: () => import('../views/About.vue')
+  },
 },
 {
   path: '/admin36737123719368365255336327043632505/',
@@ -51,6 +73,9 @@ const routes = [{
   components: {
     header: () => import('@/components/layouts/AdminHeader'),
     main: () => import('../views/admin/User.vue')
+  },
+  meta: {
+    requiresAuth: true
   }
 }
 ]
@@ -60,5 +85,4 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 })
-
 export default router

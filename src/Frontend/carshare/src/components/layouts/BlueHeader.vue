@@ -2,7 +2,7 @@
   <!-- Start: Header Blue -->
   <div>
     <!-- Start: Header -->
-    <div class="header-blue parallax">
+    <div class="header-blue parallax" >
       <nav class="navbar navbar-light navbar-expand-md navigation-clean-search">
         <div class="container-fluid">
           <a class="navbar-brand" href="#">PBD Car Share</a>
@@ -19,7 +19,7 @@
           <div class="col-sm-5 col-md-6">
             <h1>The new car share system is there</h1>
             <p>Get your&nbsp;favorite car anytime, any where, everything as you want</p>
-            <button class="btn btn-light btn-lg action-button" type="button" v-on:click="showLogin()">Get A Car Now</button>
+            <button class="btn btn-light btn-lg action-button" type="button" v-on:click="showLogin()">LOGIN NOW <font-awesome-icon icon="angle-right" /></button>
             
           </div>
           <!-- End: Text -->
@@ -52,7 +52,9 @@ export default {
     RegisterForm
   },
   methods: {
+    /*When clicked the login button*/
     showLogin() {
+      //Hide the picture and register, show login
       document.getElementById("picture").style.display = "none";
       document.getElementById("register").style.display = "none";
       document.getElementById("login").style.display = "inline-block";

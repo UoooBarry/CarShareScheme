@@ -1,25 +1,32 @@
 <template>
-  <header>
-    <nav class="navbar navbar-light navbar-expand-md navbar-transparency">
-        <div class="container">
-            <div><a class="navbar-brand" href="/about">PBD Car Share</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button></div>
-            <div class="collapse navbar-collapse"
-                id="navcol-1">
-                <ul class="nav navbar-nav ml-auto">
-                    <li class="nav-item" role="presentation"  v-bind:class="{'nav-item active': getActive('AdminUser')}" ><a class="nav-link" href="#">User list</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="#">Car list</a></li>
-                   
-                    <li class="nav-item" role="presentation" id="login" style="display: none"><a class="nav-link" href="/">Login</a></li>
-                </ul>
-            </div>
-        </div>
+  <header >
+    <nav  id = "mainHeader" class="navbar navbar-light navbar-expand-md navbar-transparency">
+        <Brand />
     </nav>
+    <nav class="subHeader">
+                <ul >
+
+                    <!-- <a class="navbar-brand-img" href="#" >  -->
+                        <img class="brand-img" src="../../assets/home.png" alt="Home logo">
+                        <!-- </a>  -->
+                    <div id="text-link">
+                    <a class="navbar-brand active" href="#" ><li> USER LIST </li></a>
+                    <a class="navbar-brand" href="#"><li > CAR LIST </li></a>
+                    </div>
+                    
+                </ul>
+        </nav>
 </header>
 </template>
 
 <script>
+import Brand from '@/components/layouts/Brand';
+
 export default {
   name: "AdminHeader",
+  components:{
+      Brand
+  },
   methods:{
        getActive(expected) {
             if (expected == this.$route.name) return true;
@@ -28,3 +35,55 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+
+#mainHeader{
+    background-color:#648CB5;
+    }
+.subHeader{
+    background-color:whitesmoke;
+    max-height:45px;
+    
+    }
+
+ul{
+    display:flex;  
+    list-style:none;
+}
+li{
+    padding: 3px 20px;
+    }
+img {
+  max-width: 30px;
+  height: 30px;
+  position:fix;
+}
+
+.navbar-brand{
+    font-family: 'Suisseintl webm', sans-serif;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    text-transform: none;
+    font-size:1em;
+    margin-right: -0px;
+    color:rgba(65, 119, 153, 0.726);
+    height:35px;
+}
+
+.active{
+  
+    background-color:#648CB5;
+  color: aliceblue;
+}
+
+ .navbar-brand:hover {
+    background-color:#648cb5e7;
+    color: aliceblue;
+ }
+
+ #text-link{
+     padding-left: 15px;
+ }
+  
+</style>

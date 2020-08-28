@@ -22,7 +22,6 @@ export default {
     }
   },
   async created() {
-    this.checkLoggedIn();
     const response = await this.$axios.get(`${this.$admin}/customers/`, {
       headers: this.header
     });

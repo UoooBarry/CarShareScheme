@@ -9,7 +9,9 @@ const Nexmo = require('nexmo');
 
  class serviceRepository {
     constructor(){
+        //Expire time set to 1 min
         this.expired = 60 * 1000;
+        //New nexmo object
         this.nexmo = new Nexmo({
             apiKey: process.env.NEXMO_KEY,
             apiSecret: process.env.NEXMO_SECRET,
@@ -18,7 +20,7 @@ const Nexmo = require('nexmo');
     }
 
     
-
+    //Get recaptcha response from google
     async getRecaptchaRes(user_response){
         const params = new URLSearchParams();
         params.append('secret', '6LcTY7sZAAAAAGZNzQgsa1Q9uZWpP8EThE5-tYaQ');
@@ -28,18 +30,23 @@ const Nexmo = require('nexmo');
         return response;
     }
 
+    /*Generate a 4 digits code */
     getOneCode(){
         //generate a number between 1000 - 9999: 4 digits
         return Math.floor(Math.random() * 8999) + 1000;
     }
 
+    /**Store the generated code to server cache memory, expired in 1 min, then send sms**/
     async putOneCode(phone){
+        //Generate a one code
         const code = await this.getOneCode();
-        await cache.put(phone, code, this.expired);
+        /**Store the code */
+        cache.put(phone, code, this.expired);
+
+        /**Send the sms to user */
         const from = 'Car share';
         const to = `61${phone}`;
         const text = `Your one time register code is ${code}`;
-
         this.nexmo.message.sendSms(from, to, text, (err,res) => {
             if(err)
                 console.log(err);
@@ -47,7 +54,9 @@ const Nexmo = require('nexmo');
 
     }
 
+    /**Verify if the code input is matched the phone */
     verifyOneCode(phone, code){
+        //Take the expected code by phone number
         const expected = cache.get(phone);
         if(code == expected){
             return true;

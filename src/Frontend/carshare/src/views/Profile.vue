@@ -3,8 +3,9 @@
  *           @AUTHOR: Bach Dao, Updated AT: 15/08/2020                *
  ***********************************************************************/
 <template>
-  <div class="profile" style>
+  <div class="profile">
     <br><br><br><br>
+    <Loading/>
     <AvatarHolder v-bind:customer="this.customer" />
 
     <InformationProfile v-bind:customer="this.customer"/>
@@ -23,6 +24,7 @@
 </style>
   
 <script>
+import Loading from '@/components/Loading';
 import AvatarHolder from "@/components/AvatarHolder";
 import InformationProfile from "@/components/InformationProfile";
 import authorizeMixin from '@/mixins/authorizeMixin';
@@ -31,7 +33,8 @@ export default {
   name: "Profile",
   components: {
     AvatarHolder,
-    InformationProfile
+    InformationProfile,
+    Loading
   },
   mixins: [authorizeMixin],
   data(){
@@ -40,18 +43,17 @@ export default {
     }
   },
  
-  async created(){  
+  async created(){ 
     const response = await this.$axios.get(`${this.$carshare}/customers/`,{headers: this.header});
     if(response.data.message === "success"){
       this.customer = response.data.customer;
     }else{
       this.flashMessage.error({
             title: 'Error',
-            message: 'Authentication error !'
+            message: 'Need to sign in first!'
           });
           this.$router.push({name: 'Home'});
     }
-    
   }
 };
 </script>

@@ -7,7 +7,7 @@
     "start": "node app",
     "start:dev": "nodemon",
     "integration-test:dev": "cross-env NODE_ENV=test TEST_DBHOST=localhost TEST_DBPORT=5433 TEST_DBNAME=CarShareTest TEST_DBUSER=postgres TEST_DBPASS=mbk83v mocha tests/integration --recursive --exit",
-    "unit-test:dev": "cross-env NODE_ENV=test mocha tests/unit --recursive --exit",
+    "unit-test:dev": "cross-env NODE_ENV=test TEST_DBHOST=localhost TEST_DBPORT=5433 TEST_DBNAME=CarShareTest TEST_DBUSER=postgres TEST_DBPASS=mbk83v mocha tests/unit --recursive --exit",
     "unit-test": "cross-env NODE_ENV=test TEST_DBHOST=localhost TEST_DBNAME=CarShareTest TEST_DBUSER=postgres TEST_DBPASS=password mocha tests/unit  --reporter mocha-junit-reporter --recursive --exit",
     "integration-test": "cross-env NODE_ENV=test TEST_DBHOST=localhost TEST_DBNAME=CarShareTest TEST_DBUSER=postgres TEST_DBPASS=password mocha tests/integration --recursive --exit"
   },

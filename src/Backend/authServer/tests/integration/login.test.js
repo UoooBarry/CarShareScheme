@@ -30,7 +30,7 @@ describe('POST /login', () => {
                 contact_number: "433838111",
                 code: "123"
             })
-
+        
     })
 
     it('Login with validate information', (done) => {
@@ -72,7 +72,6 @@ describe('POST /login', () => {
                 email: "dummy2@gmail.com",
                 password: "123456"
             })
-        console.log(res.body.message);
         expect(res.body.message).to.equal('fail');
     })
 
