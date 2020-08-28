@@ -34,8 +34,8 @@ app.use(cors());
 
 app.use('/api/cars', carsRouter);
 app.use('/api/customers', customerRouter);
-
 app.use('/api/locations', locationRouter);
+
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));

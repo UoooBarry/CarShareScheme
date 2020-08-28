@@ -24,11 +24,10 @@
 </template>
 
 <script>
-
 export default {
   name: "AdminHeader",
   components:{
-      Brand
+     
   },
   methods:{
        getActive(expected) {
@@ -39,7 +38,6 @@ export default {
 };
 </script>
 
-<<<<<<< HEAD
 <style scoped>
 
 #mainHeader{
@@ -58,37 +56,17 @@ ul{
 li{
     padding: 3px 20px;
     }
-=======
-
-<style scoped>
-#mainHeader{
-    background-color:#648CB5;
-    }
-
->>>>>>> 2d1305269a1c8c70bc188a7194a5095df02e7b63
 img {
   max-width: 30px;
   height: 30px;
   position:fix;
 }
 
-<<<<<<< HEAD
 .navbar-brand{
-=======
-
-.navbar, navbar-expand-md{
- padding-top:0px;
- border:none;
- padding-bottom:0px;
-}
-
-.navbar-main{
->>>>>>> 2d1305269a1c8c70bc188a7194a5095df02e7b63
     font-family: 'Suisseintl webm', sans-serif;
     font-weight: 500;
     letter-spacing: 0.3px;
     text-transform: none;
-<<<<<<< HEAD
     font-size:1em;
     margin-right: -0px;
     color:rgba(65, 119, 153, 0.726);
@@ -111,47 +89,3 @@ img {
  }
   
 </style>
-=======
-    font-size:25px;
-    color:aliceblue;
-    text-decoration: none;
-}
-
-
-
-
-.btn-outline-success {
-  color: black;
-  border-color: #a9a0a0;
-
-  color: cornflowerblue;
-}
-.btn-outline-dark {
-  border: none;
-}
-.btn {
-  border-radius: 0;
-}
-.btn-outline-dark:not(:disabled):not(.disabled).active,
-.btn-outline-dark:not(:disabled):not(.disabled):active,
-.show > .btn-outline-dark.dropdown-toggle {
-  background-color:#648CB5;
-  color: aliceblue;
-}
-
-.btn-outline-dark:hover {
- background-color:#648cb5de;
-  color: aliceblue;
-  
- 
-}
-
-/* this is the code showing for the border--according to inspect, but how to change it? */
-/* the code below does not change anything */
-.btn-outline-dark focus active{
-    /* border:none !important; */
-    
-  border-color: whitesmoke;
-}
-</style>
->>>>>>> 2d1305269a1c8c70bc188a7194a5095df02e7b63
