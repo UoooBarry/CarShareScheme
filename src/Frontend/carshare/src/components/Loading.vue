@@ -1,3 +1,5 @@
+<!-- @Author Yongqian Huang, created at 20/08/2020
+ -->
 <template>
     <div id='loading-car'>
         <div class="loader">

@@ -1,3 +1,7 @@
+/*************************************************
+ * @AUTHOR YONGQIAN HUANG, CREATED AT 27/08/2020 *
+ *************************************************/
+
 require('dotenv').config();
 const axios = require('axios');
 
