@@ -13,7 +13,7 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import moment from 'moment';
 import { ToggleButton } from 'vue-js-toggle-button'
 import JwPagination  from 'jw-vue-pagination'
-
+import gsap from "gsap";
 
 //add paginate
 Vue.component('jw-pagination', JwPagination);
@@ -41,7 +41,7 @@ Vue.filter('formatDate', function(value) {
     return moment(String(value)).format('MM/DD/YYYY hh:mm')
   }
 });
-
+Vue.use(gsap);
 
 // Session storage
 Vue.use(VueSession);
