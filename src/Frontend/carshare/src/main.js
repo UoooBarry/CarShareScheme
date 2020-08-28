@@ -14,7 +14,6 @@ import moment from 'moment';
 import { ToggleButton } from 'vue-js-toggle-button';
 import JwPagination  from 'jw-vue-pagination';
 
-
 //add paginate
 Vue.component('jw-pagination', JwPagination);
 //font awesome icons
@@ -42,7 +41,7 @@ Vue.filter('formatDate', function(value) {
     return moment(String(value)).format('MM/DD/YYYY hh:mm')
   }
 });
-Vue.use(gsap);
+
 
 // Session storage
 Vue.use(VueSession);
@@ -60,7 +59,7 @@ router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
     // this route requires auth, check if logged in
     // if not, redirect to login page.
-    if (localStorage.getItem('authToken') === null) {
+    if (sessionStorage.getItem('authToken') === null) {
       next({
         path: '/'
       })
@@ -87,4 +86,3 @@ Vue.mixin({
       return allCars;
     }
   }
-})

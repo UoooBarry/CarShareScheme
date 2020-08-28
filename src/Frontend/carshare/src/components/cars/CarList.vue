@@ -1,11 +1,11 @@
 <template>
-  <div class="carlist container">
+  <div class="carlist container" >
     <div class="row">
       <div v-for="(car) in pageOfItems" v-bind:key="car.id" class="col-sm-3 car">
         <CarCard v-bind:car="car" />
       </div>
     </div>
-    <div class="page-footer">
+    <div class="page-footer"  :if="cars">
             <jw-pagination :items="cars" :pageSize=8 @changePage="onChangePage" :labels="customLabels"></jw-pagination>
       </div>
   </div>
@@ -25,9 +25,6 @@ export default {
     CarCard
   },
   props: ["cars"],
-  destory(){
-    console.log('des');
-  },
   data() {
     return {
       pageOfItems: [],

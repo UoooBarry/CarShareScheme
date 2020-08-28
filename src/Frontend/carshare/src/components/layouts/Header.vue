@@ -33,11 +33,6 @@ export default {
   components:{
       Brand
   },
-  data() {
-      return{
-          id: localStorage.getItem('authToken')
-      }
-  },
   mounted() {
       //Show login if not logged in
      if(!(this.id)){
