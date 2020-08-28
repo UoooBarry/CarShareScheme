@@ -81,16 +81,15 @@ router.post('/create', [carValidator, authorize.verifyToken], (req,res) => {
                 name: req.body.name,
                 brand: req.body.brand,
                 model: req.body.model,
-                purchase_date: req.body.purchase_date,
                 location_id: req.body.location_id,
-                seats: req.body.seats,
+                purchase_date: req.body.purchase_date,
                 price: req.body.price,
+                seats: req.body.seats,
+                luggages: req.body.luggages,
                 doors: req.body.doors,
                 gear: req.body.gear,
-                air_condition: req.body.air_condition,
-                luggages: req.body.luggages,
-                description: req.body.description,
-                addons: req.body.addons
+                addons: req.body.addons,
+                description: req.body.description
             }
         
             _Car.create(car)

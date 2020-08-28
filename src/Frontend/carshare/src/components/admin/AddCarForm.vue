@@ -125,22 +125,26 @@ export default {
   },
   methods: {
     async addNewCar() {
-      console.log("submit");
+      console.log(this.header);
       this.$axios
-        .post(`${this.$carshare}/cars/create`, {
-          name: this.name,
-          brand: this.brand,
-          model: this.model,
-          location_id: this.location_id,
-          purchase_date: this.purchase_date,
-          price: this.price,
-          seats: this.seats,
-          luggages: this.seats,
-          doors: this.doors,
-          gear: this.gear,
-          addons: this.addons,
-          description: this.description
-        })
+        .post(
+          `${this.$carshare}/cars/create`,
+          {
+            name: this.name,
+            brand: this.brand,
+            model: this.model,
+            location_id: this.location_id,
+            purchase_date: this.purchase_date,
+            price: this.price,
+            seats: this.seats,
+            luggages: this.seats,
+            doors: this.doors,
+            gear: this.gear,
+            addons: this.addons,
+            description: this.description
+          },
+          { headers: this.header }
+        )
         .then(res => {
           if (res.data.message == "fail") {
             res.data.errors.forEach(error => {
