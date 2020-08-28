@@ -1,24 +1,24 @@
 <template>
   <div class="container">
     <div class="row">
-      <div class="col">
-        <div class="product-image">
-          <img src="../../public/img/elephant.jpg" alt="">
-        </div>
+      <div class="col car-description">
+        <CarDescription :car="car" />
       </div>
       <div class="col">
-        <ProductContent :car="car" />
+        <CarContent :car="car" />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import ProductContent from '@/components/cars/ProductContent';
+import CarContent from '@/components/cars/CarContent';
+import CarDescription from '@/components/cars/CarDescription';
 export default {
   name: "CarDetail",
   components: {
-    ProductContent
+    CarContent,
+    CarDescription
   },
   data(){
     return{
@@ -43,16 +43,14 @@ export default {
 
 
 <style scoped>
+.container{
+  min-width: 1500px;
+}
 .row{
   min-height: 800px;
 }
-.product-image{
-  @media (min-width: 1024px)
-  .single-product__content__image {
-      width: 60%;
-      float: left;
-      padding-top: 60%;
-      padding-right: 40px;
-  }
+.car-description{
+  margin-right: 200px;
 }
+
 </style>  

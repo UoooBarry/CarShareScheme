@@ -37,6 +37,14 @@ const car = db.define('cars', {
         type: Sequelize.INTEGER,
         defaultValue: 3
     },
+    doors:{
+        type: Sequelize.INTEGER,
+        defaultValue: 3
+    },
+    gear:{
+        type: Sequelize.STRING,
+        defaultValue: "automatic"
+    },
     description:{
         type: Sequelize.STRING
     },
