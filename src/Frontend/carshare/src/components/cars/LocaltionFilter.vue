@@ -5,7 +5,7 @@
                 <div class="input-group-prepend">
                   <div class="input-group-text">@</div>
                 </div>
-                  <input ref="autocomplete" class='form-control mr-sm-2' type="text" id='address' :value="address" >
+                  <input ref="autocomplete" class='form-control mr-sm-2 address-bar' type="text" id='address' :value="address" >
                   <button type="submit" class="btn btn-outline-success my-2 my-sm-0" @click="updateAdress">Change address</button>
               </div>
     </div>
@@ -30,3 +30,41 @@ export default {
     }
 }
 </script>
+
+
+<style scoped>
+.btn-outline-success {
+  color: black;
+  border-color: #a9a0a0;
+}
+.btn-outline-success:hover {
+  color: #fff;
+  background-color: #a9a0a0;
+  border-color: #a9a0a0;
+}
+.nav-item {
+  margin-left: 20px;
+}
+.btn-outline-dark {
+  border: none;
+  margin: 10px;
+}
+.btn {
+  border-radius: 0;
+}
+.btn-outline-dark:not(:disabled):not(.disabled).active,
+.btn-outline-dark:not(:disabled):not(.disabled):active,
+.show > .btn-outline-dark.dropdown-toggle {
+  color: #fff;
+  background-color: #a9a0a0;
+  border-color: #a9a0a0;
+}
+.btn-outline-dark:hover {
+  color: #fff;
+  background-color: #a9a0a0;
+  border-color: #a9a0a0;
+}
+.address-bar{
+  width: 400px;
+}
+</style>
