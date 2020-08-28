@@ -5,7 +5,7 @@
 
 const Car = require('../models/car');
 const Sequelize = require('sequelize');
-const { sequelize } = require('../models/car');
+const Location = require('../models/location');
 const Op = Sequelize.Op;
 
 class carRepository{
@@ -13,15 +13,23 @@ class carRepository{
         try{
             var cars;
             /**If sortItem and sort is set, return a sorted result */
-            if(sort && order){
-                cars = await Car.findAll({
-                    order: [
-                        [sort, order], //sort by query item, query order
-                    ]
-                });
-            }else{
-                cars = await Car.findAll({});
+            if(!sort || !order){
+               sort = 'name';
+               order = 'asc'
             }
+            cars = await Car.findAll({
+                where:{
+                    available: true
+                },
+                order: [
+                    [sort, order], //sort by query item, query order
+                ],
+                include: [{
+                    model: Location
+                }]
+            });
+
+            
             return Promise.resolve(cars);
         }catch(err){
             return Promise.reject(err);
@@ -36,7 +44,8 @@ class carRepository{
                     [Op.or]:{
                         brand: {[Op.like]: '%' + value + '%'},
                         model: {[Op.like]: '%' + value + '%'}
-                    }
+                    },
+                    available: true
                 }
             })
             return Promise.resolve(cars);
@@ -80,6 +89,7 @@ class carRepository{
             return Promise.reject(err);
         }
     }
+
 }
 
 

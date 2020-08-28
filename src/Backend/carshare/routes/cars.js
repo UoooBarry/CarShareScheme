@@ -8,17 +8,19 @@
  *******************************************************/
 
 
-
 const express = require('express');
 const router = express.Router();
 const _Car = require('../repository/carRepository');
+const _Location = require('../repository/locationRepository');
 const authorize = require('../helpers/authorizationHelper');
 
 //GET: /api/cars
 router.get('/', (req, res) => {
-    _Car.getAll(req.query.sort, req.query.order)
-        .then(cars => {
-            res.json({cars})
+    _Location.getAllValidateCars(req.query.from, req.query.sort, req.query.order)
+        .then(async(locations) => {
+            // const distance = await calculateDistance(req.params.address, cars.locations.address);
+            // console.log(distance);
+            res.json({locations})
         })
         .catch(
             (err) => {
@@ -96,6 +98,22 @@ router.post('/create', authorize.verifyToken, (req,res) => {
                 err
             })
         });
-})
+});
+
+
+router.post('/test/', async (req,res) => {
+    _Location.getAllValidateCars(req.body.from)
+                .then((results) => {
+                    res.json({results})
+                })
+                .catch(err => {
+                    res.json(err);
+                })
+    
+    
+});
+
+
+
 
 module.exports = router;

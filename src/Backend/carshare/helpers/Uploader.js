@@ -1,3 +1,7 @@
+/********************************
+ * @AUTHOR YONGQIAN, 20/08/2020 *
+ ********************************/
+
 require('dotenv').config()
 
 const AWS = require('aws-sdk');

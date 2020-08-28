@@ -27,7 +27,7 @@ export default {
        //Set time out, component disapper after timeout
        setTimeout(() => {
            loading.style.display = "none";
-       }, 800);
+       }, 1000);
     }
 }
 </script>
