@@ -9,11 +9,12 @@
                     <th scope="col">Name</th>
                     <th scope="col">Brand</th>
                     <th scope="col">Model</th>
-                    <th scope="col">Purchase_date</th>
+                    <th scope="col">Addons</th>
                     <th scope="col">Seats</th>
                     <th scope="col">Luggages</th>
                     <th scope="col">Doors</th>
                     <th scope="col">Price</th>
+                    <th scope="col">Avalible</th>
                     <th scope="col">Created at</th>
                     <th scope="col">Updated at</th>
                     <th scope="col">Viewed</th>

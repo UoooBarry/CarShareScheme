@@ -1,28 +1,31 @@
 <template>
     <tr>
         <td>
-            <input type="text" class='form-control' :value="car.name">
+            <input type="text" class='form-control' :value="car.name" :id="'name.' + car.id">
         </td>
         <td>
-            <input type="text" class='form-control' :value="car.brand">
+            <input type="text" class='form-control' :value="car.brand" :id="'brand.' + car.id">
         </td>
         <td>
-            <input type="text" class='form-control' :value="car.model">
+            <input type="text" class='form-control' :value="car.model" :id="'model.' + car.id">
         </td>
         <td>
-            <input type="date" class='form-control' :value="car.purchase_date">
+            <input type="text" class='form-control' :value="car.addons" :id="'addons.' + car.id">
         </td>
         <td>
-            <input type="number" class='form-control' :value="car.seats">
+            <input type="number" class='form-control' :value="car.seats" :id="'seats.' + car.id">
         </td>
         <td>
-            <input type="number" class='form-control' :value="car.luggages">  
+            <input type="number" class='form-control' :value="car.luggages" :id="'luggages.' + car.id">  
         </td>
         <td>
-            <input type="number" class='form-control' :value="car.doors">
+            <input type="number" class='form-control' :value="car.doors" :id="'doors.' + car.id">
         </td>
         <td>
-            <input type="number" class='form-control' :value="car.price">
+            <input type="number" class='form-control' :value="car.price" :id="'price.' + car.id">
+        </td>
+        <td>
+            <input type="checkbox" class='form-control' :checked="car.available" :id="'available.' + car.id">
         </td>
         <td>
             <div class='form-control'>{{ car.createdAt | formatDate }}</div>
@@ -34,14 +37,56 @@
             <div class='form-control'>{{ car.viewed }}</div>
         </td>
         <td>
-            <a href='#'>Patch</a>
+            <a href='#' @click='patch'>Patch</a>
         </td>
     </tr>
 </template>
 
 <script>
+import authorizeMixin from "@/mixins/authorizeMixin";
 export default {
-    props: ['car']
+    props: ['car'],
+    mixins: [authorizeMixin],
+    methods:{
+        patch(){
+           const submitData = {
+               name: this.getInputValue('name'),
+               brand: this.getInputValue('brand'),
+               model: this.getInputValue('model'),
+               addons: this.getInputValue('addons'),
+               seats: this.getInputValue('seats'),
+               luggages: this.getInputValue('luggages'),
+               doors: this.getInputValue('doors'),
+               price: this.getInputValue('price'),
+               available: this.getInputChecked('available'),
+           }
+
+           this.$axios.patch(`${this.$carshare}/cars/${this.car.id}`, submitData, { headers: this.header })
+                    .then(res => {
+                            if (res.data.message == "fail") {
+                                    res.data.errors.forEach(error => {
+                                    this.flashMessage.error({
+                                        title: "Update detail",
+                                        message: error
+                                    });
+                                    });
+                                    return;
+                            }
+
+                            this.flashMessage.success({
+                                title: "Update success!",
+                                message: "Update successfully!"
+                            });
+                    })
+                    .catch(err => console.log(err));
+        },
+        getInputValue(field){
+            return document.getElementById(`${field}.${this.car.id}`).value
+        },
+        getInputChecked(field){
+            return document.getElementById(`${field}.${this.car.id}`).checked
+        }
+    }
 }
 </script>
 

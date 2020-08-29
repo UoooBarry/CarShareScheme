@@ -10,7 +10,11 @@ const Op = Sequelize.Op;
 class carRepository{
     async getAll(sort, order){
         try{
-            const cars = await Car.findAll({});
+            const cars = await Car.findAll({
+                order: [
+                    ['name', 'ASC']
+                ]
+            });
             return Promise.resolve(cars);
         }catch(err){
             return Promise.reject(err);
@@ -72,9 +76,10 @@ class carRepository{
     }
 
     async update(id, data){
-        const car = await Car.findOne({where:{id: id}});
         try{
+            let car = await Car.findOne({where: {id: id}});
             await car.update(data);
+            return Promise.resolve(true);
         }catch(err){
             return Promise.reject(err);
         }

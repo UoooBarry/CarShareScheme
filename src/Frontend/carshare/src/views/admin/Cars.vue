@@ -25,7 +25,6 @@ export default {
         this.$axios.get(`${this.$carshare}/cars?all=true`)
                     .then((res) => {
                         this.cars = res.data.cars;
-                        console.log(this.cars);
                     })
     }
 }
