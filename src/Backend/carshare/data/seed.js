@@ -2,7 +2,8 @@
     Author: Yongqian Huang, created at: 23/07/2020
     updated:  Yongqian Huang, 24/07/2020, Script for seeding items to database
     updated:  Shuyuan Zhang,26/08/2020,updated seed dummy value
- 
+    updated:  Shuyuan Zhang,28/08/2020,updated the format and seed dummy value
+    updated:  Shuyuan Zhang,29/08/2020,updated seed dummy value
 */
  
 const Location = require("../models/location");
@@ -115,7 +116,7 @@ module.exports = {
           purchase_date: new Date(2019, 10, 30),
           addons: "GPS, Air Conditioning, MP4",
           available: true,
-          description: "the Hyundai Accent is a good subcompact car. ... The Accent delivers a palatable ride if the pavement isn't rough, and it gets good fuel economy with the available automatic transmission. On the downside, the Accent doesn't handle as well as some rivals, and its engine delivers underwhelming acceleration.",
+          description: "the Hyundai Accent is a good subcompact car. The Accent delivers a palatable ride if the pavement isn't rough, and it gets good fuel economy with the available automatic transmission. On the downside, the Accent doesn't handle as well as some rivals, and its engine delivers underwhelming acceleration.",
           price: 27.8,
         });
         await Car.create({
@@ -205,10 +206,163 @@ module.exports = {
           purchase_date: new Date(2018, 09, 01),
           addons: "GPS, Air Conditioning, MP4",
           available: true,
-          description: "The  Nissan X-Trail is a comfortable car and a credible option for buyers wanting a spacious and practical family SUV. ... The Nissan X-Trail is a great SUV that offers plenty of space for all the family, a wide range of engine and gearbox choices and a relaxed, easy-driving experience.",
+          description: "The  Nissan X-Trail is a comfortable car and a credible option for buyers wanting a spacious and practical family SUV. The Nissan X-Trail is a great SUV that offers plenty of space for all the family, a wide range of engine and gearbox choices and a relaxed, easy-driving experience.",
           price: 30.6,
         }); 
-              
+        await Car.create({
+          name: "KIA Rio",
+          brand: "KIA",
+          model: "Rio",
+          seats: 5,
+          doors: 4,
+          luggages: 2,
+          gear: "automatic",
+          location_id: location[Math.floor(Math.random() * 3)].id,
+          purchase_date: new Date(2020, 02, 01),
+          addons: "GPS, Air Conditioning, MP4",
+          available: true,
+          description: "The Kia Rio is a good subcompact car. For 2020, it gains a new standard infotainment system equipped with Android Auto and Apple CarPlay. The Rio boasts good fuel economy and nimble handling, but some shoppers may find the ride too firm.",
+          price: 39.6,
+        });
+        await Car.create({
+          name: "BMW X1 XDRIVE 25I",
+          brand: "BMW",
+          model: "X1 XDRIVE 25I",
+          seats: 5,
+          doors: 4,
+          luggages: 3,
+          gear: "automatic",
+          location_id: location[Math.floor(Math.random() * 3)].id,
+          purchase_date: new Date(2020, 02, 01),
+          addons: "GPS, Air Conditioning, MP4",
+          available: true,
+          description: "The BMW X1 is a lovely car to drive, and easily fits a small family of four - more so than other small SUVs I've driven. There's a good amount of interior space and boot space, it looks solid and feels good to drive.",
+          price: 120.6,
+        });
+        await Car.create({
+          name: "SUBARU FORESTER",
+          brand: "SUBARU",
+          model: "FORESTER",
+          seats: 5,
+          doors: 4,
+          luggages: 2,
+          gear: "automatic",
+          location_id: location[Math.floor(Math.random() * 3)].id,
+          purchase_date: new Date(2020, 01, 09),
+          addons: "GPS, Air Conditioning, MP4",
+          available: true,
+          description: "The Forester is a well-rounded compact SUV. Its cabin is spacious enough to easily carry a family of four or five, and there's lots of room for cargo. With its great combination of quality and value, we named the Forester a finalist for our 2020 Best Compact SUV for the Money award.",
+          price: 36.6,
+        });
+        await Car.create({
+          name: "ISUZU MUX",
+          brand: "ISUZU",
+          model: "MUX",
+          seats: 5,
+          doors: 5,
+          luggages: 4,
+          gear: "automatic",
+          location_id: location[Math.floor(Math.random() * 3)].id,
+          purchase_date: new Date(2020, 02, 13),
+          addons: "GPS, Air Conditioning, MP4",
+          available: true,
+          description: "The motor a bit noisy around town but not noticeable on long trips, the ride is quite firm. Handles well, with good pickup and ample power on the open road. Good aircon venting throughout the car. Mechanically very reliable no issues.",
+          price: 38.9,
+        });
+        await Car.create({
+          name: "KIA SPORTAGE SI 2WD",
+          brand: "KIA",
+          model: "SPORTAGE",
+          seats: 5,
+          doors: 4,
+          luggages: 3,
+          gear: "automatic",
+          location_id: location[Math.floor(Math.random() * 3)].id,
+          purchase_date: new Date(2020, 03, 14),
+          addons: "GPS, Air Conditioning, MP4",
+          available: true,
+          description: "J.D. Power gives the Sportage a ranking of 87/100 for quality and reliability, which exceeds the expectations of most. Resale value is also well above average, coming in at a ranking of 79/100, making the Sportage an excellent choice for those looking for a vehicle that they can depend on for years to come.",
+          price: 43.9,
+        });
+        await Car.create({
+          name: "KIA SPORTAGE SI 2WD",
+          brand: "KIA",
+          model: "SPORTAGE",
+          seats: 5,
+          doors: 4,
+          luggages: 3,
+          gear: "automatic",
+          location_id: location[Math.floor(Math.random() * 3)].id,
+          purchase_date: new Date(2020, 03, 14),
+          addons: "GPS, Air Conditioning, MP4",
+          available: true,
+          description: "J.D. Power gives the Sportage a ranking of 87/100 for quality and reliability, which exceeds the expectations of most. Resale value is also well above average, coming in at a ranking of 79/100, making the Sportage an excellent choice for those looking for a vehicle that they can depend on for years to come.",
+          price: 43.9,
+        });
+        await Car.create({
+          name: "FORD MUSTANG GT",
+          brand: "FORD",
+          model: "MUSTANG GT",
+          seats: 4,
+          doors: 2,
+          luggages: 1,
+          gear: "automatic",
+          location_id: location[Math.floor(Math.random() * 3)].id,
+          purchase_date: new Date(2020, 03, 19),
+          addons: "GPS, Air Conditioning, MP4，Convertible",
+          available: true,
+          description: "The Ford Mustang is a good sports car. The Mustang's stable of engines starts with a turbocharged four-cylinder that puts out 310 horsepower and includes 460- and 480-horsepower V8 variants. Two Shelby high-performance models up the power ante.",
+          price: 400,
+        });
+        await Car.create({
+          name: "AUDI R8",
+          brand: "DUDI",
+          model: "R8",
+          seats: 4,
+          doors: 2,
+          luggages: 1,
+          gear: "automatic",
+          location_id: location[Math.floor(Math.random() * 3)].id,
+          purchase_date: new Date(2020, 07, 18),
+          addons: "GPS, Air Conditioning, MP4,Sky Window",
+          available: true,
+          description: "The Audi R8 is a mid-engined supercar that competes with similarly exclusive models like the Porsche 911 Turbo and the Mercedes-AMG GT. However, if you're in the market for a supercar, the R8 is undoubtedly an appealing package thanks to its striking looks, excellent build quality and impressive performance.",
+          price: 800,
+        });
+        await Car.create({
+          name: "RANGE ROVER SPORT",
+          brand: "RANGE ROVER",
+          model: "SPORT",
+          seats: 7,
+          doors: 4,
+          luggages: 3,
+          gear: "automatic",
+          location_id: location[Math.floor(Math.random() * 3)].id,
+          purchase_date: new Date(2020, 05, 19),
+          addons: "GPS, Air Conditioning, MP4,Sky Window",
+          available: true,
+          description: "You can have it with seven seats, for starters, even though it's slightly smaller overall. This makes it a solid rival for the Audi Q7, BMW X5 and Mercedes GLE. Despite its name, it doesn't exactly shrink around you like a sports car, but the Range Rover Sport is enjoyable to drive nevertheless.",
+          price: 650,
+        });
+        await Car.create({
+          name: "HOLDEN COMMODORE RS",
+          brand: "HOLDEN",
+          model: "COMMODORE RS",
+          seats: 5,
+          doors: 4,
+          luggages: 2,
+          gear: "automatic",
+          location_id: location[Math.floor(Math.random() * 3)].id,
+          purchase_date: new Date(2020, 05, 19),
+          addons: "GPS, Air Conditioning, MP4",
+          available: true,
+          description: "The Commodore RS has a fuel consumption of 7.6 litres for every 100km. The liftback is a very swish shape, somewhere between a hatchback and a sedan. The steering was slightly stiff but nothing major, and the handling was good. It certainly looks better than an SUV.",
+          price: 34.9,
+        });
+
+
+
+               
     }
   },
  
