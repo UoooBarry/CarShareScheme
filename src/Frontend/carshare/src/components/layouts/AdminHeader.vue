@@ -8,11 +8,11 @@
             <div class="btn-group btn-group-toggle subHeader_div" data-toggle="buttons">
                     <a><img class="imglink" src="../../assets/home-1.png" alt="Home logo"></a>
                 <label class="btn btn-outline-dark otherLinks">
-                    <input type="radio" name="sort" checked value="default" /> USER LIST
+                    <input type="radio" name="users" checked value="default" /> USER LIST
                 </label>
 
                 <label class="btn btn-outline-dark otherLinks" >
-                    <input type="radio" name="sort" autocomplete="off"  /> CAR LIST
+                    <input type="radio" name="cars" autocomplete="off"  /> CAR LIST
                 </label>
             </div>
         </nav>

@@ -24,18 +24,26 @@ const carImageUpload = multer({
 
 //GET: /api/cars
 router.get('/', (req, res) => {
-    _Location.getAllValidateCars(req.query.from, req.query.sort, req.query.order)
+    /*If qeury all = true, get all cars */
+    if(req.query.all){
+        _Car.getAll()
+            .then((cars) => {
+                res.json({cars});
+            })
+            .catch(() => {
+                res.sendStatus(404);
+            })
+    }else{
+        _Location.getAllValidateCars(req.query.from, req.query.sort, req.query.order)
         .then(async(locations) => {
-            // const distance = await calculateDistance(req.params.address, cars.locations.address);
-            // console.log(distance);
             res.json({locations})
         })
         .catch(
             (err) => {
-                console.log(err);
                 res.sendStatus(403);
             }
         )
+    }
 });
 
 //GET: /api/cars/:brand

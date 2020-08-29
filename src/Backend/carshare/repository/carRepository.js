@@ -5,31 +5,12 @@
 
 const Car = require('../models/car');
 const Sequelize = require('sequelize');
-const Location = require('../models/location');
 const Op = Sequelize.Op;
 
 class carRepository{
     async getAll(sort, order){
         try{
-            var cars;
-            /**If sortItem and sort is set, return a sorted result */
-            if(!sort || !order){
-               sort = 'name';
-               order = 'asc'
-            }
-            cars = await Car.findAll({
-                where:{
-                    available: true
-                },
-                order: [
-                    [sort, order], //sort by query item, query order
-                ],
-                include: [{
-                    model: Location
-                }]
-            });
-
-            
+            const cars = await Car.findAll({});
             return Promise.resolve(cars);
         }catch(err){
             return Promise.reject(err);
