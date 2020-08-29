@@ -1,27 +1,29 @@
 <!-- @Author Yongqian Huang 29/08/2020!-->
 <template>
     <div>
-      <div class="container">
-        <div class='car-list-title'>USER LIST</div>
+        <div class='car-list-title'>CAR LIST</div>
         <hr class='user'>
-        <div class="item">Name</div>
-        <div class="item">Brand</div>
-        <div class="item">Model</div>
-        <div class="item">Purchase_date</div>
-        <div class="item">Seats</div>
-        <div class="item">Luggages</div>
-        <div class="item">Doors</div>
-        <div class="item">Price</div>
-        <div class="item">Features</div>
-        <div class="item">Created at</div>
-        <div class="item">Updated at</div>
-        <div class="item">Viewed</div>
-        <hr class='user'>
-      </div>
-      
-      <div v-for="car in cars" v-bind:key="car.car.id" class="container">
-        <CarRow v-bind:car="car" />
-      </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Brand</th>
+                    <th scope="col">Model</th>
+                    <th scope="col">Purchase_date</th>
+                    <th scope="col">Seats</th>
+                    <th scope="col">Luggages</th>
+                    <th scope="col">Doors</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Created at</th>
+                    <th scope="col">Updated at</th>
+                    <th scope="col">Viewed</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody v-for="car in cars" v-bind:key="car.id">
+                <CarRow v-bind:car="car" />
+            </tbody>
+        </table>
     </div>
 </template>
 

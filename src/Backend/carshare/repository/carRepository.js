@@ -71,6 +71,15 @@ class carRepository{
         }
     }
 
+    async update(id, data){
+        const car = await Car.findOne({where:{id: id}});
+        try{
+            await car.update(data);
+        }catch(err){
+            return Promise.reject(err);
+        }
+    }
+
 }
 
 

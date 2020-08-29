@@ -1,18 +1,42 @@
 <template>
-    <div>
-        <input type="text" class='item' :value="car.car.name">
-        <input type="text" class='item' :value="car.car.brand">
-        <input type="text" class='item' :value="car.car.model">
-        <input type="text" class='date' :value="car.car.purchase_date">
-        <input type="text" class='number' :value="car.car.seats">
-        <input type="text" class='number' :value="car.car.luggages">  
-        <input type="text" class='number' :value="car.car.doors">
-        <input type="text" class='number' :value="car.car.price">
-        <input type="text" class='number' :value="car.car.addons">
-        <div class='item'>{{ car.car.createdAt | formatDate }}</div>
-        <div class='item'>{{ car.car.updatedAt | formatDate }}</div>
-        <div class='item'>{{ car.car.viewed }}</div>
-    </div>
+    <tr>
+        <td>
+            <input type="text" class='form-control' :value="car.name">
+        </td>
+        <td>
+            <input type="text" class='form-control' :value="car.brand">
+        </td>
+        <td>
+            <input type="text" class='form-control' :value="car.model">
+        </td>
+        <td>
+            <input type="date" class='form-control' :value="car.purchase_date">
+        </td>
+        <td>
+            <input type="number" class='form-control' :value="car.seats">
+        </td>
+        <td>
+            <input type="number" class='form-control' :value="car.luggages">  
+        </td>
+        <td>
+            <input type="number" class='form-control' :value="car.doors">
+        </td>
+        <td>
+            <input type="number" class='form-control' :value="car.price">
+        </td>
+        <td>
+            <div class='form-control'>{{ car.createdAt | formatDate }}</div>
+        </td>
+        <td>
+            <div class='form-control'>{{ car.updatedAt | formatDate }}</div>
+        </td>
+        <td>
+            <div class='form-control'>{{ car.viewed }}</div>
+        </td>
+        <td>
+            <a href='#'>Patch</a>
+        </td>
+    </tr>
 </template>
 
 <script>

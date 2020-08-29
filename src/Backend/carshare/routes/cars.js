@@ -128,6 +128,44 @@ router.post('/create', [carValidator, authorize.verifyToken], (req,res) => {
    
 });
 
+//PATCH: /api/cars/:id
+router.patch('/:id/', [carValidator, authorize.verifyToken], (req,res) =>{
+    if(!req.user.admin) res.sendStatus(403);
+
+    validateResult(req)
+        .then(()=> {
+            const car = {
+                name: req.body.name,
+                brand: req.body.brand,
+                model: req.body.model,
+                purchase_date: req.body.purchase_date,
+                price: req.body.price,
+                seats: req.body.seats,
+                luggages: req.body.luggages,
+                doors: req.body.doors,
+            }
+        
+            _Car.update(req.param.id, car)
+                .then(() => {
+                    res.json({
+                        message: 'success'
+                    })
+                })
+                .catch((err) => {
+                    res.json({
+                        message: 'fail',
+                        err
+                    })
+                });
+        })
+        .catch(errors => {
+            res.json({
+                message: "fail",
+                errors
+            })
+        })
+})
+
 
 //POST: /api/cars/:id/image
 router.post('/:id/image', [authorize.verifyToken,carImageUpload.single('image')], (req,res) =>{
