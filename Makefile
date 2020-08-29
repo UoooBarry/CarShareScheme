@@ -1,3 +1,3 @@
 up:
-	cd cmds && start authServer.cmd
-	cd cmds && start carServer.cmd
+	cd src/Backend/authServer/ && npm run start:dev
+	cd src/Backend/carshare/ && npm run start:dev
