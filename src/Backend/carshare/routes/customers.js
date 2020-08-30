@@ -29,7 +29,7 @@ router.patch('/avatar', [authorize.verifyToken, avatarUpload.single('image')], (
         //Get the file type
         const fileName = req.file.originalname;
         const fileType = fileName.split('.')[1];
-        if(req.file.size > 20000 && (fileType != 'png' || fileType != 'jpg')){
+        if(req.file.size > 200000 && (fileType != 'png' || fileType != 'jpg')){
             res.json({message: "fail"});
             return;
         }

@@ -54,7 +54,7 @@ export default {
       formData.append("image", this.file);
       console.log(this.file);
       this.$axios
-        .post(`${this.$carshare}/cars/${this.id}/image`, formData, {
+        .patch(`${this.$carshare}/cars/image/${this.id}`, formData, {
           headers: this.header
         })
         .then(res => {

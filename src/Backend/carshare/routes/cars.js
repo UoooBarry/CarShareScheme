@@ -159,13 +159,16 @@ router.patch('/:id/', [authorize.verifyToken], (req,res) =>{
 })
 
 
-//POST: /api/cars/:id/image
-router.post('/:id/image', [authorize.verifyToken,carImageUpload.single('image')], (req,res) =>{
+//PATCH: /api/cars/image/:id
+router.patch('/image/:id', [authorize.verifyToken,carImageUpload.single('image')], (req,res) =>{
+    console.log(req.user.admin)
     if(!req.user.admin) res.sendStatus(403);
     //Get the file type
     const fileName = req.file.originalname;
+    console.log("file name is:"+fileName);
     const fileType = fileName.split('.')[1];
-    if(req.file.size > 20000 && (fileType != 'png' || fileType != 'jpg')){
+    console.log("file name is:"+fileType);
+    if(req.file.size > 250000 && (fileType != 'png' || fileType != 'jpg')){
         res.json({message: "fail"});
         return;
     }
