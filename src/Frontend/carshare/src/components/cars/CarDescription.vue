@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="product-image">
-      <img src="../../../public/img/defaultcar.png" alt />
+      <img :src=" 'https://carshare-image-pbd.s3-ap-southeast-2.amazonaws.com/Car/' + car.id" alt="Avatar" />
       
         <b class="description">{{ car.description }}</b>
       

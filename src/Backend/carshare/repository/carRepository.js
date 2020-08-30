@@ -2,7 +2,6 @@
  * @AUTHOR YONGQIAN HUANG, 19/08/2020, CAR SORT LOGIC *
  ******************************************************/
 
-
 const Car = require('../models/car');
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
@@ -22,16 +21,23 @@ class carRepository{
     }
 
     /**Get by column and value */
-    async getBy(value){
+    async getBy(word){
+        //Change the search word to lower case
+        const search = word.toLowerCase();
+        //Create a where clause for case insensitive search
+        const whereClause = {
+            [Op.or]: [
+                Sequelize.where(
+                    Sequelize.fn('LOWER', Sequelize.col('brand')), {[Op.like]: `%${search}%`}
+                ),
+                Sequelize.where(
+                    Sequelize.fn('LOWER', Sequelize.col('model')), {[Op.like]: `%${search}%`}
+                )
+            ]
+        }
         try{
             const cars = await Car.findAll({
-                where: {
-                    [Op.or]:{
-                        brand: {[Op.like]: '%' + value + '%'},
-                        model: {[Op.like]: '%' + value + '%'}
-                    },
-                    available: true
-                }
+                where: whereClause
             })
             return Promise.resolve(cars);
         }catch(err){

@@ -17,7 +17,6 @@ import moment from 'moment';
 import { ToggleButton } from 'vue-js-toggle-button';
 import JwPagination  from 'jw-vue-pagination';
 
-
 //add paginate
 Vue.component('jw-pagination', JwPagination);
 //font awesome icons
@@ -49,7 +48,7 @@ Vue.filter('formatDate', function(value) {
 // Session storage
 Vue.use(VueSession);
 // Flash messages
-Vue.use(FlashMessage);  
+Vue.use(FlashMessage);
 //Recaptcha
 Vue.use(VueReCaptcha, { siteKey: '6LcTY7sZAAAAAJeN_bq5d-F7S-I2Qq9yPTCMQmoA',loaderOptions:{
   autoHideBadge: true
@@ -62,7 +61,7 @@ router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
     // this route requires auth, check if logged in
     // if not, redirect to login page.
-    if (localStorage.getItem('authToken') === null) {
+    if (sessionStorage.getItem('authToken') === null) {
       next({
         path: '/'
       })

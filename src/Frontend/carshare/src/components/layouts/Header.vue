@@ -2,6 +2,9 @@
   <header>
     <nav class="navbar navbar-light navbar-expand-md navbar-transparency">
         <Brand />
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navcol-1" aria-controls="navcol-1" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
         <div class="container">
             <div class="collapse navbar-collapse"
                 id="navcol-1">
@@ -32,11 +35,6 @@ export default {
   mixins: [authorizeMixin],
   components:{
       Brand
-  },
-  data() {
-      return{
-          id: localStorage.getItem('authToken')
-      }
   },
   mounted() {
       //Show login if not logged in
