@@ -61,9 +61,10 @@ export default {
           if (res.data.message === "success") {
             this.flashMessage.success({
               title: "Success",
-              message: "Upload avatar sucessfully!"
+              message: "Upload car image sucessfully!"
             });
-            this.$router.go();
+            //Reload the window so that duplicate image can be reupload
+            window.location.reload();
           } else {
             this.flashMessage.error({
               title: "Error",

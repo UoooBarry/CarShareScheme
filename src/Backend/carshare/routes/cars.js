@@ -19,7 +19,7 @@ const {carValidator,validateResult} = require('../helpers/validator');
 const uploadFile = require('../helpers/Uploader');
 const multer  = require('multer')
 const carImageUpload = multer({ 
-    dest: 'uploads/'
+    dest: 'uploads/cars/'
  })
 
 //GET: /api/cars
@@ -163,9 +163,9 @@ router.patch('/:id/', [authorize.verifyToken], (req,res) =>{
 router.patch('/image/:id', [authorize.verifyToken,carImageUpload.single('image')], (req,res) =>{
     console.log(req.user.admin)
     if(!req.user.admin) res.sendStatus(403);
+    console.log("file name is:"+ req.file.originalname);
     //Get the file type
     const fileName = req.file.originalname;
-    console.log("file name is:"+fileName);
     const fileType = fileName.split('.')[1];
     console.log("file name is:"+fileType);
     if(req.file.size > 250000 && (fileType != 'png' || fileType != 'jpg')){
