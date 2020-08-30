@@ -46,9 +46,14 @@
         <button class="btn btn-primary" @click="patch">Patch</button>
       </td>
       <td>
-        <button class="btn btn-primary" @click="showModal">Upload Image</button>
+        <button class="btn btn-primary" @click="showModal">Image</button>
+        <uploadCarImage v-show="isModalVisible" v-bind:carid="car.id" @close="closeModal" />
       </td>
-      <uploadCarImage v-show="isModalVisible" v-bind:id=car.id @close="closeModal" />
+      <td>
+        <a @click='deleteCar' style="cursor: pointer">
+          <font-awesome-icon icon="trash-alt" />
+        </a>
+      </td>
   
     </tr>
     
@@ -115,6 +120,27 @@ export default {
     },
     getInputChecked(field) {
       return document.getElementById(`${field}.${this.car.id}`).checked;
+    },
+    deleteCar(){
+       if(confirm("Do you really want to delete the car?")){
+          this.$axios.delete(`${this.$carshare}/cars/${this.car.id}`, {headers: this.header})
+            .then(res => {
+                if (res.data.message == "fail") {
+                  this.flashMessage.error({
+                    title: "Error!",
+                    message: "Unexcpted error!"
+                  });
+                  return;
+                }
+
+                this.flashMessage.success({
+                  title: "Remove success!",
+                  message: "Remove successfully!"
+                });
+                this.$router.go();
+            })
+            .catch(err => console.log(err));
+       }
     }
   }
 };

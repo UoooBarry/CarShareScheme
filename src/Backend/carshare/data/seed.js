@@ -24,7 +24,7 @@ module.exports = {
     var location = await Location.findAll({ where: {} });
  
     //add dummy location
-    if (location.length === 0) {
+    if (location.length === 0 && process.env.NODE_ENV !== 'test') {
       await Location.create({
         name: "Cairnlea Shopping Center",
         address: "100 Furlong Rd, Cairnlea VIC 3023",
@@ -39,7 +39,7 @@ module.exports = {
       });
     }
     //Seed car records
-    if (cars.length === 0) {
+    if (cars.length === 0 && process.env.NODE_ENV !== 'test') {
       location = await Location.findAll({ where: {} });
       
         await Car.create({

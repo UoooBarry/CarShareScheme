@@ -91,6 +91,15 @@ class carRepository{
         }
     }
 
+    async remove(id){
+        try{
+            await Car.destroy({where: {id: id}});
+            return Promise.resolve(true);
+        }catch(err){
+            return Promise.reject(err);
+        }
+    }
+
 }
 
 
