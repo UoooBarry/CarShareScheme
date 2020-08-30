@@ -11,7 +11,7 @@ import authorizeMixin from "@/mixins/authorizeMixin";
 import AddCarForm from "@/components/admin/AddCarForm";
 
 export default {
-  name: "AddCar",
+  name: "AdminAddCar",
   components: {
     AddCarForm
   },
