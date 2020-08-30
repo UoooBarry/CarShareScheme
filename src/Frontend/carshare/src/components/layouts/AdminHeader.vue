@@ -12,7 +12,6 @@
       </a>
       <button class="btn active" v-on:click="listUser()">User list</button>
       <button class="btn" v-on:click="listCars()">Car list</button>
-      <button class="btn">3</button>
     </nav>
   </header>
 </template>
