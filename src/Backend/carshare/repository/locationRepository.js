@@ -1,4 +1,6 @@
-
+/**************************
+ * @AUTHOR YONGQIAN HUANG *
+ **************************/
 const Location = require('../models/location');
 const Car = require('../models/car');
 const {calculateDistance} = require('../helpers/distanceHelper');
@@ -10,9 +12,7 @@ class locationRepository{
 
     async getAll(){
         try{
-            const locations = await Location.findAll({
-                attributes: ['address']
-            });
+            const locations = await Location.findAll({});
             return Promise.resolve(locations);
         }catch(error){
             return Promise.reject(error);

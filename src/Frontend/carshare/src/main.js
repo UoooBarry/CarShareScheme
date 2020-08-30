@@ -1,3 +1,6 @@
+/**************************
+ * @AUTHOR YONGQIAN HUANG *
+ **************************/
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
@@ -42,11 +45,10 @@ Vue.filter('formatDate', function(value) {
   }
 });
 
-
 // Session storage
 Vue.use(VueSession);
 // Flash messages
-Vue.use(FlashMessage);  
+Vue.use(FlashMessage);
 //Recaptcha
 Vue.use(VueReCaptcha, { siteKey: '6LcTY7sZAAAAAJeN_bq5d-F7S-I2Qq9yPTCMQmoA',loaderOptions:{
   autoHideBadge: true

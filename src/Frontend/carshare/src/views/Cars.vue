@@ -1,3 +1,6 @@
+<!-- @Author
+     Yongqian Huang updated at 27/08/2020 Add location check to display cars
+ -->
 <template>
   <div>
     <Loading  :key="loadingKey" />

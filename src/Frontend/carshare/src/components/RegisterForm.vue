@@ -266,12 +266,12 @@ export default {
       await this.$recaptchaLoaded();
       const token = await this.$recaptcha("register");
     //   var dob = new Date(document.getElementById("year").value, document.getElementById("month").value - 1, document.getElementById("day").value); 
-      // var dob =
-      //   document.getElementById("year").value +
-      //   "-" +
-      //   document.getElementById("month").value +
-      //   "-" +
-      //   document.getElementById("day").value ;
+      var dob =
+        document.getElementById("year").value +
+        "-" +
+        document.getElementById("month").value +
+        "-" +
+        document.getElementById("day").value ;
       if (this.password != this.retype) {
         this.flashMessage.error({
           title: "Register detail",
@@ -290,7 +290,7 @@ export default {
           recaptcha_token: token,
           code: this.validation_code,
           gender: this.gender,
-          // date_of_birth: dob
+          date_of_birth: dob
         })
         .then(res => {
           if (res.data.message == "fail") {

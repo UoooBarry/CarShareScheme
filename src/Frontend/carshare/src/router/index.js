@@ -1,7 +1,10 @@
+/**************************
+ * @AUTHOR YONGQIAN HUANG *
+ **************************/
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-// import Home from '@/views/Home.vue'
 import Header from '@/components/layouts/Header';
+import AdminHeader from '@/components/layouts/AdminHeader';
 
 Vue.use(VueRouter)
 
@@ -63,7 +66,7 @@ const routes = [{
   path: '/admin36737123719368365255336327043632505/',
   name: 'Admin',
   components: {
-    header: () => import('@/components/layouts/AdminHeader'),
+    header: AdminHeader,
     main: () => import('../views/admin/Main.vue')
   }
 },
@@ -71,8 +74,30 @@ const routes = [{
   path: '/admin36737123719368365255336327043632505/users',
   name: 'AdminUser',
   components: {
-    header: () => import('@/components/layouts/AdminHeader'),
+    header: AdminHeader,
     main: () => import('../views/admin/User.vue')
+  },
+  meta: {
+    requiresAuth: true
+  }
+},
+{
+  path: '/admin36737123719368365255336327043632505/cars',
+  name: 'AdminCars',
+  components: {
+    header: AdminHeader,
+    main: () => import('../views/admin/Cars.vue')
+  },
+  meta: {
+    requiresAuth: true
+  }
+},
+{
+  path: '/admin36737123719368365255336327043632505/addcar',
+  name: 'AddCar',
+  components: {
+    header: AdminHeader,
+    main: () => import('../views/admin/AddCar.vue')
   },
   meta: {
     requiresAuth: true

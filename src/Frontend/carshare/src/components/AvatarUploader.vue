@@ -1,3 +1,5 @@
+<!-- @Author Yongqian Huang, created at 20/08/2020
+ -->
 <template>
     <div class="custom-file" style="margin-top: 10px">
         <input type="file" id="file" accept='image/*' ref="file" name="file" style="margin-top:20px; margin-bottom:10px; border: 1px solid #ada7a7;" class="custom-file-input" v-on:change="upload()">

@@ -4,6 +4,6 @@
 src/*/*/test-results.xml
 src/*/*/.env
 src/*/*/uploads
-src/*/*/.env.prodcution
+src/*/*/.env.production
 infra/.env
 src/server.zip
