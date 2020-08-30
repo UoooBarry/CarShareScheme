@@ -1,43 +1,86 @@
 <template>
   <header>
-    <nav class="navbar navbar-light navbar-expand-md navbar-transparency adminheader">
-        <Brand />
-        <div class="container">
-            <div class="collapse navbar-collapse"
-                id="navcol-1">
-                <ul class="nav navbar-nav ml-auto">
-                    <li class="nav-item" role="presentation"  v-bind:class="{'nav-item active': getActive('AdminUser')}" ><a class="nav-link" href="#">User list</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="#">Car list</a></li>
-                   
-                    <li class="nav-item" role="presentation" id="login" style="display: none"><a class="nav-link" href="/">Login</a></li>
-                </ul>
-            </div>
-        </div>
+    <nav id="mainHeader" class="navbar navbar-light navbar-expand-md navbar-transparency">
+      <a id="title">
+        <img class="titlelink" src="../../../public/img/brand.png" alt="Home logo" /> PBD Car Share
+      </a>
     </nav>
-</header>
+
+    <nav class="navbar navbar-expand-md" id="myDIV">
+      <a>
+        <img class="imglink" src="../../assets/home-1.png" alt="Home logo" />
+      </a>
+      <button class="btn active" v-on:click="listUser()">User list</button>
+      <button class="btn" v-on:click="listCars()">Car list</button>
+    </nav>
+  </header>
 </template>
 
 <script>
-import Brand from '@/components/layouts/Brand';
-
 export default {
   name: "AdminHeader",
-  components:{
-      Brand
+  methods: {
+    getActive(expected) {
+      if (expected == this.$route.name) return true;
+      return false;
+    },
+    listUser() {
+      this.$router.push("/admin36737123719368365255336327043632505/users");
+      
+    },
+    listCars() {
+      this.$router.push("/admin36737123719368365255336327043632505/cars");
+    }
   },
-  methods:{
-       getActive(expected) {
-            if (expected == this.$route.name) return true;
-            return false;
-        },
+  mounted() {
+    var header = document.getElementById("myDIV");
+    var btns = header.getElementsByClassName("btn");
+    for (var i = 0; i < btns.length; i++) {
+      btns[i].addEventListener("click", function() {
+        var current = document.getElementsByClassName("active");
+        current[0].className = current[0].className.replace(" active", "");
+        this.className += " active";
+      });
+    }
   }
 };
 </script>
 
 <style scoped>
-.adminheader{
-    background: #648CB5;
-    color: whitesmoke;
+.titlelink {
+  max-width: 50px;
+  overflow: hidden;
+  margin-top: -6px;
+
+  margin-right: 10px;
+}
+#title {
+  color: azure;
+  font-size: 2em;
+}
+.imglink {
+  max-width: 30px;
+  overflow: hidden;
+  margin-top: 5px;
+  margin-right: 10px;
 }
 
+#mainHeader {
+  background-color: #648cb5;
+  height: 60px;
+  text-decoration: none;
+}
+
+.navbar {
+  padding: 0 14px;
+}
+
+.btn {
+  cursor: pointer;
+  margin-left: 10px;
+}
+.active,
+.btn:hover {
+  background-color: #648cb5;
+}
 </style>

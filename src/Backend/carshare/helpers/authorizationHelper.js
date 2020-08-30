@@ -1,3 +1,7 @@
+/*************************************************
+ * @AUTHOR YONGQIAN HUANG, CREATED AT 20/08/2020 *
+ *************************************************/
+
 const JWT = require('jsonwebtoken');
 
 module.exports={

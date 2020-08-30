@@ -14,6 +14,10 @@ import DarkFooter from "@/components/layouts/DarkFooter.vue";
 export default {
   components: {
     DarkFooter
+  },
+  created(){
+    const localToken = localStorage.getItem('authToken');
+    if(localToken !== null) sessionStorage.setItem('authToken', localToken);
   }
 };
 </script>

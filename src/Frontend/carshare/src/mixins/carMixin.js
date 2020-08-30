@@ -1,3 +1,7 @@
+/**************************************************
+ * @AUTHOR YONGQIAN HUANG, CREATEED AT 27/08/2020 *
+ **************************************************/
+
 export default  {
     name: "CarMixin",
     data() {
@@ -8,15 +12,6 @@ export default  {
             searchItem: ''
         }
     },
-    created(){
-        this.$axios.get(`${this.$carshare}/cars`)
-                    .then(res => {
-                        this.cars = res.data.cars
-                    })
-                    .catch(err => {
-                        console.log(err)
-                    });
-    },
     methods: {
         filter(item, order){
             this.sort = item;
@@ -24,11 +19,12 @@ export default  {
             this.$axios.get(`${this.$carshare}/cars`,{
                 params: {
                   sort: item,
-                  order: order
+                  order: order,
+                  from: this.address
                 }
               })
               .then((res) => {
-                this.cars = res.data.cars;
+                this.cars = this.getCarData(res);
                 this.update();
               })
               .catch(err => console.log(err));

@@ -18,16 +18,16 @@
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
           <div class="btn-group btn-group-toggle" data-toggle="buttons">
             <label class="btn btn-outline-dark">
-              <input type="radio" name="sort" checked value="default" @click="filter('name','ASC')" /> Default (By name)
+              <input type="radio" name="sort" checked value="default" @click="filter('name','ASC')" /> Default (By range)
             </label>
 
-            <label class="btn btn-outline-dark">
-              <input type="radio" name="sort" autocomplete="off"  @click="filter('price','DESC')" /> By Price (High to Low)
-            </label>
-
-            <label class="btn btn-outline-dark">
-              <input type="radio" name="sort" autocomplete="off" @click="filter('price','ASC')"/> By Price (Low to High)
-            </label>
+            <div class="dropdown show">
+              <a class="btn btn-outline-dark" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">By Price</a>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" @click="filter('price','ASC')">From Low</a>
+                <a class="dropdown-item" @click="filter('price','DESC')">From High</a>
+              </div>
+            </div>
 
             <label class="btn btn-outline-dark">
               <input type="radio" name="sort" autocomplete="off" @click="filter('createdAt','DESC')" /> By Newest
@@ -41,6 +41,9 @@
             <label class="btn btn-outline-dark">
               <input type="radio" name="sort" autocomplete="off" @click="filter('viewed','DESC');" /> By popular
             </label>
+
+            <LocationFilter :address="address" v-on:onAddressChange="changeAddress" />
+               
           </div>
         </ul>
         <form class="form-inline my-2 my-lg-0"  @submit.prevent="search">
@@ -54,10 +57,20 @@
 </template>
 
 <script>
+import LocationFilter from '@/components/cars/LocaltionFilter';
 import CarMixin from '@/mixins/carMixin';
 export default {
   name: "CarFilterHeader",
-  mixins:[CarMixin]
+  mixins:[CarMixin],
+  props:['address'],
+  components:{
+    LocationFilter
+  },
+  methods:{
+    changeAddress(address){
+      this.$emit('onAddressChange', address);
+    }
+  }
 };
 </script>
 

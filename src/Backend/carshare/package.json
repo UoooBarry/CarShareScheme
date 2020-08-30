@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "NODE_ENV=production node ./bin/www",
+    "start": "node ./bin/www",
     "start:dev": "nodemon",
     "integration-test:dev": "cross-env NODE_ENV=test TEST_DBHOST=localhost TEST_DBPORT=5433 TEST_DBNAME=CarShareTest TEST_DBUSER=postgres TEST_DBPASS=mbk83v mocha tests/integration --recursive --exit",
     "unit-test:dev": "cross-env NODE_ENV=test TEST_DBHOST=localhost TEST_DBPORT=5432 TEST_DBNAME=CarShareTest TEST_DBUSER=postgres TEST_DBPASS=mbk83v mocha tests/unit",
@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "aws-sdk": "^2.738.0",
+    "axios": "^0.20.0",
     "cookie-parser": "~1.4.4",
     "cors": "^2.8.5",
     "cross-env": "^7.0.2",

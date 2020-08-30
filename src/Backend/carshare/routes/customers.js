@@ -1,3 +1,8 @@
+/*******************************************************
+ *   @AUTHOR: YONGQIAN HUANG, CREATED AT: 23/07/2020   *
+ * @UPDATED: YONGQIAN HUANG, 23/07/2020, INIT CREATION *
+ * *******************************************************/
+
 const express = require('express');
 const router = express.Router();
 const _Customer = require('../repository/customerRepository');
@@ -24,15 +29,13 @@ router.patch('/avatar', [authorize.verifyToken, avatarUpload.single('image')], (
         //Get the file type
         const fileName = req.file.originalname;
         const fileType = fileName.split('.')[1];
-        console.log(fileType + " " + req.file.size);
-        if(req.file.size > 20000 && (fileType != 'png' || fileType != 'jpg')){
+        if(req.file.size > 200000 && (fileType != 'png' || fileType != 'jpg')){
             res.json({message: "fail"});
             return;
         }
 
         uploadFile(req.user.id, 'Avatar', req.file.path) //upload file to avatar path
             .then(() => {
-                console.log('change');
                 res.json({message: "success"})
             })
             .catch((err) => {
@@ -75,9 +78,6 @@ router.patch('/', [profileValidator,authorize.verifyToken], async (req, res) => 
                 errors
             })
         })
-
-    
-
 });
 
 

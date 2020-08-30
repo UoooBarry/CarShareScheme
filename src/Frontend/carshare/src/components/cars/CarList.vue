@@ -1,11 +1,11 @@
 <template>
-  <div class="carlist container">
+  <div class="carlist container" >
     <div class="row">
       <div v-for="(car) in pageOfItems" v-bind:key="car.id" class="col-sm-3 car">
         <CarCard v-bind:car="car" />
       </div>
     </div>
-    <div class="page-footer">
+    <div class="page-footer"  :if="cars">
             <jw-pagination :items="cars" :pageSize=8 @changePage="onChangePage" :labels="customLabels"></jw-pagination>
       </div>
   </div>
@@ -13,7 +13,6 @@
 
 <script>
 import CarCard from "./CarCard.vue";
-
 const customLabels = {
     first: 'First',
     last: 'Last',
@@ -26,9 +25,6 @@ export default {
     CarCard
   },
   props: ["cars"],
-  destory(){
-    console.log('des');
-  },
   data() {
     return {
       pageOfItems: [],
@@ -59,10 +55,10 @@ export default {
   min-height: 800px;
   max-width: 1500px;
 }
-.page-item.active .page-link {
+.page-item.active .page-link{
     z-index: 3;
     color: #fff;
-    background: #a9a0a0 ;
+    background: #a9a0a0 !important;
     border-color:  #b1bfd8;
 }
 </style>

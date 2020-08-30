@@ -1,3 +1,5 @@
+<!-- @Author Yongqian Huang, created at 1/08/2020
+ -->
 <template>
   <div class="container">
     <div class="login-card">
@@ -24,8 +26,8 @@
         />
         <div class="checkbox">
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="formCheck-2" />
-            <label class="form-check-label" for="formCheck-2">Remember me</label>
+            <input class="form-check-input" type="checkbox" id="remember" v-model='remember' />
+            <label class="form-check-label" for="formCheck-2">Stay Sign In</label>
           </div>
         </div>
         <button
@@ -46,7 +48,8 @@ export default {
   data(){
     return{
       email: '',
-      password: ''
+      password: '',
+      remember: false
     }
   },
   methods:{
@@ -62,7 +65,8 @@ export default {
       })
       .then( (res) => {
         if(res.data.message === 'success'){
-          localStorage.setItem('authToken', res.data.token);
+          if(this.remember) localStorage.setItem('authToken', res.data.token);
+          sessionStorage.setItem('authToken', res.data.token);
           this.flashMessage.success({
             title: 'Login success',
             message: `Welcome! ${res.data.customer_name}`

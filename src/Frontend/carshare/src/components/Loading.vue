@@ -1,3 +1,5 @@
+<!-- @Author Yongqian Huang, created at 20/08/2020
+ -->
 <template>
     <div id='loading-car'>
         <div class="loader">
@@ -27,7 +29,7 @@ export default {
        //Set time out, component disapper after timeout
        setTimeout(() => {
            loading.style.display = "none";
-       }, 800);
+       }, 1000);
     }
 }
 </script>

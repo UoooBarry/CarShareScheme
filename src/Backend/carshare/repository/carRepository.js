@@ -2,26 +2,18 @@
  * @AUTHOR YONGQIAN HUANG, 19/08/2020, CAR SORT LOGIC *
  ******************************************************/
 
-
 const Car = require('../models/car');
 const Sequelize = require('sequelize');
-const { sequelize } = require('../models/car');
 const Op = Sequelize.Op;
 
 class carRepository{
     async getAll(sort, order){
         try{
-            var cars;
-            /**If sortItem and sort is set, return a sorted result */
-            if(sort && order){
-                cars = await Car.findAll({
-                    order: [
-                        [sort, order], //sort by query item, query order
-                    ]
-                });
-            }else{
-                cars = await Car.findAll({});
-            }
+            const cars = await Car.findAll({
+                order: [
+                    ['name', 'ASC']
+                ]
+            });
             return Promise.resolve(cars);
         }catch(err){
             return Promise.reject(err);
@@ -29,15 +21,23 @@ class carRepository{
     }
 
     /**Get by column and value */
-    async getBy(value){
+    async getBy(word){
+        //Change the search word to lower case
+        const search = word.toLowerCase();
+        //Create a where clause for case insensitive search
+        const whereClause = {
+            [Op.or]: [
+                Sequelize.where(
+                    Sequelize.fn('LOWER', Sequelize.col('brand')), {[Op.like]: `%${search}%`}
+                ),
+                Sequelize.where(
+                    Sequelize.fn('LOWER', Sequelize.col('model')), {[Op.like]: `%${search}%`}
+                )
+            ]
+        }
         try{
             const cars = await Car.findAll({
-                where: {
-                    [Op.or]:{
-                        brand: {[Op.like]: '%' + value + '%'},
-                        model: {[Op.like]: '%' + value + '%'}
-                    }
-                }
+                where: whereClause
             })
             return Promise.resolve(cars);
         }catch(err){
@@ -80,6 +80,17 @@ class carRepository{
             return Promise.reject(err);
         }
     }
+
+    async update(id, data){
+        try{
+            let car = await Car.findOne({where: {id: id}});
+            await car.update(data);
+            return Promise.resolve(true);
+        }catch(err){
+            return Promise.reject(err);
+        }
+    }
+
 }
 
 
