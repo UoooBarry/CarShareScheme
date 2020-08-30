@@ -6,13 +6,13 @@
       </a>
     </nav>
 
-    <nav class="navbar navbar-expand-md" id="myDIV">
+    <nav class="subnav" id="myDIV">
       <a>
         <img class="imglink" src="../../assets/home-1.png" alt="Home logo" />
       </a>
-      <button class="btn active" v-on:click="listUser()">User list</button>
-      <button class="btn" v-on:click="listCars()">Car list</button>
-      <button class="btn">3</button>
+      <a class="subnav-item" id="users" v-on:click="listUser">User list</a>
+      <a class="subnav-item" id="cars" v-on:click="listCars">Car list</a>
+      <a class="subnav-item" id="add" v-on:click="addCar">Add new car</a>
     </nav>
   </header>
 </template>
@@ -27,21 +27,48 @@ export default {
     },
     listUser() {
       this.$router.push("/admin36737123719368365255336327043632505/users");
-      
+      this.setUserSelected();
     },
     listCars() {
       this.$router.push("/admin36737123719368365255336327043632505/cars");
+      this.setCarsSelected();
+    },
+    addCar() {
+      this.$router.push("/admin36737123719368365255336327043632505/addcar");
+      this.setAddSelected();
+    },
+    setUserSelected() {
+      document.getElementById("users").style.backgroundColor = "#648cb5";
+      document.getElementById("add").style.backgroundColor = "#F8F8F8";
+      document.getElementById("cars").style.backgroundColor = "#F8F8F8";
+    },
+    setCarsSelected() {
+      document.getElementById("cars").style.backgroundColor = "#648cb5";
+      document.getElementById("users").style.backgroundColor = "#F8F8F8";
+      document.getElementById("add").style.backgroundColor = "#F8F8F8";
+    },
+    setAddSelected() {
+      document.getElementById("add").style.backgroundColor = "#648cb5";
+      document.getElementById("cars").style.backgroundColor = "#F8F8F8";
+      document.getElementById("users").style.backgroundColor = "#F8F8F8";
     }
   },
   mounted() {
-    var header = document.getElementById("myDIV");
-    var btns = header.getElementsByClassName("btn");
-    for (var i = 0; i < btns.length; i++) {
-      btns[i].addEventListener("click", function() {
-        var current = document.getElementsByClassName("active");
-        current[0].className = current[0].className.replace(" active", "");
-        this.className += " active";
-      });
+    if (
+      this.$router.currentRoute.path ===
+      "/admin36737123719368365255336327043632505/users"
+    ) {
+      this.setUserSelected();
+    } else if (
+      this.$router.currentRoute.path ===
+      "/admin36737123719368365255336327043632505/cars"
+    ) {
+      this.setCarsSelected();
+    } else if (
+      this.$router.currentRoute.path ===
+      "/admin36737123719368365255336327043632505/addcar"
+    ) {
+      this.setAddSelected();
     }
   }
 };
@@ -72,16 +99,22 @@ export default {
   text-decoration: none;
 }
 
-.navbar {
-  padding: 0 14px;
+.subnav {
+  width: 100%;
+  height: 43px;
+  border-bottom: 1px solid black;
 }
-
-.btn {
+.subnav a {
+  float: left;
+}
+.subnav-item {
+  font-size: 15px;
+  padding: 10px;
   cursor: pointer;
   margin-left: 10px;
 }
-.active,
-.btn:hover {
+
+.subnav-item:hover {
   background-color: #648cb5;
 }
 </style>
