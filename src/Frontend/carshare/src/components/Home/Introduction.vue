@@ -48,6 +48,7 @@
 </template>
 
 <style scoped>
+
 .p1,
 .p2,
 .p3 {
