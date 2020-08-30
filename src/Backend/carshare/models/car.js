@@ -38,7 +38,7 @@ const car = db.define('cars', {
         defaultValue: 3
     },
     description:{
-        type: Sequelize.STRING
+        type: Sequelize.TEXT
     },
     addons:{
         type: Sequelize.STRING,
