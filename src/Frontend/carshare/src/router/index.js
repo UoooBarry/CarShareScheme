@@ -94,7 +94,7 @@ const routes = [{
 },
 {
   path: '/admin36737123719368365255336327043632505/addcar',
-  name: 'AddCar',
+  name: 'AdminAddCar',
   components: {
     header: AdminHeader,
     main: () => import('../views/admin/AddCar.vue')
