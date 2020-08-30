@@ -73,6 +73,22 @@ router.get('/:id/',(req,res) => {
         })
 })
 
+//Delete: /api/cars/:id
+router.delete('/:id/',  authorize.verifyToken, (req,res) => {
+    if(!req.user.admin) res.sendStatus(403);
+
+    _Car.remove(req.params.id)
+        .then(() => {
+            res.json({message: 'success'});
+        })
+        .catch((err) => {
+            res.json({
+                message: 'fail',
+                err
+            });
+        })
+})
+
 //GET: /api/cars/attribute/brands
 router.get('/attribute/brands',(req,res) => {
     _Car.getBrands()

@@ -19,6 +19,8 @@
                     <th scope="col">Updated at</th>
                     <th scope="col">Viewed</th>
                     <th scope="col">Action</th>
+                    <th scope="col">Action</th>
+                    <th scope="col">Action</th> 
                 </tr>
             </thead>
             <tbody v-for="car in cars" v-bind:key="car.id">
