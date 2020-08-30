@@ -3,7 +3,7 @@
   <div class="modal-backdrop">
     <div class="modal">
       <header class="modal-header">
-        <slot name="header">Upload car image for car id {{id}}:</slot>
+        <slot name="header">Upload car image for car id {{carID}}:</slot>
       </header>
       <section class="modal-body">
         <slot name="body">
@@ -37,7 +37,7 @@ import authorizeMixin from "@/mixins/authorizeMixin";
 export default {
   mixins: [authorizeMixin],
   name: "uploadCarImage",
-  props: ["id"],
+  props: ["carID"],
   data() {
     return {
       file: ""
@@ -54,7 +54,7 @@ export default {
       formData.append("image", this.file);
       console.log(this.file);
       this.$axios
-        .patch(`${this.$carshare}/cars/image/${this.id}`, formData, {
+        .patch(`${this.$carshare}/cars/image/${this.carID}`, formData, {
           headers: this.header
         })
         .then(res => {
