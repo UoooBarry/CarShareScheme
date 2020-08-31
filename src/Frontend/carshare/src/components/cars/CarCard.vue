@@ -14,7 +14,7 @@
         </div>
 
         <div class="card-body">
-          <h5 class="card-title car">{{car.name}}</h5>
+          <h5 class="card-title car">{{car.model}}</h5>
           <h6 class="card-subtitle mb-2 text-muted">{{car.brand}}</h6>
           <p class="price">${{car.price}}/day</p>
         </div>
