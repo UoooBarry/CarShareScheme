@@ -10,7 +10,7 @@
         onclick="location.href='#';" 
       >
         <div class="hover-info" v-on:mousemove="draw" v-on:mouseover="hover" v-on:mouseleave="hover">
-          <img :src=" 'https://carshare-image-pbd.s3-ap-southeast-2.amazonaws.com/Car/' + car.id" alt="Car" />
+          <img :src=" 'https://carshare-image-pbd.s3-ap-southeast-2.amazonaws.com/Car/' + car.id" alt="Car" style="width:216px; heigh: 137px" />
         </div>
 
         <div class="card-body">
