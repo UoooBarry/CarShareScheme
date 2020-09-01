@@ -2,8 +2,8 @@
   <div class="product-content">
     <div class="intro">
       <h3 class="title">{{car.brand}}</h3>
-      <h1>{{ car.name }}</h1>
-      <h4>{{car.model}}</h4>
+      <h1>{{car.model}}</h1>
+
       <br />
       <br />
     </div>

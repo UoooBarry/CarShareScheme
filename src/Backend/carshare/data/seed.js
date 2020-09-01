@@ -24,7 +24,7 @@ module.exports = {
     var location = await Location.findAll({ where: {} });
  
     //add dummy location
-    if (location.length === 0) {
+    if (location.length === 0 && process.env.NODE_ENV !== 'test') {
       await Location.create({
         name: "Cairnlea Shopping Center",
         address: "100 Furlong Rd, Cairnlea VIC 3023",
@@ -39,7 +39,7 @@ module.exports = {
       });
     }
     //Seed car records
-    if (cars.length === 0) {
+    if (cars.length === 0 && process.env.NODE_ENV !== 'test') {
       location = await Location.findAll({ where: {} });
       
         await Car.create({
@@ -309,7 +309,7 @@ module.exports = {
           gear: "automatic",
           location_id: location[Math.floor(Math.random() * 3)].id,
           purchase_date: new Date(2020, 03, 19),
-          addons: "GPS, Air Conditioning, MP4，Convertible",
+          addons: "GPS, Air Conditioning, MP4, Convertible",
           available: true,
           description: "The Ford Mustang is a good sports car. The Mustang's stable of engines starts with a turbocharged four-cylinder that puts out 310 horsepower and includes 460- and 480-horsepower V8 variants. Two Shelby high-performance models up the power ante.",
           price: 400,

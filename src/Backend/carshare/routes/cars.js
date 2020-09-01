@@ -73,6 +73,22 @@ router.get('/:id/',(req,res) => {
         })
 })
 
+//Delete: /api/cars/:id
+router.delete('/:id/',  authorize.verifyToken, (req,res) => {
+    if(!req.user.admin) res.sendStatus(403);
+
+    _Car.remove(req.params.id)
+        .then(() => {
+            res.json({message: 'success'});
+        })
+        .catch((err) => {
+            res.json({
+                message: 'fail',
+                err
+            });
+        })
+})
+
 //GET: /api/cars/attribute/brands
 router.get('/attribute/brands',(req,res) => {
     _Car.getBrands()
@@ -168,7 +184,7 @@ router.patch('/image/:id', [authorize.verifyToken,carImageUpload.single('image')
     const fileName = req.file.originalname;
     const fileType = fileName.split('.')[1];
     console.log("file name is:"+fileType);
-    if(req.file.size > 250000 && (fileType != 'png' || fileType != 'jpg')){
+    if(req.file.size > 2097152 && (fileType != 'png' || fileType != 'jpg')){
         res.json({message: "fail"});
         return;
     }

@@ -10,7 +10,7 @@
         onclick="location.href='#';" 
       >
         <div class="hover-info" v-on:mousemove="draw" v-on:mouseover="hover" v-on:mouseleave="hover">
-          <img class="card-img-top" src="../../../public/img/defaultcar.png" alt="Card image cap" />
+          <img class="card-img" :src=" 'https://carshare-image-pbd.s3-ap-southeast-2.amazonaws.com/Car/' + car.id" alt="Car"/>
         </div>
 
         <div class="card-body">
@@ -97,7 +97,9 @@ a{
     letter-spacing: .125rem;
     width: 100%;
 }
-
+.card-img{
+  margin:0;
+}
 .card.car {
   border-radius: 16px;
   overflow: hidden;
