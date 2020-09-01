@@ -14,21 +14,18 @@
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <div class="collapse navbar-collapse btn-group" id="carnav">
+      <div class="collapse navbar-collapse" id="carnav">
         <ul class="navbar-nav mr-auto">
           
-            <li  class="nav-item">
-              <!-- <label class="btn btn-outline-dark">
-                <a class='nav-link'  @click="filter('name','ASC')" >  Default (By range) </a>
-              </label> -->
-              <label class="btn btn-outline-dark">
-                <input type="radio" name="sort" checked value="default" @click="filter('name','ASC')" /> Default (By range)
-              </label>
+            <li class="nav-item">
+                <label class="btn btn-outline-dark">
+                  <input type="radio" name="sort" checked value="default" @click="filter('name','ASC')" /> Default (By range)
+                </label>
             </li>
             
-            <li  class="nav-item dropdown">
+            <li class="nav-item dropdown">
               <label class="btn btn-outline-dark">
-                <a class="nav-link dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">By Price</a>
+                <a class="nav-link dropdown-toggle" style="padding: 0;" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">By Price</a>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                   <a class="dropdown-item" @click="filter('price','ASC')">From Low</a>
                   <a class="dropdown-item" @click="filter('price','DESC')">From High</a>
@@ -37,36 +34,24 @@
             </li>
 
             <li  class="nav-item">
-              <!-- <label class="btn btn-outline-dark">
-                <a @click="filter('createdAt','DESC')"  class='nav-link'>By Newest</a>
-              </label> -->
               <label class="btn btn-outline-dark">
                 <input type="radio" name="sort" autocomplete="off" @click="filter('createdAt','DESC')" /> By Newest
               </label>
             </li>
             
             <li class="nav-item">
-              <!-- <label class="btn btn-outline-dark">
-                <a  @click="filter('brand','DESC')" class='nav-link'>By Brand</a>
-              </label> -->
               <label class="btn btn-outline-dark">
                 <input type="radio" name="sort" autocomplete="off" @click="filter('brand','DESC')" /> By Brand
               </label>
             </li>
             
             <li class="nav-item">
-              <!-- <label class="btn btn-outline-dark">
-                <a @click="filter('viewed','DESC')"  class='nav-link'>By popular</a>
-              </label> -->
               <label class="btn btn-outline-dark">
                <input type="radio" name="sort" autocomplete="off" @click="filter('viewed','DESC');" /> By popular
               </label>
             </li>
 
             <li class="nav-item">
-              <!-- <label class="btn btn-outline-dark" id="allcars">
-                <a class='nav-link'  @click="allCar">All cars</a>
-              </label> -->
               <label class="btn btn-outline-dark">
                 <input type="radio" name="sort" value="default" @click="allCar" /> All cars
               </label>
@@ -164,5 +149,9 @@ export default {
 }
 .dropdown-item {
   cursor: pointer;
+}
+
+input[type=radio] {
+    display : none;
 }
 </style>
