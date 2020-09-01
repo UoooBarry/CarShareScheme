@@ -184,7 +184,7 @@ router.patch('/image/:id', [authorize.verifyToken,carImageUpload.single('image')
     const fileName = req.file.originalname;
     const fileType = fileName.split('.')[1];
     console.log("file name is:"+fileType);
-    if(req.file.size > 250000 && (fileType != 'png' || fileType != 'jpg')){
+    if(req.file.size > 2097152 && (fileType != 'png' || fileType != 'jpg')){
         res.json({message: "fail"});
         return;
     }

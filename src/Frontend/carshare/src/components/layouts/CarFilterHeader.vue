@@ -13,6 +13,20 @@
       >
         <span class="navbar-toggler-icon"></span>
       </button>
+      <div class="row" style="margin-left: 10px;">
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+          <div class="col-5">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+              <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                <label class="btn btn-outline-dark">
+                  <input
+                    type="radio"
+                    name="sort"
+                    checked
+                    value="default"
+                    @click="filter('name','ASC')"
+                  /> Default (By range)
+                </label>
 
       <div class="collapse navbar-collapse" id="carnav">
         <ul class="navbar-nav mr-auto">
@@ -87,18 +101,18 @@
 </template>
 
 <script>
-import LocationFilter from '@/components/cars/LocaltionFilter';
-import CarMixin from '@/mixins/carMixin';
+import LocationFilter from "@/components/cars/LocaltionFilter";
+import CarMixin from "@/mixins/carMixin";
 export default {
   name: "CarFilterHeader",
-  mixins:[CarMixin],
-  props:['address'],
-  components:{
+  mixins: [CarMixin],
+  props: ["address"],
+  components: {
     LocationFilter
   },
-  methods:{
-    changeAddress(address){
-      this.$emit('onAddressChange', address);
+  methods: {
+    changeAddress(address) {
+      this.$emit("onAddressChange", address);
     }
   }
 };
@@ -106,6 +120,9 @@ export default {
 
 
 <style scoped>
+.navbar-collapse{
+
+}
 .navbar {
   width: 95%;
   border-top: 1px solid #a9a0a0;
@@ -158,5 +175,8 @@ export default {
 
 .btn-outline-dark.active a{
   color: #fff !important;
+}
+.dropdown-item {
+  cursor: pointer;
 }
 </style>

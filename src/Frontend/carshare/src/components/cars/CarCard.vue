@@ -10,11 +10,11 @@
         onclick="location.href='#';" 
       >
         <div class="hover-info" v-on:mousemove="draw" v-on:mouseover="hover" v-on:mouseleave="hover">
-          <img :src=" 'https://carshare-image-pbd.s3-ap-southeast-2.amazonaws.com/Car/' + car.id" alt="Car" style="width:216px;" />
+          <img class="card-img" :src=" 'https://carshare-image-pbd.s3-ap-southeast-2.amazonaws.com/Car/' + car.id" alt="Car"/>
         </div>
 
         <div class="card-body">
-          <h5 class="card-title car">{{car.name}}</h5>
+          <h5 class="card-title car">{{car.model}}</h5>
           <h6 class="card-subtitle mb-2 text-muted">{{car.brand}}</h6>
           <p class="price">${{car.price}}/day</p>
         </div>
@@ -91,6 +91,9 @@ a{
     font-family: AvenirLTStd-Black;
     letter-spacing: .125rem;
     width: 100%;
+}
+.card-img{
+  margin:0;
 }
 .card.car {
   border-radius: 16px;
