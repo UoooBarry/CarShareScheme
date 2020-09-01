@@ -6,7 +6,7 @@
         :src=" 'https://carshare-image-pbd.s3-ap-southeast-2.amazonaws.com/Car/' + car.id"
         alt="Car"
       />
-      <Popular v-if="popular"/>
+      <Popular v-if="car.popular"/>
       <br />
       <div class="car-details">
         <h3>About our {{ car.name }}</h3>
@@ -40,12 +40,9 @@
 import Popular from "./Popular"
 export default {
   name: "CarDescription",
-  props: ["car", "popular"],
+  props: ["car"],
   components: {
     Popular
-  },
-  created(){
-    console.log(this.popular);
   }
   
 };
