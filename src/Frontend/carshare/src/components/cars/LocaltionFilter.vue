@@ -1,5 +1,5 @@
 <template>
-    <div class="col-sm-3.5 my-1 btn" style="float:right">
+    <div class="form-inline my-2 my-lg-0">
               <label class="sr-only" for="address">Address</label>
               <div class="input-group">
                 <div class="input-group-prepend">
@@ -65,6 +65,6 @@ export default {
   border-color: #a9a0a0;
 }
 .address-bar{
-  width: 400px;
+  width: 250px;
 }
 </style>

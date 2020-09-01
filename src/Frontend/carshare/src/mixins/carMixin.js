@@ -14,6 +14,8 @@ export default  {
     },
     methods: {
         filter(item, order){
+            const target = event.target;
+            target.parentNode.classList.add('active');
             this.sort = item;
             this.order = order;
             this.$axios.get(`${this.$carshare}/cars`,{
@@ -28,6 +30,19 @@ export default  {
                 this.update();
               })
               .catch(err => console.log(err));
+        },
+        allCar(){
+          this.$axios.get(`${this.$carshare}/cars`,{
+            params: {
+              all: true
+            }
+          })
+          .then((res) => {
+            document.getElementById('allcars').classList.add('active');
+            this.cars = res.data.cars;
+            this.update();
+          })
+          .catch(err => console.log(err));
         },
         search(){
             this.$axios.get(`${this.$carshare}/cars/search`,{
