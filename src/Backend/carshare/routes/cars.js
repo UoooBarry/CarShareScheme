@@ -63,7 +63,8 @@ router.get("/:id/", (req, res) => {
     .get(req.params.id)
     .then(async (car) => {
       const popularCars = await _Car.getMostViewed();
-      car.push({popular: popularCars.includes(car.id) });
+      //Push popular attribute to car json
+      car.dataValues.popular = popularCars.includes(car.id);
       res.json({ car });
     })
     .catch((err) => {
