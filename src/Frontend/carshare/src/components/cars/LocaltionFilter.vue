@@ -33,7 +33,7 @@ export default {
 
 
 <style scoped>
-.btn{
+.my-2{
   color: black;
   border-color: #a9a0a0;
 }

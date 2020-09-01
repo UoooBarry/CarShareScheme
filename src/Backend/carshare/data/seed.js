@@ -330,7 +330,7 @@ module.exports = {
           price: 650,
         });
         await Car.create({
-          name: " ",
+          name: "HOLDEN COMMODORE RS",
           brand: "HOLDEN",
           model: "COMMODORE RS",
           seats: 5,

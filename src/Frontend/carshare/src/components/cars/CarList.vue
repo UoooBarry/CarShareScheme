@@ -2,7 +2,7 @@
   <div class="carlist container" >
     <div class="row">
       <div v-for="(car) in pageOfItems" v-bind:key="car.id" class="col-sm-3 car">
-        <CarCard v-bind:car="car" style="max-width: 100%"/>
+        <CarCard v-bind:car="car" style="max-width: 100%" v-bind:popular="mostViewed.includes(car)"/>
       </div>
     </div>
     <div class="page-footer"  :if="cars">
@@ -28,8 +28,23 @@ export default {
   data() {
     return {
       pageOfItems: [],
-      customLabels
+      customLabels,
+      mostViewed: []
     };
+  },
+  created(){
+     this.$axios
+        .get(`http://localhost:3000/api/cars/mostviewed`)
+        .then(res => {
+          this.mostViewed = res.data.cars;
+          console.log(res.data.cars);
+        })
+        .catch(() => {
+          this.flashMessage.error({
+            title: "Fail",
+            message: "Get most view data incorrectly!"
+          });
+        });
   },
   methods: {
     onChangePage(pageOfItems) {

@@ -35,15 +35,7 @@
         <a class="btn btn-light btn-lg action-button car-list-btn" href="/Login">Get A Car Now</a>
       </div>
     </div>
-    <a
-      id="back-to-top"
-      href="#"
-      class="btn btn-light btn-lg back-to-top"
-      role="button"
-        v-on:click="topFunction()" 
-    >
-      <font-awesome-icon icon="arrow-up" />
-    </a>
+    <BackToTop />
   </div>
 </template>
 
@@ -109,33 +101,16 @@
 h1 {
   margin-bottom: 25px;
 }
-#back-to-top {
-  display: block;
-  position: fixed;
-  bottom: 20px;
-  right: 30px;
-  z-index: 99999;
-  font-size: 18px;
-  border: none;
-  outline: none;
-  background-color: rgba(255, 255, 255, 0.15);
-  color: black;
-  cursor: pointer;
-  padding: 15px;
-  border-radius: 4px;
-}
+
 </style>
 <script>
 //Get the button
 
-
+import BackToTop from "@/components/BackToTop";
 export default {
   name: "Home",
-  methods: {
-    topFunction() {
-      document.body.scrollTop = 0;
-      document.documentElement.scrollTop = 0;
-    }
-  }
+  components: {
+    BackToTop
+  },
 };
 </script>
