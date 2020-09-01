@@ -13,20 +13,6 @@
       >
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="row" style="margin-left: 10px;">
-        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-          <div class="col-5">
-            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-              <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                <label class="btn btn-outline-dark">
-                  <input
-                    type="radio"
-                    name="sort"
-                    checked
-                    value="default"
-                    @click="filter('name','ASC')"
-                  /> Default (By range)
-                </label>
 
       <div class="collapse navbar-collapse" id="carnav">
         <ul class="navbar-nav mr-auto">
