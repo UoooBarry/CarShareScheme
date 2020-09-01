@@ -1,6 +1,6 @@
 <template>
   <div>
-    <router-link :to="{name: 'CarDetail', params:{ id: car.id, popular: popular }}">
+    <router-link :to="{name: 'CarDetail', params:{ id: car.id}}">
       <div
         class="card car"
         style="width: 18rem;cursor: pointer;"
@@ -28,7 +28,7 @@
 import CarPreview from "./CarPreview";
 export default {
   name: "CarCard",
-  props: ["car", "popular"],
+  props: ["car"],
   data() {
     return {
       cardHover: false,

@@ -5,7 +5,8 @@
  *  Yongqian Huang. 17/08/2020, Car listing and description
  *  Yongqian Huang. 19/08/2020, Car creating endpoint   *
  * Yongqian Huang. 28/08/2020, Car creating Validation  *
- * Yongqian Huang, 29/08/2020, Add car share image upload*
+ * Yongqian Huang, 29/08/2020, Add car share image upload
+ * Yongqian Huang, 02/09/2020, Return if the car is popular*
  *******************************************************/
 
 const express = require("express");
@@ -43,16 +44,6 @@ router.get("/", (req, res) => {
       });
   }
 });
-//GET: /api/cars/mostviewed
-router.get("/mostviewed",  async (req, res) => {
-    const cars = await _Car.getMostViewed();
-    if (cars) {
-        res.json({cars});
-    } else {
-        res.sendStatus(403);
-    }
-});
-
 //GET: /api/cars/:brand
 router.get("/search", (req, res) => {
   _Car
@@ -70,7 +61,9 @@ router.get("/search", (req, res) => {
 router.get("/:id/", (req, res) => {
   _Car
     .get(req.params.id)
-    .then((car) => {
+    .then(async (car) => {
+      const popularCars = await _Car.getMostViewed();
+      car.push({popular: popularCars.includes(car.id) });
       res.json({ car });
     })
     .catch((err) => {

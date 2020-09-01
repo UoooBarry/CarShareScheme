@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row">
       <div class="col-lg car-description">
-        <CarDescription :car="car" :popular="$route.params.popular" />
+        <CarDescription :car="car" />
       </div>
       <div class="col-md">
         <CarContent :car="car" />

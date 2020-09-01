@@ -58,9 +58,18 @@ class carRepository {
 
   async getMostViewed() {
     try {
-      const car = await Car.findAll({ order: [["viewed", "DESC"]], limit: 3 });
+      const cars = await Car.findAll({ 
+        attributes: ["id"],
+        order: [["viewed", "DESC"]],
+        limit: 3 
+      });
+
+      //Map cars with id, return array of id that is popular
+      const carsArr = cars.map((car) => {
+        return car.id
+      })
       //Update the view number by 1
-      return Promise.resolve(car);
+      return Promise.resolve(carsArr);
     } catch (err) {
       return Promise.reject(err);
     }
