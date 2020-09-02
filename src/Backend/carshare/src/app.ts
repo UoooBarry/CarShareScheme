@@ -70,4 +70,4 @@ app.use( (err: any, req: Request, res: Response, next: NextFunction) => {
 
 app.listen(3000, () => console.log('Server in running on port 3000...'));
 
-// module.exports = app;
+module.exports = app;
