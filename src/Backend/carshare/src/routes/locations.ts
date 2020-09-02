@@ -1,11 +1,10 @@
-const express = require('express');
+import express,{Request, Response} from 'express';
 const router = express.Router();
-const _Location = require('../repository/locationRepository');
-
+import _Location from '../repository/locationRepository';
 
 
 //GET: /api/locations
-router.get('/', (req,res) => {
+router.get('/', (req: Request, res:Response) => {
     _Location.getAll()
              .then(locations => {
                 res.json({
@@ -19,4 +18,4 @@ router.get('/', (req,res) => {
 
 
 
-module.exports = router;
+export default router;

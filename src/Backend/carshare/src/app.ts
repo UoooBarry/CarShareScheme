@@ -5,23 +5,24 @@
 *              YONGQIAN HUANG, 26/07/2020, SYNC DATABASE               *
 * YONGQIAN HUANG, 03/08/2020, MAKE AUTO MIGRATION AND SEED TO DATABASE *
 * Yongqian Huang,11/08/2020, Use cors                                  *
+*Yongqian Huang, Updated at 03/09/2020 Migrate to typescript           *
 ************************************************************************/
 
+import createError from 'http-errors';
+import express,{Application, Request, Response, NextFunction} from 'express';
+import cookieParser from 'cookie-parser';
+import logger from 'morgan';
+import carsRouter from './routes/cars';
+import customerRouter from './routes/customers';
+import locationRouter from './routes/locations';
+import cors from 'cors';
 
-var createError = require('http-errors');
-var express = require('express');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-const carsRouter = require('./routes/cars');
-const customerRouter = require('./routes/customers');
-const locationRouter = require('./routes/locations')
-const cors = require('cors')
 
 // Database
-const db = require('./config/db');
-const seed = require('./data/seed');
+import db from './config/db';
+import seed from './data/seed';
 
-var app = express();
+const app:Application = express();
 
 
 app.use(logger('dev'));
@@ -37,14 +38,14 @@ app.use('/api/customers', customerRouter);
 app.use('/api/locations', locationRouter);
 
 // catch 404 and forward to error handler
-app.use(function (req, res, next) {
+app.use((req, res, next) => {
   next(createError(404));
 });
 
-//catch database connection
+// catch database connection
 db.authenticate()
   .then(() => console.log('Database connected...'))
-  .catch(err => console.log(`DB err: ${err}`))
+  .catch((err: any) => console.log(`DB err: ${err}`))
 
 
 seed.sync()
@@ -56,7 +57,7 @@ seed.sync()
 
 
 // error handler
-app.use(function (err, req, res, next) {
+app.use( (err: any, req: Request, res: Response, next: NextFunction) => {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
@@ -67,4 +68,6 @@ app.use(function (err, req, res, next) {
   res.json(err);
 });
 
-module.exports = app;
+app.listen(3000, () => console.log('Server in running on port 3000...'));
+
+// module.exports = app;

@@ -9,24 +9,24 @@
  * Yongqian Huang, 02/09/2020, Return if the car is popular*
  *******************************************************/
 
-const express = require("express");
+import express,{Request, Response, NextFunction} from 'express';
 const router = express.Router();
-const _Car = require("../repository/carRepository");
-const _Location = require("../repository/locationRepository");
-const authorize = require("../helpers/authorizationHelper");
-const { carValidator, validateResult } = require("../helpers/validator");
-const uploadFile = require("../helpers/Uploader");
-const multer = require("multer");
+import _Car from '../repository/carRepository';
+import _Location from '../repository/locationRepository';
+import {verifyToken} from '../helpers/authorizationHelper';
+import CarValidator from '../validators/CarValidator';
+import uploadFile from "../helpers/Uploader";
+import multer from 'multer';
 const carImageUpload = multer({
   dest: "uploads/cars/",
 });
 
 //GET: /api/cars
-router.get("/", (req, res) => {
+router.get("/", (req: Request, res: Response) => {
   /*If qeury all = true, get all cars */
   if (req.query.all) {
     _Car
-      .getAll()
+      .getAll(null, null)
       .then((cars) => {
         res.json({ cars });
       })
@@ -34,9 +34,8 @@ router.get("/", (req, res) => {
         res.sendStatus(404);
       });
   } else {
-    _Location
-      .getAllValidateCars(req.query.from, req.query.sort, req.query.order)
-      .then(async (locations) => {
+    _Location.getAllValidateCars(req.query.from, req.query.sort, req.query.order)
+      .then(async (locations: any) => {
         res.json({ locations });
       })
       .catch((err) => {
@@ -45,7 +44,7 @@ router.get("/", (req, res) => {
   }
 });
 //GET: /api/cars/:brand
-router.get("/search", (req, res) => {
+router.get("/search", (req: Request, res: Response) => {
   _Car
     .getBy(req.query.query)
     .then((cars) => {
@@ -58,10 +57,10 @@ router.get("/search", (req, res) => {
 });
 
 //GET: /api/cars/:id
-router.get("/:id/", (req, res) => {
+router.get("/:id/", (req: Request, res: Response) => {
   _Car
     .get(req.params.id)
-    .then(async (car) => {
+    .then(async (car: any) => {
       const popularCars = await _Car.getMostViewed();
       //Push popular attribute to car json
       car.dataValues.popular = popularCars.includes(car.id);
@@ -74,7 +73,7 @@ router.get("/:id/", (req, res) => {
 });
 
 //Delete: /api/cars/:id
-router.delete("/:id/", authorize.verifyToken, (req, res) => {
+router.delete("/:id/", verifyToken, (req: Request, res: Response) => {
   if (!req.user.admin) res.sendStatus(403);
 
   _Car
@@ -91,7 +90,7 @@ router.delete("/:id/", authorize.verifyToken, (req, res) => {
 });
 
 //GET: /api/cars/attribute/brands
-router.get("/attribute/brands", (req, res) => {
+router.get("/attribute/brands", (req: Request, res: Response) => {
   _Car
     .getBrands()
     .then((brands) => {
@@ -104,50 +103,49 @@ router.get("/attribute/brands", (req, res) => {
 });
 
 //POST: /api/cars/create
-router.post("/create", [carValidator, authorize.verifyToken], (req, res) => {
+router.post("/create", [ CarValidator.validate, verifyToken], (req: Request, res: Response) => {
   if (!req.user.admin) res.sendStatus(403);
 
-  validateResult(req)
-    .then(() => {
-      const car = {
-        name: req.body.name,
-        brand: req.body.brand,
-        model: req.body.model,
-        location_id: req.body.location_id,
-        purchase_date: req.body.purchase_date,
-        price: req.body.price,
-        seats: req.body.seats,
-        luggages: req.body.luggages,
-        doors: req.body.doors,
-        gear: req.body.gear,
-        addons: req.body.addons,
-        description: req.body.description,
-      };
-
-      _Car
-        .create(car)
-        .then(() => {
-          res.json({
-            message: "success",
-          });
-        })
-        .catch((err) => {
-          res.json({
-            message: "fail",
-            err,
-          });
-        });
-    })
-    .catch((errors) => {
-      res.json({
-        message: "fail",
-        errors,
-      });
+  const validationErrors = req.validationError;
+  if(validationErrors){
+    res.json({
+      message: "fail",
+      validationErrors,
     });
+  }else{
+    const car = {
+      name: req.body.name,
+      brand: req.body.brand,
+      model: req.body.model,
+      location_id: req.body.location_id,
+      purchase_date: req.body.purchase_date,
+      price: req.body.price,
+      seats: req.body.seats,
+      luggages: req.body.luggages,
+      doors: req.body.doors,
+      gear: req.body.gear,
+      addons: req.body.addons,
+      description: req.body.description,
+    };
+    _Car
+      .create(car)
+      .then(() => {
+        res.json({
+          message: "success",
+        });
+      })
+      .catch((err) => {
+        res.json({
+          message: "fail",
+          err,
+        });
+      });
+  }
+
 });
 
 //PATCH: /api/cars/:id
-router.patch("/:id/", [authorize.verifyToken], (req, res) => {
+router.patch("/:id/", [verifyToken], (req: Request, res: Response) => {
   if (!req.user.admin) res.sendStatus(403);
 
   const car = {
@@ -179,8 +177,8 @@ router.patch("/:id/", [authorize.verifyToken], (req, res) => {
 //PATCH: /api/cars/image/:id
 router.patch(
   "/image/:id",
-  [authorize.verifyToken, carImageUpload.single("image")],
-  (req, res) => {
+  [verifyToken, carImageUpload.single("image")],
+  (req: any, res: any) => {
     console.log(req.user.admin);
     if (!req.user.admin) res.sendStatus(403);
     console.log("file name is:" + req.file.originalname);
@@ -204,4 +202,4 @@ router.patch(
   }
 );
 
-module.exports = router;
+export default router;

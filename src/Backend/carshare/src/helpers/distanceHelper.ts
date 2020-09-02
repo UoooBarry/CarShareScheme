@@ -3,9 +3,9 @@
  *************************************************/
 
 require('dotenv').config();
-const axios = require('axios');
+import axios from 'axios';
 
-const calculateDistance = async (from, to) => {
+const calculateDistance = async (from: string, to: string) => {
 
     try{
         const result = await axios.get('https://maps.googleapis.com/maps/api/distancematrix/json',{

@@ -4,8 +4,8 @@
 
 require('dotenv').config()
 
-const AWS = require('aws-sdk');
-const { readFileSync,unlinkSync } = require('fs');
+import AWS from 'aws-sdk';
+import {readFileSync,unlinkSync} from 'fs';
 
 // Enter copied or downloaded access ID and secret key here
 const ID = process.env.AWS_ACCESS_ID;
@@ -20,7 +20,7 @@ const s3 = new AWS.S3({
     secretAccessKey: SECRET
 });
 
-const uploadFile = async(id, path, fileName) => {
+const uploadFile = async(id: number, path: string, fileName: string) => {
     // Read content from the file
     const fileContent = await readFileSync(fileName);
     // Setting up S3 upload parameters
@@ -31,7 +31,7 @@ const uploadFile = async(id, path, fileName) => {
     };
 
      // Uploading files to the bucket
-     s3.upload(params, (err, data) => {
+     s3.upload(params, (err: any, data: any) => {
         if (err) {
             return Promise.reject(err);
         }
@@ -42,4 +42,4 @@ const uploadFile = async(id, path, fileName) => {
 }
 
 
-module.exports = uploadFile;
+export default uploadFile;
