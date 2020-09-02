@@ -11,10 +11,16 @@ const Sequelize = require('sequelize');
 const db = require('../config/db');
 
 const bill = db.define('bills', {
+    completed:{
+        type: Sequelize.BOOLEAN,
+        defaultValue: false
+    },
     fee: {
-        type: Sequelize.DOUBLE
+        type: Sequelize.DOUBLE,
+        allowNull: false
     }
 });
+
 
 
 module.exports = bill;

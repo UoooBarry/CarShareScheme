@@ -28,6 +28,11 @@ const carValidator = [
     check('price').not().isEmpty().withMessage('Price cannot be empty')
 ]
 
+const orderValidator = [
+    check('car_id').not().isEmpty().withMessage('Car cannot be empty'),
+    check('period').not().isEmpty().withMessage('Period cannot be empty')
+]
+
 const validateResult = (req) => {
     const errs = validationResult(req);
         //check and return errors
@@ -44,4 +49,4 @@ const validateResult = (req) => {
 }
 
 
-module.exports = {profileValidator, validateResult, carValidator}
+module.exports = {profileValidator, validateResult, carValidator, orderValidator}

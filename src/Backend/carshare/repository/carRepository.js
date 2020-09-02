@@ -67,8 +67,7 @@ class carRepository {
       //Map cars with id, return array of id that is popular
       const carsArr = cars.map((car) => {
         return car.id
-      })
-      //Update the view number by 1
+      });
       return Promise.resolve(carsArr);
     } catch (err) {
       return Promise.reject(err);

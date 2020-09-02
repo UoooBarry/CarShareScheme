@@ -13,7 +13,7 @@ const express = require("express");
 const router = express.Router();
 const _Car = require("../repository/carRepository");
 const _Location = require("../repository/locationRepository");
-const authorize = require("../helpers/authorizationHelper");
+const {verifyToken} = require("../helpers/authorizationHelper");
 const { carValidator, validateResult } = require("../helpers/validator");
 const uploadFile = require("../helpers/Uploader");
 const multer = require("multer");
@@ -25,8 +25,7 @@ const carImageUpload = multer({
 router.get("/", (req, res) => {
   /*If qeury all = true, get all cars */
   if (req.query.all) {
-    _Car
-      .getAll()
+    _Car.getAll()
       .then((cars) => {
         res.json({ cars });
       })
@@ -34,8 +33,7 @@ router.get("/", (req, res) => {
         res.sendStatus(404);
       });
   } else {
-    _Location
-      .getAllValidateCars(req.query.from, req.query.sort, req.query.order)
+    _Location.getAllValidateCars(req.query.from, req.query.sort, req.query.order)
       .then(async (locations) => {
         res.json({ locations });
       })
@@ -46,8 +44,7 @@ router.get("/", (req, res) => {
 });
 //GET: /api/cars/:brand
 router.get("/search", (req, res) => {
-  _Car
-    .getBy(req.query.query)
+  _Car.getBy(req.query.query)
     .then((cars) => {
       res.json({ cars });
     })
@@ -59,8 +56,7 @@ router.get("/search", (req, res) => {
 
 //GET: /api/cars/:id
 router.get("/:id/", (req, res) => {
-  _Car
-    .get(req.params.id)
+  _Car.get(req.params.id)
     .then(async (car) => {
       const popularCars = await _Car.getMostViewed();
       //Push popular attribute to car json
@@ -74,11 +70,10 @@ router.get("/:id/", (req, res) => {
 });
 
 //Delete: /api/cars/:id
-router.delete("/:id/", authorize.verifyToken, (req, res) => {
+router.delete("/:id/", verifyToken, (req, res) => {
   if (!req.user.admin) res.sendStatus(403);
 
-  _Car
-    .remove(req.params.id)
+  _Car.remove(req.params.id)
     .then(() => {
       res.json({ message: "success" });
     })
@@ -92,8 +87,7 @@ router.delete("/:id/", authorize.verifyToken, (req, res) => {
 
 //GET: /api/cars/attribute/brands
 router.get("/attribute/brands", (req, res) => {
-  _Car
-    .getBrands()
+  _Car.getBrands()
     .then((brands) => {
       res.json({ brands });
     })
@@ -104,7 +98,7 @@ router.get("/attribute/brands", (req, res) => {
 });
 
 //POST: /api/cars/create
-router.post("/create", [carValidator, authorize.verifyToken], (req, res) => {
+router.post("/create", [carValidator, verifyToken], (req, res) => {
   if (!req.user.admin) res.sendStatus(403);
 
   validateResult(req)
@@ -147,7 +141,7 @@ router.post("/create", [carValidator, authorize.verifyToken], (req, res) => {
 });
 
 //PATCH: /api/cars/:id
-router.patch("/:id/", [authorize.verifyToken], (req, res) => {
+router.patch("/:id/", verifyToken, (req, res) => {
   if (!req.user.admin) res.sendStatus(403);
 
   const car = {
@@ -177,10 +171,7 @@ router.patch("/:id/", [authorize.verifyToken], (req, res) => {
 });
 
 //PATCH: /api/cars/image/:id
-router.patch(
-  "/image/:id",
-  [authorize.verifyToken, carImageUpload.single("image")],
-  (req, res) => {
+router.patch("/image/:id",[verifyToken, carImageUpload.single("image")],(req, res) => {
     console.log(req.user.admin);
     if (!req.user.admin) res.sendStatus(403);
     console.log("file name is:" + req.file.originalname);

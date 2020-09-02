@@ -14,7 +14,8 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const carsRouter = require('./routes/cars');
 const customerRouter = require('./routes/customers');
-const locationRouter = require('./routes/locations')
+const locationRouter = require('./routes/locations');
+const orderRouter = require('./routes/order');
 const cors = require('cors')
 
 // Database
@@ -35,6 +36,7 @@ app.use(cors());
 app.use('/api/cars', carsRouter);
 app.use('/api/customers', customerRouter);
 app.use('/api/locations', locationRouter);
+app.use('/api/orders', orderRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
