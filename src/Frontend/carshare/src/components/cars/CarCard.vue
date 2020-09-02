@@ -1,6 +1,6 @@
 <template>
   <div>
-    <router-link :to="{name: 'CarDetail', params:{ id }}">
+    <router-link :to="{name: 'CarDetail', params:{ id: car.id}}">
       <div
         class="card car"
         style="width: 18rem;cursor: pointer;"
@@ -10,11 +10,11 @@
         onclick="location.href='#';" 
       >
         <div class="hover-info" v-on:mousemove="draw" v-on:mouseover="hover" v-on:mouseleave="hover">
-          <img :src=" 'https://carshare-image-pbd.s3-ap-southeast-2.amazonaws.com/Car/' + car.id" alt="Car" style="width:216px; heigh: 137px" />
+          <img class="card-img" :src=" 'https://carshare-image-pbd.s3-ap-southeast-2.amazonaws.com/Car/' + car.id" alt="Car"/>
         </div>
 
         <div class="card-body">
-          <h5 class="card-title car">{{car.name}}</h5>
+          <h5 class="card-title car">{{car.model}}</h5>
           <h6 class="card-subtitle mb-2 text-muted">{{car.brand}}</h6>
           <p class="price">${{car.price}}/day</p>
         </div>
@@ -66,11 +66,9 @@ a{
 .card-img-top {
   margin-top: 0;
 }
-
 .hover-info:hover .hover-info-tip {
   display: block;
 }
-
 .hover-info-tip {
   display: none;
   margin-left: 28px;
@@ -88,16 +86,15 @@ a{
 	color: white;
   background: linear-gradient(to right, #b1bfd8 0%,  #6782b4 100%);
 }
-
-
 .card-title.car{
-
   margin-top: 8px;
     font-family: AvenirLTStd-Black;
     letter-spacing: .125rem;
     width: 100%;
 }
-
+.card-img{
+  margin:0;
+}
 .card.car {
   border-radius: 16px;
   overflow: hidden;

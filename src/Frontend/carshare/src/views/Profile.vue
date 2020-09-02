@@ -25,8 +25,8 @@
   
 <script>
 import Loading from '@/components/Loading';
-import AvatarHolder from "@/components/AvatarHolder";
-import InformationProfile from "@/components/InformationProfile";
+import AvatarHolder from "@/components/profile/AvatarHolder";
+import InformationProfile from "@/components/profile/InformationProfile";
 import authorizeMixin from '@/mixins/authorizeMixin';
 
 export default {

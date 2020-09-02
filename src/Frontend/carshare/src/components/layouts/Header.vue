@@ -5,7 +5,7 @@
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navcol-1" aria-controls="navcol-1" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-        <div class="container">
+        
             <div class="collapse navbar-collapse"
                 id="navcol-1">
                 <ul class="nav navbar-nav ml-auto">
@@ -21,7 +21,7 @@
                     <li class="nav-item" role="presentation" id="login" style="display: none"><a class="nav-link" href="/login">Login/Register</a></li>
                 </ul>
             </div>
-        </div>
+        
     </nav>
 </header>
 </template>

@@ -16,14 +16,14 @@
       <div class="hero">
         <div class="row">
           <!-- Start: Text -->
-          <div class="col-sm-5 col-md-6">
+          <div class="col-md-6">
             <h1>The new car share system is there</h1>
             <p>Get your&nbsp;favorite car anytime, any where, everything as you want</p>
             <button class="btn btn-light btn-lg action-button" type="button" v-on:click="showLogin()">LOGIN NOW <font-awesome-icon icon="angle-right" /></button>
             
           </div>
           <!-- End: Text -->
-          <div class="col-sm-5 offset-sm-2 col-md-6 offset-md-0 phone-holder">
+          <div class="col-md-6 offset-md-0 phone-holder">
             <div class="container iphone-mockup" id="picture">
               <img src="../../../public/img/elephant.jpg" />
             </div>

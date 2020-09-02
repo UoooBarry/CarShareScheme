@@ -2,8 +2,8 @@
   <div class="product-content">
     <div class="intro">
       <h3 class="title">{{car.brand}}</h3>
-      <h1>{{ car.name }}</h1>
-      <h4>{{car.model}}</h4>
+      <h1>{{car.model}}</h1>
+
       <br />
       <br />
     </div>
@@ -129,12 +129,12 @@ ul li {
   text-transform: capitalize;
 }
 .product-content {
-  min-width: 300px;
+  min-width: 600px;
   margin-top: 48px;
   margin-bottom: 128px;
-
+  display: block;
   box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.12);
-  padding: 64px;
+  padding: 32px 0 32px 32px;
   border-radius: 8px;
   background-color: #fff;
   box-sizing: border-box;

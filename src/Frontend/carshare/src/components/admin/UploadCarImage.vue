@@ -46,13 +46,12 @@ export default {
   methods: {
     bindFile() {
       this.file = this.$refs.file.files[0];
-      console.log(this.file)
     },
     upload() {
       let formData = new FormData();
       formData.append("enctype", "multipart/form-data");
       formData.append("image", this.file);
-      console.log(this.file);
+      console.log(this.header);
       this.$axios
         .patch(`${this.$carshare}/cars/image/${this.carid}`, formData, {
           headers: this.header

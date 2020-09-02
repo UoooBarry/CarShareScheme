@@ -69,7 +69,7 @@ export default {
                 title: "Login as Admin success",
                 message: `Welcome admin!`
               });
-              this.$router.push({ name: "AdminUser" });
+              this.$router.push("/admin36737123719368365255336327043632505/cars");
             } else {
               this.flashMessage.warning({
                 title: "Login fail",
