@@ -88,6 +88,12 @@ jobs:
             sh prod.env.sh > .env
             cp .env ../src/Backend/authServer
             cp .env ../src/Backend/carshare
+
+      - run:
+          name: Build Carshare server
+          command: |
+            cd src/Backend/carshare
+            npm run build
       
       - run: 
           name: Compress backend applications
