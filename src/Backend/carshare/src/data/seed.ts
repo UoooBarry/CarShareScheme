@@ -4,23 +4,16 @@
     updated:  Shuyuan Zhang,26/08/2020,updated seed dummy value
     updated:  Shuyuan Zhang,28/08/2020,updated the format and seed dummy value
     updated:  Shuyuan Zhang,29/08/2020,updated seed dummy value
+    updated:  Yongqian Huang,03/09/2020, Migrate to typescript
 */
+import Location from '../models/location';
+import Car from '../models/car';
  
-const Location = require("../models/location");
-const Car = require("../models/car");
-const Bill = require("../models/bill");
-const Rent = require("../models/rent");
- 
-module.exports = {
-  sync: async () => {
-    await Location.sync();
-    await Car.sync();
-    await Bill.sync();
-    await Rent.sync();
-  },
+export default {
   up: async () => {
+    
     var cars = await Car.findAll({ where: {} });
- 
+    
     var location = await Location.findAll({ where: {} });
  
     //add dummy location

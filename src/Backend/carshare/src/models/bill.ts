@@ -5,15 +5,20 @@
  ********************************************************/
     
 
+import { Model, Table, AutoIncrement, PrimaryKey, Column, NotEmpty } from "sequelize-typescript";
 
-import Sequelize from 'sequelize';
-import db from '../config/db';
+export interface BillI{
+    fee: number
+}
 
-const bill = db.define('bills', {
-    fee: {
-        type: Sequelize.DOUBLE
+@Table(
+    {
+        tableName: 'bills',
+        timestamps: true
     }
-});
-
-
-export default bill;
+)
+export default class Bill extends Model implements BillI{
+    @NotEmpty
+    @Column
+    fee!: number
+}

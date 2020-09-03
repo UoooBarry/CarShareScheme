@@ -1,11 +1,14 @@
 /**************************
- * @AUTHOR YONGQIAN HUANG *
+ * @AUTHOR YONGQIAN HUANG
+ * Updated in 03/09/2020 migrate to typescript *
  **************************/
-const Location = require('../models/location');
-const Car = require('../models/car');
-const {calculateDistance} = require('../helpers/distanceHelper');
+import Location from '../models/location';
+import Car from '../models/car';
+import {calculateDistance} from '../helpers/distanceHelper';
 
 class locationRepository{
+    maximumRange: number;
+
     constructor(){
         this.maximumRange = 8000; //COUNT IN M
     }
@@ -19,7 +22,7 @@ class locationRepository{
         }
     }
 
-    async getAllValidateCars(from, sort, order){
+    async getAllValidateCars(from: string, sort: string | undefined, order: string | undefined){
         try{
             let validLocation = [];
             if(!sort || !order){
@@ -29,7 +32,7 @@ class locationRepository{
             const locations = await Location.findAll({
                 attributes: ['address'],
                 include:[{
-                    model: Car,
+                    model: <any>Car,
                     where: {available: true}
                 }],
                 order: [
@@ -60,4 +63,4 @@ class locationRepository{
     }
 }
 
-module.exports = new locationRepository();
+export default new locationRepository();

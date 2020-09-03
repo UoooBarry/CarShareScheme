@@ -3,9 +3,11 @@
     updated: Yongqian Huang, 23/07/2020, Init creation
 */
 
-require('dotenv').config()
+import path from "path"
 
-module.exports = {
+require('dotenv').config({path: path.resolve(__dirname, '../../.env')})
+
+export default {
   development: {
     DBHOST: process.env.DEV_DBHOST,
     DBPORT: process.env.DEV_DBPORT,

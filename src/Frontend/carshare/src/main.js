@@ -81,7 +81,7 @@ Vue.mixin({
       let allCars = [];
       const locations = res.data.locations;
       for(const location of locations){
-        for(const car of location.cars){
+        for(const car of location.Cars){
             allCars.push(car);
         }
       }

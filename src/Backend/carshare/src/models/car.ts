@@ -4,73 +4,90 @@
  * @UPDATED: YONGQIAN HUANG, 23/07/2020, CREATION OF CAR MODEL  *
  * YONGQIAN HUANG, 23/07/2020, MIGRATION TO POSTGRESQL DATABASE *
  ****************************************************************/
-             
 
-import Sequelize from 'sequelize';
+import { Model, Table, AutoIncrement, Column, NotEmpty, BelongsTo, Default, ForeignKey, DataType } from "sequelize-typescript";
 import Location from './location';
-import db from '../config/db';
+import { IdentityStore } from "aws-sdk";
 
 
-const car = db.define('cars', {
-    name: {
-        type: Sequelize.STRING
-    },
-    brand: {
-        type: Sequelize.STRING
-    },
-    model: {
-        type: Sequelize.STRING
-    },
-    purchase_date: {
-        type: 'DATE',
-        defaultValue: new Date()
-    },
-    location_id: {
-        type: Sequelize.INTEGER
-    },
-    seats:{
-        type: Sequelize.INTEGER,
-        allowNull: false
-    },
-    luggages:{
-        type: Sequelize.INTEGER,
-        defaultValue: 3
-    },
-    doors:{
-        type: Sequelize.INTEGER,
-        defaultValue: 3
-    },
-    gear:{
-        type: Sequelize.STRING,
-        defaultValue: "automatic"
-    },
-    description:{
-        type: Sequelize.TEXT
-    },
-    addons:{
-        type: Sequelize.STRING,
-        allowNull: false
-    },
-    viewed:{
-        type: Sequelize.INTEGER,
-        defaultValue: 0
-    },
-    available: {
-        type: Sequelize.BOOLEAN,
-        defaultValue: true
-    },
-    price: {
-        type: Sequelize.DOUBLE,
-        allowNull: false
+export interface CarI{
+    id?: number | null
+    name: string
+    brand: string
+    model: string
+    purchase_date: Date
+    location_id: number
+    seats: number
+    luggages: number
+    doors: number
+    gear: string
+    description: string
+    addons: string
+    viewed: number
+    available: boolean
+    price: number
+}
+
+@Table(
+    {
+        tableName: 'cars',
+        timestamps: true
     }
-});
+)
+export default class Car extends Model implements CarI{
+    @NotEmpty
+    @Column
+    name!: string;
 
-car.belongsTo(Location, {
-    foreignKey: 'location_id'
-});
+    @NotEmpty
+    @Column
+    brand!: string;
 
-Location.hasMany(car, {
-    foreignKey: 'location_id'
-});
+    @NotEmpty
+    @Column
+    model!: string;
 
-export default car;
+    @Column
+    purchase_date!: Date;
+
+    @ForeignKey(() => Location)
+    @Column
+    location_id!: number;
+
+    @BelongsTo(() => Location, {foreignKey: 'location_id', targetKey: 'id'})
+    location!: Location;
+
+    @Column
+    seats!: number;
+
+    @Column
+    luggages!: number;
+
+    @Column
+    doors!: number;
+
+    @Default('Automation')
+    @Column
+    gear!: string;
+
+    @Column({
+        type: DataType.TEXT
+    })
+    description!: string;
+
+    @Column
+    addons!: string;
+
+    @Column
+    viewed!: number;
+
+    @Column
+    available!: boolean;
+
+    @Column({
+        type: DataType.DOUBLE
+    })
+    price!: number
+    
+}
+

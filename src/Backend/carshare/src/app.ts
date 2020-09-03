@@ -44,16 +44,20 @@ app.use((req, res, next) => {
 
 // catch database connection
 db.authenticate()
-  .then(() => console.log('Database connected...'))
+  .then(() =>{ 
+    console.log('Database connected...');
+    db.sync()
+      .then(() => {
+        seed.up().then(() => {
+          console.log('Database seeded.');
+        });    
+      });
+  })
   .catch((err: any) => console.log(`DB err: ${err}`))
 
 
-seed.sync()
-  .then(() => {
-    seed.up().then(() => {
-      console.log('Database seeded.');
-    })
-  })
+
+  
 
 
 // error handler

@@ -17,7 +17,7 @@ import ProfileValidator from '../validators/ProfileValidator';
 
 //GET /api/customers/:id
 router.get('/:id/', async (req, res) => {
-    const customer = await _Customer.getById(req.params.id);
+    const customer = await _Customer.getById(parseInt(req.params.id));
     if (customer) {
         res.json(customer);
     } else {

@@ -17,6 +17,7 @@ import {verifyToken} from '../helpers/authorizationHelper';
 import CarValidator from '../validators/CarValidator';
 import uploadFile from "../helpers/Uploader";
 import multer from 'multer';
+import Car from '../models/car';
 const carImageUpload = multer({
   dest: "uploads/cars/",
 });
@@ -27,18 +28,19 @@ router.get("/", (req: Request, res: Response) => {
   if (req.query.all) {
     _Car
       .getAll(null, null)
-      .then((cars) => {
+      .then((cars: Car[]) => {
         res.json({ cars });
       })
       .catch(() => {
         res.sendStatus(404);
       });
   } else {
-    _Location.getAllValidateCars(req.query.from, req.query.sort, req.query.order)
+    _Location.getAllValidateCars(<string>req.query.from, <string>req.query.sort, <string>req.query.order)
       .then(async (locations: any) => {
         res.json({ locations });
       })
       .catch((err) => {
+        console.log(err);
         res.sendStatus(403);
       });
   }
@@ -46,11 +48,11 @@ router.get("/", (req: Request, res: Response) => {
 //GET: /api/cars/:brand
 router.get("/search", (req: Request, res: Response) => {
   _Car
-    .getBy(req.query.query)
-    .then((cars) => {
+    .getBy(<string>req.query.query)
+    .then((cars: Car[]) => {
       res.json({ cars });
     })
-    .catch((err) => {
+    .catch((err: Error) => {
       console.log(err);
       res.sendStatus(403);
     });
@@ -59,14 +61,14 @@ router.get("/search", (req: Request, res: Response) => {
 //GET: /api/cars/:id
 router.get("/:id/", (req: Request, res: Response) => {
   _Car
-    .get(req.params.id)
+    .get(parseInt(req.params.id))
     .then(async (car: any) => {
       const popularCars = await _Car.getMostViewed();
       //Push popular attribute to car json
       car.dataValues.popular = popularCars.includes(car.id);
       res.json({ car });
     })
-    .catch((err) => {
+    .catch((err: Error) => {
       console.log(err);
       res.sendStatus(403);
     });
@@ -77,11 +79,11 @@ router.delete("/:id/", verifyToken, (req: Request, res: Response) => {
   if (!req.user.admin) res.sendStatus(403);
 
   _Car
-    .remove(req.params.id)
+    .remove(parseInt(req.params.id))
     .then(() => {
       res.json({ message: "success" });
     })
-    .catch((err) => {
+    .catch((err: any) => {
       res.json({
         message: "fail",
         err,
@@ -93,10 +95,10 @@ router.delete("/:id/", verifyToken, (req: Request, res: Response) => {
 router.get("/attribute/brands", (req: Request, res: Response) => {
   _Car
     .getBrands()
-    .then((brands) => {
+    .then((brands: Car[]) => {
       res.json({ brands });
     })
-    .catch((err) => {
+    .catch((err: any) => {
       console.log(err);
       res.sendStatus(403);
     });
@@ -134,7 +136,7 @@ router.post("/create", [ CarValidator.validate, verifyToken], (req: Request, res
           message: "success",
         });
       })
-      .catch((err) => {
+      .catch((err: Error) => {
         res.json({
           message: "fail",
           err,
@@ -160,13 +162,13 @@ router.patch("/:id/", [verifyToken], (req: Request, res: Response) => {
     doors: req.body.doors,
   };
   _Car
-    .update(req.params.id, car)
+    .update(parseInt(req.params.id), car)
     .then(() => {
       res.json({
         message: "success",
       });
     })
-    .catch((err) => {
+    .catch((err: any) => {
       res.json({
         message: "fail",
         err,

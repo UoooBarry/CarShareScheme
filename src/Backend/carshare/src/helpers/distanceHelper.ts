@@ -22,4 +22,4 @@ const calculateDistance = async (from: string, to: string) => {
 }
 
 
-module.exports = {calculateDistance};
+export {calculateDistance};
