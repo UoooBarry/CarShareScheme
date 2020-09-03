@@ -2,14 +2,14 @@
  * @AUTHOR YONGQIAN HUANG 31/08/2020 *
  *************************************/
 
-const chai = require('chai');
+import chai from 'chai';
 //Assertion style
 const assert = chai.assert;
-const app = require('../../app');
-const db = require('../../config/db');
-const Car = require('../../models/car');
-const Location = require('../../models/location');
-const chaiHttp = require('chai-http');
+import app from '../../app';
+import db from '../../config/db'
+import Car from '../../models/car';
+import Location from '../../models/location';
+import chaiHttp from 'chai-http';
 chai.use(chaiHttp);
 
 describe('/api/cars', () => {

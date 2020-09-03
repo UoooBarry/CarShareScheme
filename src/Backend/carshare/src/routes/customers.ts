@@ -68,9 +68,9 @@ router.get('/', verifyToken, async (req: Request, res: Response) => {
 });
 
 
-router.patch('/', [ProfileValidator.validate, verifyToken], async (req: Request, res: Response) => {
+router.patch('/', [ProfileValidator.validate, verifyToken], (req: Request, res: Response) => {
     const validationErrors = req.validationError;
-    if(validationErrors){
+    if(validationErrors && validationErrors.length > 0){
         res.json({
           message: "fail",
           validationErrors,
@@ -78,17 +78,17 @@ router.patch('/', [ProfileValidator.validate, verifyToken], async (req: Request,
       }else{
         /*Update customer information and return message */
         _Customer.update(req.user.id, req.body)
-        .then(() => {
-            res.json({
-                message: "success"
+            .then(() => {
+                res.json({
+                    message: "success"
+                })
             })
-        })
-        .catch((err) => {
-            console.log(err);
-            res.json({
-                message: "fail"
+            .catch((err) => {
+                console.log(err);
+                res.json({
+                    message: "fail"
+                })
             })
-        })
       }
 });
 

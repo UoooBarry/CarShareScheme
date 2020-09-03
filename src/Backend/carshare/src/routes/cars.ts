@@ -107,7 +107,7 @@ router.post("/create", [ CarValidator.validate, verifyToken], (req: Request, res
   if (!req.user.admin) res.sendStatus(403);
 
   const validationErrors = req.validationError;
-  if(validationErrors){
+  if(validationErrors && validationErrors.length > 0){
     res.json({
       message: "fail",
       validationErrors,

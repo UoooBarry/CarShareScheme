@@ -2,18 +2,18 @@
  * @AUTHOR YONGQIAN HUANG, CREATED AT 22/08/2020 *
  *************************************************/
 
-const chai = require('chai');
+import chai from 'chai';
 //Assertion style
 const assert = chai.assert;
-const app = require('../../app');
-const Customer = require('../../models/customer');
-const db = require('../../config/db');
-const chaiHttp = require('chai-http');
-const {generateAccessToken} = require('../../helpers/authorizationHelper');
+import app from '../../app';
+import Customer from '../../models/customer';
+import db from '../../config/db'
+import chaiHttp from 'chai-http';
+import {generateAccessToken} from '../../helpers/authorizationHelper';
 chai.use(chaiHttp);
 
 describe('/api/customers', () => {
-    let token;
+    let token:string;
     before(async() => {
         try{
             //Sync all database before start testing
