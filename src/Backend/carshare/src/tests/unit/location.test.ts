@@ -6,16 +6,17 @@
  ******************************************************************************/
 
 
-
-const Location = require('../../models/location');
-const Car = require('../../models/car');
-const chai = require('chai');
+import db from '../../config/db'
+import Car from '../../models/car'
+import Location from '../../models/location'
+import chai from 'chai';
 //Assertion style
 const assert = chai.assert;
  
 describe('models/location', () => {
-    before(() => {
-        Location.sync();
+    before(async() => {
+        await db.authenticate();
+        await db.sync();
     });
  
     it("creates a location", async () => {
@@ -28,11 +29,6 @@ describe('models/location', () => {
         assert.equal(rmit.address, "330 Swanston St, Melbourne, VIC");
     });
     it("delete a location", async () => {
-        await Car.destroy({
-            where: {
-                location_id: 1,
-            }
-        });
         await Location.destroy({
             where: {
                 name: "RMIT",
@@ -42,3 +38,5 @@ describe('models/location', () => {
         assert.equal(location.length, 0);
     })
 })
+
+export{}

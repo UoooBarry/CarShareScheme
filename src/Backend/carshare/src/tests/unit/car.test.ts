@@ -7,19 +7,18 @@
  ******************************************************************************/
 
 
-
-
-const Car = require('../../models/car');
-const Location = require('../../models/location');
-const chai = require('chai');
+import db from '../../config/db'
+import Car from '../../models/car'
+import Location from '../../models/location'
+import * as chai from 'chai';
 //Assertion style
 const assert = chai.assert;
  
 describe('model/car', ()=> {
     /* Clean up all data before test */
     before(async () => {
-        await Location.sync();
-        await Car.sync();
+        await db.authenticate();
+        await db.sync();
     });
  
     it("creates a car", async () => {
@@ -35,12 +34,13 @@ describe('model/car', ()=> {
                 seats: 4,
                 addons: "GPS, air conditional",
                 purchase_date: new Date(),
-                available: false
+                available: false,
+                price: 20.2
             })
                 .then((car) => {
                     assert.equal(car.name, 'Test Car'); //Car name should be equal to Test Car after created
-                    assert.equal(testcar.brand, "Test brand");  //Car brand should be equal to Test Car after created
-                    assert.equal(testcar.model, "T1"); //Car model should be equal to Test Car after created
+                    assert.equal(car.brand, "Test brand");  //Car brand should be equal to Test Car after created
+                    assert.equal(car.model, "T1"); //Car model should be equal to Test Car after created
                 })
                 .catch( (err) => {
                     assert.lengthOf(err,0); //No errors should be found
@@ -49,3 +49,5 @@ describe('model/car', ()=> {
         });
         
 });
+
+export {};
