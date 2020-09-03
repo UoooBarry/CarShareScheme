@@ -44,8 +44,6 @@ jobs:
             cd src/Backend/carshare/
             mkdir -p ../test-output
             npm run unit-test
-      - store_test_results:
-          path: src/Backend/carshare/test-results.xml
     
   integration-tests:
     docker:
