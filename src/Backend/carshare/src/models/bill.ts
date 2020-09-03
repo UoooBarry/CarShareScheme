@@ -5,10 +5,12 @@
  ********************************************************/
     
 
-import { Model, Table, AutoIncrement, PrimaryKey, Column, NotEmpty } from "sequelize-typescript";
+import { Model, Table, Column, NotEmpty, Default, DataType } from "sequelize-typescript";
 
 export interface BillI{
-    fee: number
+    id?: number | null,
+    fee: number,
+    completed: boolean
 }
 
 @Table(
@@ -19,6 +21,13 @@ export interface BillI{
 )
 export default class Bill extends Model implements BillI{
     @NotEmpty
-    @Column
+    @Column({
+        type: DataType.DOUBLE
+    })
     fee!: number
+
+
+    @Default(false)
+    @Column
+    completed!: boolean
 }

@@ -73,7 +73,7 @@ class carRepository {
       const carsArr = cars.map((car: any) => {
         return car.id;
       })
-      //Update the view number by 1
+      
       return Promise.resolve(carsArr);
     } catch (err) {
       return Promise.reject(err);
