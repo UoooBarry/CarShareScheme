@@ -7,3 +7,4 @@ src/*/*/uploads
 src/*/*/.env.production
 infra/.env
 src/server.zip
+src/*/*/dist

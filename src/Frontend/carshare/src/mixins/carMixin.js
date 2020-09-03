@@ -38,7 +38,6 @@ export default  {
             }
           })
           .then((res) => {
-            document.getElementById('allcars').classList.add('active');
             this.cars = res.data.cars;
             this.update();
           })
