@@ -1,6 +1,7 @@
 /* 
     Author: Yongqian Huang, created at: 23/07/2020
     updated: Yongqian Huang, 23/07/2020, Init creation
+     * YONGQIAN HUANG   Updated in 03/09/2020 migrate to typescript *
 */
 
 import {Sequelize} from 'sequelize-typescript';

@@ -1,6 +1,6 @@
 /******************************************************
  * @AUTHOR YONGQIAN HUANG, 19/08/2020, CAR SORT LOGIC *
- * pdated in 03/09/2020 migrate to typescript         *
+ * updated in 03/09/2020 migrate to typescript        *
  ******************************************************/
 
 import Car from '../models/car';

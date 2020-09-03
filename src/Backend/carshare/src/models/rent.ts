@@ -2,6 +2,7 @@
  *       @AUTHOR: YONGQIAN HUANG, CREATED AT: 23/07/2020        *
  * @UPDATED: YONGQIAN HUANG, 23/07/2020, CREATION OF RENT MODEL *
  *        YONGQIAN HUANG, 30/07/2020, CREATE BILL MODEL         *
+ *  YONGQIAN HUANG   Updated in 03/09/2020 migrate to typescript *
  ****************************************************************/
 
 

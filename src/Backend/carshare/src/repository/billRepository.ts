@@ -1,5 +1,6 @@
 /*************************************************
- * @AUTHOR YONGQIAN HUANG, CREATED AT 02/09/2020 *
+ * @AUTHOR YONGQIAN HUANG, CREATED AT 02/09/2020
+ * Updated in 03/09/2020 migrate to typescript    *
  *************************************************/
 
 
