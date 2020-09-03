@@ -11,7 +11,7 @@
     "integration-test:dev": "cross-env NODE_ENV=test TEST_DBHOST=localhost TEST_DBPORT=5433 TEST_DBNAME=CarShareTest TEST_DBUSER=postgres TEST_DBPASS=mbk83v ts-mocha src/tests/integration/*.ts --recursive --exit",
     "unit-test:dev": "cross-env NODE_ENV=test TEST_DBHOST=localhost TEST_DBPORT=5433 TEST_DBNAME=CarShareTest TEST_DBUSER=postgres TEST_DBPASS=mbk83v ts-mocha src/tests/unit/*.ts",
     "unit-test": "cross-env NODE_ENV=test TEST_DBHOST=localhost TEST_DBPORT=5433 TEST_DBNAME=CarShareTest TEST_DBUSER=postgres TEST_DBPASS=password ts-mocha src/tests/unit/*.ts",
-    "integration-test": "cross-env NODE_ENV=test TEST_DBHOST=localhost TEST_DBPORT=5432 TEST_DBNAME=CarShareTest TEST_DBUSER=postgres TEST_DBPASS=password ts-mocha -p ./tsconfig.json src/tests/integration/*.ts --recursive --exit"
+    "integration-test": "cross-env NODE_ENV=test TEST_DBHOST=localhost TEST_DBPORT=5432 TEST_DBNAME=CarShareTest TEST_DBUSER=postgres TEST_DBPASS=password ts-mocha src/tests/integration/*.ts --recursive --exit"
   },
   "dependencies": {
     "@types/bluebird": "^3.5.32",
