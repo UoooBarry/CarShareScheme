@@ -27,6 +27,12 @@
       become: yes
       npm: 
         path: "/usr/local/bin/Backend/carshare"
+
+    - name: Build carshare server
+      become: yes
+      command:
+        chdir: /usr/local/bin/Backend/carshare
+        cmd: /usr/bin/npm run build
     
     - name: Copy auth service systemd service file to server
       become: yes
