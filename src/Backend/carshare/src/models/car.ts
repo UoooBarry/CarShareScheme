@@ -6,10 +6,9 @@
  ****************************************************************/
              
 
-
-const Sequelize = require('sequelize');
-const Location = require('./location');
-const db = require('../config/db');
+import Sequelize from 'sequelize';
+import Location from './location';
+import db from '../config/db';
 
 
 const car = db.define('cars', {
@@ -74,4 +73,4 @@ Location.hasMany(car, {
     foreignKey: 'location_id'
 });
 
-module.exports = car;
+export default car;

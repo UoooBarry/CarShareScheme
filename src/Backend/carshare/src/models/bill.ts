@@ -6,9 +6,8 @@
     
 
 
-
-const Sequelize = require('sequelize');
-const db = require('../config/db');
+import Sequelize from 'sequelize';
+import db from '../config/db';
 
 const bill = db.define('bills', {
     fee: {
@@ -17,4 +16,4 @@ const bill = db.define('bills', {
 });
 
 
-module.exports = bill;
+export default bill;

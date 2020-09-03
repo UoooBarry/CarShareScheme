@@ -93,6 +93,7 @@ jobs:
           name: Build Carshare server
           command: |
             cd src/Backend/carshare
+            npm install -g typescript
             npm run build
       
       - run: 
