@@ -22,6 +22,16 @@ class locationRepository{
         }
     }
 
+    async get(id: number) {
+        try {
+          const location:any = await Location.findOne({ where: { id: id } });
+          console.log(location);
+          return Promise.resolve(location);
+        } catch (err) {
+          return Promise.reject(err);
+        }
+      }
+
     async getAllValidateCars(from: string, sort: string | undefined, order: string | undefined){
         try{
             let validLocation = [];

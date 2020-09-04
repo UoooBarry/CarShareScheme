@@ -16,6 +16,10 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import moment from 'moment';
 import { ToggleButton } from 'vue-js-toggle-button';
 import JwPagination  from 'jw-vue-pagination';
+import VueNumericInput from 'vue-numeric-input';
+
+//numeric input
+Vue.use(VueNumericInput)
 
 //add paginate
 Vue.component('jw-pagination', JwPagination);

@@ -16,6 +16,19 @@ router.get('/', (req: Request, res:Response) => {
           })
   });
 
+//GET: /api/locations/:id
+router.get('/:id', (req: Request, res:Response) => {
+    _Location.get(parseInt(req.params.id))
+             .then(location => {
+                res.json({
+                    location
+                })
+             })
+             .catch((error) => {
+              res.json({message: 'fail', reason: error});
+          })
+  });
+
 
 
 export default router;

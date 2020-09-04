@@ -40,7 +40,10 @@ export default {
           message: "Get car data incorrectly!"
         });
         this.$router.push({ name: "Cars" });
-      })
+      });
+  },
+  mounted() {
+ 
   }
 };
 </script>

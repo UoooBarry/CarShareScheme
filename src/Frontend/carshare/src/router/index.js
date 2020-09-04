@@ -63,6 +63,14 @@ const routes = [{
   },
 },
 {
+  path: '/checkout/:id',
+  name: 'Checkout',
+  components: {
+    header: Header,
+    main: () => import('../views/Checkout.vue')
+  },
+},
+{
   path: '/admin36737123719368365255336327043632505/',
   name: 'Admin',
   components: {
