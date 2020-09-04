@@ -1,14 +1,17 @@
 /**************
- * Unit tested by QINGKAI YI  *
+ * Unit tested by QINGKAI YI
+ * Updated at 04/09/2020 migrate to ts  *
  **************/
-const Customer = require('../../models/customer');
-const chai = require('chai');
+import Customer from '../../models/customer';
+import chai from 'chai';
+import db from '../../config/database';
 //Assertion style
 const assert = chai.assert;
 
 describe('model/customer', () => {
-    before(() => {
-        Customer.sync();
+    before(async () => {
+        await db.authenticate();
+        await db.sync();
     });
 
     it('Create a customer', ()=> {
@@ -24,7 +27,7 @@ describe('model/customer', () => {
             .then((customer) => {
                 assert.equal(customer.first_name, 'Dummy'); /**Check if customer name is correct */
                 assert.equal(customer.family_name, 'Dummy');
-                assert.equal(customer.contact_number, '123456789');
+                assert.equal(customer.contact_number, 123456789);
             })
     })
 })

@@ -1,10 +1,12 @@
+ 
 /***********************************************************************
  *           @AUTHOR: YONGQIAN HUANG, CREATED AT: 04/07/2020           *
- * @UPDATED: YONGQIAN HUANG, 04/08/2020, APPLY DATA REPOSITORY PATTERN *
+ * @UPDATED: YONGQIAN HUANG, 04/08/2020, APPLY DATA REPOSITORY PATTERN  *
+ *           Yongqian Huang, 04/09/2020, Migrate to typescript         *
  ***********************************************************************/
- 
-const Customer = require('../models/customer');
-const Login = require('../models/login');
+
+import Login from '../models/login';
+import Customer from '../models/customer';
  
 class customerRepository{
  
@@ -15,21 +17,21 @@ class customerRepository{
         const customersWithActivate = await Login.findAll({
             attributes: ['activate'],
             include: [
-                {model: Customer}
+                {model: <any>Customer}
             ]
         });
         return customersWithActivate;
     }
  
-    async getById(id){
+    async getById(id: number){
         return await Customer.findAll({where: {id: id}});
     }
  
-    async getByContact(contact){
+    async getByContact(contact:number){
         return await Customer.findAll({where: {contact_number: contact}});
     }
  
-    async create(first_name, family_name, gender, date_of_birth, contact_number){
+    async create(first_name: string, family_name: string , gender:string, date_of_birth:Date, contact_number:number ){
         //Create customer, return the promise of customer obj, if error, reject
         try{
             const customer = await Customer.create({
@@ -47,7 +49,7 @@ class customerRepository{
     }
  
     //Remove customer by ID, return a promise
-    async removeById(){
+    async removeById(id: number){
         try{
             await Customer.destroy({
                 where: {
@@ -61,4 +63,4 @@ class customerRepository{
     }
 }
  
-module.exports = new customerRepository();
+export default new customerRepository();

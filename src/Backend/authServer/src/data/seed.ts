@@ -3,14 +3,11 @@
     Update: Shuyuan Zhang, 28/08/2020, Updated seed data
 */
  
-const Customer = require("../models/customer");
-const Login = require("../models/login");
-const passwordHash = require('password-hash');
-module.exports = {
-  sync: async () => {
-    await Customer.sync();
-    await Login.sync();
-  },
+import Customer from '../models/customer';
+import Login from '../models/login';
+import passwordHash from 'password-hash';
+
+export default {
   up: async () => {
     var admin = await Customer.findAll({
       where: {

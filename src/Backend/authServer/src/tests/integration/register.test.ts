@@ -1,20 +1,22 @@
  
 /**********************************************************************
  *           AUTHOR: YONGQIAN HUANG, CREATED AT: 01/08/2020           *
- * UPDATED: YONGQIAN HUANG, 24/07/2020, INIT CREATION FOR API TESTING *
+ * UPDATED: YONGQIAN HUANG, 24/07/2020, INIT CREATION FOR API TESTING 
+ *  * Updated at 04/09/2020 migrate to ts  *                          *
  **********************************************************************/
 
 
 
-const chai = require('chai');
+import chai from 'chai';
 //Assertion style
 chai.should();
-const app = require('../../app');
-const db = require('../../config/database');
-const Customer =require('../../models/customer');
-const Login =require('../../models/login');
+import app from '../../app';
+import db from '../../config/database';
+import Customer from '../../models/customer'
+import Login from '../../models/login'
 
-const chaiHttp = require('chai-http');
+
+import chaiHttp from 'chai-http';
 chai.use(chaiHttp);
 
 

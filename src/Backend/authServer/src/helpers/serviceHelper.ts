@@ -2,12 +2,16 @@
  * @AUTHOR YONGQIAN HUANG, CREATED AT 07/08/2020 MANAGE MICROSERVICES *
  *         Yongqian Huang, Added 2FA validation                       *
  **********************************************************************/
-require('dotenv').config();
-const axios = require('axios').default;
-const cache = require('memory-cache');
-const Nexmo = require('nexmo');
 
- class serviceRepository {
+import axios from 'axios';
+import cache from 'memory-cache';
+import Nexmo from 'nexmo';
+import path from 'path';
+require('dotenv').config({path: path.resolve(__dirname, '../../.env')})
+
+ class serviceHelper {
+     expired: number;
+     nexmo: any;
     constructor(){
         //Expire time set to 1 min
         this.expired = 60 * 1000;
@@ -21,7 +25,7 @@ const Nexmo = require('nexmo');
 
     
     //Get recaptcha response from google
-    async getRecaptchaRes(user_response){
+    async getRecaptchaRes(user_response: any){
         const params = new URLSearchParams();
         params.append('secret', '6LcTY7sZAAAAAGZNzQgsa1Q9uZWpP8EThE5-tYaQ');
         params.append('response', user_response);
@@ -37,7 +41,7 @@ const Nexmo = require('nexmo');
     }
 
     /**Store the generated code to server cache memory, expired in 1 min, then send sms**/
-    async putOneCode(phone){
+    async putOneCode(phone: number){
         //Generate a one code
         const code = await this.getOneCode();
         /**Store the code */
@@ -47,7 +51,7 @@ const Nexmo = require('nexmo');
         const from = 'Car share';
         const to = `61${phone}`;
         const text = `Your one time register code is ${code}`;
-        this.nexmo.message.sendSms(from, to, text, (err,res) => {
+        this.nexmo.message.sendSms(from, to, text, (err: any,res: any) => {
             if(err)
                 console.log(err);
         });
@@ -55,7 +59,7 @@ const Nexmo = require('nexmo');
     }
 
     /**Verify if the code input is matched the phone */
-    verifyOneCode(phone, code){
+    verifyOneCode(phone: number, code: number){
         //Take the expected code by phone number
         const expected = cache.get(phone);
         if(code == expected){
@@ -66,4 +70,4 @@ const Nexmo = require('nexmo');
     }
  }
 
- module.exports = new serviceRepository();
+export default new serviceHelper();

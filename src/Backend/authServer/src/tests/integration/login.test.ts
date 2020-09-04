@@ -2,14 +2,14 @@
  * AUTHOR: YONGQIAN HUANG, CREATED AT: 12/08/2020 *
  **************************************************/
 
-const chai = require('chai');
+import chai from 'chai';
 //Assertion style
 chai.should();
 const expect = chai.expect;
-const app = require('../../app');
-const db = require('../../config/database');
-const Customer = require('../../models/customer');
-const Login = require('../../models/login');
+import app from '../../app';
+import db from '../../config/database';
+import Customer from '../../models/customer'
+import Login from '../../models/login'
 
 const chaiHttp = require('chai-http');
 chai.use(chaiHttp);
@@ -62,6 +62,7 @@ describe('POST /login', () => {
     it('Login with an deactivate account', async () => {
         //deactivate the customer account
         const login = await Login.findOne({ where: { Email: 'dummy2@gmail.com' } });
+        if(!login) throw new Error('Login not found');
         await login.update({
             activate: false
         });
