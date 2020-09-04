@@ -1,8 +1,9 @@
+<!-- Yongqian Huang updated at 04/09/2020, fixed mutated error-->
 <template>
   <div class="row">
     <div class="col">
       <ProgressionBar />
-      <Review id="review" :car="car" :day="day" v-on:update-day="update" />
+      <Review id="review" :car="car" v-on:update-day="update" />
       <Pickup id="pickup" :location="location" />
       <Payment id="payment" />
       <div class="space"></div>
@@ -42,7 +43,6 @@ export default {
   },
   methods: {
     update(day) {
-      console.log("test");
       this.day = day;
       this.subTotalKey++;
     }

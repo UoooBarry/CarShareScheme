@@ -78,8 +78,8 @@ export default {
   name: "SubTotal",
   components: {},
   props: ["car", "day"],
-  mounted() {
-      
+  methods: {
+    addDay(){}
   }
 };
 </script>
