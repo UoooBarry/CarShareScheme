@@ -41,16 +41,17 @@ window.$ = $;
 
 export default {
   name: "Review",
+  props: ['car'],
   components: {},
-  props: ["car", "day"],
   data() {
-    return {};
+    return {
+      day: 1
+    };
   },
   methods: {
     setDate() {
-      let myNumber = this.day;
-      console.log("clicked and value is" + this.day);
-      this.$emit("update-day", myNumber);
+      this.day = document.getElementById('day').value;
+      this.$emit("update-day", this.day);
     }
   },
   mounted() {}
