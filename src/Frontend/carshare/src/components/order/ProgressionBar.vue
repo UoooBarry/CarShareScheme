@@ -11,9 +11,6 @@
         <li class="step3">
           <span>Payment</span>
         </li>
-        <li class="step4">
-          <span>Success</span>
-        </li>
       </ul>
     </div>
   
@@ -70,7 +67,7 @@ body {
 
 #checkout-bar {
   position: relative;
-  width: 100%;
+  width: 99%;
   padding: 0;
   margin: 0 auto;
   list-style: none;
@@ -80,7 +77,7 @@ body {
 
 #checkout-bar li {
   position: relative;
-  width: 25%;
+  width: 33%;
   float: left;
   text-align: center;
   color: #999;
@@ -103,8 +100,7 @@ body {
 
 #checkout-bar.step1 .step1:after,
 #checkout-bar.step2 .step2:after,
-#checkout-bar.step3 .step3:after,
-#checkout-bar.step4 .step4:after {
+#checkout-bar.step3 .step3:after{
   background-color: #21a9af;
   -webkit-transition: width 2s;
   /* Safari */
@@ -133,9 +129,8 @@ body {
 
 #checkout-bar.step1:after,
 #checkout-bar.step2:after,
-#checkout-bar.step3:after,
-#checkout-bar.step4:after {
-  width: 25%;
+#checkout-bar.step3:after{
+  width: 33%;
   background-color: #21a9af;
   z-index: 2;
   -webkit-transition: width 2s;
@@ -144,14 +139,10 @@ body {
 }
 
 #checkout-bar.step2:after {
-  width: 50%;
+  width: 66%;
 }
 
 #checkout-bar.step3:after {
-  width: 75%;
-}
-
-#checkout-bar.step4:after {
   width: 100%;
 }
 

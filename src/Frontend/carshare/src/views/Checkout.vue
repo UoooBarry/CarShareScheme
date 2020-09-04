@@ -7,10 +7,11 @@
       <Pickup id="pickup" :location="location" />
       <Payment id="payment" />
       <div class="space"></div>
-      <button id="btn-progress" type="button" class="btn btn-success customize-button">Next</button>
-      <CompleteOrderButton id="btn-order" class="btn customize-button" />
+      <button id="btn-progress" type="button" class="btn btn-next customize-button">Next</button>
+
+      <CompleteOrderButton id="btn-order" />
     </div>
-    <div class="col">
+    <div class="col" style="min-height:700px">
       <SubTotal :car="car" :day="day" :key="subTotalKey" />
     </div>
   </div>
@@ -48,7 +49,6 @@ export default {
     }
   },
   async created() {
- 
     await this.$axios
       .get(`${this.$carshare}/cars/${this.$route.params.id}`)
       .then(res => {
@@ -79,14 +79,13 @@ export default {
           params: { id: this.$route.params.id }
         });
       });
-     
   },
   mounted() {
     const $ = require("jquery");
     window.$ = $;
-    $(document).ready(function() {
-      $("#btn-progress").click(function() {
-        var classes = ["step1", "step2", "step3", "step4"];
+    $(document).ready(() => {
+      $("#btn-progress").click(() => {
+        var classes = ["step1", "step2", "step3"];
         $("#checkout-bar").each(function() {
           this.className =
             classes[($.inArray(this.className, classes) + 1) % classes.length];
@@ -94,16 +93,40 @@ export default {
             $("#review").show();
             $("#pickup").hide();
             $("#payment").hide();
+            $("#btn-order").hide();
+            $("#btn-progress").show();
           } else if (this.className === "step2") {
             $("#review").hide();
             $("#pickup").show();
             $("#payment").hide();
+            $("#btn-order").hide();
+            $("#btn-progress").show();
           } else if (this.className === "step3") {
             $("#review").hide();
             $("#payment").show();
             $("#pickup").hide();
+            $("#btn-progress").hide();
+            $("#btn-order").show();
           }
         });
+      });
+
+      $("#b-2-car").click(() => {
+        $("#checkout-bar").attr("class", "step1");
+        $("#review").show();
+        $("#pickup").hide();
+        $("#payment").hide();
+        $("#btn-order").hide();
+        $("#btn-progress").show();
+      });
+
+      $("#b-2-pickup").click(() => {
+        $("#checkout-bar").attr("class", "step2");
+        $("#review").hide();
+        $("#pickup").show();
+        $("#payment").hide();
+        $("#btn-order").hide();
+        $("#btn-progress").show();
       });
     });
   }
@@ -112,6 +135,15 @@ export default {
 
 
 <style scoped>
+.btn-next {
+  font-size: 14px;
+  background-color: black;
+  color: white;
+  display: block;
+  width: 300px;
+  height: 60px;
+  font-size: 20px;
+}
 button {
   border: none;
   background: none;
@@ -122,8 +154,6 @@ button {
 .btn {
   display: inline-block;
   padding: 6px 12px;
-
-  font-size: 14px;
   font-weight: 400;
   line-height: 1.42857143;
   text-align: center;
@@ -138,7 +168,7 @@ button {
   user-select: none;
   background-image: none;
   border: 1px solid transparent;
-  border-radius: 4px;
+  border-radius: 30px;
   margin: 0 auto;
 }
 
@@ -168,7 +198,7 @@ button {
   width: 100%;
   float: left;
   clear: both;
-  height: 200px;
+  height: 80px;
 }
 
 #payment,

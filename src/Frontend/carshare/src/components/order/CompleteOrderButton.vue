@@ -1,15 +1,17 @@
 <template>
-  <div class="button">
-          <div id="anim">
-            <font-awesome-icon icon="box" class="Pack" style="color: white" />
-            <div class="Car">
-              <font-awesome-icon icon="shipping-fast" style="color: white" />
-            </div>
-            <div class="path">Please Wait...</div>
-            <a class="final">Order Placed</a>
-          </div>
-          <a href="#anim" v-on:click="toCheckout" class="text">Book Now</a>
+  <div class="container">
+    <div class="button">
+      <div id="anim">
+        <font-awesome-icon icon="box" class="Pack" style="color: white" />
+        <div class="Car">
+          <font-awesome-icon icon="shipping-fast" style="color: white" />
         </div>
+        <div class="path">Please Wait...</div>
+        <a class="final">Order Placed</a>
+      </div>
+      <a href="#anim" class="text">Book Now</a>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -30,11 +32,12 @@ export default {
   height: 60px;
   border-radius: 30px;
   background-color: black;
-  marging: 0 auto;
+  margin: 0 auto;
   z-index: 0;
   display: flex;
   cursor: pointer;
   padding: 15px;
+  margin-bottom: 90px;
 }
 .text {
   z-index: 1;

@@ -79,7 +79,7 @@ export default {
   components: {},
   props: ["car", "day"],
   methods: {
-    addDay(){}
+    addDay() {}
   }
 };
 </script>
@@ -100,11 +100,11 @@ export default {
 p {
   margin: 0;
 }
-.total-text{
+.total-text {
   font-weight: bold;
   font-size: 24px;
 }
-.my-3{
+.my-3 {
   padding-left: 30px;
 }
 </style>  

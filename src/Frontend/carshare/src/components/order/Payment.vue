@@ -1,24 +1,24 @@
 <template>
   <div class="card border-0">
     <div class="card-header card-2">
-      <p class="card-text text-muted mt-md-4 mb-2" style="font-size:30px">PAYMENT METHOD</p>
+      <p class="card-text text-muted mt-md-4 mb-2" style="font-size:30px"><font-awesome-icon icon="chevron-left" id="b-2-pickup" />PAYMENT METHOD</p>
     </div>
       <article class="card">
         <div class="card-body p-5">
           <ul class="nav  nav-pills rounded nav-fill mb-3" role="tablist">
             <li class="nav-item">
               <a class="nav-link active" data-toggle="pill" href="#nav-tab-card">
-                <i class="fa fa-credit-card"></i> Credit Card
+                 <font-awesome-icon icon="credit-card" /> Credit Card
               </a>
             </li>
             <li class="nav-item">
               <a class="nav-link" data-toggle="pill" href="#nav-tab-paypal">
-                <i class="fab fa-paypal"></i> Paypal
+                 <font-awesome-icon :icon="[ 'fab', 'paypal' ]" /> Paypal
               </a>
             </li>
             <li class="nav-item">
               <a class="nav-link" data-toggle="pill" href="#nav-tab-bank">
-                <i class="fa fa-university"></i> Bank Transfer
+                 <font-awesome-icon icon="university" /> Bank Transfer
               </a>
             </li>
           </ul>
@@ -38,9 +38,9 @@
                     <input type="text" class="form-control" name="cardNumber" placeholder />
                     <div class="input-group-append">
                       <span class="input-group-text text-muted">
-                        <i class="fab fa-cc-visa"></i>
-                        <i class="fab fa-cc-amex"></i>
-                        <i class="fab fa-cc-mastercard"></i>
+                        <font-awesome-icon :icon="[ 'fab', 'cc-visa' ]" id="visa"/> 
+                        <font-awesome-icon :icon="[ 'fab', 'cc-amex' ]" id="amex"/> 
+                        <font-awesome-icon :icon="[ 'fab', 'cc-mastercard' ]" id="master"/>
                       </span>
                     </div>
                   </div>
@@ -74,8 +74,7 @@
                     <!-- form-group.// -->
                   </div>
                 </div>
-                <!-- row.// -->
-                <button class="subscribe btn btn-primary btn-block" type="button">Confirm</button>
+              
               </form>
             </div>
             <!-- tab-pane.// -->
@@ -98,11 +97,11 @@
                 <dd>THE WORLD BANK</dd>
               </dl>
               <dl class="param">
-                <dt>Accaunt number:</dt>
+                <dt>Account number:</dt>
                 <dd>12345678912345</dd>
               </dl>
               <dl class="param">
-                <dt>IBAN:</dt>
+                <dt>BSB:</dt>
                 <dd>123456789</dd>
               </dl>
               <p>
@@ -136,6 +135,12 @@ export default {
 
 
 <style scoped>
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link{
+  background-color: black;
+}
+.nav-link {
+  color: black;
+}
 .card{
   border:none;
   margin-top: 5px;
@@ -144,5 +149,13 @@ export default {
 .card, .card-header{
   background-color:#F8F8F8;
 
+}
+#visa,#amex{
+  padding-right: 2px;
+}
+#b-2-pickup {
+  float: left;
+  margin-top: 7px;
+  cursor: pointer;
 }
 </style>  
