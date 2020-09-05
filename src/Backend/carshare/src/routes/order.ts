@@ -1,5 +1,6 @@
 /*************************************************
- * @AUTHOR YONGQIAN HUANG, CREATED AT 02/09/2020 *
+ * @AUTHOR YONGQIAN HUANG, CREATED AT 02/09/2020
+ *         Yongqian Huang, 05/09/2020, Implement payment *
  *************************************************/
 
 import express,{Request, Response} from 'express';
@@ -58,7 +59,6 @@ router.post('/create', [OrderValidator.validate, verifyToken], async (req: Reque
 // })
 
 router.post('/pay', [PaymentValidator.validate, verifyToken], async (req: Request, res: Response) => {
-    console.log('payment');
     const validationErrors = req.validationError;
     if(req.bill?.user_id != req.user.id) res.sendStatus(403);
     if(validationErrors && validationErrors.length > 0){
