@@ -32,13 +32,12 @@
         </div>
       </div>
     </div>
+    <div class="space"></div>
+    <button id="btn-progress" type="button" class="btn btn-next customize-button" @click='nextStep()' >Next</button>
   </div>
 </template>
 
 <script>
-const $ = require("jquery");
-window.$ = $;
-
 export default {
   name: "Review",
   props: ['car'],
@@ -49,6 +48,9 @@ export default {
     };
   },
   methods: {
+    nextStep(){
+      this.$emit('nextStep');
+    },
     setDate() {
       this.day = document.getElementById('day').value;
       this.$emit("update-day", this.day);
@@ -66,7 +68,7 @@ export default {
   height: 80%;
 }
 .card-body {
-  background-color: #f8f8f8;
+  background-color: #F8F8F8;
 }
 .item {
   margin-top: 30px;

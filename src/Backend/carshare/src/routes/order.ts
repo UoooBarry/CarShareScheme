@@ -27,10 +27,19 @@ router.post('/create', [OrderValidator.validate, verifyToken], async (req: Reque
             const feeToPay = req.body.period * car.price;
             //Create bill
             const bill = await _Bill.create({
+                user_id: req.user.id,
                 fee: feeToPay
             })
     
-            res.json({ bill });
+            //Create rent
+            const rent = await _Rent.create({
+                car_id: req.body.car_id,
+                user_id: req.user.id,
+                period: req.body.period,
+                bill_id: bill.id
+            });
+    
+            res.json({ bill, rent });
         }catch(err){
             res.json({
                 message: "fail",

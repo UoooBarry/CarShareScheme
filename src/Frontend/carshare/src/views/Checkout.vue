@@ -3,11 +3,9 @@
   <div class="row">
     <div class="col">
       <ProgressionBar id='progress' />
-      <Review id="review" :car="car" v-on:update-day="update"/>
-      <Pickup id="pickup" :location="location" v-on:lastStep="lastStep"/>
-      <Payment id="payment" v-on:lastStep="lastStep" />
-      <div class="space"></div>
-      <button id="btn-progress" type="button" class="btn btn-next customize-button" @click='nextStep()' >Next</button>
+      <Review id="review" :car="car" v-on:update-day="update"  v-on:nextStep='nextStep()'/>
+      <Pickup id="pickup" :location="location" v-on:lastStep="lastStep"  v-on:nextStep='nextStep()'/>
+      <Payment id="payment" v-on:lastStep="lastStep"  v-on:nextStep='nextStep()'/>
 
       <CompleteOrderButton id="btn-order" />
     </div>
@@ -121,71 +119,12 @@ export default {
 
 
 <style scoped>
-.btn-next {
-  font-size: 14px;
-  background-color: black;
-  color: white;
-  display: block;
-  width: 300px;
-  height: 60px;
-  font-size: 20px;
-}
+
 button {
   border: none;
   background: none;
 }
-.customize-button {
-  margin-bottom: 90px !important;
-}
-.btn {
-  display: inline-block;
-  padding: 6px 12px;
-  font-weight: 400;
-  line-height: 1.42857143;
-  text-align: center;
-  white-space: nowrap;
-  vertical-align: middle;
-  -ms-touch-action: manipulation;
-  touch-action: manipulation;
-  cursor: pointer;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  background-image: none;
-  border: 1px solid transparent;
-  border-radius: 30px;
-  margin: 0 auto;
-}
 
-.btn-success {
-  display: block;
-  min-width: 220px;
-  text-transform: uppercase;
-  color: #fff;
-  background-color: #5cb85c;
-  border-color: #4cae4c;
-}
-
-.btn-success:hover {
-  color: #fff;
-  background-color: #449d44;
-  border-color: #398439;
-}
-
-.btn.focus,
-.btn:focus,
-.btn:hover {
-  color: #fff;
-  text-decoration: none;
-}
-
-.space {
-  width: 100%;
-  float: left;
-  clear: both;
-  height: 80px;
-}
 
 #payment,
 #pickup,

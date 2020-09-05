@@ -116,6 +116,8 @@
         <!-- card-body.// -->
       </article>
       <!-- card.// -->
+      <div class="space"></div>
+      <button id="btn-progress" type="button" class="btn btn-next customize-button" @click='nextStep()' >Next</button>
     </div>
     <!-- row.// -->
 
@@ -130,6 +132,9 @@ export default {
     return {};
   },
   methods: {
+    nextStep(){
+      this.$emit('nextStep');
+    },
     lastStep(){
       this.$emit('lastStep');
     }
