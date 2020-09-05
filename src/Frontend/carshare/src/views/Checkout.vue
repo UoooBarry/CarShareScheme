@@ -2,7 +2,7 @@
 <template>
 <div class="container-fluid" style="max-width:80%">
     <div class="row justify-content-between">
-      <div class="col" style="max-width:800px">
+      <div class="col-auto" style="max-width:800px">
         <ProgressionBar id="progress" />
         <Review
           id="review"
