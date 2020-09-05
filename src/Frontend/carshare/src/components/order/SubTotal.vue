@@ -5,28 +5,35 @@
         class="img-fluid"
         :src=" 'https://carshare-image-pbd.s3-ap-southeast-2.amazonaws.com/Car/' + car.id"
       />
-      <div class="media-body my-auto" style="margin-left:30px">
-        <div class="row">
-          <div class="col-auto">
-            <p class="mb-0" style="font-size:30px">
-              <b>{{car.model}}</b>
-            </p>
-            <small class="text-muted" style="font-size:24px">{{car.brand}}</small>
-          </div>
+      <div class="media-body my-auto">
+        <div class="flex-column">
+          <p class="mb-0" style="font-size:26px">
+            <b>{{car.model}}</b>
+          </p>
+          <small class="text-muted" style="font-size:20px">{{car.brand}}</small>
         </div>
       </div>
     </div>
 
     <div class="col">
+      <hr class="my-3" />
+      <div class="row coupon">
+        <label class="coupon__label" for="coupon_code">Promotional code</label>
+        <div class="coupon__input">
+          <input type="text" name="coupon_code" class="coupon_input_field" value placeholder />
+        </div>
+        <a class="button coupon_button">Redeem</a>
+      </div>
+      <hr class="my-3" />
       <div class="row justify-content-between">
         <div class="col-4">
           <p>
-            <b>Promotion</b>
+            Sub Total
           </p>
         </div>
         <div class="flex-sm-col col-auto">
           <p class="mb-1">
-            <b>Promotion</b>
+            {{day}}
           </p>
         </div>
       </div>
@@ -34,25 +41,12 @@
       <div class="row justify-content-between">
         <div class="col-4">
           <p>
-            <b>Sub Total</b>
+            Extra fee
           </p>
         </div>
         <div class="flex-sm-col col-auto">
           <p class="mb-1">
-            <b>{{day}}</b>
-          </p>
-        </div>
-      </div>
-      <hr class="my-3" />
-      <div class="row justify-content-between">
-        <div class="col-4">
-          <p>
-            <b>Extra fee</b>
-          </p>
-        </div>
-        <div class="flex-sm-col col-auto">
-          <p class="mb-1">
-            <b>fee</b>
+            fee
           </p>
         </div>
       </div>
@@ -87,11 +81,12 @@ export default {
 
 <style scoped>
 .item-row {
-  width: 70%;
-  margin-top: 50px;
-  margin-left: 120px;
-  border: 1px solid gray;
-  border-radius: 25px;
+  max-width: 450px;
+  margin: 100px 10px 0 150px;
+  border-radius: 8px;
+  background-color: white;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
 }
 .img-fluid {
   margin: 30px;
@@ -106,5 +101,33 @@ p {
 }
 .my-3 {
   padding-left: 30px;
+}
+.coupon {
+  text-align: left;
+  display: flex;
+  flex-wrap: wrap;
+  padding-left: 43px;
+  padding-right: 25px;
+}
+.coupon__label {
+  width: 100%;
+  text-transform: uppercase;
+}
+.coupon__input {
+  -webkit-box-flex: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  margin-right: 8px;
+  font-size:22px;
+}
+.coupon_button {
+  height: 40px;
+  padding: 8px;
+  background-color: #d5d5d5;
+  border-color: #d5d5d5;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  text-transform: uppercase;
 }
 </style>  

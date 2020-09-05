@@ -55,7 +55,8 @@ body {
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  background-color: #F8F8F8
+  background-color: #F8F8F8;
+  margin-top:10px;
 }
 
 .checkout-wrap {

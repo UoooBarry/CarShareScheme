@@ -112,6 +112,9 @@ export default {
   -webkit-animation-duration: 5s;
 }
 /* transition of car */
+.Car{
+  font-size:20px;
+}
 @-webkit-keyframes example {
   0% {
     left: 200%;

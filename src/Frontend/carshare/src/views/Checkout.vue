@@ -1,16 +1,32 @@
 <!-- Yongqian Huang updated at 04/09/2020, fixed mutated error-->
 <template>
-  <div class="row">
-    <div class="col">
-      <ProgressionBar id='progress' />
-      <Review id="review" :car="car" v-on:update-start="updateStart" v-on:update-day="updatePeriod"  v-on:nextStep='nextStep()'/>
-      <Pickup id="pickup" :location="location" v-on:lastStep="lastStep" :period="day" v-on:createBill="createBill" :start_from="start_from"  v-on:nextStep='nextStep()'/>
-      <Payment id="payment" v-on:lastStep="lastStep" :bill='bill' v-on:nextStep='nextStep()'/>
+<div class="container-fluid" style="max-width:80%">
+    <div class="row justify-content-between">
+      <div class="col" style="max-width:800px">
+        <ProgressionBar id="progress" />
+        <Review
+          id="review"
+          :car="car"
+          v-on:update-start="updateStart"
+          v-on:update-day="updatePeriod"
+          v-on:nextStep="nextStep()"
+        />
+        <Pickup
+          id="pickup"
+          :location="location"
+          v-on:lastStep="lastStep"
+          :period="day"
+          v-on:createBill="createBill"
+          :start_from="start_from"
+          v-on:nextStep="nextStep()"
+        />
+        <Payment id="payment" v-on:lastStep="lastStep" :bill="bill" v-on:nextStep="nextStep()" />
+      </div>
+      <div class="col-auto" style="min-height:700px">
+        <SubTotal :car="car" :day="day" />
+      </div>
     </div>
-    <div class="col" style="min-height:700px">
-      <SubTotal :car="car" :day="day" />
     </div>
-  </div>
 </template>
 
 <script>
@@ -34,46 +50,45 @@ export default {
       step: 1,
       day: 1,
       location: "",
-      stepElements: '',
+      stepElements: "",
       start_from: new Date().toISOString().substring(0, 10),
-      bill: ''
+      bill: ""
     };
   },
   methods: {
     updatePeriod(day) {
       this.day = day;
     },
-    updateStart(date){
+    updateStart(date) {
       this.start_from = date;
     },
-    createBill(bill){
+    createBill(bill) {
       this.bill = bill;
     },
-    nextStep(){
-      this.step ++;
+    nextStep() {
+      this.step++;
       this.show();
     },
-    lastStep(){
-      this.step --;
-      this.show()
+    lastStep() {
+      this.step--;
+      this.show();
     },
     show() {
       //Change progress bar
-      const progressBar = document.getElementById('checkout-bar');
-      progressBar.className =`step${this.step}`;
+      const progressBar = document.getElementById("checkout-bar");
+      progressBar.className = `step${this.step}`;
 
       //Show the step elment
       const currentStepElement = this.stepElements[this.step - 1];
-      currentStepElement.style.display = 'block';
+      currentStepElement.style.display = "block";
 
       //Filter then hide other elements
-      const otherElements = this.stepElements.filter( (element) => {
+      const otherElements = this.stepElements.filter(element => {
         return element !== currentStepElement;
-      })
-      for(const element of otherElements){
-        element.style.display = 'none';
+      });
+      for (const element of otherElements) {
+        element.style.display = "none";
       }
-
     }
   },
   async created() {
@@ -110,26 +125,26 @@ export default {
   },
   mounted() {
     this.stepElements = [
-      document.getElementById('review'),
-      document.getElementById('pickup'),
-      document.getElementById('payment')
-    ]
+      document.getElementById("review"),
+      document.getElementById("pickup"),
+      document.getElementById("payment")
+    ];
   }
 };
 </script>
 
 
 <style scoped>
-
 button {
   border: none;
   background: none;
 }
-
 
 #payment,
 #pickup,
 #btn-order {
   display: none;
 }
+
+
 </style>  
