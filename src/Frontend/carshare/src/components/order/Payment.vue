@@ -1,9 +1,10 @@
 <template>
   <div class="card border-0">
     <div class="card-header card-2">
-      <p class="card-text text-muted mt-md-4 mb-2" style="font-size:30px"><font-awesome-icon icon="chevron-left" id="b-2-pickup" @click='lastStep'/>PAYMENT METHOD</p>
+      <p class="card-text text-muted mt-md-4 mb-2" style="font-size:30px">PAYMENT METHOD</p>
     </div>
       <article class="card">
+          <h3>Payment estimate: ${{bill.fee}}</h3>
         <div class="card-body p-5">
           <ul class="nav  nav-pills rounded nav-fill mb-3" role="tablist">
             <li class="nav-item">
@@ -116,8 +117,11 @@
         <!-- card-body.// -->
       </article>
       <!-- card.// -->
-      <div class="space"></div>
-      <button id="btn-progress" type="button" class="btn btn-next customize-button" @click='nextStep()' >Next</button>
+      
+      <a  @click='pay'>
+        <CompleteOrderButton id="btn-order" />
+      </a>
+      
     </div>
     <!-- row.// -->
 
@@ -125,11 +129,17 @@
 </template>
 
 <script>
+import CompleteOrderButton from "@/components/order/CompleteOrderButton";
+import authorizeMixin from '@/mixins/authorizeMixin';
 export default {
   name: "Payment",
-  components: {},
+  props: ['bill'],
+  mixins: [authorizeMixin],
+  components: {
+    CompleteOrderButton
+  },
   data() {
-    return {};
+    return {}
   },
   methods: {
     nextStep(){
@@ -137,10 +147,31 @@ export default {
     },
     lastStep(){
       this.$emit('lastStep');
-    }
-  },
-  mounted() {}
-};
+    },
+    pay(){
+      this.$axios.post(`${this.$carshare}/orders/pay`,{
+        bill_id: this.bill.id,
+        total: this.bill.fee //Not implment with pay api
+      },{headers: this.header})
+        .then((res) => {
+          if (res.data.message == "fail") {
+            res.data.errors.forEach(error => {
+              this.flashMessage.error({
+                title: "Order failed",
+                message: error
+              });
+            });
+            return;
+          }
+
+          this.flashMessage.success({
+            title: "Order confrimed!",
+            message: "Order payed successfully!"
+          });
+        });
+   }
+  }
+}
 </script>
 
 

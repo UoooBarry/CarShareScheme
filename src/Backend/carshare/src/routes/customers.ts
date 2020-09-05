@@ -73,7 +73,7 @@ router.patch('/', [ProfileValidator.validate, verifyToken], (req: Request, res: 
     if(validationErrors && validationErrors.length > 0){
         res.json({
           message: "fail",
-          validationErrors,
+          errors: validationErrors,
         });
       }else{
         /*Update customer information and return message */

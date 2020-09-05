@@ -3,14 +3,12 @@
   <div class="row">
     <div class="col">
       <ProgressionBar id='progress' />
-      <Review id="review" :car="car" v-on:update-day="update"  v-on:nextStep='nextStep()'/>
-      <Pickup id="pickup" :location="location" v-on:lastStep="lastStep"  v-on:nextStep='nextStep()'/>
-      <Payment id="payment" v-on:lastStep="lastStep"  v-on:nextStep='nextStep()'/>
-
-      <CompleteOrderButton id="btn-order" />
+      <Review id="review" :car="car" v-on:update-start="updateStart" v-on:update-day="updatePeriod"  v-on:nextStep='nextStep()'/>
+      <Pickup id="pickup" :location="location" v-on:lastStep="lastStep" :period="day" v-on:createBill="createBill" :start_from="start_from"  v-on:nextStep='nextStep()'/>
+      <Payment id="payment" v-on:lastStep="lastStep" :bill='bill' v-on:nextStep='nextStep()'/>
     </div>
     <div class="col" style="min-height:700px">
-      <SubTotal :car="car" :day="day" :key="subTotalKey" />
+      <SubTotal :car="car" :day="day" />
     </div>
   </div>
 </template>
@@ -20,7 +18,6 @@ import ProgressionBar from "@/components/order/ProgressionBar";
 import SubTotal from "@/components/order/SubTotal";
 import Pickup from "@/components/order/PickUp";
 import Payment from "@/components/order/Payment";
-import CompleteOrderButton from "@/components/order/CompleteOrderButton";
 import Review from "@/components/order/Review";
 export default {
   name: "Checkout",
@@ -29,30 +26,34 @@ export default {
     Review,
     SubTotal,
     Pickup,
-    Payment,
-    CompleteOrderButton
+    Payment
   },
   data() {
     return {
       car: "",
       step: 1,
       day: 1,
-      subTotalKey: 0,
       location: "",
-      stepElements: ''
+      stepElements: '',
+      start_from: new Date().toISOString().substring(0, 10),
+      bill: ''
     };
   },
   methods: {
-    update(day) {
+    updatePeriod(day) {
       this.day = day;
-      this.subTotalKey++;
+    },
+    updateStart(date){
+      this.start_from = date;
+    },
+    createBill(bill){
+      this.bill = bill;
     },
     nextStep(){
       this.step ++;
       this.show();
     },
     lastStep(){
-      console.log('emited');
       this.step --;
       this.show()
     },

@@ -15,6 +15,27 @@ class billRepository{
            return Promise.reject(err);
          }
     }
+
+    async get(id:number){
+      try {
+        const bill:any = await Bill.findOne({ where: { id: id } });
+        return Promise.resolve(bill);
+      } catch (err) {
+        return Promise.reject(err);
+      }
+    }
+
+    async pay(bill: Bill | undefined){
+      try {
+        if(!bill) throw 'No bill found';
+        await bill.update({
+          completed: true
+        })
+        return Promise.resolve(true);
+      } catch (err) {
+        return Promise.reject(err);
+      }
+    }
 }
 
 export default new billRepository();

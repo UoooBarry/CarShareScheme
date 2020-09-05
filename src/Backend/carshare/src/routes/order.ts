@@ -9,6 +9,7 @@ import _Rent from '../repository/rentReponsitory';
 import _Bill from '../repository/billRepository';
 import _Car from '../repository/carRepository';
 import OrderValidator from '../validators/OrderValidator';
+import PaymentValidator from '../validators/PaymentValidator';
 
 //POST: api/orders/create
 router.post('/create', [OrderValidator.validate, verifyToken], async (req: Request, res: Response) => {
@@ -17,7 +18,7 @@ router.post('/create', [OrderValidator.validate, verifyToken], async (req: Reque
     if(validationErrors && validationErrors.length > 0){
         res.json({
           message: "fail",
-          validationErrors,
+          errors: validationErrors,
         });
       }else{
         try {
@@ -35,6 +36,7 @@ router.post('/create', [OrderValidator.validate, verifyToken], async (req: Reque
             const rent = await _Rent.create({
                 car_id: req.body.car_id,
                 user_id: req.user.id,
+                start_from: req.body.start_from,
                 period: req.body.period,
                 bill_id: bill.id
             });
@@ -43,20 +45,44 @@ router.post('/create', [OrderValidator.validate, verifyToken], async (req: Reque
         }catch(err){
             res.json({
                 message: "fail",
-                err,
+                errors: err,
             });
         }
       }
 });
 
 
-//GET: api/orders/:id/
-router.post('/:id/', [verifyToken], (req: Request, res: Response) => {
+// //GET: api/orders/:id/
+// router.post('/:id/', [verifyToken], (req: Request, res: Response) => {
 
-})
+// })
 
-router.post('/pay', [verifyToken], async (req: Request, res: Response) => {
+router.post('/pay', [PaymentValidator.validate, verifyToken], async (req: Request, res: Response) => {
+    console.log('payment');
+    const validationErrors = req.validationError;
+    if(req.bill?.user_id != req.user.id) res.sendStatus(403);
+    if(validationErrors && validationErrors.length > 0){
+        res.json({
+          message: "fail",
+          errors: {validationErrors},
+        });
+      }else{
+        try{
+            //If pass payment validator
 
+            //Update bill status
+            await _Bill.pay(req.bill);
+
+            res.json({
+                message: "success"
+            })
+        }catch(err){
+            res.json({
+                message: "fail",
+                errors: {err},
+            });
+        }
+    }
 })
 
 export default router;

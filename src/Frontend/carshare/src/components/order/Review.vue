@@ -25,8 +25,14 @@
         </div>
 
         <div class="pl-0 flex-sm-col col-auto my-auto">
+          <p style="font-size:18px">
+            <b>Start from:</b><input id='startFrom' v-on:change.prevent="setStartFrom" v-model="start_from" type="date">
+          </p>
+          
+
+
           <p style="font-size:20px">
-              <input type="number" v-model="day" v-on:change.prevent="setDate" id="day" name="day" min="1" >
+              <input type="number" v-model="day" v-on:change.prevent="setPeriod" id="day" name="day" min="1" >
             <b>Days</b>
           </p>
         </div>
@@ -44,19 +50,22 @@ export default {
   components: {},
   data() {
     return {
-      day: 1
+      day: 1,
+      start_from: new Date().toISOString().substring(0, 10)
     };
   },
   methods: {
     nextStep(){
       this.$emit('nextStep');
     },
-    setDate() {
+    setPeriod() {
       this.day = document.getElementById('day').value;
       this.$emit("update-day", this.day);
+    },
+    setStartFrom(){
+      this.$emit("update-start", this.start_from);
     }
-  },
-  mounted() {}
+  }
 };
 </script>
 

@@ -17,6 +17,7 @@ export interface RentI{
     car_id: number;
     user_id: number;
     period: number;
+    start_from: Date;
     bill_id: number;
     completed: boolean;
 }
@@ -43,6 +44,10 @@ export default class Rent extends Model implements RentI{
 
     @BelongsTo(() => Car, 'car_id')
     car!: Car
+
+    @NotEmpty
+    @Column
+    start_from!: Date
 
     @NotEmpty
     @Column

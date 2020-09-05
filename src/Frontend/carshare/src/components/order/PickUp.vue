@@ -15,31 +15,62 @@
         </div>
       </div>
       <div class="form-group row">
-        <label for="inputPassword" class="col-sm-2 col-form-label font-weight-bold">Time</label>
+        <label for="inputPassword" class="col-sm-2 col-form-label font-weight-bold">Return Date</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control" />
+          <input type="input" class="form-control" :value="calculateDay(period).toISOString().substring(0, 10)" readonly/>
         </div>
       </div>
     </div>
     <div class="space"></div>
-    <button id="btn-progress" type="button" class="btn btn-next customize-button" @click='nextStep()' >Next</button>
+    <button id="btn-progress" type="button" class="btn btn-next customize-button" @click='nextStep()' >Confrim Order</button>
   </div>
 </template>
 
 <script>
+import authorizeMixin from '@/mixins/authorizeMixin';
 export default {
   name: "Pickup",
   components: {},
-  props: ["location"],
+  mixins: [authorizeMixin],
+  props: ["location", "period", "start_from"],
   data() {
     return {};
   },
   methods: {
     nextStep(){
-      this.$emit('nextStep');
+      this.$axios.post(`${this.$carshare}/orders/create`,{
+        car_id: this.$route.params.id,
+        start_from: this.start_from,
+        period: this.period,
+      },{headers: this.header})
+        .then((res) => {
+          if (res.data.message == "fail") {
+            res.data.errors.forEach(error => {
+              this.flashMessage.error({
+                title: "Order failed",
+                message: error
+              });
+            });
+            return;
+          }
+
+          this.flashMessage.success({
+            title: "Order confrimed!",
+            message: "Order confrimed successfully!"
+          });
+
+          this.$emit('createBill', res.data.bill);
+          this.$emit('nextStep');
+        })
     },
     lastStep(){
       this.$emit('lastStep');
+    },
+    calculateDay(period){
+      const date = new Date(this.start_from);
+      //Add period to days
+      date.setTime(date.getTime() + period * 86400000)
+      return date;
     }
   },
   mounted() {}
