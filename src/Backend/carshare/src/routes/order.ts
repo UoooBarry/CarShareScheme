@@ -30,15 +30,7 @@ router.post('/create', [OrderValidator.validate, verifyToken], async (req: Reque
                 fee: feeToPay
             })
     
-            //Create rent
-            const rent = await _Rent.create({
-                car_id: req.body.car_id,
-                user_id: req.user.id,
-                period: req.body.period,
-                bill_id: bill.id
-            });
-    
-            res.json({ bill, rent });
+            res.json({ bill });
         }catch(err){
             res.json({
                 message: "fail",

@@ -1,7 +1,7 @@
 <template>
   <div class="card border-0">
     <div class="card-header card-2">
-      <p class="card-text text-muted mt-md-4 mb-2" style="font-size:30px"><font-awesome-icon icon="chevron-left" id="b-2-pickup" />PAYMENT METHOD</p>
+      <p class="card-text text-muted mt-md-4 mb-2" style="font-size:30px"><font-awesome-icon icon="chevron-left" id="b-2-pickup" @click='lastStep'/>PAYMENT METHOD</p>
     </div>
       <article class="card">
         <div class="card-body p-5">
@@ -128,6 +128,11 @@ export default {
   components: {},
   data() {
     return {};
+  },
+  methods: {
+    lastStep(){
+      this.$emit('lastStep');
+    }
   },
   mounted() {}
 };

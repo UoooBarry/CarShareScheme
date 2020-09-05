@@ -3,7 +3,7 @@
     <div class="card border-0">
       <div class="card-header card-2">
         <p class="card-text text-muted mt-md-4 mb-2" style="font-size:30px">
-          <font-awesome-icon icon="chevron-left" id="b-2-car" />PICK UP INFORMATION
+          <font-awesome-icon icon="chevron-left" id="b-2-car" @click='lastStep' />PICK UP INFORMATION
         </p>
       </div>
     </div>
@@ -31,6 +31,11 @@ export default {
   props: ["location"],
   data() {
     return {};
+  },
+  methods: {
+    lastStep(){
+      this.$emit('lastStep');
+    }
   },
   mounted() {}
 };

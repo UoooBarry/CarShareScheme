@@ -2,12 +2,12 @@
 <template>
   <div class="row">
     <div class="col">
-      <ProgressionBar />
-      <Review id="review" :car="car" v-on:update-day="update" />
-      <Pickup id="pickup" :location="location" />
-      <Payment id="payment" />
+      <ProgressionBar id='progress' />
+      <Review id="review" :car="car" v-on:update-day="update"/>
+      <Pickup id="pickup" :location="location" v-on:lastStep="lastStep"/>
+      <Payment id="payment" v-on:lastStep="lastStep" />
       <div class="space"></div>
-      <button id="btn-progress" type="button" class="btn btn-next customize-button">Next</button>
+      <button id="btn-progress" type="button" class="btn btn-next customize-button" @click='nextStep()' >Next</button>
 
       <CompleteOrderButton id="btn-order" />
     </div>
@@ -37,15 +37,44 @@ export default {
   data() {
     return {
       car: "",
+      step: 1,
       day: 1,
       subTotalKey: 0,
-      location: ""
+      location: "",
+      stepElements: ''
     };
   },
   methods: {
     update(day) {
       this.day = day;
       this.subTotalKey++;
+    },
+    nextStep(){
+      this.step ++;
+      this.show();
+    },
+    lastStep(){
+      console.log('emited');
+      this.step --;
+      this.show()
+    },
+    show() {
+      //Change progress bar
+      const progressBar = document.getElementById('checkout-bar');
+      progressBar.className =`step${this.step}`;
+
+      //Show the step elment
+      const currentStepElement = this.stepElements[this.step - 1];
+      currentStepElement.style.display = 'block';
+
+      //Filter then hide other elements
+      const otherElements = this.stepElements.filter( (element) => {
+        return element !== currentStepElement;
+      })
+      for(const element of otherElements){
+        element.style.display = 'none';
+      }
+
     }
   },
   async created() {
@@ -81,54 +110,11 @@ export default {
       });
   },
   mounted() {
-    const $ = require("jquery");
-    window.$ = $;
-    $(document).ready(() => {
-      $("#btn-progress").click(() => {
-        var classes = ["step1", "step2", "step3"];
-        $("#checkout-bar").each(function() {
-          this.className =
-            classes[($.inArray(this.className, classes) + 1) % classes.length];
-          if (this.className === "step1") {
-            $("#review").show();
-            $("#pickup").hide();
-            $("#payment").hide();
-            $("#btn-order").hide();
-            $("#btn-progress").show();
-          } else if (this.className === "step2") {
-            $("#review").hide();
-            $("#pickup").show();
-            $("#payment").hide();
-            $("#btn-order").hide();
-            $("#btn-progress").show();
-          } else if (this.className === "step3") {
-            $("#review").hide();
-            $("#payment").show();
-            $("#pickup").hide();
-            $("#btn-progress").hide();
-            $("#btn-order").show();
-          }
-        });
-      });
-
-      $("#b-2-car").click(() => {
-        $("#checkout-bar").attr("class", "step1");
-        $("#review").show();
-        $("#pickup").hide();
-        $("#payment").hide();
-        $("#btn-order").hide();
-        $("#btn-progress").show();
-      });
-
-      $("#b-2-pickup").click(() => {
-        $("#checkout-bar").attr("class", "step2");
-        $("#review").hide();
-        $("#pickup").show();
-        $("#payment").hide();
-        $("#btn-order").hide();
-        $("#btn-progress").show();
-      });
-    });
+    this.stepElements = [
+      document.getElementById('review'),
+      document.getElementById('pickup'),
+      document.getElementById('payment')
+    ]
   }
 };
 </script>

@@ -48,4 +48,5 @@ Bill.hasOne(Rent,{
     foreignKey: 'bill_id'
 })
 
+
 export default db;

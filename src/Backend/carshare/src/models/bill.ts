@@ -6,10 +6,12 @@
  ********************************************************/
     
 
-import { Model, Table, Column, NotEmpty, Default, DataType } from "sequelize-typescript";
+import { Model, Table, Column, NotEmpty, Default, DataType, ForeignKey, BelongsTo } from "sequelize-typescript";
+import Customer from './customer';
 
 export interface BillI{
     id?: number | null,
+    user_id: number,
     fee: number,
     completed: boolean
 }
@@ -27,6 +29,12 @@ export default class Bill extends Model implements BillI{
     })
     fee!: number
 
+    @ForeignKey(() => Customer)
+    @Column
+    user_id!: number
+
+    @BelongsTo(() => Customer)
+    user!: Customer
 
     @Default(false)
     @Column
