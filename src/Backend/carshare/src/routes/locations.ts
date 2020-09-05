@@ -1,3 +1,9 @@
+/*******************************************************
+ *   @AUTHOR: YONGQIAN HUANG, CREATED AT: 23/07/2020   *
+ * @UPDATED: YONGQIAN HUANG, 23/07/2020, INIT CREATION 
+ *           Yongqian Huang, 03/09/2020, Migrate to ts*
+ * *******************************************************/
+
 import express,{Request, Response} from 'express';
 const router = express.Router();
 import _Location from '../repository/locationRepository';
