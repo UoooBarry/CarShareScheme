@@ -26,7 +26,8 @@ router.post('/create', [OrderValidator.validate, verifyToken], async (req: Reque
             const car = await _Car.get(req.body.car_id);
             if(!car.available) throw 'The car does not available yet';
     
-            const feeToPay = req.body.period * car.price;
+            const feeToPay = (req.body.period * car.price).toFixed(2);
+
             //Create bill
             const bill = await _Bill.create({
                 user_id: req.user.id,
