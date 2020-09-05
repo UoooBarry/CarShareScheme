@@ -1,5 +1,6 @@
 /**************************
- * @AUTHOR YONGQIAN HUANG *
+ * @AUTHOR YONGQIAN HUANG 
+ * @UPDATE Bach Dao       *
  **************************/
 import Vue from 'vue'
 import VueRouter from 'vue-router'

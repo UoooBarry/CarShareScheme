@@ -1,6 +1,10 @@
-<!-- @Author
-     Yongqian Huang updated at 27/08/2020 Add location check to display cars
- -->
+ /***********************************************************************
+ *           @AUTHOR: Bach Dao, CREATED AT: 23/09/2020                  *
+ *   Bach Dao, Updated AT: 24/08/2020      sorting                      *
+ *   Bach Dao, Updated AT: 25/08/2020      navigation layout            *
+ *   Bach Dao, Updated AT: 27/08/2020      tool tips                    *  
+ *Yongqian Huang updated at 27/08/2020 Add location check to display cars*
+ ***********************************************************************/
 <template>
   <div>
     <Loading :key="loadingKey" />

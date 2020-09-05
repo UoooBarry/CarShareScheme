@@ -1,3 +1,7 @@
+/*************************************************
+ * @AUTHOR YONGQIAN HUANG, CREATED AT 02/09/2020
+ * Updated Bach Dao, 03/09/2020, Get Location by ID *
+ *************************************************/
 import express,{Request, Response} from 'express';
 const router = express.Router();
 import _Location from '../repository/locationRepository';

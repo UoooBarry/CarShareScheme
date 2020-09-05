@@ -1,6 +1,7 @@
 /**************************
  * @AUTHOR YONGQIAN HUANG
  * Updated in 03/09/2020 migrate to typescript *
+ * Updated in 03/09/2020 Bach Dao get location by ID*
  **************************/
 import Location from '../models/location';
 import Car from '../models/car';
@@ -10,7 +11,7 @@ class locationRepository{
     maximumRange: number;
 
     constructor(){
-        this.maximumRange = 8000; //COUNT IN M
+        this.maximumRange = 20000; //COUNT IN M
     }
 
     async getAll(){
