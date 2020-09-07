@@ -10,10 +10,10 @@ import { Model, Table, Column, NotEmpty, Default, DataType, ForeignKey, BelongsT
 import Customer from './customer';
 
 export interface BillI{
-    id?: number | null,
-    user_id: number,
-    fee: number,
-    completed: boolean
+    id?: number | null;
+    user_id: number;
+    fee: number;
+    isPaid: boolean;
 }
 
 @Table(
@@ -38,5 +38,5 @@ export default class Bill extends Model implements BillI{
 
     @Default(false)
     @Column
-    completed!: boolean
+    isPaid!: boolean
 }

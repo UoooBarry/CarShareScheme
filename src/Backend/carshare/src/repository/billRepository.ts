@@ -29,7 +29,7 @@ class billRepository{
       try {
         if(!bill) throw 'No bill found';
         await bill.update({
-          completed: true
+          isPaid: true
         })
         return Promise.resolve(true);
       } catch (err) {

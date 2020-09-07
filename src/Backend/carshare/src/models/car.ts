@@ -8,7 +8,6 @@
 
 import { Model, Table, AutoIncrement, Column, NotEmpty, BelongsTo, Default, ForeignKey, DataType } from "sequelize-typescript";
 import Location from './location';
-import { IdentityStore } from "aws-sdk";
 
 
 export interface CarI{

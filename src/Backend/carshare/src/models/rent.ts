@@ -18,8 +18,9 @@ export interface RentI{
     user_id: number;
     period: number;
     start_from: Date;
+    isPicked: boolean;
     bill_id: number;
-    completed: boolean;
+    isCompleted: boolean;
 }
 
 @Table(
@@ -63,7 +64,9 @@ export default class Rent extends Model implements RentI{
 
     @Default(false)
     @Column
-    completed!: boolean
+    isPicked!: boolean
 
-
+    @Default(false)
+    @Column
+    isCompleted!: boolean
 }

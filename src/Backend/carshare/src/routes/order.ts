@@ -59,6 +59,24 @@ router.post('/create', [OrderValidator.validate, verifyToken], async (req: Reque
 
 // })
 
+
+// GET: /api/cars/
+// Get all orders of the current user
+router.get('/',[verifyToken], (req: Request, res: Response) => {
+    _Rent.getByUserId(req.user.id) 
+            .then((rents) => {
+                res.json({
+                    rents
+                });
+            })
+            .catch((err) => {
+                res.json({
+                    message: "fail",
+                    errors: err,
+                });
+            })
+});
+
 router.post('/pay', [PaymentValidator.validate, verifyToken], async (req: Request, res: Response) => {
     const validationErrors = req.validationError;
     if(req.bill?.user_id != req.user.id) res.sendStatus(403);
