@@ -1,5 +1,6 @@
 /***********************************************************************
- *           @AUTHOR: Bach Dao, CREATED AT: 03/09/2020                *
+*           @AUTHOR: Shuyuan Zhang, CREATED AT: 03/09/2020            *
+ *           @AUTHOR: Bach Dao, CREATED AT: 04/09/2020                *
  ***********************************************************************/
 <template>
   <div class="card border-0">
