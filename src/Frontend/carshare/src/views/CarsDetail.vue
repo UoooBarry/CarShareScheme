@@ -1,3 +1,8 @@
+/***********************************************************************
+ *           @AUTHOR: Bach Dao, CREATED AT: 03/09/2020                 *
+ *   Bach Dao, Updated AT: 04/08/2020      added 2 components          *
+ *   Bach Dao, Updated AT: 04/08/2020      description for car         *
+ ***********************************************************************/
 <template>
   <div class="container">
     <div class="row">
@@ -40,7 +45,10 @@ export default {
           message: "Get car data incorrectly!"
         });
         this.$router.push({ name: "Cars" });
-      })
+      });
+  },
+  mounted() {
+ 
   }
 };
 </script>

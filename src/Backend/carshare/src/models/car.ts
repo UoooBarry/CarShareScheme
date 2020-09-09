@@ -2,7 +2,9 @@
 /****************************************************************
  *       @AUTHOR: YONGQIAN HUANG, CREATED AT: 23/07/2020        *
  * @UPDATED: YONGQIAN HUANG, 23/07/2020, CREATION OF CAR MODEL  *
- * YONGQIAN HUANG, 23/07/2020, MIGRATION TO POSTGRESQL DATABASE *
+ * YONGQIAN HUANG, 23/07/2020, MIGRATION TO POSTGRESQL DATABASE
+ * Bach Dao, 24/08/2020, Change data type, Add more properties for Car*
+ * YONGQIAN HUANG   Updated in 03/09/2020 migrate to typescript *
  ****************************************************************/
 
 import { Model, Table, AutoIncrement, Column, NotEmpty, BelongsTo, Default, ForeignKey, DataType } from "sequelize-typescript";

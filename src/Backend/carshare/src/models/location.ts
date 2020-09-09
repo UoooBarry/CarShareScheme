@@ -1,7 +1,8 @@
  
 /********************************************************************
  *         @AUTHOR: YONGQIAN HUANG, CREATED AT: 23/07/2020          *
- * @UPDATED: YONGQIAN HUANG, 23/07/2020, CREATION OF LOCATION MODEL *
+ * @UPDATED: YONGQIAN HUANG, 23/07/2020, CREATION OF LOCATION MODEL 
+ *   YONGQIAN HUANG   Updated in 03/09/2020 migrate to typescript **
  ********************************************************************/
 
 

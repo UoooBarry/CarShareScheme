@@ -22,6 +22,12 @@
       become: yes
       npm:
         path: "/usr/local/bin/Backend/authServer"
+
+    - name: Build authentication server
+      become: yes
+      command:
+        chdir: /usr/local/bin/Backend/authServer
+        cmd: /usr/bin/npm run build
     
     - name: Install carshare server dependencies
       become: yes

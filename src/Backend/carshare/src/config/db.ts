@@ -1,6 +1,7 @@
 /* 
     Author: Yongqian Huang, created at: 23/07/2020
     updated: Yongqian Huang, 23/07/2020, Init creation
+     * YONGQIAN HUANG   Updated in 03/09/2020 migrate to typescript *
 */
 
 import {Sequelize} from 'sequelize-typescript';
@@ -10,6 +11,8 @@ import path from 'path';
 
 import Location from '../models/location';
 import Car from '../models/car';
+import Bill from '../models/bill';
+import Rent from '../models/rent';
 
 const env = process.env.NODE_ENV || 'development';
 const config = envConfigs[env];
@@ -39,4 +42,11 @@ Location.hasMany(Car, {
     sourceKey: 'id',
     foreignKey: 'location_id'
 })
+
+Bill.hasOne(Rent,{
+    sourceKey: 'id',
+    foreignKey: 'bill_id'
+})
+
+
 export default db;

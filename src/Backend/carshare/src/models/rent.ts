@@ -2,6 +2,7 @@
  *       @AUTHOR: YONGQIAN HUANG, CREATED AT: 23/07/2020        *
  * @UPDATED: YONGQIAN HUANG, 23/07/2020, CREATION OF RENT MODEL *
  *        YONGQIAN HUANG, 30/07/2020, CREATE BILL MODEL         *
+ *  YONGQIAN HUANG   Updated in 03/09/2020 migrate to typescript *
  ****************************************************************/
 
 
@@ -15,8 +16,8 @@ export interface RentI{
     id?: number | null;
     car_id: number;
     user_id: number;
-    location_id: number;
     period: number;
+    start_from: Date;
     bill_id: number;
     completed: boolean;
 }
@@ -45,12 +46,8 @@ export default class Rent extends Model implements RentI{
     car!: Car
 
     @NotEmpty
-    @ForeignKey(() => Location)
     @Column
-    location_id!: number
-
-    @BelongsTo(() => Location, 'location_id')
-    location!: Location
+    start_from!: Date
 
     @NotEmpty
     @Column
