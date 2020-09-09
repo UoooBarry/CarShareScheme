@@ -79,7 +79,7 @@ jobs:
           name: Setup
           command: |
             mkdir -p artifacts
-            npm install -g typescript
+            sudo npm install -g typescript
       
       - run:
           name: Config dot env
