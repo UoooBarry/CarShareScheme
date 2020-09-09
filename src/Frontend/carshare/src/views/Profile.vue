@@ -1,6 +1,7 @@
 /***********************************************************************
- *           @AUTHOR: Bach Dao, CREATED AT: 11/08/2020           *
- *           @AUTHOR: Bach Dao, Updated AT: 15/08/2020                *
+ *           @AUTHOR: Bach Dao, CREATED AT: 11/08/2020                *
+ * @AUTHOR: Bach Dao, Updated AT: 15/08/2020   Fetch Data, update profile to database*
+* @AUTHOR: Bach Dao, Updated AT: 20/08/2020  Fix responsive layout    *          
  ***********************************************************************/
 <template>
   <div class="profile">

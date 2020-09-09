@@ -2,6 +2,7 @@
  *   @AUTHOR: YONGQIAN HUANG, CREATED AT: 23/07/2020   *
  * @UPDATED: YONGQIAN HUANG, 23/07/2020, INIT CREATION 
  *           Yongqian Huang, 03/09/2020, Migrate to ts*
+ * * Updated Bach Dao, 03/09/2020, Get Location by ID *
  * *******************************************************/
 
 import express,{Request, Response} from 'express';

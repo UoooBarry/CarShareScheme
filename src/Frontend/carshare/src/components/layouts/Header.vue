@@ -1,3 +1,6 @@
+/***********************************************************************
+ *           @AUTHOR: Bach Dao, Updated AT: 13/08/2020                *
+ ***********************************************************************/
 <template>
   <header>
     <nav class="navbar navbar-light navbar-expand-md navbar-transparency">

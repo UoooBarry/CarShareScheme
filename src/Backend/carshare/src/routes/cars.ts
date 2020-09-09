@@ -4,6 +4,7 @@
  *  YONGQIAN HUANG, 23/07/2020, MIGRATE TO POSTGRESQL  *
  *  Yongqian Huang. 17/08/2020, Car listing and description
  *  Yongqian Huang. 19/08/2020, Car creating endpoint   *
+ *  Bach Dao. 27/08/2020, Get car by id/all endpoint  *
  * Yongqian Huang. 28/08/2020, Car creating Validation  *
  * Yongqian Huang, 29/08/2020, Add car share image upload
  * Yongqian Huang, 02/09/2020, Return if the car is popular*

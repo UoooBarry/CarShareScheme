@@ -1,3 +1,10 @@
+/***********************************************************************
+ *           @AUTHOR: Bach Dao, CREATED AT: 03/09/2020                *
+  *   Bach Dao, Updated AT: 03/08/2020  Create components transition  *
+ *   Bach Dao, Updated AT: 04/08/2020      fix layouts                *
+ *  Yongqian Huang updated at 04/09/2020   fixed mutated error        *
+*   Bach Dao, Updated AT: 06/08/2020  Create animation of complete button *
+ ***********************************************************************/
 <!-- Yongqian Huang updated at 04/09/2020, fixed mutated error-->
 <template>
 <div class="container-fluid" style="max-width:80%">
