@@ -41,7 +41,7 @@
               <div class="form-group">
                 <label for="cardNumber">Card number</label>
                 <div class="input-group">
-                  <input type="text" class="form-control" name="cardNumber" placeholder />
+                  <input type="text" class="form-control" name="cardNumber" id='cardNumber' placeholder />
                   <div class="input-group-append">
                     <span class="input-group-text text-muted">
                       <font-awesome-icon :icon="[ 'fab', 'cc-visa' ]" id="visa" />
@@ -60,8 +60,8 @@
                       <span class="hidden-xs">Expiration</span>
                     </label>
                     <div class="input-group">
-                      <input type="number" class="form-control" placeholder="MM" name />
-                      <input type="number" class="form-control" placeholder="YY" name />
+                      <input type="number" class="form-control" placeholder="MM" id='mm' name />
+                      <input type="number" class="form-control" placeholder="YY" id='yy' name />
                     </div>
                   </div>
                 </div>
@@ -75,7 +75,7 @@
                       CVV
                       <font-awesome-icon icon="question-circle" id="tooltip-target-1" />
                     </label>
-                    <input type="number" class="form-control" required />
+                    <input type="number" class="form-control" id='cvv' required />
                   </div>
                   <!-- form-group.// -->
                 </div>
