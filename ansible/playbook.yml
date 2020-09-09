@@ -34,11 +34,6 @@
       npm: 
         path: "/usr/local/bin/Backend/carshare"
 
-    - name: Setup permission
-      become: yes
-      command:
-        cmd: sudo chown -R $USER /usr/local/lib/node_modules
-
     - name: Build carshare server
       become: yes
       command:
