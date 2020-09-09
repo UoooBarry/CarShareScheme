@@ -1,5 +1,7 @@
-<!-- @Author Yongqian Huang, created at 1/08/2020
- -->
+/***********************************************************************
+ *           @AUTHOR: Yongqian Huang, CREATED AT: 01/08/2020           *
+*           @Update: Bach Dao     : 03/08/2020                          *
+ ***********************************************************************/
 <template>
   <div class="container">
     <div class="login-card">

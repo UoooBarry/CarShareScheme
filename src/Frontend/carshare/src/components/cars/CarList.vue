@@ -1,8 +1,11 @@
+/***********************************************************************
+ *           @AUTHOR: Bach Dao, Created AT: 24/08/2020                *
+ ***********************************************************************/
 <template>
   <div class="carlist container" >
     <div class="row">
       <div v-for="(car) in pageOfItems" v-bind:key="car.id" class="col-sm-3 car">
-        <CarCard v-bind:car="car" />
+        <CarCard v-bind:car="car" style="max-width: 100%"/>
       </div>
     </div>
     <div class="page-footer"  :if="cars">

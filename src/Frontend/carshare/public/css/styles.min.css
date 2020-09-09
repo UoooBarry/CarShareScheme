@@ -58,6 +58,72 @@ html, body {
   width: 100%;
 }
 
+
+.btn {
+  display: inline-block;
+  padding: 6px 12px;
+  font-weight: 400;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 30px;
+  margin: 0 auto;
+}
+
+.customize-button {
+  margin-bottom: 90px !important;
+}
+
+.btn-success {
+  display: block;
+  min-width: 220px;
+  text-transform: uppercase;
+  color: #fff;
+  background-color: #5cb85c;
+  border-color: #4cae4c;
+}
+
+.btn-success:hover {
+  color: #fff;
+  background-color: #449d44;
+  border-color: #398439;
+}
+
+.btn.focus,
+.btn:focus,
+.btn:hover {
+  color: #fff;
+  text-decoration: none;
+}
+
+.btn-next {
+  background-color: black !important;
+  color: white !important;
+  display: block !important;
+  width: 300px !important;
+  height: 60px !important;
+  font-size: 20px;
+}
+
+
+.space {
+  background-color: #F8F8F8;
+  width: 100%;
+  float: left;
+  clear: both;
+  height: 80px;
+}
+
 .footer-dark {
   padding: 20px 0;
   color: #f0f9ff;
@@ -91,7 +157,7 @@ html, body {
 
 .parallax{
         /* Set a specific height */
-  height: 800px;
+  min-height: 800px;
 
   /* Create the parallax scrolling effect */
   background-attachment: fixed;

@@ -1,6 +1,7 @@
 /***********************************************************************
- *           @AUTHOR: Bach Dao, CREATED AT: 11/08/2020           *
- *           @AUTHOR: Bach Dao, Updated AT: 15/08/2020                *
+ *           @AUTHOR: Bach Dao, CREATED AT: 11/08/2020                *
+ * @AUTHOR: Bach Dao, Updated AT: 15/08/2020   Fetch Data, update profile to database*
+* @AUTHOR: Bach Dao, Updated AT: 20/08/2020  Fix responsive layout    *          
  ***********************************************************************/
 <template>
   <div class="profile">
@@ -25,8 +26,8 @@
   
 <script>
 import Loading from '@/components/Loading';
-import AvatarHolder from "@/components/AvatarHolder";
-import InformationProfile from "@/components/InformationProfile";
+import AvatarHolder from "@/components/profile/AvatarHolder";
+import InformationProfile from "@/components/profile/InformationProfile";
 import authorizeMixin from '@/mixins/authorizeMixin';
 
 export default {

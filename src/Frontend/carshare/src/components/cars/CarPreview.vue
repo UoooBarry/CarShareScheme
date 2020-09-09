@@ -1,6 +1,9 @@
+/***********************************************************************
+ *           @AUTHOR: Bach Dao, Created AT: 24/08/2020                *
+ ***********************************************************************/
 <template>
   <div class="tip">
-    <div class="tip-header">Car name: {{car.name}}</div>
+    <div class="tip-header">{{car.name}}</div>
     <div class="row">Car brand: {{car.brand}}</div>
     <div class="row">Car model: {{car.model}}</div>
     <div class="row">Bought in: {{car.purchase_date}}</div>
@@ -36,7 +39,7 @@ export default {
     margin: 0;
     font-weight: bold;
     color: white;
-    background: linear-gradient(to right,  #a9a0a0 0%, #c9c5bf 100%);
+    background: linear-gradient(to right,  #8f8787 0%, #dfdad3 100%);
 }
 .tip {
   min-width: 250px;

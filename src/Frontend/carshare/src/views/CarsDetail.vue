@@ -1,56 +1,67 @@
+/***********************************************************************
+ *           @AUTHOR: Bach Dao, CREATED AT: 03/09/2020                 *
+ *   Bach Dao, Updated AT: 04/08/2020      added 2 components          *
+ *   Bach Dao, Updated AT: 04/08/2020      description for car         *
+ ***********************************************************************/
 <template>
   <div class="container">
     <div class="row">
-      <div class="col car-description">
+      <div class="col-lg car-description">
         <CarDescription :car="car" />
       </div>
-      <div class="col">
+      <div class="col-md">
         <CarContent :car="car" />
       </div>
     </div>
+    <BackToTop />
   </div>
 </template>
 
 <script>
-import CarContent from '@/components/cars/CarContent';
-import CarDescription from '@/components/cars/CarDescription';
+import BackToTop from "@/components/BackToTop";
+import CarContent from "@/components/cars/CarContent";
+import CarDescription from "@/components/cars/CarDescription";
 export default {
   name: "CarDetail",
   components: {
     CarContent,
-    CarDescription
+    CarDescription,
+    BackToTop
   },
-  data(){
-    return{
-      car: ''
-    }
+  data() {
+    return {
+      car: ""
+    };
   },
-  created(){
-    this.$axios.get(`${this.$carshare}/cars/${this.$route.params.id}`)
-              .then((res) => {
-                this.car = res.data.car;
-              })
-              .catch(() => {
-                this.flashMessage.error({
-                  title: 'Fail',
-                  message: 'Get car data incorrectly!'
-                });
-                this.$router.push({name: 'Cars'});
-              })
+  created() {
+    this.$axios
+      .get(`${this.$carshare}/cars/${this.$route.params.id}`)
+      .then(res => {
+        this.car = res.data.car;
+      })
+      .catch(() => {
+        this.flashMessage.error({
+          title: "Fail",
+          message: "Get car data incorrectly!"
+        });
+        this.$router.push({ name: "Cars" });
+      });
+  },
+  mounted() {
+ 
   }
-}
+};
 </script>
 
 
 <style scoped>
-.container{
-  min-width: 1500px;
+.container {
+  min-width: 1200px;
 }
-.row{
+.row {
   min-height: 800px;
 }
-.car-description{
+.car-description {
   margin-right: 200px;
 }
-
 </style>  

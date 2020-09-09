@@ -1,5 +1,6 @@
 /**************************
- * @AUTHOR YONGQIAN HUANG *
+ * @AUTHOR YONGQIAN HUANG 
+ * @UPDATE Bach Dao       *
  **************************/
 import Vue from 'vue'
 import VueRouter from 'vue-router'
@@ -60,6 +61,14 @@ const routes = [{
   components: {
     header: Header,
     main: () => import('../views/About.vue')
+  },
+},
+{
+  path: '/checkout/:id',
+  name: 'Checkout',
+  components: {
+    header: Header,
+    main: () => import('../views/Checkout.vue')
   },
 },
 {

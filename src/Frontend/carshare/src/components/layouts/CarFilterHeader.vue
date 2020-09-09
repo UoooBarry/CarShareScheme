@@ -1,74 +1,111 @@
+/***********************************************************************
+ *           @AUTHOR: Bach Dao, CREATED AT: 24/08/2020                *
+ ***********************************************************************/
 <template>
-  <header>
+  <div>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      Filter:
+      <a class="navbar-brand">Filter:</a>
       <button
         class="navbar-toggler"
         type="button"
         data-toggle="collapse"
-        data-target="#navbarTogglerDemo02"
-        aria-controls="navbarTogglerDemo02"
+        data-target="#carnav"
+        aria-controls="carnav"
         aria-expanded="false"
         aria-label="Toggle navigation"
       >
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-          <div class="btn-group btn-group-toggle" data-toggle="buttons">
+      <div class="collapse navbar-collapse" id="carnav">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
             <label class="btn btn-outline-dark">
               <input type="radio" name="sort" checked value="default" @click="filter('name','ASC')" /> Default (By range)
             </label>
+          </li>
 
-            <div class="dropdown show">
-              <a class="btn btn-outline-dark" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">By Price</a>
+          <li class="nav-item dropdown">
+            <label class="btn btn-outline-dark">
+              <a
+                class="nav-link dropdown-toggle"
+                style="padding: 0;"
+                role="button"
+                id="dropdownMenuLink"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >By Price</a>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                 <a class="dropdown-item" @click="filter('price','ASC')">From Low</a>
                 <a class="dropdown-item" @click="filter('price','DESC')">From High</a>
               </div>
-            </div>
-
-            <label class="btn btn-outline-dark">
-              <input type="radio" name="sort" autocomplete="off" @click="filter('createdAt','DESC')" /> By Newest
             </label>
+          </li>
 
+          <li class="nav-item">
+            <label class="btn btn-outline-dark">
+              <input
+                type="radio"
+                name="sort"
+                autocomplete="off"
+                @click="filter('createdAt','DESC')"
+              /> By Newest
+            </label>
+          </li>
+
+          <li class="nav-item">
             <label class="btn btn-outline-dark">
               <input type="radio" name="sort" autocomplete="off" @click="filter('brand','DESC')" /> By Brand
             </label>
+          </li>
 
-
+          <li class="nav-item">
             <label class="btn btn-outline-dark">
               <input type="radio" name="sort" autocomplete="off" @click="filter('viewed','DESC');" /> By popular
             </label>
+          </li>
 
-            <LocationFilter :address="address" v-on:onAddressChange="changeAddress" />
-               
+          <li class="nav-item">
+            <label class="btn btn-outline-dark">
+              <input type="radio" name="sort" value="default" @click="allCar" /> All cars
+            </label>
+          </li>
+          <LocationFilter :address="address" v-on:onAddressChange="changeAddress" />
+          <div class="col-sm-3.5 my-1 btn">
+          <form class="form-inline" @submit.prevent="search">
+            <input
+              class="form-control mr-sm-2"
+              type="search"
+              placeholder="Search"
+              v-model="searchItem"
+            />
+            <button
+              class="btn btn-outline-success my-2 my-sm-0"
+              type="submit"
+              v-on:click="update"
+            >Search</button>
+          </form>
           </div>
         </ul>
-        <form class="form-inline my-2 my-lg-0"  @submit.prevent="search">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search" v-model="searchItem" />
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit"  v-on:click="update">Search</button>
-        </form>
-
       </div>
     </nav>
-  </header>
+  </div>
 </template>
 
 <script>
-import LocationFilter from '@/components/cars/LocaltionFilter';
-import CarMixin from '@/mixins/carMixin';
+import LocationFilter from "@/components/cars/LocaltionFilter";
+import CarMixin from "@/mixins/carMixin";
 export default {
   name: "CarFilterHeader",
-  mixins:[CarMixin],
-  props:['address'],
-  components:{
+  mixins: [CarMixin],
+  props: ["address"],
+  components: {
     LocationFilter
   },
-  methods:{
-    changeAddress(address){
-      this.$emit('onAddressChange', address);
+  methods: {
+    changeAddress(address) {
+      this.$emit("onAddressChange", address);
     }
   }
 };
@@ -91,6 +128,13 @@ export default {
   background-color: #a9a0a0;
   border-color: #a9a0a0;
 }
+
+.btn-outline-success:activate {
+  color: #fff;
+  background-color: #a9a0a0;
+  border-color: #a9a0a0;
+}
+
 .nav-item {
   margin-left: 20px;
 }
@@ -112,5 +156,25 @@ export default {
   color: #fff;
   background-color: #a9a0a0;
   border-color: #a9a0a0;
+}
+
+.btn-outline-dark.active {
+  background-color: #a9a0a0;
+  border-color: #a9a0a0;
+}
+
+.btn-outline-dark.active a {
+  color: #fff !important;
+}
+.dropdown-item {
+  cursor: pointer;
+}
+
+input[type="radio"] {
+  display: none;
+}
+.mr-sm-2 {
+  width: 70%;
+  border-radius: 0;
 }
 </style>

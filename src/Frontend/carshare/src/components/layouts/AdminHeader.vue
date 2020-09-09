@@ -1,3 +1,6 @@
+/***********************************************************************
+ *           @AUTHOR: Bach Dao, CREATED AT: 11/08/2020                *
+ ***********************************************************************/
 <template>
   <header>
     <nav id="mainHeader" class="navbar navbar-light navbar-expand-md navbar-transparency">
