@@ -72,7 +72,7 @@ router.beforeEach((to, from, next) => {
     // if not, redirect to login page.
     if (sessionStorage.getItem("authToken") === null) {
       next({
-        path: "/",
+        path: "/login",
       });
     } else {
       next();
