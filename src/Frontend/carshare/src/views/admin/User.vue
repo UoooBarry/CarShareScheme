@@ -4,7 +4,7 @@
 <template >
   <div>
     <div class="container">
-      <UserList v-bind:customers="this.customers" class='user-list'/>
+      <UserList v-bind:customers="this.customers" class='user-list' v-if='this.customers.length > 0'/>
     </div>
   </div>
 </template>

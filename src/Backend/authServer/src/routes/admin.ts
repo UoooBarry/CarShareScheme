@@ -14,11 +14,7 @@ import {verifyToken} from '../helpers/authorizationHelper';
 
 //GET /api/admin/verify return if an token holder is an admin
 router.get('/verify', verifyToken, (req: Request,res: Response) => {
-  if(req.user.admin){
-    res.json({authorize: true});
-  }else{
-    res.json({authorize: false});
-  }
+  res.json({authorize: req.user.admin});
 });
 
 //GET /api/admin/customers, return all customers with activate status
