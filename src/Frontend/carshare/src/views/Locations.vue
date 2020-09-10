@@ -1,5 +1,6 @@
 <template>
     <div class='container main'>
+        <h1>Nearest return location</h1>
         <LocationTable :locations='locations' />
     </div>
     
