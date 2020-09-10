@@ -1,5 +1,6 @@
 <template>
     <div class='container main'>
+        <Loading />
         <h1>Nearest return location</h1>
         <LocationTable :locations='locations' />
     </div>
@@ -7,6 +8,7 @@
 </template>
 
 <script>
+import Loading from '@/components/Loading';
 import LocationTable from '@/components/locations/locationTable'
 export default {
     name: 'Locations',
@@ -17,7 +19,8 @@ export default {
         }
     },
     components:{
-        LocationTable
+        LocationTable,
+        Loading
     },
     created(){
         navigator.geolocation.getCurrentPosition(position => {

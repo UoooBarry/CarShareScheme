@@ -5,6 +5,7 @@
 
 
 import Bill from '../models/bill';
+import {RentStatus} from '../models/rent'
 
 class billRepository{
    async create(bill: any){
@@ -30,7 +31,7 @@ class billRepository{
         if(!bill) throw 'No bill found';
         await bill.update({
           isPaid: true
-        })
+        });
         return Promise.resolve(true);
       } catch (err) {
         return Promise.reject(err);

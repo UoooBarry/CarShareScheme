@@ -12,15 +12,21 @@ import Car from './car';
 import Customer from './customer';
 import Bill from './bill';
 
+export enum RentStatus{
+    NotPicked = 'Not picked',
+    InProgress = 'In progress',
+    Completed = 'Completed',
+    Overdue = 'Overdue'
+}
+
 export interface RentI{
     id?: number | null;
     car_id: number;
     user_id: number;
     period: number;
     start_from: Date;
-    isPicked: boolean;
     bill_id: number;
-    isCompleted: boolean;
+    status: RentStatus
 }
 
 @Table(
@@ -62,11 +68,7 @@ export default class Rent extends Model implements RentI{
     @BelongsTo(() => Bill, 'bill_id')
     bill!: Bill
 
-    @Default(false)
+    @Default(RentStatus.NotPicked)
     @Column
-    isPicked!: boolean
-
-    @Default(false)
-    @Column
-    isCompleted!: boolean
+    status!: RentStatus
 }

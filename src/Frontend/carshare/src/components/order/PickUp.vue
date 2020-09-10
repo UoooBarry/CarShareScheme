@@ -12,7 +12,7 @@
     </div>
     <div class="location-form">
       <div class="form-group row">
-        <label for="inputPassword" class="col-sm-2 col-form-label font-weight-bold">Location</label>
+        <label for="inputPassword" class="col-sm-2 col-form-label font-weight-bold">Pick up location</label>
         <div class="col-sm-10">
           <input type="text" v-model="location.name" class="form-control" readonly />
         </div>

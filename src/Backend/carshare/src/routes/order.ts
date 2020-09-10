@@ -6,11 +6,13 @@
 import express,{Request, Response} from 'express';
 const router = express.Router();
 import {verifyToken} from '../helpers/authorizationHelper';
+import {BillType} from '../models/bill'
 import _Rent from '../repository/rentReponsitory';
 import _Bill from '../repository/billRepository';
 import _Car from '../repository/carRepository';
 import OrderValidator from '../validators/OrderValidator';
 import PaymentValidator from '../validators/PaymentValidator';
+import billRepository from '../repository/billRepository';
 
 //POST: api/orders/create
 router.post('/create', [OrderValidator.validate, verifyToken], async (req: Request, res: Response) => {
@@ -31,7 +33,8 @@ router.post('/create', [OrderValidator.validate, verifyToken], async (req: Reque
             //Create bill
             const bill = await _Bill.create({
                 user_id: req.user.id,
-                fee: feeToPay
+                fee: feeToPay,
+                type: BillType.RentFee
             })
     
             //Create rent
@@ -88,7 +91,7 @@ router.post('/pay', [PaymentValidator.validate, verifyToken], async (req: Reques
       }else{
         try{
             //If pass payment validator
-
+            
             //Update bill status
             await _Bill.pay(req.bill);
 
