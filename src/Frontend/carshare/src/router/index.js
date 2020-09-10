@@ -61,6 +61,17 @@ const routes = [{
   },
 },
 {
+  path: '/receipt',
+  name: 'Receipt',
+  components: {
+    header: Header,
+    main: () => import('../views/Receipt.vue')
+  },
+  meta: {
+    requiresAuth: true
+  }
+},
+{
   path: '/locations',
   name: 'Locations',
   components: {

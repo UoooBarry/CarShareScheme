@@ -48,6 +48,7 @@ export default {
       },{headers: this.header})
         .then((res) => {
           if (res.data.message == "fail") {
+            console.log(res.data);
             res.data.errors.forEach(error => {
               this.flashMessage.error({
                 title: "Order failed",
@@ -62,6 +63,7 @@ export default {
             message: "Order confrimed successfully!"
           });
 
+          this.$emit('createRent', res.data.rent);
           this.$emit('createBill', res.data.bill);
           this.$emit('nextStep');
         })

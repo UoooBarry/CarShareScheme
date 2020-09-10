@@ -57,10 +57,18 @@ router.post('/create', [OrderValidator.validate, verifyToken], async (req: Reque
 });
 
 
-// //GET: api/orders/:id/
-// router.post('/:id/', [verifyToken], (req: Request, res: Response) => {
-
-// })
+//GET: api/orders/:id/
+router.get('/:id/', [verifyToken], (req: Request, res: Response) => {
+    _Rent.getById(req.params.id)
+            .then((rent) => {
+                if(rent?.user_id != req.user.id) throw 'Not correct user';
+                res.json({rent});
+            })
+            .catch((err) => {
+                console.log(err)
+                res.sendStatus(404);
+            })
+})
 
 
 // GET: /api/cars/

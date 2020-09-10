@@ -136,7 +136,7 @@ import CompleteOrderButton from "@/components/order/CompleteOrderButton";
 import authorizeMixin from "@/mixins/authorizeMixin";
 export default {
   name: "Payment",
-  props: ["bill"],
+  props: ["bill", "rent"],
   mixins: [authorizeMixin],
   components: {
     CompleteOrderButton
@@ -175,9 +175,7 @@ export default {
           });
           result = false
       }
-      
-      
-      console.log(expireDate);
+
       return result;
     },
     nextStep(){
@@ -204,10 +202,16 @@ export default {
               return;
             }
 
+            sessionStorage.setItem('rent_id', this.rent.id);
+            
             this.flashMessage.success({
               title: "Order confrimed!",
               message: "Order payed successfully!"
             });
+            this.$router.push({
+              name: "Receipt"
+            });
+            console.log(this.rent.id);
           });
         }
    }

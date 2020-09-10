@@ -5,6 +5,8 @@
 
 import Rent from '../models/rent';
 import Bill from '../models/bill';
+import Car from '../models/car';
+import Location from '../models/location';
 
 class rentRepository{
     async create(rent: any){
@@ -14,6 +16,28 @@ class rentRepository{
          } catch (err) {
            return Promise.reject(err);
          }
+    }
+
+    async getById(rent_id?: string){
+      try{
+        if(!rent_id) throw 'No id'; 
+        const result = await Rent.findOne({
+          where:{id: rent_id},
+          include: [{
+            model: Bill
+          },
+          {
+            model: Car,
+            include:[{
+              model: Location
+            }]
+          }
+        ]
+        });
+        return Promise.resolve(result);
+      }catch (err) {
+        return Promise.reject(err);
+      }
     }
 
     async getByUserId(user_id: number){
