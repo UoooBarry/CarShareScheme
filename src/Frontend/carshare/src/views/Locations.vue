@@ -1,5 +1,5 @@
 <template>
-    <div class='container'>
+    <div class='container main'>
         <LocationTable :locations='locations' />
     </div>
     
@@ -46,3 +46,10 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+.main{
+    margin-top: 20px;
+    min-height: 800px;
+}
+</style>
