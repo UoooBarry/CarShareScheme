@@ -61,6 +61,14 @@ const routes = [{
   },
 },
 {
+  path: '/locations',
+  name: 'Locations',
+  components: {
+    header: Header,
+    main: () => import('../views/Locations.vue')
+  },
+},
+{
   path: '/checkout/:id',
   name: 'Checkout',
   components: {
