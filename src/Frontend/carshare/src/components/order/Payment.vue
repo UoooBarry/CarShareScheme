@@ -211,7 +211,6 @@ export default {
             this.$router.push({
               name: "Receipt"
             });
-            console.log(this.rent.id);
           });
         }
    }
