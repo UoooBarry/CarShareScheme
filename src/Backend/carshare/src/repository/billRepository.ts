@@ -69,7 +69,7 @@ class billRepository{
         const bill = Bill.findAll({
           where: {
             isPaid: false,
-            createdAt: {[Op.lt]: new Date}
+            createdAt: {[Op.lt]: new Date()}
           },
           include:[{
             model: Rent,
