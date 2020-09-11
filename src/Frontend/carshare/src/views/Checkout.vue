@@ -23,11 +23,12 @@
           :location="location"
           v-on:lastStep="lastStep"
           :period="day"
+          v-on:createRent="creatRent"
           v-on:createBill="createBill"
           :start_from="start_from"
           v-on:nextStep="nextStep()"
         />
-        <Payment id="payment" v-on:lastStep="lastStep" :bill="bill" v-on:nextStep="nextStep()" />
+        <Payment id="payment" v-on:lastStep="lastStep" :bill="bill" :rent="rent" v-on:nextStep="nextStep()" />
       </div>
       <div class="col-auto" style="min-height:700px">
         <SubTotal :car="car" :day="day" />
@@ -59,7 +60,8 @@ export default {
       location: "",
       stepElements: "",
       start_from: new Date().toISOString().substring(0, 10),
-      bill: ""
+      bill: "",
+      rent: ''
     };
   },
   methods: {
@@ -71,6 +73,9 @@ export default {
     },
     createBill(bill) {
       this.bill = bill;
+    },
+    creatRent(rent){
+      this.rent = rent;
     },
     nextStep() {
       this.step++;

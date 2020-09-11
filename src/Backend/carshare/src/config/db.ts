@@ -25,7 +25,7 @@ const db = new Sequelize({
     username: config.DBUSER,
     password: config.DBPASS,
     host: config.DBHOST,
-    port: <any>config.DBPORT,
+    port: <number>parseInt(config.DBPORT) || 5432,
     dialect: <any>config.dialect,
     logging: false,
     pool: {

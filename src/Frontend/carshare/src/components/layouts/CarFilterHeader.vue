@@ -16,12 +16,11 @@
       >
         <span class="navbar-toggler-icon"></span>
       </button>
-
       <div class="collapse navbar-collapse" id="carnav">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
             <label class="btn btn-outline-dark">
-              <input type="radio" name="sort" checked value="default" @click="filter('name','ASC')" /> Default (By range)
+              <input type="radio" name="sort" value="default" @click="filter('name','ASC')"  checked/> Default (By range)
             </label>
           </li>
 
@@ -48,6 +47,7 @@
               <input
                 type="radio"
                 name="sort"
+                value='newest'
                 autocomplete="off"
                 @click="filter('createdAt','DESC')"
               /> By Newest
@@ -56,19 +56,19 @@
 
           <li class="nav-item">
             <label class="btn btn-outline-dark">
-              <input type="radio" name="sort" autocomplete="off" @click="filter('brand','DESC')" /> By Brand
+              <input type="radio" name="sort" autocomplete="off" value='brand' @click="filter('brand','DESC')" /> By Brand
             </label>
           </li>
 
           <li class="nav-item">
             <label class="btn btn-outline-dark">
-              <input type="radio" name="sort" autocomplete="off" @click="filter('viewed','DESC');" /> By popular
+              <input type="radio" name="sort" autocomplete="off" value='popular' @click="filter('viewed','DESC');" /> By popular
             </label>
           </li>
 
           <li class="nav-item">
             <label class="btn btn-outline-dark">
-              <input type="radio" name="sort" value="default" @click="allCar" /> All cars
+              <input type="radio" name="sort" value="all" @click="allCar" /> All cars
             </label>
           </li>
           <LocationFilter :address="address" v-on:onAddressChange="changeAddress" />

@@ -30,4 +30,12 @@ describe('/api/cars', () => {
                             done();
                         })
     })
+
+    it('Get all melbourne Cars', (done) => {
+        chai.request(app).get('/api/cars?from=Melbourne,VIC')   
+                        .end((err,res) => {
+                            assert.equal(200, res.status);
+                            done();
+                        })
+    })
 })

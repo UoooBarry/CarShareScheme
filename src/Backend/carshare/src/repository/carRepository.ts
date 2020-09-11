@@ -120,6 +120,18 @@ class carRepository {
       return Promise.reject(err);
     }
   }
+
+  async deactivate(id: number){
+    try {
+      const car = await Car.findOne({where: {id: id}});
+      await car?.update({
+        available: false
+      })
+      return Promise.resolve(true);
+    } catch (err) {
+      return Promise.reject(err);
+    }
+  }
 }
 
 export default new carRepository();

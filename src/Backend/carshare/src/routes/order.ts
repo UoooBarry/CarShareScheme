@@ -1,16 +1,19 @@
 /*************************************************
  * @AUTHOR YONGQIAN HUANG, CREATED AT 02/09/2020
- *         Yongqian Huang, 05/09/2020, Implement payment *
+ *         Yongqian Huang, 05/09/2020, Implement payment
+ *         Yongqian Huang, 11/09/2020, Send receipt message *
  *************************************************/
 
 import express,{Request, Response} from 'express';
 const router = express.Router();
 import {verifyToken} from '../helpers/authorizationHelper';
-import _Rent from '../repository/rentReponsitory';
+import {BillType} from '../models/bill'
+import _Rent from '../repository/rentRepository';
 import _Bill from '../repository/billRepository';
 import _Car from '../repository/carRepository';
 import OrderValidator from '../validators/OrderValidator';
 import PaymentValidator from '../validators/PaymentValidator';
+import Message from '../helpers/messageHelper';
 
 //POST: api/orders/create
 router.post('/create', [OrderValidator.validate, verifyToken], async (req: Request, res: Response) => {
@@ -31,7 +34,8 @@ router.post('/create', [OrderValidator.validate, verifyToken], async (req: Reque
             //Create bill
             const bill = await _Bill.create({
                 user_id: req.user.id,
-                fee: feeToPay
+                fee: feeToPay,
+                type: BillType.RentFee
             })
     
             //Create rent
@@ -42,6 +46,8 @@ router.post('/create', [OrderValidator.validate, verifyToken], async (req: Reque
                 period: req.body.period,
                 bill_id: bill.id
             });
+
+            await _Car.deactivate(car.id);
     
             res.json({ bill, rent });
         }catch(err){
@@ -54,10 +60,36 @@ router.post('/create', [OrderValidator.validate, verifyToken], async (req: Reque
 });
 
 
-// //GET: api/orders/:id/
-// router.post('/:id/', [verifyToken], (req: Request, res: Response) => {
+//GET: api/orders/:id/
+router.get('/:id/', [verifyToken], (req: Request, res: Response) => {
+    _Rent.getById(req.params.id)
+            .then((rent) => {
+                if(rent?.user_id != req.user.id) throw 'Not correct user';
+                res.json({rent});
+            })
+            .catch((err) => {
+                console.log(err)
+                res.sendStatus(404);
+            })
+})
 
-// })
+
+// GET: /api/cars/
+// Get all orders of the current user
+router.get('/',[verifyToken], (req: Request, res: Response) => {
+    _Rent.getByUserId(req.user.id) 
+            .then((rents) => {
+                res.json({
+                    rents
+                });
+            })
+            .catch((err) => {
+                res.json({
+                    message: "fail",
+                    errors: err,
+                });
+            })
+});
 
 router.post('/pay', [PaymentValidator.validate, verifyToken], async (req: Request, res: Response) => {
     const validationErrors = req.validationError;
@@ -70,9 +102,13 @@ router.post('/pay', [PaymentValidator.validate, verifyToken], async (req: Reques
       }else{
         try{
             //If pass payment validator
-
+            
             //Update bill status
             await _Bill.pay(req.bill);
+
+            //Send message to user
+            const text: string = `Thanks for order our rent services. Your rent will start at ${req.bill?.rent.start_from}. You will soon receive a detail receipt in your email`;
+            Message.sendMessage(req.user.contact_number, text);
 
             res.json({
                 message: "success"

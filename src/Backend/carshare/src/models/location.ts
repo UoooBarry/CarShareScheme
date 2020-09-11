@@ -12,6 +12,7 @@ export interface LocationI{
     id?: number | null;
     name: string;
     address: string;
+    distance?: number | null;
 }
 
 @Table(
@@ -28,4 +29,6 @@ export default class Location extends Model implements LocationI{
     @NotEmpty
     @Column
     address!: string;
+
+    distance!: number;
 }

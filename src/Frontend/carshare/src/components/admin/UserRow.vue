@@ -3,14 +3,14 @@
  ***********************************************************************/
 <template>
     <div>
-        <div class="item">{{ customer.customer.first_name }}</div>
-        <div class="item">{{ customer.customer.family_name }}</div>
+        <div class="item">{{ customer.user.first_name }}</div>
+        <div class="item">{{ customer.user.family_name }}</div>
         <div
           class="item"
-        >{{ customer.customer.date_of_birth === null? "null" : customer.customer.date_of_birth }}</div>
-        <div class="item">{{ customer.customer.contact_number }}</div>
-        <div class="item">{{ customer.customer.createdAt | formatDate }}</div>
-        <div class="item">{{ customer.customer.updatedAt | formatDate}}</div>
+        >{{ customer.user.date_of_birth === null? "null" : customer.user.date_of_birth }}</div>
+        <div class="item">{{ customer.user.contact_number }}</div>
+        <div class="item">{{ customer.user.createdAt | formatDate }}</div>
+        <div class="item">{{ customer.user.updatedAt | formatDate}}</div>
         <div class="item">
          
           <div class="form-check pl-0">
@@ -32,7 +32,7 @@ export default {
     props: ['customer'],
     methods:{
         activate() {
-            this.$axios.patch(`${this.$admin}/activate/${this.customer.customer.id}`, {}, {headers: this.header})
+            this.$axios.patch(`${this.$admin}/activate/${this.customer.user.id}`, {}, {headers: this.header})
                         .then((res) => {
                              this.flashMessage.info({
                                 title: 'Messsage',
