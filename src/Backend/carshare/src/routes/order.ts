@@ -7,12 +7,11 @@ import express,{Request, Response} from 'express';
 const router = express.Router();
 import {verifyToken} from '../helpers/authorizationHelper';
 import {BillType} from '../models/bill'
-import _Rent from '../repository/rentReponsitory';
+import _Rent from '../repository/rentRepository';
 import _Bill from '../repository/billRepository';
 import _Car from '../repository/carRepository';
 import OrderValidator from '../validators/OrderValidator';
 import PaymentValidator from '../validators/PaymentValidator';
-import billRepository from '../repository/billRepository';
 
 //POST: api/orders/create
 router.post('/create', [OrderValidator.validate, verifyToken], async (req: Request, res: Response) => {
@@ -45,6 +44,8 @@ router.post('/create', [OrderValidator.validate, verifyToken], async (req: Reque
                 period: req.body.period,
                 bill_id: bill.id
             });
+
+            await _Car.deactivate(car.id);
     
             res.json({ bill, rent });
         }catch(err){

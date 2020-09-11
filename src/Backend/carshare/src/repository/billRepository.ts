@@ -5,7 +5,8 @@
 
 
 import Bill from '../models/bill';
-import {RentStatus} from '../models/rent'
+import Rent, {RentStatus} from '../models/rent'
+import Car from '../models/car';
 
 class billRepository{
    async create(bill: any){
@@ -19,7 +20,15 @@ class billRepository{
 
     async get(id:number){
       try {
-        const bill:any = await Bill.findOne({ where: { id: id } });
+        const bill:any = await Bill.findOne({ 
+          where: { id: id },
+          include:[{
+            model: Rent,
+            include:[{
+              model: Car
+            }]
+          }]
+         });
         return Promise.resolve(bill);
       } catch (err) {
         return Promise.reject(err);
@@ -34,6 +43,22 @@ class billRepository{
         });
         return Promise.resolve(true);
       } catch (err) {
+        return Promise.reject(err);
+      }
+    }
+
+    async getAll(){
+      try{
+        const bill = Bill.findAll({
+          include:[{
+            model: Rent,
+            include:[{
+              model: Car
+            }]
+          }]
+        })
+        return Promise.resolve(bill);
+      }catch (err) {
         return Promise.reject(err);
       }
     }

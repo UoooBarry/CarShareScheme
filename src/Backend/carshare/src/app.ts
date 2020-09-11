@@ -17,6 +17,7 @@ import customerRouter from './routes/customers';
 import locationRouter from './routes/locations';
 import orderRouter from './routes/order';
 import cors from 'cors';
+import CleanBillTask from './tasks/cleanBillTask';
 
 
 // Database
@@ -58,9 +59,9 @@ db.authenticate()
   .catch((err: any) => console.log(`DB err: ${err}`))
 
 
-
-  
-
+//Tasks
+const cleanBill = new CleanBillTask(24);
+cleanBill.run();
 
 // error handler
 app.use( (err: any, req: Request, res: Response, next: NextFunction) => {

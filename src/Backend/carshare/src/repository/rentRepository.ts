@@ -7,6 +7,7 @@ import Rent from '../models/rent';
 import Bill from '../models/bill';
 import Car from '../models/car';
 import Location from '../models/location';
+import Customer from '../models/customer';
 
 class rentRepository{
     async create(rent: any){
@@ -25,6 +26,9 @@ class rentRepository{
           where:{id: rent_id},
           include: [{
             model: Bill
+          },
+          {
+            model: Customer
           },
           {
             model: Car,
