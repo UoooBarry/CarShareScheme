@@ -74,9 +74,9 @@ router.get('/:id/', [verifyToken], (req: Request, res: Response) => {
 })
 
 
-// GET: /api/cars/
+// GET: /api/cars/personal
 // Get all orders of the current user
-router.get('/',[verifyToken], (req: Request, res: Response) => {
+router.get('/personal',[verifyToken], (req: Request, res: Response) => {
     _Rent.getByUserId(req.user.id) 
             .then((rents) => {
                 res.json({
@@ -90,6 +90,42 @@ router.get('/',[verifyToken], (req: Request, res: Response) => {
                 });
             })
 });
+
+// GET: /api/cars/
+// Get all orders for admin
+router.get('/', [verifyToken], (req: Request, res: Response) => {
+    if(!req.user.admin) res.sendStatus(403);
+    _Rent.getAll()
+            .then((rents) => {
+                res.json({
+                    rents
+                });
+            })
+            .catch((err) => {
+                res.json({
+                    message: "fail",
+                    errors: err,
+                });
+            })
+})
+
+//PATCH: /api/cars/return/:id
+router.patch('/return', [verifyToken], (req: Request, res: Response) => {
+    if(!req.user.admin) res.sendStatus(403);
+    _Rent.return(req.body.rent_id)
+            .then(() => {
+                res.json({
+                    message: 'success'
+                });
+            })
+            .catch((err) => {
+                res.json({
+                    message: "fail",
+                    errors: err,
+                });
+                console.log(err);
+            })
+})
 
 router.post('/pay', [PaymentValidator.validate, verifyToken], async (req: Request, res: Response) => {
     const validationErrors = req.validationError;

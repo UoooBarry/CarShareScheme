@@ -3,7 +3,7 @@
  * Updated in 03/09/2020 migrate to typescript   *
  *************************************************/
 
-import Rent from '../models/rent';
+import Rent, {RentStatus} from '../models/rent';
 import Bill from '../models/bill';
 import Car from '../models/car';
 import Location from '../models/location';
@@ -32,6 +32,7 @@ class rentRepository{
           },
           {
             model: Car,
+            attributes: ['id', 'name', 'location_id'],
             include:[{
               model: Location
             }]
@@ -55,6 +56,48 @@ class rentRepository{
             }]
           });
         return Promise.resolve(result);
+      }catch (err) {
+        return Promise.reject(err);
+      }
+    }
+
+    async getAll(){
+      try{
+        const result = await Rent.findAll({
+          order: [["id", "ASC"]],
+          include: [
+            {
+              model: Bill
+            },
+            {
+              model: Car,
+              attributes: ['id', 'name', 'location_id', 'available'],
+              include:[{
+                model: Location
+              }]
+            }
+        ]
+        });
+      return Promise.resolve(result);
+      }catch (err) {
+        return Promise.reject(err);
+      }
+    }
+
+    async return(id: number){
+      try{
+        const rent = await Rent.findOne({
+          where: {id: id},
+          include: [
+            {
+              model: Car
+            }
+          ]
+        });
+        if(!rent) throw 'No rent error';
+        await rent.update({status: RentStatus.Completed});
+        await rent.car.update({available: true});
+        return Promise.resolve(true);
       }catch (err) {
         return Promise.reject(err);
       }

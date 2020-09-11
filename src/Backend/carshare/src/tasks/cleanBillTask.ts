@@ -34,6 +34,7 @@ export default class cleanBillTask implements TaskI{
         }
         console.log('Cleaning task finished.' + ` ${tasks} cleaned...`);
      }
+     
      run(): void {
          setInterval(() => {
              this.task();
