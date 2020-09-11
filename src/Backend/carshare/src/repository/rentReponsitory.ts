@@ -6,6 +6,8 @@
 
 import Rent from '../models/rent'
 import Bill from '../models/bill';
+import Car from '../models/car';
+import Location from '../models/location';
 class rentRepostiory {
   async create(rent: any) {
     try {
@@ -22,6 +24,12 @@ class rentRepostiory {
         where: { user_id: id },
         include: [{
           model: <any>Bill
+        }, {
+          model: <any>Car,
+          include:[{
+            model: <any>Location
+          }]
+          
         }], order: [["createdAt", "DESC"]],
       });
       return Promise.resolve(result);

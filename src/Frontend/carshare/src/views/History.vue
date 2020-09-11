@@ -4,45 +4,50 @@
 <template >
   <div>
     <div class="container">
-      <UserList v-bind:customers="this.customers" class='user-list'/>
+      <RentList v-bind:rents="this.rents" class='user-list'/>
     </div>
   </div>
 </template>
 
 <script>
 import authorizeMixin from "@/mixins/authorizeMixin";
-import UserList from "@/components/admin/UserList";
+import RentList from "@/components/rent/RentList";
 
 export default {
   name: "User",
   components: {
-    UserList
+    RentList
   },
   mixins: [authorizeMixin],
   data() {
     return {
-      customers: []
+      rents: []
     }
   },
   async created() {
-    const response = await this.$axios.get(`${this.$admin}/customers/`, {
+    const response = await this.$axios.get(`${this.$carshare}/orders/`, {
       headers: this.header
     });
-    this.customers = response.data.customers;
+    this.rents = response.data.rents;
   }
 };
 </script>
 
 <style>
+.car-item {
+  display: inline-block;
+  margin: 10px;
+  width: 375px;
+  float: left;
+}
 .item {
   display: inline-block;
   margin: 10px;
   width: 125px;
 }
 .user-list{
-  margin-top: 40px;
-  border: 1px solid #9D9B9B;
-  border-radius: 10px;
+  margin-top: 10px;
+
 }
 
 
