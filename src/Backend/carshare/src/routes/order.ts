@@ -1,6 +1,7 @@
 /*************************************************
  * @AUTHOR YONGQIAN HUANG, CREATED AT 02/09/2020
- *         Yongqian Huang, 05/09/2020, Implement payment *
+ *         Yongqian Huang, 05/09/2020, Implement payment
+ *         Yongqian Huang, 11/09/2020, Send receipt message *
  *************************************************/
 
 import express,{Request, Response} from 'express';
@@ -12,6 +13,7 @@ import _Bill from '../repository/billRepository';
 import _Car from '../repository/carRepository';
 import OrderValidator from '../validators/OrderValidator';
 import PaymentValidator from '../validators/PaymentValidator';
+import Message from '../helpers/messageHelper';
 
 //POST: api/orders/create
 router.post('/create', [OrderValidator.validate, verifyToken], async (req: Request, res: Response) => {
@@ -103,6 +105,10 @@ router.post('/pay', [PaymentValidator.validate, verifyToken], async (req: Reques
             
             //Update bill status
             await _Bill.pay(req.bill);
+
+            //Send message to user
+            const text: string = `Thanks for order our rent services. Your rent will start at ${req.bill?.rent.start_from}. You will soon receive a detail receipt in your email`;
+            Message.sendMessage(req.user.contact_number, text);
 
             res.json({
                 message: "success"
