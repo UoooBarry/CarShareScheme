@@ -2,12 +2,15 @@
   <div>
     <div class="container">
       <h1>Rent History</h1>
+
       <hr class="user" />
-      <div class="car-item">Car</div>
-      <div class="item">Pick Up Location</div>
-      <div class="item">Payment Status</div>
-      <div class="item">Total Price</div>
-      <div class="item">Order Status</div>
+      <div class="row" style="padding: 1rem!important;">
+        <div class="car-item">Car</div>
+        <div class="pickup-item">Pick Up Location</div>
+        <div class="item">Payment Status</div>
+        <div class="item">Total Price</div>
+        <div class="item">Order Status</div>
+      </div>
       <hr class="user" />
     </div>
 
@@ -31,28 +34,6 @@ export default {
 
 
 <style>
-hr.user {
-  margin-top: 5px;
-  margin-bottom: 5px;
-}
-
-.user-list-title {
-  text-align: left;
-  font-family: Montserrat;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 20px;
-  line-height: 24px;
-}
-
-.item {
-  display: inline-block;
-  margin: 10px;
-  width: 125px;
-}
-.user {
-  padding-left: 20px;
-}
 header#header {
   display: none !important;
 }

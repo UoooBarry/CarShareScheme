@@ -4,7 +4,7 @@
 <template >
   <div>
     <div class="container">
-      <RentList v-bind:rents="this.rents" class='user-list'/>
+      <RentList v-bind:rents="this.rents" class="user-list" />
     </div>
   </div>
 </template>
@@ -22,7 +22,7 @@ export default {
   data() {
     return {
       rents: []
-    }
+    };
   },
   async created() {
     const response = await this.$axios.get(`${this.$carshare}/orders/`, {
@@ -35,21 +35,29 @@ export default {
 
 <style>
 .car-item {
-  display: inline-block;
+  display: flex;
   margin: 10px;
   width: 375px;
-  float: left;
+  justify-content: center;
+  align-items: center;
 }
 .item {
-  display: inline-block;
+  display: flex !important;
   margin: 10px;
   width: 125px;
+  justify-content: center;
+  align-items: center;
 }
-.user-list{
+.pickup-item{
+    display: flex !important;
+  margin: 10px;
+  width: 225px;
+  justify-content: center;
+  align-items: center;
+}
+.user-list {
   margin-top: 10px;
-
 }
-
 
 #dark-footer {
   display: none !important;

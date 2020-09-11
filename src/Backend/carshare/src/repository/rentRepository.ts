@@ -71,9 +71,10 @@ class rentRepository{
             },
             {
               model: Car,
-              attributes: ['id', 'name', 'location_id', 'available'],
+              attributes: ['id', 'brand', 'model', 'location_id', 'available'],
               include:[{
-                model: Location
+                model: Location,
+                attributes: ['id', 'address'],
               }]
             }
         ]

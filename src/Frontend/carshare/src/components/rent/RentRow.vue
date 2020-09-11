@@ -2,10 +2,11 @@
  *           @AUTHOR: Bach Dao, Created AT: 15/08/2020                *
  ***********************************************************************/
 <template>
-  <div>
+  <div class="shadow-lg p-3 mb-5 bg-white rounded">
     <div
-      class="row"
-    >{{ rent.createdAt | formatDate }} Rent ID: {{ rent.id }} Period: {{ rent.period }}days</div>
+      class="row bill-id"
+    >{{ rent.createdAt | formatDate }} - Rent ID: {{ rent.id }} - Period: {{ rent.period }} days</div>
+    <hr class="user" />
     <div class="row">
       <div class="car-item">
         <div class="row">
@@ -23,7 +24,7 @@
           </div>
         </div>
       </div>
-      <div class="item">{{ rent.car.location.address }}</div>
+      <div class="pickup-item">{{ rent.car.location.address }}</div>
 
       <div class="item">{{ this.paymentStatus }}</div>
       <div class="item">${{ rent.bill.fee }}</div>
@@ -64,5 +65,10 @@ export default {
 }
 img {
   margin: 0;
+}
+.bill-id{
+    display: block;
+    text-align: left;
+    padding-left: 30px;
 }
 </style>
