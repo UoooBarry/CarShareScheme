@@ -294,7 +294,7 @@ export default {
         });
         await Car.create({
           name: "AUDI R8",
-          brand: "DUDI",
+          brand: "AUDI",
           model: "R8",
           seats: 4,
           doors: 2,
