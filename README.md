@@ -8,9 +8,11 @@
     <br>
     <a href='https://github.com/UoooBarry'> <img src='https://img.shields.io/badge/Contributor-UoooBarry-brightgreen' /> </a>
     <a href='https://github.com/noobfromvn99'> <img src='https://img.shields.io/badge/Contributor-noobfromvn99-brightgreen' /> </a>
+    <a href='https://github.com/Simon12038057639'> <img src='https://img.shields.io/badge/Contributor-Simon-brightgreen' /> </a>
     <br>
-     <a> <img src='https://img.shields.io/badge/Language-Javascript-yellow' /> </a>
-     <a> <img src='https://img.shields.io/badge/Database-Postgresql-blue' /> </a>
+     <a> <img src='https://img.shields.io/badge/Language-TypeScript-blue' /> </a>
+    <a> <img src='https://img.shields.io/badge/Language-Javascript-yellow' /> </a>
+     <a> <img src='https://img.shields.io/badge/Database-Postgresql-lightblue' /> </a>
      <a> <img src='https://img.shields.io/badge/Runtime-Node.Js-green' /> </a>
      <a> <img src='https://img.shields.io/badge/Framework-Express.Js-lightgrey' /> </a>
      <a> <img src='https://img.shields.io/badge/Framework-Vue.Js-brightgreen' /> </a>

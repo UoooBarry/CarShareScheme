@@ -1,6 +1,8 @@
 
 /***********************************************************************
- *           @AUTHOR: Bach Dao, CREATED AT: 03/09/2020                 *
+*           @AUTHOR: Bach Dao, CREATED AT: 03/09/2020                  *
+*          Shuyuan Zhang, Updated at: 03/09/2020                       *
+*           Bach Dao, updated at AT: 04/09/2020                        *
 *   Yongqian Huang updated at: 09/09/2020 Add payment validation       *
  ***********************************************************************/
 <template>
