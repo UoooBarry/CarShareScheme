@@ -30,7 +30,7 @@ export default {
         }
     },
     created(){
-        const rent_id = sessionStorage.getItem('rent_id');
+        const rent_id = this.$route.params.id;
         if(!rent_id) this.$router.push({name: 'Home'});
         this.$axios.get(`${this.$carshare}/orders/${rent_id}`, {headers: this.header})
                     .then((res) => {

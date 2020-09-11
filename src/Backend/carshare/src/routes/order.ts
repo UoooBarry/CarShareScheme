@@ -107,7 +107,7 @@ router.post('/pay', [PaymentValidator.validate, verifyToken], async (req: Reques
             await _Bill.pay(req.bill);
 
             //Send message to user
-            const text: string = `Thanks for order our rent services. Your rent will start at ${req.bill?.rent.start_from}. You will soon receive a detail receipt in your email`;
+            const text: string = `Thanks for order our rent services. Your rent will start at ${req.bill?.rent.start_from}. You will soon receive a detail receipt in your email. `;
             Message.sendMessage(req.user.contact_number, text);
 
             res.json({

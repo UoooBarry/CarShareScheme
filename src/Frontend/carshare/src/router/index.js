@@ -61,7 +61,7 @@ const routes = [{
   },
 },
 {
-  path: '/receipt',
+  path: '/receipt/:id',
   name: 'Receipt',
   components: {
     header: Header,

@@ -203,15 +203,14 @@ export default {
               });
               return;
             }
-
-            sessionStorage.setItem('rent_id', this.rent.id);
             
             this.flashMessage.success({
               title: "Order confrimed!",
               message: "Order payed successfully!"
             });
             this.$router.push({
-              name: "Receipt"
+              name: "Receipt",
+              params:{ id: this.rent.id }
             });
           });
         }
