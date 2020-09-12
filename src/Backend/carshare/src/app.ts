@@ -60,7 +60,7 @@ db.authenticate()
 
 
 //Tasks
-const cleanBill = new CleanBillTask(24);
+const cleanBill: CleanBillTask = new CleanBillTask(24);
 cleanBill.run();
 
 // error handler

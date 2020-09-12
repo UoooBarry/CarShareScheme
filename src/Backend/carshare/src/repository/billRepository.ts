@@ -21,7 +21,7 @@ class billRepository{
 
     async get(id:number){
       try {
-        const bill:any = await Bill.findOne({ 
+        const bill:Bill | null = await Bill.findOne({ 
           where: { id: id },
           include:[{
             model: Rent,
