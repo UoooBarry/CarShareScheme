@@ -7,7 +7,7 @@
 import Bill from '../models/bill';
 import Rent, {RentStatus} from '../models/rent'
 import Car from '../models/car';
-import { Op } from 'sequelize/types';
+import { Op } from 'sequelize';
 
 class billRepository{
    async create(bill: any){
