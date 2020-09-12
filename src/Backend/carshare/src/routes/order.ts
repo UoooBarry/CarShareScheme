@@ -74,9 +74,9 @@ router.get('/:id/', [verifyToken], (req: Request, res: Response) => {
 })
 
 
-// GET: /api/cars/personal
+// GET: /api/orders/personal
 // Get all orders of the current user
-router.get('/personal',[verifyToken], (req: Request, res: Response) => {
+router.get('/list/personal',[verifyToken], (req: Request, res: Response) => {
     _Rent.getByUserId(req.user.id) 
             .then((rents) => {
                 res.json({
