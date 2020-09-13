@@ -68,7 +68,7 @@ router.get('/:id/', [verifyToken], (req: Request, res: Response) => {
                 res.json({rent});
             })
             .catch((err) => {
-                console.log(err)
+                console.log(err);
                 res.sendStatus(404);
             })
 })

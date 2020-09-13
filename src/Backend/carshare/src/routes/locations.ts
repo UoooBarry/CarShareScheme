@@ -19,7 +19,10 @@ router.get('/', (req: Request, res:Response) => {
                 })
              })
              .catch((error) => {
-              res.json({message: 'fail', reason: error});
+                 res.json({
+                     message: 'fail',
+                     errors: error
+                 });
           })
   });
 
@@ -32,7 +35,7 @@ router.get('/:id', (req: Request, res:Response) => {
                 })
              })
              .catch((error) => {
-              res.json({message: 'fail', reason: error});
+              res.json({message: 'fail', errors: error});
             })
   });
 

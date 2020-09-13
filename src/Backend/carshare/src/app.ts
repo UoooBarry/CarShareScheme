@@ -41,7 +41,7 @@ app.use('/api/locations', locationRouter);
 app.use('/api/orders', orderRouter);
 
 // catch 404 and forward to error handler
-app.use((req, res, next) => {
+app.use((req: Request, res: Response, next: NextFunction) => {
   next(createError(404));
 });
 
