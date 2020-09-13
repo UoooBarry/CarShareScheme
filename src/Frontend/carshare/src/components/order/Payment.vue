@@ -4,6 +4,7 @@
 *          Shuyuan Zhang, Updated at: 03/09/2020                       *
 *           Bach Dao, updated at AT: 04/09/2020                        *
 *   Yongqian Huang updated at: 09/09/2020 Add payment validation       *
+*Bach Dao updated at 13/09/2020 fix button payment validation          *
  ***********************************************************************/
 <template>
   <div class="card border-0">
