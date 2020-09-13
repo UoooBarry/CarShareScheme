@@ -140,6 +140,7 @@ router.post('/pay', [PaymentValidator.validate, verifyToken], async (req: Reques
             //If pass payment validator
             
             //Update bill status
+            if(!req.bill) throw 'Not fond';
             await _Bill.pay(req.bill);
 
             //Send message to user

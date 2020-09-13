@@ -36,7 +36,7 @@ class billRepository{
       }
     }
 
-    async pay(bill: Bill | undefined){
+    async pay(bill: Bill | null){
       try {
         if(!bill) throw 'No bill found';
         await bill.update({
