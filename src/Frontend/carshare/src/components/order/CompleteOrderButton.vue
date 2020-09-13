@@ -77,25 +77,19 @@ export default {
 }
 
 .order {
-  -webkit-appearance: none;
-  -moz-appearance: none;
+
   appearance: none;
   border: 0;
-  background: var(--dark);
+  background-color: black !important;
   position: relative;
-  height: 63px;
-  width: 240px;
+  width: 300px !important;
+  height: 60px !important;
   padding: 0;
   outline: none;
   cursor: pointer;
-  border-radius: 32px;
-  -webkit-mask-image: -webkit-radial-gradient(white, black);
-  -webkit-tap-highlight-color: transparent;
+  border-radius: 0.25rem;
   overflow: hidden;
-  -webkit-transition: -webkit-transform 0.3s ease;
-  transition: -webkit-transform 0.3s ease;
   transition: transform 0.3s ease;
-  transition: transform 0.3s ease, -webkit-transform 0.3s ease;
 }
 .order span {
   --o: 1;
@@ -109,11 +103,9 @@ export default {
   font-size: 16px;
   font-weight: 500;
   opacity: var(--o);
-  -webkit-transition: opacity 0.3s ease;
   transition: opacity 0.3s ease;
 }
 .order span.default {
-  -webkit-transition-delay: 0.3s;
   transition-delay: 0.3s;
 }
 .order span.success {
@@ -133,11 +125,9 @@ export default {
   stroke-linejoin: round;
   stroke-dasharray: 16px;
   stroke-dashoffset: var(--offset);
-  -webkit-transition: stroke-dashoffset 0.3s ease;
   transition: stroke-dashoffset 0.3s ease;
 }
 .order:active {
-  -webkit-transform: scale(0.96);
   transform: scale(0.96);
 }
 .order .lines {
@@ -163,14 +153,7 @@ export default {
   --start: var(--white);
   --stop: var(--grey-light);
   border-radius: 2px;
-  background: -webkit-gradient(
-    linear,
-    left top,
-    left bottom,
-    from(var(--start)),
-    to(var(--stop))
-  );
-  background: linear-gradient(var(--start), var(--stop));
+  background: linear-gradient(var(--white), var(--white));
   position: absolute;
 }
 .order .truck {
@@ -180,7 +163,6 @@ export default {
   z-index: 1;
   top: 11px;
   position: absolute;
-  -webkit-transform: translateX(24px);
   transform: translateX(24px);
 }
 .order .truck:before,
@@ -194,9 +176,7 @@ export default {
   display: block;
   background: var(--white);
   border-radius: 1px;
-  -webkit-transform-origin: 100% 50%;
   transform-origin: 100% 50%;
-  -webkit-transform: rotate(var(--r));
   transform: rotate(var(--r));
 }
 .order .truck:before {
@@ -232,13 +212,6 @@ export default {
   width: 2px;
   left: 0;
   top: 14px;
-  background: -webkit-gradient(
-    linear,
-    left top,
-    left bottom,
-    from(var(--grey)),
-    to(var(--grey-dark))
-  );
   background: linear-gradient(var(--grey), var(--grey-dark));
 }
 .order .truck .front:after {
@@ -252,7 +225,6 @@ export default {
   overflow: hidden;
   border-radius: 2px 8px 8px 2px;
   background: var(--primary-light);
-  -webkit-transform: perspective(4px) rotateY(3deg);
   transform: perspective(4px) rotateY(3deg);
   width: 22px;
   height: 41px;
@@ -260,7 +232,6 @@ export default {
   left: 2px;
   top: 0;
   z-index: 1;
-  -webkit-transform-origin: 0 50%;
   transform-origin: 0 50%;
 }
 .order .truck .front .window:before,
@@ -281,7 +252,6 @@ export default {
   height: 4px;
   position: absolute;
   background: rgba(255, 255, 255, 0.14);
-  -webkit-transform: skewY(14deg);
   transform: skewY(14deg);
   box-shadow: 0 7px 0 rgba(255, 255, 255, 0.14);
 }
@@ -289,11 +259,9 @@ export default {
   width: 3px;
   height: 8px;
   left: 83px;
-  -webkit-transform-origin: 100% 50%;
   transform-origin: 100% 50%;
   position: absolute;
   border-radius: 2px;
-  -webkit-transform: scaleX(0.8);
   transform: scaleX(0.8);
   background: #f0dc5f;
 }
@@ -302,22 +270,12 @@ export default {
   height: 4px;
   width: 7px;
   opacity: 0;
-  -webkit-transform: perspective(2px) rotateY(-15deg) scaleX(0.94);
   transform: perspective(2px) rotateY(-15deg) scaleX(0.94);
   position: absolute;
-  -webkit-transform-origin: 0 50%;
   transform-origin: 0 50%;
   left: 3px;
   top: 50%;
   margin-top: -2px;
-  background: -webkit-gradient(
-    linear,
-    left top,
-    right top,
-    from(#f0dc5f),
-    color-stop(rgba(240, 220, 95, 0.7)),
-    to(rgba(240, 220, 95, 0))
-  );
   background: linear-gradient(
     90deg,
     #f0dc5f,
@@ -358,110 +316,57 @@ export default {
 }
 .order.animate .default {
   --o: 0;
-  -webkit-transition-delay: 0s;
   transition-delay: 0s;
 }
 .order.animate .success {
   --offset: 0;
   --o: 1;
-  -webkit-transition-delay: 7s;
   transition-delay: 7s;
 }
 .order.animate .success svg {
-  -webkit-transition-delay: 7.3s;
   transition-delay: 7.3s;
 }
 .order.animate .truck {
-  -webkit-animation: truck 10s ease forwards;
   animation: truck 10s ease forwards;
 }
 .order.animate .truck:before {
-  -webkit-animation: door1 2.4s ease forwards 0.3s;
   animation: door1 2.4s ease forwards 0.3s;
 }
 .order.animate .truck:after {
-  -webkit-animation: door2 2.4s ease forwards 0.6s;
   animation: door2 2.4s ease forwards 0.6s;
 }
 .order.animate .truck .light:before,
 .order.animate .truck .light:after {
-  -webkit-animation: light 10s ease forwards;
   animation: light 10s ease forwards;
 }
 .order.animate .box {
-  -webkit-animation: box 10s ease forwards;
   animation: box 10s ease forwards;
 }
 .order.animate .lines {
-  -webkit-animation: lines 10s ease forwards;
   animation: lines 10s ease forwards;
-}
-
-@-webkit-keyframes truck {
-  10%,
-  30% {
-    -webkit-transform: translateX(-164px);
-    transform: translateX(-164px);
-  }
-  40% {
-    -webkit-transform: translateX(-104px);
-    transform: translateX(-104px);
-  }
-  60% {
-    -webkit-transform: translateX(-224px);
-    transform: translateX(-224px);
-  }
-  75%,
-  100% {
-    -webkit-transform: translateX(24px);
-    transform: translateX(24px);
-  }
 }
 
 @keyframes truck {
   10%,
   30% {
-    -webkit-transform: translateX(-164px);
     transform: translateX(-164px);
   }
   40% {
-    -webkit-transform: translateX(-104px);
     transform: translateX(-104px);
   }
   60% {
-    -webkit-transform: translateX(-224px);
-    transform: translateX(-224px);
+    transform: translateX(-280px);
   }
   75%,
   100% {
-    -webkit-transform: translateX(24px);
     transform: translateX(24px);
   }
 }
-@-webkit-keyframes lines {
-  0%,
-  30% {
-    opacity: 0;
-    -webkit-transform: scaleY(0.7) translateX(0);
-    transform: scaleY(0.7) translateX(0);
-  }
-  35%,
-  65% {
-    opacity: 1;
-  }
-  70% {
-    opacity: 0;
-  }
-  100% {
-    -webkit-transform: scaleY(0.7) translateX(-400px);
-    transform: scaleY(0.7) translateX(-400px);
-  }
-}
+
 @keyframes lines {
   0%,
   30% {
     opacity: 0;
-    -webkit-transform: scaleY(0.7) translateX(0);
     transform: scaleY(0.7) translateX(0);
   }
   35%,
@@ -472,117 +377,59 @@ export default {
     opacity: 0;
   }
   100% {
-    -webkit-transform: scaleY(0.7) translateX(-400px);
     transform: scaleY(0.7) translateX(-400px);
   }
 }
-@-webkit-keyframes light {
-  0%,
-  30% {
-    opacity: 0;
-    -webkit-transform: perspective(2px) rotateY(-15deg) scaleX(0.88);
-    transform: perspective(2px) rotateY(-15deg) scaleX(0.88);
-  }
-  40%,
-  100% {
-    opacity: 1;
-    -webkit-transform: perspective(2px) rotateY(-15deg) scaleX(0.94);
-    transform: perspective(2px) rotateY(-15deg) scaleX(0.94);
-  }
-}
+
 @keyframes light {
   0%,
   30% {
     opacity: 0;
-    -webkit-transform: perspective(2px) rotateY(-15deg) scaleX(0.88);
     transform: perspective(2px) rotateY(-15deg) scaleX(0.88);
   }
   40%,
   100% {
     opacity: 1;
-    -webkit-transform: perspective(2px) rotateY(-15deg) scaleX(0.94);
     transform: perspective(2px) rotateY(-15deg) scaleX(0.94);
   }
 }
-@-webkit-keyframes door1 {
-  30%,
-  50% {
-    -webkit-transform: rotate(32deg);
-    transform: rotate(32deg);
-  }
-}
+
 @keyframes door1 {
   30%,
   50% {
-    -webkit-transform: rotate(32deg);
     transform: rotate(32deg);
   }
 }
-@-webkit-keyframes door2 {
-  30%,
-  50% {
-    -webkit-transform: rotate(-32deg);
-    transform: rotate(-32deg);
-  }
-}
+
 @keyframes door2 {
   30%,
   50% {
-    -webkit-transform: rotate(-32deg);
     transform: rotate(-32deg);
   }
 }
-@-webkit-keyframes box {
-  8%,
-  10% {
-    -webkit-transform: translateX(40px);
-    transform: translateX(40px);
-    opacity: 1;
-  }
-  25% {
-    -webkit-transform: translateX(112px);
-    transform: translateX(112px);
-    opacity: 1;
-  }
-  26% {
-    -webkit-transform: translateX(112px);
-    transform: translateX(112px);
-    opacity: 0;
-  }
-  27%,
-  100% {
-    -webkit-transform: translateX(0px);
-    transform: translateX(0px);
-    opacity: 0;
-  }
-}
+
 @keyframes box {
   8%,
   10% {
-    -webkit-transform: translateX(40px);
     transform: translateX(40px);
     opacity: 1;
   }
   25% {
-    -webkit-transform: translateX(112px);
-    transform: translateX(112px);
+    transform: translateX(180px);
     opacity: 1;
   }
   26% {
-    -webkit-transform: translateX(112px);
-    transform: translateX(112px);
+    transform: translateX(180px);
     opacity: 0;
   }
   27%,
   100% {
-    -webkit-transform: translateX(0px);
     transform: translateX(0px);
     opacity: 0;
   }
 }
 html {
   box-sizing: border-box;
-  -webkit-font-smoothing: antialiased;
 }
 
 * {
@@ -596,11 +443,8 @@ html {
 body {
   min-height: 100vh;
   font-family: Roboto, Arial;
-  display: -webkit-box;
   display: flex;
-  -webkit-box-pack: center;
   justify-content: center;
-  -webkit-box-align: center;
   align-items: center;
   background: #e4ecfa;
 }

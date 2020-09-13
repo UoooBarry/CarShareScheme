@@ -444,3 +444,10 @@ img {
 ._vue-flash-msg-body {
   z-index: 1;
 }
+
+.page-item.active .page-link{
+  z-index: 3;
+  color: #fff;
+  background: #a9a0a0 !important;
+  border-color:  #b1bfd8 !important;
+}

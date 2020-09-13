@@ -6,7 +6,7 @@
     <div class="tip-header">{{car.name}}</div>
     <div class="row">Car brand: {{car.brand}}</div>
     <div class="row">Car model: {{car.model}}</div>
-    <div class="row">Bought in: {{car.purchase_date}}</div>
+    <div class="row">Bought in: {{car.purchase_date | formatDate}}</div>
     <div class="row">Car features:</div>
     <div class v-for="value in splitedFeatures()" v-bind:key="value.index">
       <div class="feature row">
