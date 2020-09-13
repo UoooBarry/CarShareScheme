@@ -2,12 +2,15 @@
  * @AUTHOR YONGQIAN HUANG, CREATED AT 27/08/2020 *
  *************************************************/
 
-require('dotenv').config();
+import path from "path"
+
+require('dotenv').config({path: path.resolve(__dirname, '../../.env')})
 import axios from 'axios';
 
 const calculateDistance = async (from: string, to: string) => {
 
     try{
+        //Get distance result form matrix api
         const result = await axios.get('https://maps.googleapis.com/maps/api/distancematrix/json',{
             params:{
                 origins: from,
