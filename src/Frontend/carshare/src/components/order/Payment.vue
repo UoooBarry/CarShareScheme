@@ -256,4 +256,8 @@ export default {
   margin-top: 7px;
   cursor: pointer;
 }
+#visa, #amex, #master{
+  font-size: 22px;
+  
+}
 </style>  

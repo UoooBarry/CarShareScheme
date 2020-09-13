@@ -3,17 +3,35 @@
  ***********************************************************************/
 <template>
   <div class="container">
-    <div class="button">
-      <div id="anim">
-        <font-awesome-icon icon="box" class="Pack" style="color: white" />
-        <div class="Car">
-          <font-awesome-icon icon="shipping-fast" style="color: white" />
+    <button class="order">
+      <span class="default">Complete Order</span>
+      <span class="success">
+        Order Placed
+        <svg viewBox="0 0 12 10">
+          <polyline points="1.5 6 4.5 9 10.5 1" />
+        </svg>
+      </span>
+      <div class="box"></div>
+      <div class="truck">
+        <div class="back"></div>
+        <div class="front">
+          <div class="window"></div>
         </div>
-        <div class="path">Please Wait...</div>
-        <a class="final">Order Placed</a>
+        <div class="light top"></div>
+        <div class="light bottom"></div>
       </div>
-      <a href="#anim" class="text">Book Now</a>
-    </div>
+      <div class="lines"></div>
+    </button>
+    <!-- dribbble -->
+    <a
+      class="dribbble"
+      href="https://dribbble.com/shots/7112021-Order-confirm-animation"
+      target="_blank"
+    >
+      <img
+        src="https://cdn.dribbble.com/assets/dribbble-ball-mark-2bd45f09c2fb58dbbfb44766d5d1d07c5a12972d602ef8b32204d28fa3dda554.svg"
+      />
+    </a>
   </div>
 </template>
 
@@ -24,163 +42,420 @@ export default {
   data() {
     return {};
   },
-  mounted() {}
+  mounted() {
+    global.jQuery = require("jquery");
+    var $ = global.jQuery;
+    window.$ = $;
+    $(".order").click(function(e) {
+      console.log(e);
+      let button = $(this);
+
+      if (!button.hasClass("animate")) {
+        button.addClass("animate");
+        setTimeout(() => {
+          button.removeClass("animate");
+        }, 10000);
+      }
+    });
+  }
 };
 </script>
 
 
 <style scoped>
-.button {
-  width: 300px;
-  height: 60px;
-  border-radius: 30px;
-  background-color: black;
-  margin: 0 auto;
-  z-index: 0;
-  display: flex;
+:root {
+  --primary: #275efe;
+  --primary-light: #7699ff;
+  --dark: #1c212e;
+  --grey-dark: #3f4656;
+  --grey: #6c7486;
+  --grey-light: #cdd9ed;
+  --white: #fff;
+  --green: #16bf78;
+  --sand: #dcb773;
+  --sand-light: #edd9a9;
+}
+
+.order {
+
+  appearance: none;
+  border: 0;
+  background-color: black !important;
+  position: relative;
+  width: 300px !important;
+  height: 60px !important;
+  padding: 0;
+  outline: none;
   cursor: pointer;
-  padding: 15px;
-  margin-bottom: 90px;
+  border-radius: 0.25rem;
+  overflow: hidden;
+  transition: transform 0.3s ease;
 }
-.text {
-  z-index: 1;
-  color: white;
-  font-size: 20px;
-  margin: auto;
-  text-decoration: none;
-}
-#anim {
-  display: none;
-}
-#anim:target {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  height: 100%;
-  position: relative;
-  background-color: black;
-  overflow-x: hidden;
-}
-#anim:target + a {
-  display: none;
-}
-#anim:target > .path {
-  font-size: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  position: relative;
+.order span {
+  --o: 1;
   position: absolute;
-  left: 200%;
-  width: 100%;
-  height: 100%;
-  background-color: black;
-  color: white;
-  -webkit-animation: linear alternate;
-  -webkit-animation-name: path;
-  -webkit-animation-duration: 4s;
-  -webkit-animation-delay: 3s;
-}
-
-#anim:target > .Pack {
-  width: 15px;
-  height: 15px;
-  align-self: center;
-  -webkit-box-shadow: -3px -5px 9px 0px rgba(56, 54, 45, 1);
-  -moz-box-shadow: -3px -5px 9px 0px rgba(56, 54, 45, 1);
-  box-shadow: -3px -5px 9px 0px rgba(56, 54, 45, 1);
-  position: relative;
-  z-index: 400;
-  right: 200%;
-  position: absolute;
-  -webkit-animation: linear alternate;
-  -webkit-animation-name: pack;
-  -webkit-animation-duration: 5s;
-}
-#anim:target > .Car {
-  width: 60%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  background-color: black;
-  position: relative;
-  -webkit-box-shadow: -3px -5px 9px 0px rgba(56, 54, 45, 1);
-  -moz-box-shadow: -3px -5px 9px 0px rgba(56, 54, 45, 1);
-  box-shadow: -3px -5px 9px 0px rgba(56, 54, 45, 1);
-  z-index: 500;
-  position: absolute;
-  left: 200%;
-  -webkit-animation: ease-in-out alternate;
-  -webkit-animation-name: example;
-  -webkit-animation-duration: 5s;
-}
-/* transition of car */
-.Car{
-  font-size:20px;
-}
-@-webkit-keyframes example {
-  0% {
-    left: 200%;
-  }
-  30% {
-    left: 10%;
-  }
-  40% {
-    left: 10%;
-  }
-  100% {
-    left: 200%;
-  }
-}
-/* transition of waiting message */
-@-webkit-keyframes path {
-  0% {
-    left: 50%;
-  }
-  50% {
-    left: -40%;
-  }
-  100% {
-    left: 200%;
-  }
-}
-/* transition of package */
-@-webkit-keyframes pack {
-  0% {
-    right: 70%;
-  }
-  30% {
-    left: 0;
-  }
-  40% {
-    left: 15%;
-  }
-  100% {
-    left: 200%;
-  }
-}
-
-#anim:target > .final {
+  left: 0;
+  right: 0;
   text-align: center;
-  position: relative;
-  z-index: -700;
-  color: white;
-  font-size: 20px;
-  margin: auto;
-  text-decoration: none;
-  -webkit-animation: linear alternate;
-  -webkit-animation-name: final;
-  -webkit-animation-fill-mode: forwards;
-  -webkit-animation-delay: 1s;
-  -webkit-animation-duration: 10s;
+  top: 19px;
+  line-height: 24px;
+  color: var(--white);
+  font-size: 16px;
+  font-weight: 500;
+  opacity: var(--o);
+  transition: opacity 0.3s ease;
+}
+.order span.default {
+  transition-delay: 0.3s;
+}
+.order span.success {
+  --offset: 16px;
+  --o: 0;
+}
+.order span.success svg {
+  width: 12px;
+  height: 10px;
+  display: inline-block;
+  vertical-align: top;
+  fill: none;
+  margin: 7px 0 0 4px;
+  stroke: var(--green);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 16px;
+  stroke-dashoffset: var(--offset);
+  transition: stroke-dashoffset 0.3s ease;
+}
+.order:active {
+  transform: scale(0.96);
+}
+.order .lines {
+  opacity: 0;
+  position: absolute;
+  height: 3px;
+  background: var(--white);
+  border-radius: 2px;
+  width: 6px;
+  top: 30px;
+  left: 100%;
+  box-shadow: 15px 0 0 var(--white), 30px 0 0 var(--white),
+    45px 0 0 var(--white), 60px 0 0 var(--white), 75px 0 0 var(--white),
+    90px 0 0 var(--white), 105px 0 0 var(--white), 120px 0 0 var(--white),
+    135px 0 0 var(--white), 150px 0 0 var(--white), 165px 0 0 var(--white),
+    180px 0 0 var(--white), 195px 0 0 var(--white), 210px 0 0 var(--white),
+    225px 0 0 var(--white), 240px 0 0 var(--white), 255px 0 0 var(--white),
+    270px 0 0 var(--white), 285px 0 0 var(--white), 300px 0 0 var(--white),
+    315px 0 0 var(--white), 330px 0 0 var(--white);
+}
+.order .back,
+.order .box {
+  --start: var(--white);
+  --stop: var(--grey-light);
+  border-radius: 2px;
+  background: linear-gradient(var(--white), var(--white));
+  position: absolute;
+}
+.order .truck {
+  width: 60px;
+  height: 41px;
+  left: 100%;
+  z-index: 1;
+  top: 11px;
+  position: absolute;
+  transform: translateX(24px);
+}
+.order .truck:before,
+.order .truck:after {
+  --r: -90deg;
+  content: "";
+  height: 2px;
+  width: 20px;
+  right: 58px;
+  position: absolute;
+  display: block;
+  background: var(--white);
+  border-radius: 1px;
+  transform-origin: 100% 50%;
+  transform: rotate(var(--r));
+}
+.order .truck:before {
+  top: 4px;
+}
+.order .truck:after {
+  --r: 90deg;
+  bottom: 4px;
+}
+.order .truck .back {
+  left: 0;
+  top: 0;
+  width: 60px;
+  height: 41px;
+  z-index: 1;
+}
+.order .truck .front {
+  overflow: hidden;
+  position: absolute;
+  border-radius: 2px 9px 9px 2px;
+  width: 26px;
+  height: 41px;
+  left: 60px;
+}
+.order .truck .front:before,
+.order .truck .front:after {
+  content: "";
+  position: absolute;
+  display: block;
+}
+.order .truck .front:before {
+  height: 13px;
+  width: 2px;
+  left: 0;
+  top: 14px;
+  background: linear-gradient(var(--grey), var(--grey-dark));
+}
+.order .truck .front:after {
+  border-radius: 2px 9px 9px 2px;
+  background: var(--primary);
+  width: 24px;
+  height: 41px;
+  right: 0;
+}
+.order .truck .front .window {
+  overflow: hidden;
+  border-radius: 2px 8px 8px 2px;
+  background: var(--primary-light);
+  transform: perspective(4px) rotateY(3deg);
+  width: 22px;
+  height: 41px;
+  position: absolute;
+  left: 2px;
+  top: 0;
+  z-index: 1;
+  transform-origin: 0 50%;
+}
+.order .truck .front .window:before,
+.order .truck .front .window:after {
+  content: "";
+  position: absolute;
+  right: 0;
+}
+.order .truck .front .window:before {
+  top: 0;
+  bottom: 0;
+  width: 14px;
+  background: var(--dark);
+}
+.order .truck .front .window:after {
+  width: 14px;
+  top: 7px;
+  height: 4px;
+  position: absolute;
+  background: rgba(255, 255, 255, 0.14);
+  transform: skewY(14deg);
+  box-shadow: 0 7px 0 rgba(255, 255, 255, 0.14);
+}
+.order .truck .light {
+  width: 3px;
+  height: 8px;
+  left: 83px;
+  transform-origin: 100% 50%;
+  position: absolute;
+  border-radius: 2px;
+  transform: scaleX(0.8);
+  background: #f0dc5f;
+}
+.order .truck .light:before {
+  content: "";
+  height: 4px;
+  width: 7px;
+  opacity: 0;
+  transform: perspective(2px) rotateY(-15deg) scaleX(0.94);
+  position: absolute;
+  transform-origin: 0 50%;
+  left: 3px;
+  top: 50%;
+  margin-top: -2px;
+  background: linear-gradient(
+    90deg,
+    #f0dc5f,
+    rgba(240, 220, 95, 0.7),
+    rgba(240, 220, 95, 0)
+  );
+}
+.order .truck .light.top {
+  top: 4px;
+}
+.order .truck .light.bottom {
+  bottom: 4px;
+}
+.order .box {
+  --start: var(--sand-light);
+  --stop: var(--sand);
+  width: 21px;
+  height: 21px;
+  right: 100%;
+  top: 21px;
+}
+.order .box:before,
+.order .box:after {
+  content: "";
+  top: 10px;
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+.order .box:before {
+  height: 3px;
+  margin-top: -1px;
+  background: rgba(0, 0, 0, 0.1);
+}
+.order .box:after {
+  height: 1px;
+  background: rgba(0, 0, 0, 0.15);
+}
+.order.animate .default {
+  --o: 0;
+  transition-delay: 0s;
+}
+.order.animate .success {
+  --offset: 0;
+  --o: 1;
+  transition-delay: 7s;
+}
+.order.animate .success svg {
+  transition-delay: 7.3s;
+}
+.order.animate .truck {
+  animation: truck 10s ease forwards;
+}
+.order.animate .truck:before {
+  animation: door1 2.4s ease forwards 0.3s;
+}
+.order.animate .truck:after {
+  animation: door2 2.4s ease forwards 0.6s;
+}
+.order.animate .truck .light:before,
+.order.animate .truck .light:after {
+  animation: light 10s ease forwards;
+}
+.order.animate .box {
+  animation: box 10s ease forwards;
+}
+.order.animate .lines {
+  animation: lines 10s ease forwards;
 }
 
-@-webkit-keyframes final {
-  0% {
-    z-index: -700;
+@keyframes truck {
+  10%,
+  30% {
+    transform: translateX(-164px);
+  }
+  40% {
+    transform: translateX(-104px);
+  }
+  60% {
+    transform: translateX(-280px);
+  }
+  75%,
+  100% {
+    transform: translateX(24px);
+  }
+}
+
+@keyframes lines {
+  0%,
+  30% {
+    opacity: 0;
+    transform: scaleY(0.7) translateX(0);
+  }
+  35%,
+  65% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 0;
   }
   100% {
-    z-index: 700;
+    transform: scaleY(0.7) translateX(-400px);
   }
+}
+
+@keyframes light {
+  0%,
+  30% {
+    opacity: 0;
+    transform: perspective(2px) rotateY(-15deg) scaleX(0.88);
+  }
+  40%,
+  100% {
+    opacity: 1;
+    transform: perspective(2px) rotateY(-15deg) scaleX(0.94);
+  }
+}
+
+@keyframes door1 {
+  30%,
+  50% {
+    transform: rotate(32deg);
+  }
+}
+
+@keyframes door2 {
+  30%,
+  50% {
+    transform: rotate(-32deg);
+  }
+}
+
+@keyframes box {
+  8%,
+  10% {
+    transform: translateX(40px);
+    opacity: 1;
+  }
+  25% {
+    transform: translateX(180px);
+    opacity: 1;
+  }
+  26% {
+    transform: translateX(180px);
+    opacity: 0;
+  }
+  27%,
+  100% {
+    transform: translateX(0px);
+    opacity: 0;
+  }
+}
+html {
+  box-sizing: border-box;
+}
+
+* {
+  box-sizing: inherit;
+}
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  min-height: 100vh;
+  font-family: Roboto, Arial;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #e4ecfa;
+}
+body .dribbble {
+  position: fixed;
+  display: block;
+  right: 20px;
+  bottom: 20px;
+}
+body .dribbble img {
+  display: block;
+  height: 28px;
 }
 </style>  
