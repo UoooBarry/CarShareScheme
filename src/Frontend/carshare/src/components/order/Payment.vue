@@ -43,7 +43,7 @@
               <div class="form-group">
                 <label for="cardNumber">Card number</label>
                 <div class="input-group">
-                  <input type="text" class="form-control" name="cardNumber" id='cardNumber' placeholder />
+                  <input type="text" class="form-control" name="cardNumber" id='cardNumber' @change='creditCardCheck' placeholder />
                   <div class="input-group-append">
                     <span class="input-group-text text-muted">
                       <font-awesome-icon :icon="[ 'fab', 'cc-visa' ]" id="visa" />
@@ -147,6 +147,16 @@ export default {
     return {};
   },
   methods: {
+    creditCardCheck(event){
+      const inputCard = event.target.value;
+      const visaRegex = /^(?:4[0-9]{12}(?:[0-9]{3})?)$/;
+      const masterRegex = /^(?:5[1-5][0-9]{14})$/;
+      if(visaRegex.test(inputCard)){
+        console.log('visa');
+      }else if(masterRegex.test(inputCard)){
+        console.log('master')
+      }
+    },
     verifyCreditcard(){
       let result = true;
       const creditCard = document.getElementById('cardNumber').value;
