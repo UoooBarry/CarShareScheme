@@ -33,37 +33,11 @@ export default {
 };
 </script>
 
-<style>
-.car-item {
-  display: flex;
-  margin: 10px;
-  width: 375px;
-  justify-content: center;
-  align-items: center;
-}
-.item {
-  display: flex !important;
-  margin: 10px;
-  width: 125px;
-  justify-content: center;
-  align-items: center;
-}
-.pickup-item{
-    display: flex !important;
-  margin: 10px;
-  width: 225px;
-  justify-content: center;
-  align-items: center;
-}
-.user-list {
-  margin-top: 10px;
-}
+<style scoped>
 
-#dark-footer {
-  display: none !important;
-}
 
-.main {
-  height: 930px;
-}
+
+
+
+
 </style>

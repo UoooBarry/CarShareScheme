@@ -3,7 +3,7 @@
  ***********************************************************************/
 <template>
   <div class="container">
-    <button class="order">
+    <button class="order" id='order-button'>
       <span class="default">Complete Order</span>
       <span class="success">
         Order Placed
@@ -43,20 +43,7 @@ export default {
     return {};
   },
   mounted() {
-    global.jQuery = require("jquery");
-    var $ = global.jQuery;
-    window.$ = $;
-    $(".order").click(function(e) {
-      console.log(e);
-      let button = $(this);
-
-      if (!button.hasClass("animate")) {
-        button.addClass("animate");
-        setTimeout(() => {
-          button.removeClass("animate");
-        }, 10000);
-      }
-    });
+   
   }
 };
 </script>

@@ -44,7 +44,14 @@
               <div class="form-group">
                 <label for="cardNumber">Card number</label>
                 <div class="input-group">
-                  <input type="text" class="form-control" name="cardNumber" id='cardNumber' @change='creditCardCheck' placeholder />
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="cardNumber"
+                    id="cardNumber"
+                    @change="creditCardCheck"
+                    placeholder
+                  />
                   <div class="input-group-append">
                     <span class="input-group-text text-muted">
                       <font-awesome-icon :icon="[ 'fab', 'cc-visa' ]" id="visa" />
@@ -63,8 +70,8 @@
                       <span class="hidden-xs">Expiration</span>
                     </label>
                     <div class="input-group">
-                      <input type="number" class="form-control" placeholder="MM" id='mm' name />
-                      <input type="number" class="form-control" placeholder="YY" id='yy' name />
+                      <input type="number" class="form-control" placeholder="MM" id="mm" name />
+                      <input type="number" class="form-control" placeholder="YY" id="yy" name />
                     </div>
                   </div>
                 </div>
@@ -78,7 +85,7 @@
                       CVV
                       <font-awesome-icon icon="question-circle" id="tooltip-target-1" />
                     </label>
-                    <input type="number" class="form-control" id='cvv' required />
+                    <input type="number" class="form-control" id="cvv" required />
                   </div>
                   <!-- form-group.// -->
                 </div>
@@ -124,10 +131,11 @@
       <!-- card-body.// -->
     </article>
     <!-- card.// -->
-
-    <a @click="pay">
-      <CompleteOrderButton id="btn-order" />
-    </a>
+      <a @click="pay">
+        <CompleteOrderButton id="btn-order" />
+      </a>
+      
+  
   </div>
   <!-- row.// -->
 
@@ -151,11 +159,18 @@ export default {
     creditCardCheck(event){
       const inputCard = event.target.value;
       const visaRegex = /^(?:4[0-9]{12}(?:[0-9]{3})?)$/;
-      const masterRegex = /^(?:5[1-5][0-9]{14})$/;
+      const masterRegex = /^(?:5[1-5][0-9]{2}|222[1-9]|22[3-9][0-9]|2[3-6][0-9]{2}|27[01][0-9]|2720)[0-9]{12}$/;
+      const amexRegex = /^3[47][0-9]{13}$/;
       if(visaRegex.test(inputCard)){
-        console.log('visa');
+        document.getElementById('visa').style.color = "black";
       }else if(masterRegex.test(inputCard)){
-        console.log('master')
+        document.getElementById('master').style.color = "black";
+      }else if(amexRegex.test(inputCard)){
+        document.getElementById('amex').style.color = "black";
+      }else{
+         document.getElementById('visa').style.color = "#6c757d";
+        document.getElementById('master').style.color = "#6c757d";
+        document.getElementById('amex').style.color = "#6c757d";
       }
     },
     verifyCreditcard(){
@@ -219,10 +234,20 @@ export default {
               title: "Order confrimed!",
               message: "Order payed successfully!"
             });
-            this.$router.push({
-              name: "Receipt",
-              params:{ id: this.rent.id }
-            });
+
+            const order_button = document.getElementById('order-button');
+            order_button.classList.add('animate');
+            order_button.disabled = true;
+             setTimeout(() => {
+               this.$router.push({
+                name: "Receipt",
+                params:{ id: this.rent.id }
+                });
+                
+            }, 8000);
+
+
+            
           });
         }
    }
@@ -257,8 +282,9 @@ export default {
   margin-top: 7px;
   cursor: pointer;
 }
-#visa, #amex, #master{
+#visa,
+#amex,
+#master {
   font-size: 22px;
-  
 }
 </style>  

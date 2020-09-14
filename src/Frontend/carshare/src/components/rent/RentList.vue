@@ -7,9 +7,9 @@
       <div class="row" style="padding: 1rem!important;">
         <div class="car-item">Car</div>
         <div class="pickup-item">Pick Up Location</div>
-        <div class="item">Payment Status</div>
-        <div class="item">Total Price</div>
-        <div class="item">Order Status</div>
+        <div class="rent-table-item">Payment Status</div>
+        <div class="rent-table-item">Total Price</div>
+        <div class="rent-table-item">Order Status</div>
       </div>
       <hr class="user" />
     </div>
@@ -31,17 +31,3 @@ export default {
   props: ["rents"]
 };
 </script>
-
-
-<style>
-header#header {
-  display: none !important;
-}
-#dark-footer {
-  display: none !important;
-}
-
-.main {
-  height: 930px;
-}
-</style>

@@ -2,7 +2,7 @@
  *           @AUTHOR: Bach Dao, Created AT: 15/08/2020                *
  ***********************************************************************/
 <template>
-  <div class="shadow-lg p-3 mb-1 bg-white rounded">
+  <div class="shadow-sm p-3 mb-4 bg-white rounded">
     <div
       class="row bill-id"
     >{{ rent.createdAt | formatDate }} - Rent ID: {{ rent.id }} - Period: {{ rent.period }} days</div>
@@ -17,22 +17,29 @@
             />
           </div>
           <div class="col">
-            <p class="mb-0" style="font-size:30px; margin-top:20px">
+            <p class="mb-0" style="font-size: 24px; margin-top:20px">
               <b>{{rent.car.model}}</b>
             </p>
-            <small class="text-muted" style="font-size:24px">{{rent.car.brand}}</small>
+            <small class="text-muted" style="font-size:18px">{{rent.car.brand}}</small>
           </div>
         </div>
       </div>
       <div class="pickup-item">{{ rent.car.location.address }}</div>
 
-      <div class="item">
+      <div class="rent-table-item">
         <div v-if="this.rent.bill.isPaid">Paid</div>
         <div v-else>Unpaid</div>
       </div>
-      <div class="item">${{ rent.bill.fee }}</div>
-      <div class="item">
-        <div v-if="this.rent.bill.isPaid">{{ rent.status }}</div>
+      <div class="rent-table-item">${{ rent.bill.fee }}</div>
+      <div class="rent-table-item">
+        <div v-if="this.rent.bill.isPaid">
+            <div v-if="this.rent.status === 'In progress'">
+              <a href="/locations">Find the nearst return location</a>
+            </div>
+            <div v-else>
+              {{ rent.status }}
+            </div>
+        </div>
         <div v-else>
           <a class="pay-now">Pay now</a>
         </div>
