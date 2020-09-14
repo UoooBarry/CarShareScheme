@@ -13,7 +13,7 @@
         <hr class='user'>
       </div>
       
-      <div v-for="customer in customers" v-bind:key="customer.customer.id" class="container">
+      <div v-for="customer in customers" v-bind:key="customer.id" class="container">
         <UserRow v-bind:customer="customer" />
       </div>
     </div>

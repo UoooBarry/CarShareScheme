@@ -4,9 +4,10 @@
  *************************************************/
 
 import JWT from 'jsonwebtoken';
+import Customer from '../models/customer'
 import {Request, Response, NextFunction} from 'express';
 
-const generateAccessToken = (customer: any) => {
+const generateAccessToken = (customer: Customer) => {
     return JWT.sign({customer}, process.env.ACCESS_TOKEN_SECRET);
 }
 

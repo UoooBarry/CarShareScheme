@@ -12,7 +12,7 @@
     </div>
     <div class="location-form">
       <div class="form-group row">
-        <label for="inputPassword" class="col-sm-2 col-form-label font-weight-bold">Location</label>
+        <label for="inputPassword" class="col-sm-2 col-form-label font-weight-bold">Pick up location</label>
         <div class="col-sm-10">
           <input type="text" v-model="location.name" class="form-control" readonly />
         </div>
@@ -48,12 +48,12 @@ export default {
       },{headers: this.header})
         .then((res) => {
           if (res.data.message == "fail") {
-            res.data.errors.forEach(error => {
+          
               this.flashMessage.error({
                 title: "Order failed",
-                message: error
+                message: res.data.errors
               });
-            });
+
             return;
           }
 
@@ -62,6 +62,7 @@ export default {
             message: "Order confrimed successfully!"
           });
 
+          this.$emit('createRent', res.data.rent);
           this.$emit('createBill', res.data.bill);
           this.$emit('nextStep');
         })

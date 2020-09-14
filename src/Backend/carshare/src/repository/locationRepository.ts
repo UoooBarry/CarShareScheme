@@ -32,6 +32,33 @@ class locationRepository{
         }
       }
 
+    async getNearestLocation(from: string | undefined){
+        try{
+            if(!from) throw 'No from';
+            let validLocation = [];
+            const locations = await Location.findAll({});
+            //Record the last element to sort the array
+            let lowest = this.maximumRange;
+            for await (const location of locations){
+                const result = await calculateDistance(from, location.address);
+                const distance = result.distance.value;
+                location.setDataValue('distance', distance);
+                //Default sort by distance
+                if(distance <= this.maximumRange){
+                    if(distance < lowest){
+                        lowest = distance;
+                        validLocation.unshift(location);
+                    }else{
+                        validLocation.push(location);
+                    }
+                }
+            }
+            return Promise.resolve(validLocation);
+        }catch (err) {
+          return Promise.reject(err);
+        }
+    }
+
     async getAllValidateCars(from: string, sort: string | undefined, order: string | undefined){
         try{
             let validLocation = [];

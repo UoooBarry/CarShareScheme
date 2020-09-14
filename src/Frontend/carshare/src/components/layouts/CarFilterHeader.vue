@@ -16,14 +16,8 @@
       >
         <span class="navbar-toggler-icon"></span>
       </button>
-
       <div class="collapse navbar-collapse" id="carnav">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-            <label class="btn btn-outline-dark">
-              <input type="radio" name="sort" checked value="default" @click="filter('name','ASC')" /> Default (By range)
-            </label>
-          </li>
 
           <li class="nav-item dropdown">
             <label class="btn btn-outline-dark">
@@ -35,45 +29,26 @@
                 data-toggle="dropdown"
                 aria-haspopup="true"
                 aria-expanded="false"
-              >By Price</a>
+              >Filter</a>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <a class="dropdown-item" @click="filter('price','ASC')">From Low</a>
-                <a class="dropdown-item" @click="filter('price','DESC')">From High</a>
+                <a class="dropdown-item activate" @click="filter('name','ASC')">Default (By range)</a>
+                <a class="dropdown-item" @click="filter('price','ASC')">By price low</a>
+                <a class="dropdown-item" @click="filter('price','DESC')">By price high</a>
+                <a class="dropdown-item" @click="filter('createdAt','DESC')">By latest</a>
+                <a class="dropdown-item" @click="filter('brand','ASC')">By brand</a>
+                <a class="dropdown-item" @click="filter('viewed','DESC')">By popular</a>
               </div>
             </label>
           </li>
 
           <li class="nav-item">
             <label class="btn btn-outline-dark">
-              <input
-                type="radio"
-                name="sort"
-                autocomplete="off"
-                @click="filter('createdAt','DESC')"
-              /> By Newest
-            </label>
-          </li>
-
-          <li class="nav-item">
-            <label class="btn btn-outline-dark">
-              <input type="radio" name="sort" autocomplete="off" @click="filter('brand','DESC')" /> By Brand
-            </label>
-          </li>
-
-          <li class="nav-item">
-            <label class="btn btn-outline-dark">
-              <input type="radio" name="sort" autocomplete="off" @click="filter('viewed','DESC');" /> By popular
-            </label>
-          </li>
-
-          <li class="nav-item">
-            <label class="btn btn-outline-dark">
-              <input type="radio" name="sort" value="default" @click="allCar" /> All cars
+              <input type="radio" name="sort" value="all" @click="allCar" /> All cars
             </label>
           </li>
           <LocationFilter :address="address" v-on:onAddressChange="changeAddress" />
           <div class="col-sm-3.5 my-1 btn">
-          <form class="form-inline" @submit.prevent="search">
+          <form class="form-inline" style="float:right;" @submit.prevent="search">
             <input
               class="form-control mr-sm-2"
               type="search"
@@ -177,4 +152,5 @@ input[type="radio"] {
   width: 70%;
   border-radius: 0;
 }
+
 </style>

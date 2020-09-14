@@ -6,14 +6,23 @@
  ********************************************************/
     
 
-import { Model, Table, Column, NotEmpty, Default, DataType, ForeignKey, BelongsTo } from "sequelize-typescript";
+import { Model, Table, Column, NotEmpty, Default, DataType, ForeignKey, BelongsTo, HasOne } from "sequelize-typescript";
 import Customer from './customer';
+import Rent from "./rent";
+
+export enum BillType{
+    RentFee = 'Rent fee',
+    OverdueFee = 'Overdue fee',
+}
+
 
 export interface BillI{
-    id?: number | null,
-    user_id: number,
-    fee: number,
-    completed: boolean
+    id?: number | null;
+    user_id: number;
+    type: string;
+    fee: number;
+    isPaid: boolean;
+    rent: Rent;
 }
 
 @Table(
@@ -32,11 +41,18 @@ export default class Bill extends Model implements BillI{
     @ForeignKey(() => Customer)
     @Column
     user_id!: number
+    
+    @NotEmpty
+    @Column
+    type!: string
 
     @BelongsTo(() => Customer)
     user!: Customer
 
+    @HasOne(() => Rent)
+    rent!: Rent
+
     @Default(false)
     @Column
-    completed!: boolean
+    isPaid!: boolean
 }

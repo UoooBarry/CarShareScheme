@@ -17,7 +17,7 @@
                     <li class="nav-item dropdown" id="account"  v-bind:class="{'nav-item active': getActive('Profile')}"><a data-toggle="dropdown" aria-expanded="false" class="dropdown-toggle nav-link" href="#" >Account</a>
                         <div class="dropdown-menu" role="menu">
                             <a class="dropdown-item" role="presentation" href="/user/profile">Profile</a>
-                            <a class="dropdown-item" role="presentation" href="#">Rent History</a>
+                            <a class="dropdown-item" role="presentation" href="/rents">Rent History</a>
                             <a class="dropdown-item" role="presentation" href="#" v-on:click="this.logout">Logout</a>
                         </div>
                     </li>
@@ -72,5 +72,8 @@ export default {
 }
 .dropdown-menu {
     border: 0;
+}
+#navcol-1{
+    margin-right:40px;
 }
 </style>

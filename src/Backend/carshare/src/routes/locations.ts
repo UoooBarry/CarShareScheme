@@ -19,7 +19,10 @@ router.get('/', (req: Request, res:Response) => {
                 })
              })
              .catch((error) => {
-              res.json({message: 'fail', reason: error});
+                 res.json({
+                     message: 'fail',
+                     errors: error
+                 });
           })
   });
 
@@ -32,9 +35,22 @@ router.get('/:id', (req: Request, res:Response) => {
                 })
              })
              .catch((error) => {
-              res.json({message: 'fail', reason: error});
-          })
+              res.json({message: 'fail', errors: error});
+            })
   });
+
+  //GET: /api/locations/nearest
+router.get('/location/nearest', (req: Request, res: Response) => {
+    _Location.getNearestLocation(<string>req.query.from)
+                .then((locations) => {
+                    res.json({
+                        locations
+                    })
+                })
+                .catch(() => {
+                    res.sendStatus(404);
+                })
+})
 
 
 
