@@ -7,6 +7,7 @@
 import Bill from '../models/bill';
 import Rent, {RentStatus} from '../models/rent'
 import Car from '../models/car';
+import { Op } from 'sequelize';
 
 class billRepository{
    async create(bill: any){
@@ -20,7 +21,7 @@ class billRepository{
 
     async get(id:number){
       try {
-        const bill:any = await Bill.findOne({ 
+        const bill:Bill | null = await Bill.findOne({ 
           where: { id: id },
           include:[{
             model: Rent,
@@ -35,7 +36,7 @@ class billRepository{
       }
     }
 
-    async pay(bill: Bill | undefined){
+    async pay(bill: Bill | null){
       try {
         if(!bill) throw 'No bill found';
         await bill.update({
@@ -50,6 +51,26 @@ class billRepository{
     async getAll(){
       try{
         const bill = Bill.findAll({
+          include:[{
+            model: Rent,
+            include:[{
+              model: Car
+            }]
+          }]
+        })
+        return Promise.resolve(bill);
+      }catch (err) {
+        return Promise.reject(err);
+      }
+    }
+
+    async getUnPaidBills(){
+      try{
+        const bill = Bill.findAll({
+          where: {
+            isPaid: false,
+            createdAt: {[Op.lt]: new Date()}
+          },
           include:[{
             model: Rent,
             include:[{

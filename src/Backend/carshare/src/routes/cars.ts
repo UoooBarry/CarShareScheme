@@ -37,7 +37,7 @@ router.get("/", (req: Request, res: Response) => {
       });
   } else {
     _Location.getAllValidateCars(<string>req.query.from, <string>req.query.sort, <string>req.query.order)
-      .then(async (locations: any) => {
+      .then((locations: any) => {
         res.json({ locations });
       })
       .catch((err) => {

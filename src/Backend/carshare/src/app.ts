@@ -15,7 +15,7 @@ import logger from 'morgan';
 import carsRouter from './routes/cars';
 import customerRouter from './routes/customers';
 import locationRouter from './routes/locations';
-import orderRouter from './routes/order';
+import orderRouter from './routes/orders';
 import cors from 'cors';
 import CleanBillTask from './tasks/cleanBillTask';
 
@@ -41,7 +41,7 @@ app.use('/api/locations', locationRouter);
 app.use('/api/orders', orderRouter);
 
 // catch 404 and forward to error handler
-app.use((req, res, next) => {
+app.use((req: Request, res: Response, next: NextFunction) => {
   next(createError(404));
 });
 
@@ -60,7 +60,7 @@ db.authenticate()
 
 
 //Tasks
-const cleanBill = new CleanBillTask(24);
+const cleanBill: CleanBillTask = new CleanBillTask(24);
 cleanBill.run();
 
 // error handler

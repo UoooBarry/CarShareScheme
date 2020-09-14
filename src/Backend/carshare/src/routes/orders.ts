@@ -46,11 +46,10 @@ router.post('/create', [OrderValidator.validate, verifyToken], async (req: Reque
                 period: req.body.period,
                 bill_id: bill.id
             });
-
-            await _Car.deactivate(car.id);
     
             res.json({ bill, rent });
-        }catch(err){
+        } catch (err) {
+            console.log(err);
             res.json({
                 message: "fail",
                 errors: err,
@@ -68,15 +67,15 @@ router.get('/:id/', [verifyToken], (req: Request, res: Response) => {
                 res.json({rent});
             })
             .catch((err) => {
-                console.log(err)
+                console.log(err);
                 res.sendStatus(404);
             })
 })
 
 
-// GET: /api/cars/
+// GET: /api/orders/personal
 // Get all orders of the current user
-router.get('/',[verifyToken], (req: Request, res: Response) => {
+router.get('/list/personal',[verifyToken], (req: Request, res: Response) => {
     _Rent.getByUserId(req.user.id) 
             .then((rents) => {
                 res.json({
@@ -91,6 +90,42 @@ router.get('/',[verifyToken], (req: Request, res: Response) => {
             })
 });
 
+// GET: /api/cars/
+// Get all orders for admin
+router.get('/', [verifyToken], (req: Request, res: Response) => {
+    if(!req.user.admin) res.sendStatus(403);
+    _Rent.getAll()
+            .then((rents) => {
+                res.json({
+                    rents
+                });
+            })
+            .catch((err) => {
+                res.json({
+                    message: "fail",
+                    errors: err,
+                });
+            })
+})
+
+//PATCH: /api/cars/return/:id
+router.patch('/return', [verifyToken], (req: Request, res: Response) => {
+    if(!req.user.admin) res.sendStatus(403);
+    _Rent.return(req.body.rent_id)
+            .then(() => {
+                res.json({
+                    message: 'success'
+                });
+            })
+            .catch((err) => {
+                res.json({
+                    message: "fail",
+                    errors: err,
+                });
+                console.log(err);
+            })
+})
+
 router.post('/pay', [PaymentValidator.validate, verifyToken], async (req: Request, res: Response) => {
     const validationErrors = req.validationError;
     if(req.bill?.user_id != req.user.id) res.sendStatus(403);
@@ -104,11 +139,16 @@ router.post('/pay', [PaymentValidator.validate, verifyToken], async (req: Reques
             //If pass payment validator
             
             //Update bill status
+            if(!req.bill) throw 'Not fond';
             await _Bill.pay(req.bill);
 
             //Send message to user
-            const text: string = `Thanks for order our rent services. Your rent will start at ${req.bill?.rent.start_from}. You will soon receive a detail receipt in your email. `;
-            Message.sendMessage(req.user.contact_number, text);
+            if (process.env.NODE_ENV == 'production') {
+                const text: string = `Thanks for order our rent services. Your rent will start at ${req.bill?.rent.start_from}. You will soon receive a detail receipt in your email. `;
+                Message.sendMessage(req.user.contact_number, text);
+            }
+            
+            await _Car.deactivate(req.bill.rent.car.id);
 
             res.json({
                 message: "success"
