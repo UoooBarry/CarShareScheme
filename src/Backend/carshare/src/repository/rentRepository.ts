@@ -54,9 +54,18 @@ class rentRepository implements DataRepository{
             where: {
               user_id: user_id
             },
-            include: [{
+          include: [
+            {
               model: Bill
-            }]
+            },
+            {
+              model: Car,
+              attributes: ['id', 'name', 'location_id'],
+              include:[{
+                model: Location
+              }]
+            },
+          ],
           });
         return Promise.resolve(result);
       }catch (err) {

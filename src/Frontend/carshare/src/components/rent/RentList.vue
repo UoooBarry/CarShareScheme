@@ -13,7 +13,7 @@
       </div>
       <hr class="user" />
     </div>
-
+  
     <div v-for="rent in rents" v-bind:key="rent.id" class="container">
       <RentRow v-bind:rent="rent" />
     </div>
