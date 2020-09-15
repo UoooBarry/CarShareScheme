@@ -27,14 +27,23 @@
     <p class="text-md-left mb-5 px-2">
       1.All renters must be aged at least 21 years old at the commencement of the rental.
       <br />2.Any renters aged 21 to 24 inclusive (whether the main or additional driver) incur an age surcharge per day, and can access our standard range of vehicles. Ultimate Protection (UP) is not available to drivers in this age group.
-      <br /> 
+      <br />
     </p>
     <h1
       class="text-md-left mb-5 px-2 font-weight-bold font-italic"
     >4. What is my responsisibility when renting a vehicle in PBD Car Share?</h1>
     <p class="text-md-left mb-5 px-2">
       From the time you collect your vehicle, you are financially responsible for any loss of damage to the vehicle. This includes damage caused outside of your control including hailstorms. You are also bound by PBD's standard Terms & Policy as agreed to when you confirm the order.
-      <br /> 
+      <br />
+    </p>
+    <h1
+      class="text-md-left mb-5 px-2 font-weight-bold font-italic"
+    >5. What is car hire excess insurance?</h1>
+    <p class="text-md-left mb-5 px-2">
+     Car hire excess insurance is an  insurance include in the price which can protect you from the excess costs that you are required to pay in the event that your hire car is damaged or stolen.
+      <br />
+      When the car is damaged or lost, you need to pay a fixed amount, and then the insurance will pay the rest.
+       <br />
     </p>
   </div>
 </template>
