@@ -54,11 +54,7 @@ import authorizeMixin from "@/mixins/authorizeMixin";
 export default {
   name: "RentRow",
   mixins: [authorizeMixin],
-  props: ["rent"],
-  data() {
-    return {};
-  },
-  created() {}
+  props: ["rent"]
 };
 </script>
 

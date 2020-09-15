@@ -47,8 +47,8 @@
             </label>
           </li>
           <LocationFilter :address="address" v-on:onAddressChange="changeAddress" />
-          <div class="col-sm-3.5 my-1 btn">
-          <form class="form-inline" style="float:right;" @submit.prevent="search">
+          <div class="col-sm-3.5 my-1 btn" style="float: right;">
+          <form class="form-submit" style="" @submit.prevent="search">
             <input
               class="form-control mr-sm-2"
               type="search"
@@ -88,6 +88,10 @@ export default {
 
 
 <style scoped>
+.form-submit{
+  display: flex;
+  align-items: center;
+}
 .navbar {
   width: 95%;
   border-top: 1px solid #a9a0a0;

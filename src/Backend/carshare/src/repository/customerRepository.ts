@@ -6,15 +6,36 @@
  ***********************************************************************/
 
 import Customer from '../models/customer';
+import DataRepository from './dataRepository';
 
-class customerRepository{
+class customerRepository implements DataRepository{
+    private static instance?: customerRepository;
+
+    async create(object: any) {
+        try {
+            const customer = await Customer.create({object})
+            return Promise.resolve(customer);
+        }catch(error){
+            return Promise.reject(error);
+        }
+    }
     
-    async getAll(){
-        return await Customer.findAll({where: {}});
+    async getAll() {
+        try{
+            const customers = await Customer.findAll({where: {}});
+            return Promise.resolve(customers);
+        }catch(error){
+            return Promise.reject(error);
+        }
     }
 
-    async getById(id: number){
-        return await Customer.findOne({where: {id: id}});
+    async get(id: number) {
+        try{
+            const customer = await Customer.findOne({where: {id: id}});
+            return Promise.resolve(customer);
+        }catch(error){
+            return Promise.reject(error);
+        }
     }
 
     /*Update customer with json array */
@@ -29,6 +50,13 @@ class customerRepository{
         }
     }
 
+    static getInstance(): customerRepository{
+        if (!customerRepository.instance) 
+            customerRepository.instance = new customerRepository()
+        
+        return customerRepository.instance;
+    }
+
 }
 
-export default new customerRepository();
+export default customerRepository.getInstance();
