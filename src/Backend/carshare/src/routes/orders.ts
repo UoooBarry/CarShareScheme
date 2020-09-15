@@ -61,7 +61,7 @@ router.post('/create', [OrderValidator.validate, verifyToken], async (req: Reque
 
 //GET: api/orders/:id/
 router.get('/:id/', [verifyToken], (req: Request, res: Response) => {
-    _Rent.getById(req.params.id)
+    _Rent.get(parseInt(req.params.id))
             .then((rent) => {
                 if(rent?.user_id != req.user.id) throw 'Not correct user';
                 res.json({rent});
@@ -108,11 +108,43 @@ router.get('/', [verifyToken], (req: Request, res: Response) => {
             })
 })
 
-//PATCH: /api/cars/return/:id
+//PATCH: /api/cars/return
 router.patch('/return', [verifyToken], (req: Request, res: Response) => {
     if(!req.user.admin) res.sendStatus(403);
     _Rent.return(req.body.rent_id)
-            .then(() => {
+        .then(() => {
+
+                //Send message to user only in production environment
+                if (process.env.NODE_ENV == 'production') {
+                    const text: string = `Thanks for order our rent services. Your rent id: ${req.body.rent_id}, is successfully returned. Thank you for using our service!.`;
+                    Message.sendMessage(req.user.contact_number, text);
+                }
+            
+                res.json({
+                    message: 'success'
+                });
+            })
+            .catch((err) => {
+                res.json({
+                    message: "fail",
+                    errors: err,
+                });
+                console.log(err);
+            })
+})
+
+//PATCH: /api/cars/pickup
+router.patch('/pickup', [verifyToken], (req: Request, res: Response) => {
+    if(!req.user.admin) res.sendStatus(403);
+    _Rent.pickUp(req.body.rent_id)
+        .then(() => {
+
+                //Send message to user only in production environment
+                if (process.env.NODE_ENV == 'production') {
+                    const text: string = `Thanks for order our rent services. Your rent id: ${req.body.rent_id}, is successfully picked up. Thank you for using our service!.`;
+                    Message.sendMessage(req.user.contact_number, text);
+                }
+            
                 res.json({
                     message: 'success'
                 });
@@ -142,9 +174,9 @@ router.post('/pay', [PaymentValidator.validate, verifyToken], async (req: Reques
             if(!req.bill) throw 'Not fond';
             await _Bill.pay(req.bill);
 
-            //Send message to user
+            //Send message to user only in production environment
             if (process.env.NODE_ENV == 'production') {
-                const text: string = `Thanks for order our rent services. Your rent will start at ${req.bill?.rent.start_from}. You will soon receive a detail receipt in your email. `;
+                const text: string = `Thanks for order our rent services. Your rent id: ${req.bill?.id} will start at ${req.bill?.rent.start_from}. You will soon receive a detail receipt in your email. `;
                 Message.sendMessage(req.user.contact_number, text);
             }
             

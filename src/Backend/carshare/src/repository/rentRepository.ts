@@ -8,8 +8,11 @@ import Bill from '../models/bill';
 import Car from '../models/car';
 import Location from '../models/location';
 import Customer from '../models/customer';
+import DataRepository from './dataRepository';
 
-class rentRepository{
+class rentRepository implements DataRepository{
+  private static instance?: rentRepository;
+
     async create(rent: any){
        try {
            const result = await Rent.create(rent);
@@ -19,7 +22,7 @@ class rentRepository{
          }
     }
 
-    async getById(rent_id?: string){
+    async get(rent_id?: number){
       try{
         if(!rent_id) throw 'No id'; 
         const result = await Rent.findOne({
@@ -83,7 +86,20 @@ class rentRepository{
       }catch (err) {
         return Promise.reject(err);
       }
+  }
+
+  async pickUp(id: number) {
+    try{
+      const rent = await Rent.findOne({
+        where: {id: id}
+      });
+      if(!rent) throw 'No rent error';
+      await rent.update({status: RentStatus.InProgress});
+      return Promise.resolve(true);
+    }catch (err) {
+      return Promise.reject(err);
     }
+  }
 
     async return(id: number){
       try{
@@ -102,7 +118,15 @@ class rentRepository{
       }catch (err) {
         return Promise.reject(err);
       }
-    }
+  }
+  
+  static getInstance(): rentRepository{
+    if (!rentRepository.instance) 
+      rentRepository.instance = new rentRepository()
+    
+    return rentRepository.instance;
+  }
+
 }
 
-export default new rentRepository();
+export default rentRepository.getInstance();
