@@ -25,7 +25,7 @@ export default {
     };
   },
   async created() {
-    const response = await this.$axios.get(`${this.$carshare}/orders/`, {
+    const response = await this.$axios.get(`${this.$carshare}/orders/list/personal`, {
       headers: this.header
     });
     this.rents = response.data.rents;
