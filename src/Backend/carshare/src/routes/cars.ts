@@ -28,7 +28,7 @@ router.get("/", (req: Request, res: Response) => {
   /*If qeury all = true, get all cars */
   if (req.query.all) {
     _Car
-      .getAll(null, null)
+      .getAll()
       .then((cars: Car[]) => {
         res.json({ cars });
       })

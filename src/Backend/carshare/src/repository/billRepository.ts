@@ -3,13 +3,16 @@
  * Updated in 03/09/2020 migrate to typescript    *
  *************************************************/
 
-
+import DataRepository from './dataRepository';
 import Bill from '../models/bill';
 import Rent, {RentStatus} from '../models/rent'
 import Car from '../models/car';
 import { Op } from 'sequelize';
+import { throws } from 'assert';
 
-class billRepository{
+class billRepository implements DataRepository{
+  private static instance?: billRepository;
+
    async create(bill: any){
        try {
            const result = await Bill.create(bill);
@@ -82,7 +85,15 @@ class billRepository{
       }catch (err) {
         return Promise.reject(err);
       }
-    }
+  }
+  
+  static getInstance(): billRepository{
+    if (!billRepository.instance) 
+      billRepository.instance = new billRepository()
+    
+    return billRepository.instance;
+  }
+
 }
 
-export default new billRepository();
+export default billRepository.getInstance();

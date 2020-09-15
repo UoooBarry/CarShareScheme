@@ -7,9 +7,12 @@
 import Car from '../models/car';
 import Sequelize from 'sequelize';
 const Op = Sequelize.Op;
+import DataRepository from './dataRepository';
 
-class carRepository {
-  async getAll(sort: string | null, order: string | null) {
+class carRepository implements DataRepository{
+  private static instance?: carRepository;
+
+  async getAll() {
     try {
       const cars = await Car.findAll({
         order: [["name", "ASC"]],
@@ -132,6 +135,13 @@ class carRepository {
       return Promise.reject(err);
     }
   }
+
+  static getInstance(): carRepository{
+    if (!carRepository.instance) 
+      carRepository.instance = new carRepository()
+    
+    return carRepository.instance;
+  }
 }
 
-export default new carRepository();
+export default carRepository.getInstance();

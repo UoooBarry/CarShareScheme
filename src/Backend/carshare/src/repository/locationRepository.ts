@@ -5,13 +5,24 @@
  **************************/
 import Location from '../models/location';
 import Car from '../models/car';
-import {calculateDistance} from '../helpers/distanceHelper';
+import { calculateDistance } from '../helpers/distanceHelper';
+import DataRepository from './dataRepository';
 
-class locationRepository{
+class locationRepository implements DataRepository{
     maximumRange: number;
-
+    private static instance?: locationRepository;
+    
     constructor(){
         this.maximumRange = 20000; //COUNT IN M
+    }
+
+    async create(object: any) {
+        try {
+            const location = await Location.create({object})
+            return Promise.resolve(location);
+        }catch(error){
+            return Promise.reject(error);
+        }
     }
 
     async getAll(){
@@ -98,6 +109,13 @@ class locationRepository{
             return Promise.reject(error);
         }
     }
+
+    static getInstance(): locationRepository{
+        if (!locationRepository.instance) 
+            locationRepository.instance = new locationRepository()
+        
+        return locationRepository.instance;
+    }
 }
 
-export default new locationRepository();
+export default locationRepository.getInstance();

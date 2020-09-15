@@ -12,7 +12,7 @@
         src: "../artifacts/server.zip"
         dest: "{{home_dir}}"
     
-    - name: Extract AuthServer
+    - name: Extract Servers
       become: yes
       unarchive: 
         src: "{{home_dir}}/server.zip"
