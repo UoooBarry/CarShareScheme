@@ -53,11 +53,11 @@ const routes = [{
   }
 },
 {
-  path: '/about',
-  name: 'About',
+  path: '/contact',
+  name: 'Contact',
   components: {
     header: Header,
-    main: () => import('../views/About.vue')
+    main: () => import('../views/Contact.vue')
   },
 },
 {
@@ -77,6 +77,22 @@ const routes = [{
   components: {
     header: Header,
     main: () => import('../views/Locations.vue')
+  },
+},
+{
+  path: '/term',
+  name: 'Term',
+  components: {
+    header: Header,
+    main: () => import('../views/TermAndPolicy.vue')
+  },
+},
+{
+  path: '/FAQ',
+  name: 'FAQ',
+  components: {
+    header: Header,
+    main: () => import('../views/FAQ.vue')
   },
 },
 {
