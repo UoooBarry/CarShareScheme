@@ -6,7 +6,7 @@
 
 <script>
 import authorizeMixin from "@/mixins/authorizeMixin";
-import OrderList from '@/components/admin/OrderList';
+import OrderList from '@/components/admin/Order/OrderList';
 export default {
     name: 'Orders',
     mixins: [authorizeMixin],

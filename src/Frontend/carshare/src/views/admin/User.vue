@@ -11,7 +11,7 @@
 
 <script>
 import authorizeMixin from "@/mixins/authorizeMixin";
-import UserList from "@/components/admin/UserList";
+import UserList from "@/components/admin/User/UserList";
 
 export default {
   name: "User",

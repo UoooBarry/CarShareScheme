@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import CarList from "@/components/admin/CarList"
+import CarList from "@/components/admin/Car/CarList"
 import authorizeMixin from "@/mixins/authorizeMixin";
 
 export default {

@@ -23,7 +23,7 @@ export default {
   components: {
     Payment
   },
-  props: ["rentId","fee"],
+  props: ["rentId", "fee"],
   data() {
     return {};
   },
