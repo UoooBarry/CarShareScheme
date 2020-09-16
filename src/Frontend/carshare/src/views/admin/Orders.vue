@@ -1,6 +1,6 @@
 <template>
     <div>
-        <OrderList :rents='rents' />
+        <OrderList :rents='rents' :locations='locations' />
     </div>
 </template>
 
@@ -16,6 +16,7 @@ export default {
     data(){
         return{
             rents: [],
+            locations: []
         }
     },
     created(){
@@ -27,7 +28,18 @@ export default {
         })
         .catch((err)=> {
             console.log(err);
+        });
+
+        this.$axios.get(`${this.$carshare}/locations`, {
+            headers: this.header
         })
+        .then((res) => {
+            this.locations = res.data.locations;
+            console.log(this.locations);
+        })
+        .catch((err)=> {
+            console.log(err);
+        });
     }
 }
 </script>
