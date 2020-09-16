@@ -37,11 +37,12 @@
       <br />
     </p>
     <h1
-      class="text-md-left mb-5 px-2 font-weight-bold font-italic"
+      class="text-md-left mb-5 px-2 font-weight-bold font-italic" id="insurance"
     >5. What is car hire excess insurance?</h1>
     <p class="text-md-left mb-5 px-2">
       Car hire excess insurance is an insurance include in the price which can protect you from the excess costs that you are required to pay in the event that your hire car is damaged or stolen.
       <br />
+       <br />
       <font color="#060100" size="4">Let's look at what insurance included:</font>
     </p>
     <h4
