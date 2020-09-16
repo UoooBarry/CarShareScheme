@@ -17,7 +17,7 @@ import ProfileValidator from '../validators/ProfileValidator';
 
 //GET /api/customers/:id
 router.get('/:id/', async (req, res) => {
-    const customer = await _Customer.getById(parseInt(req.params.id));
+    const customer = await _Customer.get(parseInt(req.params.id));
     if (customer) {
         res.json(customer);
     } else {
@@ -59,7 +59,7 @@ router.patch('/avatar', [verifyToken, avatarUpload.single('image')], (req: Reque
 
 //GET /api/customers/ for single customer profile
 router.get('/', verifyToken, async (req: Request, res: Response) => {
-    const customer = await _Customer.getById(req.user.id);
+    const customer = await _Customer.get(req.user.id);
     if (customer) {
         res.json({ message: "success", customer });
     } else {

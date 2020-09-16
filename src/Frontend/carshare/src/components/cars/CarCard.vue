@@ -3,17 +3,25 @@
  ***********************************************************************/
 <template>
   <div>
-    <router-link :to="{name: 'CarDetail', params:{ id: car.id}}">
       <div
         class="card car"
         style="width: 18rem;cursor: pointer;"
         @mouseover="cardHover = true"
         @mouseleave="cardHover = false"
         :class="{hover: cardHover}"
-        onclick="location.href='#';" 
+        v-on:click="$router.push({name: 'CarDetail', params:{ id: car.id}})"
       >
-        <div class="hover-info" v-on:mousemove="draw" v-on:mouseover="hover" v-on:mouseleave="hover">
-          <img class="card-img" :src=" 'https://carshare-image-pbd.s3-ap-southeast-2.amazonaws.com/Car/' + car.id" alt="Car"/>
+        <div
+          class="hover-info"
+          v-on:mousemove="draw"
+          v-on:mouseover="hover"
+          v-on:mouseleave="hover"
+        >
+          <img
+            class="card-img"
+            :src=" 'https://carshare-image-pbd.s3-ap-southeast-2.amazonaws.com/Car/' + car.id"
+            alt="Car"
+          />
         </div>
 
         <div class="card-body">
@@ -23,7 +31,6 @@
         </div>
       </div>
       <CarPreview :id="`preview${car.id}`" v-if="hovering" v-bind:car="this.car" />
-    </router-link>
   </div>
 </template>
 
@@ -63,7 +70,7 @@ export default {
 </script>
 
 <style scoped>
-a{
+a {
   color: black;
 }
 .card-img-top {
@@ -84,19 +91,19 @@ a{
   border: 1px solid black;
   border-radius: 10px;
 }
-.button:hover{
-	text-decoration: none;
-	color: white;
-  background: linear-gradient(to right, #b1bfd8 0%,  #6782b4 100%);
+.button:hover {
+  text-decoration: none;
+  color: white;
+  background: linear-gradient(to right, #b1bfd8 0%, #6782b4 100%);
 }
-.card-title.car{
+.card-title.car {
   margin-top: 8px;
-    font-family: AvenirLTStd-Black;
-    letter-spacing: .125rem;
-    width: 100%;
+  font-family: AvenirLTStd-Black;
+  letter-spacing: 0.125rem;
+  width: 100%;
 }
-.card-img{
-  margin:0;
+.card-img {
+  margin: 0;
 }
 .card.car {
   border-radius: 16px;
@@ -104,7 +111,7 @@ a{
   -webkit-transition: margin 0.5s ease-out;
   -moz-transition: margin 0.5s ease-out;
   -o-transition: margin 0.5s ease-out;
-  box-shadow: 0 5px 10px 0 rgba(0,0,0,.12);
+  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.12);
 }
 .card.car:hover {
   /* cursor:pointer; */

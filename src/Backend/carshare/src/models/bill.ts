@@ -24,7 +24,7 @@ export interface BillI{
     isPaid: boolean;
     rent: Rent;
 }
-
+ 
 @Table(
     {
         tableName: 'bills',

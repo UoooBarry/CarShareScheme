@@ -3,12 +3,16 @@
  * Updated in 03/09/2020 migrate to typescript    *
  *************************************************/
 
-
+import DataRepository from './dataRepository';
 import Bill from '../models/bill';
 import Rent, {RentStatus} from '../models/rent'
 import Car from '../models/car';
+import { Op } from 'sequelize';
+import { throws } from 'assert';
 
-class billRepository{
+class billRepository implements DataRepository{
+  private static instance?: billRepository;
+
    async create(bill: any){
        try {
            const result = await Bill.create(bill);
@@ -20,7 +24,7 @@ class billRepository{
 
     async get(id:number){
       try {
-        const bill:any = await Bill.findOne({ 
+        const bill:Bill | null = await Bill.findOne({ 
           where: { id: id },
           include:[{
             model: Rent,
@@ -35,7 +39,7 @@ class billRepository{
       }
     }
 
-    async pay(bill: Bill | undefined){
+    async pay(bill: Bill | null){
       try {
         if(!bill) throw 'No bill found';
         await bill.update({
@@ -62,6 +66,34 @@ class billRepository{
         return Promise.reject(err);
       }
     }
+
+    async getUnPaidBills(){
+      try{
+        const bill = Bill.findAll({
+          where: {
+            isPaid: false,
+            createdAt: {[Op.lt]: new Date()}
+          },
+          include:[{
+            model: Rent,
+            include:[{
+              model: Car
+            }]
+          }]
+        })
+        return Promise.resolve(bill);
+      }catch (err) {
+        return Promise.reject(err);
+      }
+  }
+  
+  static getInstance(): billRepository{
+    if (!billRepository.instance) 
+      billRepository.instance = new billRepository()
+    
+    return billRepository.instance;
+  }
+
 }
 
-export default new billRepository();
+export default billRepository.getInstance();
