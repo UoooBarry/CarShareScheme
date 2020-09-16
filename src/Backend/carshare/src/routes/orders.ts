@@ -111,7 +111,7 @@ router.get('/', [verifyToken], (req: Request, res: Response) => {
 //PATCH: /api/cars/return
 router.patch('/return', [verifyToken], (req: Request, res: Response) => {
     if(!req.user.admin) res.sendStatus(403);
-    _Rent.return(req.body.rent_id)
+    _Rent.return(req.body.rent_id, req.body.location_id)
         .then(() => {
 
                 //Send message to user only in production environment
