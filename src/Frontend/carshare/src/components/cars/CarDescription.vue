@@ -9,7 +9,7 @@
         :src=" 'https://carshare-image-pbd.s3-ap-southeast-2.amazonaws.com/Car/' + car.id"
         alt="Car"
       />
-      <Popular v-if="car.popular"/>
+      <Popular v-if="car.popular" />
       <br />
       <div class="car-details">
         <h3>About our {{ car.name }}</h3>
@@ -19,11 +19,14 @@
         <b
           class="description"
         >Our company guarantees that we have each car checked before any renting transactions, so the users will not need to worry about the safety. We are also very strict on where the car’s come from, as a result there are no bad influences on the car.</b>
-        <br><br>
-        <b
-          class="description"
-        >
-        We provide a few of <a href="#">insurance plans</a> for the customers to enhance the security during their renting experience.
+        <br />
+        <br />
+        <b class="description">
+          We provide a few of
+          <a
+            style="font-weight: bold; cursor:pointer"
+            v-on:click="redirect"
+          >insurance plans</a> for the customers to enhance the security during their renting experience.
         </b>
         <h3>Wide options</h3>
         <b
@@ -40,14 +43,22 @@
 </template>
 
 <script>
-import Popular from "./Popular"
+import Popular from "./Popular";
 export default {
   name: "CarDescription",
   props: ["car"],
   components: {
     Popular
+  },
+  methods: {
+    redirect() {
+      this.$router.push({name: 'FAQ'}).then(() => {
+        document.querySelector("#insurance").scrollIntoView({
+          behavior: "smooth"
+        });
+      });
+    }
   }
-  
 };
 </script>
 
@@ -76,12 +87,12 @@ h3 {
   line-height: 1.6;
   margin-top: 10px;
 }
-.popular{
+.popular {
   margin-top: -50px;
   width: 200px;
   height: 150px;
 }
-#car-description{
+#car-description {
   min-width: 600px;
   margin-right: 100px;
 }

@@ -5,7 +5,7 @@
  *           Yongqian Huang, 04/09/2020, Migrate to typescript      *
  ********************************************************************/
 
-import { Model, Table, AutoIncrement, PrimaryKey, Column, AllowNull, NotEmpty, BelongsTo, Unique, Default } from "sequelize-typescript";
+import { Model, Table, AutoIncrement, PrimaryKey, Column, AllowNull, NotEmpty, BelongsTo, Unique, Default, DataType } from "sequelize-typescript";
 
 export interface customerI{
     id?: number | null;
@@ -32,7 +32,7 @@ export default class Customer extends Model implements customerI{
     @Column
     family_name!: string;
 
-    @Column
+    @Column('Date')
     date_of_birth?: Date;
 
     @NotEmpty

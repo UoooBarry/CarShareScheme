@@ -9,21 +9,21 @@
         <div class="row">
           <!-- Start: Services -->
           <div class="col-sm-6 col-md-3 item">
-            <h3>Services</h3>
+            <h3>About us</h3>
             <ul>
-              <li>Car share</li>
+              <li> <a href="/FAQ"> FAQ </a></li>
               <li>
-                <a href="https://github.com/UoooBarry/CarShareScheme">Development</a>
+                <a href="/term">Terms and Policy</a>
               </li>
               <li>
-                <a href="http://carshare-vue-pbd.s3-website-ap-southeast-2.amazonaws.com/">Hosting</a>
+                <a href="/contact">Contact</a>
               </li>
             </ul>
           </div>
           <!-- End: Services -->
           <!-- Start: About -->
           <div class="col-sm-6 col-md-3 item">
-            <h3>About</h3>
+            <h3>Others</h3>
             <ul>
               <li>
                 <a href="https://rmit.instructure.com/">Rmit</a>
@@ -40,7 +40,7 @@
           <!-- Start: Footer Text -->
           <div class="col-md-6 item text">
             <h3>Team PBD</h3>
-            <p>Praesent sed lobortis mi. Suspendisse vel placerat ligula. Vivamus ac sem lacus. Ut vehicula rhoncus elementum. Etiam quis tristique lectus. Aliquam in arcu eget velit pulvinar dictum vel in justo.</p>
+            <p>This is team PBD final capstone project for renting car web base application</p>
           </div>
           <!-- End: Footer Text -->
  
