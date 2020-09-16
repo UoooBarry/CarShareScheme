@@ -1,5 +1,5 @@
 <template>
-<div class="container mt-5 mb-20 shadow-md border">
+<div class="container mt-5 shadow-md border" style="margin-bottom:230px">
           <div class="row">
               <!-- Section Titile -->
               <div class="col-md-12 wow animated fadeInLeft" data-wow-delay=".2s">
@@ -9,40 +9,33 @@
           <div class="row">
               <!-- Section Titile -->
               <div class="col-md-6 mt-3 contact-widget-section2 wow animated fadeInLeft" data-wow-delay=".2s">
-                <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content.</p>
+                <p>Any queries will be responded with 2 days during business hours. You can also try to contact us by following ways (Working hours 8:00am - 5:00pm everyday)</p>
 
                 <div class="find-widget">
-                 Company:  <a href="https://hostriver.ro">HostRiver</a>
+                 Company:  <a href="https://hostriver.ro">CarShareScheme PBD</a>
                 </div>
                 <div class="find-widget">
-                 Address: <a href="#">4435 Berkshire Circle Knoxville</a>
+                 Address: <a href="/locations">You can find our nearest company locations here</a>
                 </div>
                 <div class="find-widget">
-                  Phone:  <a href="#">+ 879-890-9767</a>
+                  Phone:  <a href="#">+ 619-890-9767</a>
                 </div>
                 
                 <div class="find-widget">
-                  Website:  <a href="https://uny.ro">www.uny.ro</a>
+                  Website:  <a href="https://carshare.uooobarry.com/">https://carshare.uooobarry.com/</a>
                 </div>
-                <div class="find-widget">
-                   Program: <a href="#">Mon to Sat: 09:30 AM - 10.30 PM</a>
-                </div>
+               
               </div>
               <!-- contact form -->
               <div class="col-md-6 wow animated fadeInRight" data-wow-delay=".2s">
-                  <form class="shake" role="form" method="post" id="contactForm" name="contact-form" data-toggle="validator">
+                  <form class="shake" role="form" action="mailto:Bach.rmit.5499@gmail.com" method="post" id="contactForm" name="contact-form" enctype="text/plain">
                       <!-- Name -->
                       <div class="form-group label-floating">
                         <label class="control-label" for="name">Name</label>
                         <input class="form-control" id="name" type="text" name="name" required data-error="Please enter your name">
                         <div class="help-block with-errors"></div>
                       </div>
-                      <!-- email -->
-                      <div class="form-group label-floating">
-                        <label class="control-label" for="email">Email</label>
-                        <input class="form-control" id="email" type="email" name="email" required data-error="Please enter your Email">
-                        <div class="help-block with-errors"></div>
-                      </div>
+               
                       <!-- Subject -->
                       <div class="form-group label-floating">
                         <label class="control-label">Subject</label>
@@ -57,7 +50,7 @@
                       </div>
                       <!-- Form Submit -->
                       <div class="form-submit mt-5">
-                          <button class="btn btn-common" type="submit" id="form-submit"><i class="material-icons mdi mdi-message-outline"></i> Send Message</button>
+                          <button class="btn btn-outline-dark" type="submit" id="form-submit"><i class="material-icons mdi mdi-message-outline"></i> Send Message</button>
                           <div id="msgSubmit" class="h3 text-center hidden"></div>
                           <div class="clearfix"></div>
                       </div>
@@ -69,6 +62,10 @@
 
 
 <style scoped>
+.row{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
 .form-control,
 .form-group .form-control {
     border: 0;
