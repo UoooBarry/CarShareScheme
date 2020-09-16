@@ -14,7 +14,7 @@
                     <th scope="col">User id</th>
                     <th scope="col">Fee</th>
                     <th scope="col">Status</th>
-                    <th scope="col">Return</th>
+                    <th scope="col">Action</th>
                 </tr>
             </thead>
             <tbody v-for="rent in rents" v-bind:key="rent.id">

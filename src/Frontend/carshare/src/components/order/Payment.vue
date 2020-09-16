@@ -12,7 +12,7 @@
       <p class="card-text text-muted mt-md-4 mb-2" style="font-size:30px">PAYMENT METHOD</p>
     </div>
     <article class="card">
-      <h3>Payment estimate: ${{bill.fee}}</h3>
+     
       <div class="card-body p-5">
         <ul class="nav nav-pills rounded nav-fill mb-3" role="tablist">
           <li class="nav-item">

@@ -1,13 +1,11 @@
 
 <template>
-    <div class="col-sm-3.5 my-1 btn">
+    <div class="my-1 btn">
               <label class="sr-only" for="address">Address</label>
               <div class="input-group">
-                <div class="input-group-prepend">
-                  <div class="input-group-text">@</div>
-                </div>
-                  <input ref="autocomplete" class='form-control mr-sm-2 address-bar' type="text" id='address' :value="address" >
-                  <button type="submit" class="btn my-2 my-sm-0" @click="updateAdress">Change address</button>
+               
+                  <input ref="autocomplete" class='form-control address-bar' type="text" id='address' :value="address" >
+                  <button type="submit" class="btn btn-find-address my-2 my-sm-0" @click="updateAdress">Change address</button>
               </div>
     </div>
 </template>
@@ -49,5 +47,11 @@ export default {
 
 .address-bar{
   width: 250px;
+}
+.btn-find-address:hover, .btn-find-address:active, .btn-find-address:focus{
+    color: #fff;
+  background-color: #a9a0a0;
+  border-color: #a9a0a0;
+  box-shadow: none !important;
 }
 </style>

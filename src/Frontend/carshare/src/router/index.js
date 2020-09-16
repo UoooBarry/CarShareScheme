@@ -73,6 +73,14 @@ const routes = [
     },
   },
   {
+    path: "*",
+    name: "NotFound",
+    component: {
+      header: Header,
+      main: () => import("../views/NotFound.vue"),
+    },
+  },
+  {
     path: "/locations",
     name: "Locations",
     components: {

@@ -108,8 +108,8 @@ router.get('/', [verifyToken], (req: Request, res: Response) => {
             })
 })
 
-//PATCH: /api/cars/return/:id
-router.patch('/return', [verifyToken], (req: Request, res: Response) => {
+//PATCH: /api/cars/update/:id
+router.patch('/update', [verifyToken], (req: Request, res: Response) => {
     if(!req.user.admin) res.sendStatus(403);
     _Rent.return(req.body.rent_id)
             .then(() => {
