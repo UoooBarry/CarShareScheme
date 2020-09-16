@@ -18,13 +18,16 @@ const routes = [
       main: () => import("@/views/Home"),
     },
   },
-  {
-    path: "/Home",
-    name: "Cars",
-    components: {
-      header: Header,
-      main: () => import("../views/Cars.vue"),
-    },
+  meta: {
+    requiresAuth: true
+  }
+},
+{
+  path: '/contact',
+  name: 'Contact',
+  components: {
+    header: Header,
+    main: () => import('../views/Contact.vue')
   },
   {
     path: "/car/:id",
@@ -42,6 +45,29 @@ const routes = [
       main: () => import("../components/layouts/BlueHeader"),
     },
   },
+},
+{
+  path: '/term',
+  name: 'Term',
+  components: {
+    header: Header,
+    main: () => import('../views/TermAndPolicy.vue')
+  },
+},
+{
+  path: '/FAQ',
+  name: 'FAQ',
+  components: {
+    header: Header,
+    main: () => import('../views/FAQ.vue')
+  },
+},
+{
+  path: '/checkout/:id',
+  name: 'Checkout',
+  components: {
+    header: Header,
+    main: () => import('../views/Checkout.vue')
   {
     path: "/user/profile",
     name: "Profile",

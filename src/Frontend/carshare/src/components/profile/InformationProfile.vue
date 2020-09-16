@@ -42,7 +42,7 @@
         />
 
         <label for="dob" class="control-label">Date of birth:</label>
-        <input type="date" name="dob" class="form-control" id="dob" :value="customer.date_of_birth" />
+        <input type="date" name="dob" class="form-control" id="dob" :value="customer.date_of_birth" required />
 
         <input type="submit" class="form-control" id="update" value="update" />
       </div>
