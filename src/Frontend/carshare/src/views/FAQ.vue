@@ -40,10 +40,32 @@
       class="text-md-left mb-5 px-2 font-weight-bold font-italic"
     >5. What is car hire excess insurance?</h1>
     <p class="text-md-left mb-5 px-2">
-     Car hire excess insurance is an  insurance include in the price which can protect you from the excess costs that you are required to pay in the event that your hire car is damaged or stolen.
+      Car hire excess insurance is an insurance include in the price which can protect you from the excess costs that you are required to pay in the event that your hire car is damaged or stolen.
       <br />
-      When the car is damaged or lost, you need to pay a fixed amount, and then the insurance will pay the rest.
-       <br />
+      <font color="#060100" size="4">Let's look at what insurance included:</font>
+    </p>
+    <h4
+      class="text-md-left mb-5 px-2 font-weight-bold font-italic"
+    >Included damage cover (Collision Damage Waiver)</h4>
+    <p class="text-md-left mb-5 px-2">
+      Accidents happen. Even a great driver can be in the wrong place at the wrong time. Plus, the car could get damaged while it’s parked.
+      <br />When you rent a car, you’ll be protected by the rental company’s Collision Damage Waiver. If there’s any damage to the car’s bodywork, the most you’ll pay towards repairs is the ‘excess’. This is normally between $350/$400 and $3,000/$3,500. Collision Damage Waiver will cover the rest of the cost.
+      <br />However, Collision Damage Waiver only covers the car’s bodywork, so you’ll pay the full cost of any repairs to its windows, tyres, chassis, engine, interior, etc.
+    </p>
+    <h4
+      class="text-md-left mb-5 px-2 font-weight-bold font-italic"
+    >Included theft cover (Theft Protection)</h4>
+    <p class="text-md-left mb-5 px-2">
+      Like any car, a rental car is a lot less likely to be stolen than bumped or scraped. But replacing a whole car would cost a lot more than fixing a dent or replacing a side panel.
+      <br />The good news is: you’re protected. If the car is stolen while you have it, or damaged when someone tries to steal it, the most you’ll have to pay is an excess. This excess can range between $350/$400 and $3,000/$3,500. The rental company’s Theft Protection policy will cover the rest of the cost.
+    </p>
+    <h4
+      class="text-md-left mb-5 px-2 font-weight-bold font-italic"
+    >Included cover for other things (Third-Party Liability)</h4>
+    <p class="text-md-left mb-5 px-2">
+      Third-Party Liability covers the cost of repairs to any ‘third party’ (anything that’s not in the car). If you damage someone else’s property, this policy will pay out. This cover is usually included in the rental price.
+      <br />Most of the time, you won’t pay any excess, but there are some rental companies that will charge one.
+      <br />
     </p>
   </div>
 </template>
