@@ -6,6 +6,9 @@
 import JWT from 'jsonwebtoken';
 import Customer from '../models/customer'
 import {Request, Response, NextFunction} from 'express';
+import path from "path";
+
+require('dotenv').config({ path: path.resolve(__dirname, '../../.env') });
 
 const generateAccessToken = (customer: Customer) => {
     return JWT.sign({customer}, process.env.ACCESS_TOKEN_SECRET);

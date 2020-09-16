@@ -5,6 +5,7 @@
  ******************************************************/
 
 import Car from '../models/car';
+import Location from '../models/location';
 import Sequelize from 'sequelize';
 const Op = Sequelize.Op;
 import DataRepository from './dataRepository';
@@ -14,9 +15,11 @@ class carRepository implements DataRepository{
 
   async getAll() {
     try {
-      const cars = await Car.findAll({
-        order: [["name", "ASC"]],
-      });
+      const cars = await Car.findAll(
+        {
+          order: [["name", "ASC"]],
+        },
+      );
       return Promise.resolve(cars);
     } catch (err) {
       return Promise.reject(err);

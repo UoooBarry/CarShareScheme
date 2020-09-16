@@ -18,7 +18,7 @@
                 </tr>
             </thead>
             <tbody v-for="rent in rents" v-bind:key="rent.id">
-                <OrderRow v-bind:rent="rent" />
+                <OrderRow v-bind:rent="rent" :locations='locations' />
             </tbody>
         </table>
     </div>
@@ -28,7 +28,7 @@
 import OrderRow from '@/components/admin/OrderRow';
 export default {
     name: 'Order',
-    props: ['rents'],
+    props: ['rents', 'locations'],
     components:{
         OrderRow
     }

@@ -86,7 +86,7 @@ class rentRepository implements DataRepository{
               attributes: ['id', 'brand', 'model', 'location_id', 'available'],
               include:[{
                 model: Location,
-                attributes: ['id', 'address'],
+                attributes: ['id', 'name', 'address'],
               }]
             }
         ]
@@ -110,7 +110,7 @@ class rentRepository implements DataRepository{
     }
   }
 
-    async return(id: number){
+    async return(id: number, location_id: number){
       try{
         const rent = await Rent.findOne({
           where: {id: id},
@@ -122,7 +122,7 @@ class rentRepository implements DataRepository{
         });
         if(!rent) throw 'No rent error';
         await rent.update({status: RentStatus.Completed});
-        await rent.car.update({available: true});
+        await rent.car.update({location_id: location_id, available: true});
         return Promise.resolve(true);
       }catch (err) {
         return Promise.reject(err);
