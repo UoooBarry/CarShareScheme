@@ -14,7 +14,7 @@
             {{rent.car.brand}} {{rent.car.model}}
         </td>
         <td>
-            {{rent.car.location.address}}
+            {{rent.car.location.name}}
         </td>
         <td>
             {{rent.user_id}}
