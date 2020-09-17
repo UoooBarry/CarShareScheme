@@ -112,7 +112,7 @@ export default {
 
 @media only screen and (max-width: 600px) {
   .product-content  {
-    overflow: visible;
+    overflow-y: auto;
     overflow-wrap: break-word;
   }
 }

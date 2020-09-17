@@ -5,12 +5,12 @@
  ***********************************************************************/
 <template>
   <div class="container">
-    <div class="row">
+    <div class="row justify-content-between">
       <div class="col-lg car-description">
         <CarDescription :car="car" />
       </div>
       <!-- <div class="col"></div> -->
-      <div class="col">
+      <div class="col-4">
           <CarContent :car="car" />
       </div>
     </div>
@@ -59,9 +59,9 @@ export default {
 
 <style scoped>
 
-@media only screen and (min-width: 600px) {
+@media only screen and (max-width: 600px) {
   .car-description  {
-    margin-right: 200px;
+     hyphens: auto;
   }
 }
 </style>  

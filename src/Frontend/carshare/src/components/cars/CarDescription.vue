@@ -97,6 +97,9 @@ overflow-wrap: break-word;
 }
 
 @media only screen and (max-width: 600px) {
+  .description-text {
+   overflow-wrap: break-word;
+  }
   .product-image .car-img  {
     display: none;
   }
