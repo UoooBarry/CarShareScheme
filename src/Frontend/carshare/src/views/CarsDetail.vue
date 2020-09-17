@@ -59,9 +59,4 @@ export default {
 
 <style scoped>
 
-@media only screen and (max-width: 600px) {
-  .car-description  {
-     hyphens: auto;
-  }
-}
 </style>  

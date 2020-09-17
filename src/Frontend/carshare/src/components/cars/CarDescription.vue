@@ -101,7 +101,9 @@ overflow-wrap: break-word;
    overflow-wrap: break-word;
   }
   .product-image .car-img  {
-    display: none;
+    margin-left: 0;
+    overflow: auto;
+    max-width: 400px;
   }
 }
 
