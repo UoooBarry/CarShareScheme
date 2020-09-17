@@ -92,7 +92,7 @@ h3 {
 }
 
 p { 
-
+overflow: visible;
 overflow-wrap: break-word;
 }
 
