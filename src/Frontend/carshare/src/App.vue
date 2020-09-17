@@ -30,13 +30,6 @@ export default {
   color: #2c3e50;
   background-color: #F8F8F8;
 }
-
-@media only screen and (max-width: 600px) {
-  #app  {
-    overflow-y: auto;
-  }
-}
-
 #nav {
   padding: 30px;
 }

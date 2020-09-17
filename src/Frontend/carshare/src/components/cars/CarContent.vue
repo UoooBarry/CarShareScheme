@@ -89,10 +89,7 @@
         <span class="daily">/day</span>
       </div>
       <div class="col price" style="margin-left:-100px">
-   
         <router-link class="button" :to="{name: 'Checkout', params:{ id: car.id}}">Check out</router-link>
-        <div></div>
-        <div></div>
       </div>
     </div>
   </div>
