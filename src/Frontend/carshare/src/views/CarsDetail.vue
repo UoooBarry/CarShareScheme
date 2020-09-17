@@ -9,12 +9,15 @@
       <div class="col-lg car-description">
         <CarDescription :car="car" />
       </div>
-      <div class="col-md">
-        <CarContent :car="car" />
+      <!-- <div class="col"></div> -->
+      <div class="col">
+          <CarContent :car="car" />
       </div>
     </div>
+     
     <BackToTop />
   </div>
+  
 </template>
 
 <script>
@@ -55,13 +58,10 @@ export default {
 
 
 <style scoped>
-.container {
-  min-width: 1200px;
-}
-.row {
-  min-height: 800px;
-}
-.car-description {
-  margin-right: 200px;
+
+@media only screen and (min-width: 600px) {
+  .car-description  {
+    margin-right: 200px;
+  }
 }
 </style>  

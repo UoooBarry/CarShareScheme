@@ -2,7 +2,7 @@
  *           @AUTHOR: Bach Dao, Created AT: 28/08/2020                *
  ***********************************************************************/
 <template>
-  <div class="product-content">
+  <div class="contianer product-content">
     <div id="new-tab"></div>
     <div class="intro">
       <h3 class="title">{{car.brand}}</h3>
@@ -109,6 +109,14 @@ export default {
 </script>
 
 <style scoped>
+
+@media only screen and (max-width: 600px) {
+  .product-content  {
+    overflow: visible;
+    overflow-wrap: break-word;
+  }
+}
+
 .package-title {
   font-weight: bold !important;
 }

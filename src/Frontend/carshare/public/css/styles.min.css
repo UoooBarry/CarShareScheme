@@ -27,14 +27,14 @@ html, body {
 .car-item {
   display: flex;
   margin: 10px;
-  width: 375px;
+  max-width: 375px;
   justify-content: center;
   align-items: center;
 }
 .pickup-item{
     display: flex !important;
   margin: 10px;
-  width: 225px;
+  width: 225px; 
   justify-content: center;
   align-items: center;
 }
