@@ -9,17 +9,23 @@
   <div>
     <Loading :key="loadingKey" />
     <div class="sub-header">
-
       <h1>Car List Result</h1>
-
     </div>
 
-    <CarFilterHeader
-      v-on:onFilter="update"
-      :address="address"
-      v-on:onAddressChange="changeAddress"
-    />
-    <CarList v-bind:cars="cars" />
+    <div class="row">
+      <div class="filter-col">
+        <CarFilter />
+      </div>
+
+      <div class="car-list-col">
+        <CarFilterHeader
+          v-on:onFilter="update"
+          :address="address"
+          v-on:onAddressChange="changeAddress"
+        />
+        <CarList v-bind:cars="cars" />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -28,6 +34,7 @@ import CarMixin from "@/mixins/carMixin";
 import Loading from "@/components/Loading";
 import CarFilterHeader from "@/components/layouts/CarFilterHeader.vue";
 import CarList from "@/components/cars/CarList.vue";
+import CarFilter from "@/components/cars/CarFilter.vue";
 export default {
   name: "Cars",
   mixins: [CarMixin],
@@ -82,7 +89,8 @@ export default {
   components: {
     Loading,
     CarFilterHeader,
-    CarList
+    CarList,
+    CarFilter
   },
   methods: {
     update(cars) {
@@ -132,11 +140,17 @@ body {
   background-size: cover;
   background-position: 100% 10%;
   margin: auto;
-  
 }
-.sub-header h1{
+.sub-header h1 {
   line-height: 300px;
   color: white;
   font-weight: 600;
+}
+.filter-col {
+  width: 20%;
+  margin: 20px;
+}
+.car-list-col {
+  width: 70%;
 }
 </style>  
