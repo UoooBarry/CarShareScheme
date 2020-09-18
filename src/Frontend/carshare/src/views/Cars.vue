@@ -8,11 +8,14 @@
 <template>
   <div>
     <Loading :key="loadingKey" />
-    <div class="sub-header">
-
+    
+    <dir class='showing-result'>
       <h1>Car List Result</h1>
+    </dir>
 
-    </div>
+      
+
+   
 
     <CarFilterHeader
       v-on:onFilter="update"
@@ -125,18 +128,14 @@ body {
 .main {
   min-height: 600px;
 }
-.sub-header {
-  background: url("../../public/img/subheadbg.png");
-  height: 300px;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: 100% 10%;
-  margin: auto;
-  
+.showing-result {
+  text-align: center;
 }
-.sub-header h1{
-  line-height: 300px;
-  color: white;
-  font-weight: 600;
+
+.showing-result h1{
+      opacity: 1;
+    -webkit-transition: .3s cubic-bezier(.25,.46,.45,.94);
+    transition: .3s cubic-bezier(.25,.46,.45,.94);
+    text-transform: uppercase;
 }
 </style>  

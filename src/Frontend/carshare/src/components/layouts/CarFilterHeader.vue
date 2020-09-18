@@ -19,17 +19,18 @@
       <div class="collapse navbar-collapse" id="carnav">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item dropdown">
+            <a class="inner_section_label">SORT BY</a>            
             <label class="btn btn-outline-dark">
               <a
-                class="nav-link dropdown-toggle"
+                class="dropdown-toggle inner_section"
                 style="padding: 0;"
                 role="button"
-                id="dropdownMenuLink"
+                id="navbarDropdown"
                 data-toggle="dropdown"
                 aria-haspopup="true"
                 aria-expanded="false"
-              >Select a filter</a>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" style>
+              >Default (By range)</a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="margin-left: 100px">
                 <a class="dropdown-item" @click="filter('name','ASC')">Default (By range)</a>
                 <a class="dropdown-item" @click="filter('price','ASC')">By price low</a>
                 <a class="dropdown-item" @click="filter('price','DESC')">By price high</a>
@@ -39,14 +40,12 @@
               </div>
             </label>
           </li>
-
-          <li class="nav-item">
-            <label class="btn btn-outline-dark">
-              <input type="radio" name="sort" value="all" @click="allCar" /> All cars
-            </label>
-          </li>
-          <LocationFilter :address="address" v-on:onAddressChange="changeAddress" />
-          <li class="nav-item my-1 btn">
+        </ul>
+            <!-- <label class="btn" style="margin: 10px;">
+              <a @click="allCar">All cars</a>
+            </label> -->
+            <div class="search" style="display: flex">
+              <LocationFilter :address="address" v-on:onAddressChange="changeAddress" />
             <form class="form-inline" style="float:right;" @submit.prevent="search">
               <input
                 class="form-control input-1"
@@ -56,8 +55,9 @@
               />
               <button class="btn btn-outline-success" type="submit" v-on:click="update">Search</button>
             </form>
-          </li>
-        </ul>
+            </div>
+            
+        
       </div>
     </nav>
   </div>
@@ -140,5 +140,26 @@ input[type="radio"] {
   width: 250px;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
+}
+.inner_section{
+    appearance: none;
+    font-family: AvenirLTStd-Black;
+    text-transform: uppercase;
+    background-color: transparent;
+    outline: none;
+    border: 0;
+    padding-right: 24px;
+        font-size: 1rem;
+    cursor: pointer;
+    font-weight: 500;
+}
+.inner_section_label{
+    position: relative;
+    width: auto;
+    display: inline-block;
+    font-family: AvenirLTStd-Book,Arial,sans-serif;
+    text-align: left;
+    background-color: transparent;
+    font-size: 1rem;
 }
 </style>
