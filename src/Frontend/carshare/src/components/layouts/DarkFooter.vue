@@ -95,7 +95,7 @@ export default {
 }
 
 .social-button-group {
-  margin-top: 3rem !important;
+  margin-top: 1.5rem !important;
 }
 .btn.btn-social-icon {
   width: 50px;
