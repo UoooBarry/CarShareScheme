@@ -44,9 +44,11 @@
             <!-- <label class="btn" style="margin: 10px;">
               <a @click="allCar">All cars</a>
             </label> -->
-            <div class="search" style="display: flex">
+            <!-- <div class="search" style="display: flex"> -->
               <LocationFilter :address="address" v-on:onAddressChange="changeAddress" />
-            <form class="form-inline" style="float:right;" @submit.prevent="search">
+
+          
+              <form class="form-inline" style="float:right;" @submit.prevent="search">
               <input
                 class="form-control input-1"
                 type="search"
@@ -55,7 +57,9 @@
               />
               <button class="btn btn-outline-success" type="submit" v-on:click="update">Search</button>
             </form>
-            </div>
+        <!-- </div> -->
+        
+            
             
         
       </div>

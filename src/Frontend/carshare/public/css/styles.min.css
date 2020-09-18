@@ -162,7 +162,7 @@ html, body {
   overflow: hidden;
   position: relative;
 
-
+  background-color: #282d32;
 }
 
 .nav-item{
@@ -225,6 +225,7 @@ html, body {
   margin-bottom: 0;
 }
 .footer-dark ul a {
+  font-size: 15px;
   color: inherit;
   text-decoration: none;
   opacity: 0.6;
