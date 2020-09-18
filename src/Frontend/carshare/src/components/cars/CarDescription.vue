@@ -113,7 +113,7 @@ overflow-wrap: break-word;
   height: 150px;
 }
 #car-description {
-  min-width: 600px;
+  width:100%;
   margin-right: 100px;
 }
 </style>

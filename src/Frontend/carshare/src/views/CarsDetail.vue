@@ -6,11 +6,11 @@
 <template>
   <div class="container">
     <div class="row justify-content-between">
-      <div class="col-lg car-description">
+      <div class="col-md car-description">
         <CarDescription :car="car" />
       </div>
       <!-- <div class="col"></div> -->
-      <div class="col-4">
+      <div class="col-md car-content">
           <CarContent :car="car" />
       </div>
     </div>
@@ -58,6 +58,10 @@ export default {
 
 
 <style scoped>
+.container{
+  max-width: 80%;
+}
+
 @media only screen and (max-width: 600px) {
   .container {
     overflow-y: auto;

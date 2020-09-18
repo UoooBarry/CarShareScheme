@@ -153,8 +153,11 @@ html, body {
 .footer-dark {
   padding: 20px 0;
   color: #f0f9ff;
-  background-color: #282d32;
-  height: 200px;
+  background: url("../img/footerbg.jpg") ;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 100% 70%;
+  height: 100%;
   width: 100%;
   overflow: hidden;
   position: relative;
@@ -210,13 +213,13 @@ html, body {
   margin-top: 0;
   margin-bottom: 12px;
   font-weight: 700;
-  font-size: 16px;
+  font-size: 26px;
 }
 .footer-dark ul {
   padding: 0;
   list-style: none;
   line-height: 1.6;
-  font-size: 14px;
+  font-size: 18px;
   margin-bottom: 0;
 }
 .footer-dark ul a {
@@ -234,6 +237,7 @@ html, body {
 .footer-dark .item.text p {
   opacity: 0.6;
   margin-bottom: 0;
+  font-size: 16px;
 }
 .footer-dark .item.social {
   text-align: center;

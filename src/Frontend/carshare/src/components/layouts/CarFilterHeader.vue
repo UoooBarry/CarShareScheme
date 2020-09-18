@@ -3,7 +3,7 @@
  ***********************************************************************/
 <template>
   <div>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="container-fluid navbar navbar-expand-lg navbar-light bg-light">
       <a class="navbar-brand">Filter:</a>
       <button
         class="navbar-toggler"
@@ -18,7 +18,6 @@
       </button>
       <div class="collapse navbar-collapse" id="carnav">
         <ul class="navbar-nav mr-auto">
-
           <li class="nav-item dropdown">
             <label class="btn btn-outline-dark">
               <a
@@ -29,9 +28,9 @@
                 data-toggle="dropdown"
                 aria-haspopup="true"
                 aria-expanded="false"
-              >Filter</a>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <a class="dropdown-item activate" @click="filter('name','ASC')">Default (By range)</a>
+              >Select a filter</a>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" style>
+                <a class="dropdown-item" @click="filter('name','ASC')">Default (By range)</a>
                 <a class="dropdown-item" @click="filter('price','ASC')">By price low</a>
                 <a class="dropdown-item" @click="filter('price','DESC')">By price high</a>
                 <a class="dropdown-item" @click="filter('createdAt','DESC')">By latest</a>
@@ -47,21 +46,17 @@
             </label>
           </li>
           <LocationFilter :address="address" v-on:onAddressChange="changeAddress" />
-          <div class="col-sm-3.5 my-1 btn" style="float: right;">
-          <form class="form-submit" style="" @submit.prevent="search">
-            <input
-              class="form-control mr-sm-2"
-              type="search"
-              placeholder="Search"
-              v-model="searchItem"
-            />
-            <button
-              class="btn btn-outline-success my-2 my-sm-0"
-              type="submit"
-              v-on:click="update"
-            >Search</button>
-          </form>
-          </div>
+          <li class="nav-item my-1 btn">
+            <form class="form-inline" style="float:right;" @submit.prevent="search">
+              <input
+                class="form-control input-1"
+                type="search"
+                placeholder="Search"
+                v-model="searchItem"
+              />
+              <button class="btn btn-outline-success" type="submit" v-on:click="update">Search</button>
+            </form>
+          </li>
         </ul>
       </div>
     </nav>
@@ -88,10 +83,6 @@ export default {
 
 
 <style scoped>
-.form-submit{
-  display: flex;
-  align-items: center;
-}
 .navbar {
   width: 95%;
   border-top: 1px solid #a9a0a0;
@@ -102,18 +93,14 @@ export default {
   color: black;
   border-color: #a9a0a0;
 }
-.btn-outline-success:hover {
-  color: #fff;
-  background-color: #a9a0a0;
-  border-color: #a9a0a0;
+.btn-outline-success:hover,
+.btn-outline-success:active,
+.btn-outline-success:focus {
+  color: #fff !important;
+  background-color: #a9a0a0 !important;
+  border-color: #a9a0a0 !important;
+  box-shadow: none !important;
 }
-
-.btn-outline-success:activate {
-  color: #fff;
-  background-color: #a9a0a0;
-  border-color: #a9a0a0;
-}
-
 .nav-item {
   margin-left: 20px;
 }
@@ -136,25 +123,22 @@ export default {
   background-color: #a9a0a0;
   border-color: #a9a0a0;
 }
-
 .btn-outline-dark.active {
   background-color: #a9a0a0;
   border-color: #a9a0a0;
 }
-
 .btn-outline-dark.active a {
   color: #fff !important;
 }
 .dropdown-item {
   cursor: pointer;
 }
-
 input[type="radio"] {
   display: none;
 }
-.mr-sm-2 {
-  width: 70%;
-  border-radius: 0;
+.input-1 {
+  width: 250px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
 }
-
 </style>

@@ -1,4 +1,3 @@
-
 /***********************************************************************
 *           @AUTHOR: Bach Dao, CREATED AT: 03/09/2020                  *
 *          Shuyuan Zhang, Updated at: 03/09/2020                       *
@@ -12,7 +11,7 @@
       <p class="card-text text-muted mt-md-4 mb-2" style="font-size:30px">PAYMENT METHOD</p>
     </div>
     <article class="card">
-      <h3>Payment estimate: ${{bill.fee}}</h3>
+     
       <div class="card-body p-5">
         <ul class="nav nav-pills rounded nav-fill mb-3" role="tablist">
           <li class="nav-item">
@@ -203,7 +202,6 @@ export default {
           });
           result = false
       }
-
       return result;
     },
     nextStep(){
@@ -234,7 +232,6 @@ export default {
               title: "Order confrimed!",
               message: "Order payed successfully!"
             });
-
             const order_button = document.getElementById('order-button');
             order_button.classList.add('animate');
             order_button.disabled = true;
@@ -245,8 +242,6 @@ export default {
                 });
                 
             }, 8000);
-
-
             
           });
         }
@@ -268,7 +263,6 @@ export default {
   border: none;
   margin-top: 5px;
 }
-
 .card,
 .card-header {
   background-color: #f8f8f8;

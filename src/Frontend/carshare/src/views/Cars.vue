@@ -8,7 +8,12 @@
 <template>
   <div>
     <Loading :key="loadingKey" />
-    <h4>SHOWING CAR LIST RESULT</h4>
+    <div class="sub-header">
+
+      <h1>Car List Result</h1>
+
+    </div>
+
     <CarFilterHeader
       v-on:onFilter="update"
       :address="address"
@@ -72,7 +77,7 @@ export default {
               console.log(err);
             });
         });
-    })
+    });
   },
   components: {
     Loading,
@@ -120,5 +125,18 @@ body {
 .main {
   min-height: 600px;
 }
-
+.sub-header {
+  background: url("../../public/img/subheadbg.png");
+  height: 300px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 100% 10%;
+  margin: auto;
+  
+}
+.sub-header h1{
+  line-height: 300px;
+  color: white;
+  font-weight: 600;
+}
 </style>  
