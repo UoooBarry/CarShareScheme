@@ -62,6 +62,17 @@ const routes = [
   }
 },
 {
+  path: '/user/validation',
+  name: 'Validation',
+  components: {
+    header: Header,
+    main: () => import('../views/Validation.vue')
+  },
+  meta: {
+    requiresAuth: true
+  }
+},
+{
   path: '/contact',
   name: 'Contact',
   components: {

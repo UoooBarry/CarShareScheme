@@ -1,7 +1,8 @@
 /*******************************************************
  *   @AUTHOR: YONGQIAN HUANG, CREATED AT: 23/07/2020   *
  * @UPDATED: YONGQIAN HUANG, 23/07/2020, INIT CREATION 
- *           Yongqian Huang, 03/09/2020, Migrate to ts*
+ *           Yongqian Huang, 03/09/2020, Migrate to ts
+ *           Yongqian Huang, 19/09/2020, Upload licenses*
  * *******************************************************/
 
 import express,{Request, Response, NextFunction} from 'express';
@@ -56,6 +57,71 @@ router.patch('/avatar', [verifyToken, avatarUpload.single('image')], (req: Reque
                 res.json({message: "fail"})
             })
 })
+
+//Use multer middleware to handle image
+router.post('/licenses/front', [verifyToken, avatarUpload.single('image')], (req: Request, res: Response) => {
+    //Get the file type
+    const fileName: string = req.file.originalname;
+    const fileType: string = fileName.split('.')[1];
+    console.log(fileName);
+    if (fileType != "png") {
+        if (fileType != "jpg") {
+            res.json({
+                message: "fail",
+                reason: 'File format unsupported.'
+            });
+            return;
+        }
+    }
+    if (req.file.size > 200000) {
+        res.json({
+            message: "fail",
+            reason: 'File too big.'
+        });
+        return;
+    }
+
+    uploadFile(req.user.id, 'license/front', req.file.path) //upload file to avatar path
+        .then(() => {
+            res.json({ message: "success" })
+        })
+        .catch((err) => {
+            console.log(err);
+            res.json({ message: "fail" })
+        })
+});
+
+router.post('/licenses/back', [verifyToken, avatarUpload.single('image')], (req: Request, res: Response) => {
+    //Get the file type
+    const fileName: string = req.file.originalname;
+    const fileType: string = fileName.split('.')[1];
+    console.log(fileName);
+    if (fileType != "png") {
+        if (fileType != "jpg") {
+            res.json({
+                message: "fail",
+                reason: 'File format unsupported.'
+            });
+            return;
+        }
+    }
+    if (req.file.size > 200000) {
+        res.json({
+            message: "fail",
+            reason: 'File too big.'
+        });
+        return;
+    }
+
+    uploadFile(req.user.id, 'license/back', req.file.path) //upload file to avatar path
+        .then(() => {
+            res.json({ message: "success" })
+        })
+        .catch((err) => {
+            console.log(err);
+            res.json({ message: "fail" })
+        })
+});
 
 //GET /api/customers/ for single customer profile
 router.get('/', verifyToken, async (req: Request, res: Response) => {

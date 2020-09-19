@@ -6,19 +6,17 @@
 <template>
   <div class="profile">
     <br><br><br><br>
-    <!-- <Loading/> -->
-    <AvatarHolder v-bind:customer="this.customer"/>
-
-    <ProfileAndValidation v-bind:customer="this.customer" />
+    <Loading/>
+    <AvatarHolder v-bind:customer="this.customer" />
+    <ValidationHolder :customer="this.customer"/>
     </div>
 </template>
 <style>
 
 .profile {
-  height: 1100px;
+  height: 1000px;
   background-image: url("../assets/img/bg.jpg");
-  background-color: transparent;
-  background-repeat: repeat-y;
+  background-repeat: none;
   background-size: cover;
   background-attachment: fixed;
 }
@@ -26,17 +24,17 @@
 </style>
   
 <script>
-// import Loading from '@/components/Loading';
-import ProfileAndValidation from '@/components/profile/ProfileAndValidation';
+import Loading from '@/components/Loading';
 import AvatarHolder from "@/components/profile/AvatarHolder";
+import ValidationHolder from '@/components/profile/ValidationHolder';
 import authorizeMixin from '@/mixins/authorizeMixin';
 
 export default {
-  name: "Profile",
+  name: "Validation",
   components: {
     AvatarHolder,
-    ProfileAndValidation,
-    // Loading
+    Loading,
+    ValidationHolder
   },
   mixins: [authorizeMixin],
   data(){
