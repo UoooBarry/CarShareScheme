@@ -13,7 +13,7 @@
             class="custom-file-input"
             v-on:change="upload()"
         />
-        <label class="custom-file-label" for="file">Choose file</label>
+        <label class="custom-file-label" for="file">Upload license {{dimension}} image</label>
     </div>
 </div>
 
@@ -66,7 +66,7 @@ export default {
 .custom-file {
   margin-top: 20px;
   margin-bottom: 10px;
-  width:200px;
+  width:300px;
 }
 .custom-file-label{
     text-align: left;

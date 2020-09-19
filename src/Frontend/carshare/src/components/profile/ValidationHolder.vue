@@ -29,7 +29,7 @@
         <input
           type="text"
           class="form-control"
-          value="Pending"
+          :value="validateResult"
           disabled
         />
       </div>
@@ -59,7 +59,8 @@ export default {
   name: "ValidationHolder",
   data() {
     return {
-      firstName: ""
+      firstName: "",
+      validateResult: this.getValidateResult()
     };
   },
   components:{
@@ -73,6 +74,12 @@ export default {
   methods:{
     lastStep(){
       this.$emit('lastStep');
+    },
+    getValidateResult(){
+      if(this.customer.License.isValidated)
+        return 'Validated'
+      else
+        return 'Pending'
     }
   }
 };

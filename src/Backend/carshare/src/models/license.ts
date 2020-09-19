@@ -10,6 +10,7 @@ import Customer from './customer';
 export interface LicenseI{
   id?: number | null;
   user_id: number;
+  uploadedImage: number;
   isValidated: boolean;
 }
 
@@ -24,7 +25,11 @@ export default class License extends Model implements LicenseI {
   @Column
   user_id!: number
 
+  @Default(0)
+  @Column
+  uploadedImage!: number;
+
   @Default(false)
   @Column
-  isValidated!: boolean; 
+  isValidated!: boolean;
 }
