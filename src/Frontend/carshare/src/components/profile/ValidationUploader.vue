@@ -13,7 +13,7 @@
             class="custom-file-input"
             v-on:change="upload()"
         />
-        <label class="custom-file-label" for="file">Upload license {{dimension}} image</label>
+        <label class="custom-file-label" for="file">Upload license {{dimension}}</label>
     </div>
 </div>
 

@@ -60,7 +60,7 @@ export default {
   data() {
     return {
       firstName: "",
-      validateResult: this.getValidateResult()
+      validateResult: this.getValidateResult(),
     };
   },
   components:{
