@@ -8,20 +8,23 @@
 <template>
   <div>
     <Loading :key="loadingKey" />
-    <div class="sub-header">
+
+    <dir class="showing-result">
       <h1>Car List Result</h1>
-    </div>
+    </dir>
 
     <div class="row">
       <div class="filter-col">
-        <CarFilter />
+        <CarFilter v-on:update-style.prevent="updateCard" />
       </div>
 
       <div class="car-list-col">
         <CarFilterHeader
           v-on:onFilter="update"
           :address="address"
+          :card="card"
           v-on:onAddressChange="changeAddress"
+          
         />
         <CarList v-bind:cars="cars" />
       </div>
@@ -42,7 +45,8 @@ export default {
     return {
       cars: [],
       address: "",
-      loadingKey: 0
+      loadingKey: 0,
+      card: true
     };
   },
   created() {
@@ -97,6 +101,10 @@ export default {
       this.cars = cars;
       this.loadingKey++;
     },
+    updateCard(card) {
+      this.card = card;
+      console.log(this.card);
+    },
     //Change address, resend request
     changeAddress(address) {
       this.address = address;
@@ -133,18 +141,15 @@ body {
 .main {
   min-height: 600px;
 }
-.sub-header {
-  background: url("../../public/img/subheadbg.png");
-  height: 300px;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: 100% 10%;
-  margin: auto;
+.showing-result {
+  text-align: center;
 }
-.sub-header h1 {
-  line-height: 300px;
-  color: white;
-  font-weight: 600;
+
+.showing-result h1 {
+  opacity: 1;
+  -webkit-transition: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  text-transform: uppercase;
 }
 .filter-col {
   width: 20%;
@@ -152,5 +157,14 @@ body {
 }
 .car-list-col {
   width: 70%;
+}
+
+@media only screen and (max-width: 414px) {
+  .filter-col {
+    display: none;
+  }
+  .car-list-col {
+    width: 100%;
+  }
 }
 </style>  

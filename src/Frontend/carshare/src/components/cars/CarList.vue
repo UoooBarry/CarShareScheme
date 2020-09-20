@@ -5,7 +5,9 @@
   <div class="carlist container" >
     <div class="row">
       <div v-for="(car) in pageOfItems" v-bind:key="car.id" class="col-sm-3 car">
+        
         <CarCard v-bind:car="car" style="max-width: 100%"/>
+        <CarRow v-bind:car="car"/>
       </div>
     </div>
     <div class="page-footer"  :if="cars">
@@ -16,6 +18,7 @@
 
 <script>
 import CarCard from "./CarCard.vue";
+import CarRow from "./CarRow.vue";
 const customLabels = {
     first: 'First',
     last: 'Last',
@@ -25,7 +28,8 @@ const customLabels = {
 export default {
   name: "CarList",
   components: {
-    CarCard
+    CarCard,
+    CarRow
   },
   props: ["cars"],
   data() {
