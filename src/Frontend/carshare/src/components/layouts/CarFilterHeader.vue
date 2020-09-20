@@ -29,7 +29,7 @@
                 data-toggle="dropdown"
                 aria-haspopup="true"
                 aria-expanded="false"
-              >Default (By range)</a>
+              >{{ selectedItem }}</a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="margin-left: 100px">
                 <a class="dropdown-item" @click="filter('name','ASC')">Default (By range)</a>
                 <a class="dropdown-item" @click="filter('price','ASC')">By price low</a>
@@ -74,6 +74,11 @@ export default {
   name: "CarFilterHeader",
   mixins: [CarMixin],
   props: ["address"],
+  data(){
+    return{
+      selectedItem: 'Default (By range)'
+    }
+  },
   components: {
     LocationFilter
   },
