@@ -37,9 +37,17 @@
         <label for="dob" class="control-label">Date of birth:</label>
         <input type="date" name="dob" class="form-control" id="dob" :value="customer.date_of_birth" required />
 
-        <input type="submit" class="btn-scss-lg" id="update" value="Update" />
-        <br>
-        <button  class="btn-scss-lg" @click="nextStep()">Licence Validation ></button>
+        <div class='row'>
+          <div class='col'>
+            <input type="submit" class="btn-scss-lg" id="update" value="Update" />
+          </div>
+          <div class='col'>
+            <button  class="btn-scss-lg" @click="nextStep()">Licence Validation ></button>
+          </div>
+        </div>
+        
+        <!-- <br> -->
+        
       </div>
       
     </form>
@@ -110,7 +118,7 @@ export default {
     color: rgb(63, 63, 63);
     cursor: pointer;
     font-size: 1.5em;
-    padding: 1.5rem;
+    padding: 1.0rem;
     border: 0;
     transition: all 0.5s;
     border-radius: 10px;

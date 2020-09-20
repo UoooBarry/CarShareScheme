@@ -38,12 +38,8 @@
     </div>
 
     <div class='row justify-content-between'>
-      <div class='col'>
         <ValidationUploader :dimension="'front'" :customer_id="customer.id"/>
-      </div>
-      <div class='col'>
         <ValidationUploader :dimension="'back'" :customer_id="customer.id"/>
-      </div>
     </div>
    
     <button  class="btn-scss-lg" @click="lastStep()">&lt; User Profile</button>

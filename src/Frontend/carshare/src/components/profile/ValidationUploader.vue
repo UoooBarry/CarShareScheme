@@ -1,19 +1,18 @@
 <!-- @Author Yongqian Huang, created at 20/08/2020
  -->
 <template>
-    <div class="col-md-3 justify-content-md-center">
-        <img :src="imageSrc" alt="licenses" @error='defaultImage'>
+    <div class="col justify-content-center uploader">
+        <img :src="imageSrc" alt="licenses" @error='defaultImage' class='license-image'>
         <div class="custom-file" style="margin-top: 10px">
         <input
             type="file"
-            id="file"
             accept="image/*"
             ref="file"
             name="file"
             class="custom-file-input"
             v-on:change="upload()"
         />
-        <label class="custom-file-label" for="file">Upload license {{dimension}}</label>
+        <label class="custom-file-label" for="file">{{labelText}}</label>
     </div>
 </div>
 
@@ -28,7 +27,8 @@ export default {
   data(){
     return{
       imageSrc:  `https://carshare-image-pbd.s3-ap-southeast-2.amazonaws.com/license/${this.dimension}/${this.customer_id}`,
-      defaultImageFile: "@/assets/img/avatar_2x.png"
+      defaultImageFile: "@/assets/img/avatar_2x.png",
+      labelText: `Upload license ${this.dimension}`
     }
   },
   methods: {
@@ -50,7 +50,7 @@ export default {
               title: "Success",
               message: "Upload licenses sucessfully!"
             });
-            this.$router.go();
+            this.labelText = "Uploaded sucessfully";
           } else {
             this.flashMessage.error({
               title: "Error",
@@ -63,6 +63,17 @@ export default {
 };
 </script>
 <style scoped>
+@media only screen and (max-width: 600px) {
+  .license-image{
+    display: none;
+  }
+  .uploader{
+    width: 100%;
+    display: block;
+    min-width: 100%;
+  }
+}
+
 .custom-file {
   margin-top: 20px;
   margin-bottom: 10px;
