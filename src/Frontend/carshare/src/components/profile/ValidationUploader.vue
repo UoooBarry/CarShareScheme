@@ -41,7 +41,7 @@ export default {
       formData.append("enctype", "multipart/form-data");
       formData.append("image", file);
       this.$axios
-        .post(`${this.$carshare}/customers/licenses/${this.dimension}`, formData, {
+        .post(`${this.$carshare}/licenses/upload/${this.dimension}`, formData, {
           headers: this.header
         })
         .then(res => {
@@ -72,6 +72,10 @@ export default {
     display: block;
     min-width: 100%;
   }
+}
+
+.license-image{
+  border-radius: 8px;
 }
 
 .custom-file {

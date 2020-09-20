@@ -15,7 +15,7 @@
 <style>
 
 .profile {
-  height: 1100px;
+  height: 1000px;
   background-image: url("../assets/img/bg.jpg");
   background-color: transparent;
   background-repeat: repeat-y;

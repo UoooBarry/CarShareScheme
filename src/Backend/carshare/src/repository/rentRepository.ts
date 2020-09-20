@@ -53,7 +53,8 @@ class rentRepository implements DataRepository{
         const result = await Rent.findAll({
             where: {
               user_id: user_id
-            },
+          },
+          order:[["createdAt","DESC"]],
           include: [
             {
               model: Bill

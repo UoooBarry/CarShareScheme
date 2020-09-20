@@ -16,6 +16,7 @@ import carsRouter from './routes/cars';
 import customerRouter from './routes/customers';
 import locationRouter from './routes/locations';
 import orderRouter from './routes/orders';
+import licenseRouter from './routes/licenses';
 import cors from 'cors';
 import CleanBillTask from './tasks/cleanBillTask';
 
@@ -39,6 +40,7 @@ app.use('/api/cars', carsRouter);
 app.use('/api/customers', customerRouter);
 app.use('/api/locations', locationRouter);
 app.use('/api/orders', orderRouter);
+app.use('/api/licenses', licenseRouter);
 
 // catch 404 and forward to error handler
 app.use((req: Request, res: Response, next: NextFunction) => {

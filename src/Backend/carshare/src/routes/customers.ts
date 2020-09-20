@@ -57,16 +57,23 @@ router.patch('/avatar', [verifyToken, avatarUpload.single('image')], (req: Reque
                 console.log(err);
                 res.json({message: "fail"})
             })
-})  
+});
 
-//Use multer middleware to handle image
-router.post('/licenses/front', [verifyToken, avatarUpload.single('image')], async (req: Request, res: Response) => {
+//GET /api/customers/licenses/requests get all the pending licenses validation requests
+router.get('/licenses/requests', [verifyToken], (req: Request, res: Response) => {
+    if (!req.user.admin) res.sendStatus(403); //Admin only
+    
+    
+});
+
+router.post('/licenses/upload/:dimension', [verifyToken, avatarUpload.single('image')], async (req: Request, res: Response) => {
     if (! await _License.get(req.user.id)) { //If user currently has no license table create one
         await _License.create({
             user_id: req.user.id
         })
     }
 
+    
     //Get the file type
     const fileName: string = req.file.originalname;
     const fileType: string = fileName.split('.')[1];
@@ -87,7 +94,7 @@ router.post('/licenses/front', [verifyToken, avatarUpload.single('image')], asyn
         return;
     }
 
-    uploadFile(req.user.id, 'license/front', req.file.path) //upload file to avatar path
+    uploadFile(req.user.id, `license/${req.params.dimension}`, req.file.path) //upload file to avatar path
         .then(() => {
             _License.updateImage(req.user.id);
             res.json({ message: "success" })
@@ -96,45 +103,7 @@ router.post('/licenses/front', [verifyToken, avatarUpload.single('image')], asyn
             console.log(err);
             res.json({ message: "fail" })
         })
-});
-
-router.post('/licenses/back', [verifyToken, avatarUpload.single('image')], async (req: Request, res: Response) => {
-    if (! await _License.get(req.user.id)) { //If user currently has no license table create one
-        await _License.create({
-            user_id: req.user.id
-        })
-    }
-
-    //Get the file type
-    const fileName: string = req.file.originalname;
-    const fileType: string = fileName.split('.')[1];
-    if (fileType != "png") {
-        if (fileType != "jpg") {
-            res.json({
-                message: "fail",
-                reason: 'File format unsupported.'
-            });
-            return;
-        }
-    }
-    if (req.file.size > 200000) {
-        res.json({
-            message: "fail",
-            reason: 'File too big.'
-        });
-        return;
-    }
-
-    uploadFile(req.user.id, 'license/back', req.file.path) //upload file to avatar path
-        .then(() => {
-            _License.updateImage(req.user.id);
-            res.json({ message: "success" })
-        })
-        .catch((err) => {
-            console.log(err);
-            res.json({ message: "fail" })
-        })
-});
+})
 
 //GET /api/customers/ for single customer profile
 router.get('/', verifyToken, async (req: Request, res: Response) => {

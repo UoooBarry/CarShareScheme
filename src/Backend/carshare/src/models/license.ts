@@ -3,7 +3,7 @@
  ********************************************************/
     
 
-import { Model, Table, Column, NotEmpty, Default, DataType, ForeignKey, BelongsTo, HasOne } from "sequelize-typescript";
+import { Model, Table, Column, NotEmpty, Default, Unique, ForeignKey, BelongsTo, HasOne } from "sequelize-typescript";
 import Customer from './customer';
 
 
@@ -22,6 +22,7 @@ export interface LicenseI{
 )
 export default class License extends Model implements LicenseI {
   @ForeignKey(() => Customer)
+  @Unique
   @Column
   user_id!: number
 
