@@ -40,6 +40,8 @@
                 data-toggle="dropdown"
                 aria-haspopup="true"
                 aria-expanded="false"
+              />
+              
               <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="margin-left: 100px">
                 <a class="dropdown-item" @click="filter('name','ASC')">Default (By range)</a>
                 <a class="dropdown-item" @click="filter('price','ASC')">By price low</a>
