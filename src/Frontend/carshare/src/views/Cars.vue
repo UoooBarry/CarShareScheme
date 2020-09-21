@@ -8,21 +8,27 @@
 <template>
   <div>
     <Loading :key="loadingKey" />
-    
-    <dir class='showing-result'>
+
+    <dir class="showing-result">
       <h1>Car List Result</h1>
     </dir>
 
-      
+    <div class="row">
+      <div class="filter-col">
+        <CarFilter v-on:update-style.prevent="updateCard" />
+      </div>
 
-   
-
-    <CarFilterHeader
-      v-on:onFilter="update"
-      :address="address"
-      v-on:onAddressChange="changeAddress"
-    />
-    <CarList v-bind:cars="cars" />
+      <div class="car-list-col">
+        <CarFilterHeader
+          v-on:onFilter="update"
+          :address="address"
+          :card="card"
+          v-on:onAddressChange="changeAddress"
+          
+        />
+        <CarList v-bind:cars="cars" />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -31,6 +37,7 @@ import CarMixin from "@/mixins/carMixin";
 import Loading from "@/components/Loading";
 import CarFilterHeader from "@/components/layouts/CarFilterHeader.vue";
 import CarList from "@/components/cars/CarList.vue";
+import CarFilter from "@/components/cars/CarFilter.vue";
 export default {
   name: "Cars",
   mixins: [CarMixin],
@@ -38,7 +45,8 @@ export default {
     return {
       cars: [],
       address: "",
-      loadingKey: 0
+      loadingKey: 0,
+      card: true
     };
   },
   created() {
@@ -85,12 +93,17 @@ export default {
   components: {
     Loading,
     CarFilterHeader,
-    CarList
+    CarList,
+    CarFilter
   },
   methods: {
     update(cars) {
       this.cars = cars;
       this.loadingKey++;
+    },
+    updateCard(card) {
+      this.card = card;
+      console.log(this.card);
     },
     //Change address, resend request
     changeAddress(address) {
@@ -132,10 +145,26 @@ body {
   text-align: center;
 }
 
-.showing-result h1{
-      opacity: 1;
-    -webkit-transition: .3s cubic-bezier(.25,.46,.45,.94);
-    transition: .3s cubic-bezier(.25,.46,.45,.94);
-    text-transform: uppercase;
+.showing-result h1 {
+  opacity: 1;
+  -webkit-transition: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  text-transform: uppercase;
+}
+.filter-col {
+  width: 20%;
+  margin: 20px;
+}
+.car-list-col {
+  width: 70%;
+}
+
+@media only screen and (max-width: 414px) {
+  .filter-col {
+    display: none;
+  }
+  .car-list-col {
+    width: 100%;
+  }
 }
 </style>  
