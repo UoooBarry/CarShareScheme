@@ -1,6 +1,7 @@
 
 import DataRepository from './dataRepository';
 import License from '../models/license';
+import {Op} from 'sequelize';
 
 class licenseRepository implements DataRepository {
   private static instance?: licenseRepository;
@@ -49,6 +50,23 @@ class licenseRepository implements DataRepository {
     }
 
   } 
+
+  async getPending() {
+    try{
+      const license = await License.findOne({
+        where: { 
+          uploadedImage: { [Op.gte]: 2 }, //Get validations that image upload >= 2
+          isValidated: false //And not validated yet
+        },
+      });
+      license?.update({
+        uploadedImage: license.uploadedImage + 1
+      })
+      return Promise.resolve(license);
+  }catch(error){
+      return Promise.reject(error);
+  }
+  }
   
 
 

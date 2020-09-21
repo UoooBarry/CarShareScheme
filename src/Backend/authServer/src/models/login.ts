@@ -33,7 +33,8 @@ export default class Login extends Model implements LoginI{
     @Column
     password!: string;
 
-    @ForeignKey(()=> Customer)
+    @ForeignKey(() => Customer)
+    @Unique
     @Column
     user_id!: number;
 
