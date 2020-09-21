@@ -1,5 +1,6 @@
 /***********************************************************************
- *           @AUTHOR: Bach Dao, Updated AT: 13/08/2020                *
+ *           @AUTHOR: Bach Dao, Updated AT: 13/08/2020
+                      Yongqian Huang updated at 19/09/2020              *
  ***********************************************************************/
 <template>
   <!-- Start: Footer Dark -->
@@ -9,7 +10,7 @@
         <div class="row">
           <!-- Start: Services -->
           <div class="col-sm-6 col-md-3 item">
-            <h3>About us</h3>
+            <h4>About us</h4>
             <ul>
               <li>
                 <a href="/FAQ">FAQ</a>
@@ -25,7 +26,7 @@
           <!-- End: Services -->
           <!-- Start: About -->
           <div class="col-sm-6 col-md-3 item">
-            <h3>Others</h3>
+            <h4>Others</h4>
             <ul>
               <li>
                 <a href="https://rmit.instructure.com/">Rmit</a>
@@ -43,7 +44,7 @@
           <!-- End: About -->
           <!-- Start: Footer Text -->
           <div class="col-md-6 item text">
-            <h3>Team PBD</h3>
+            <h4>Team PBD</h4>
             <p>This is team PBD final capstone project for renting car web base application</p>
           </div>
           <!-- End: Footer Text -->
@@ -94,7 +95,7 @@ export default {
 }
 
 .social-button-group {
-  margin-top: 3rem !important;
+  margin-top: 1.5rem !important;
 }
 .btn.btn-social-icon {
   width: 50px;
