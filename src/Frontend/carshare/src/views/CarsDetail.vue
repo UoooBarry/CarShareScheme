@@ -22,8 +22,8 @@
 
 <script>
 import BackToTop from "@/components/BackToTop";
-import CarContent from "@/components/cars/CarContent";
-import CarDescription from "@/components/cars/CarDescription";
+import CarContent from "@/components/cars/car_detail/CarContent";
+import CarDescription from "@/components/cars/car_detail/CarDescription";
 export default {
   name: "CarDetail",
   components: {

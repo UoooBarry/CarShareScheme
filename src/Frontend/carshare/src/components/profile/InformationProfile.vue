@@ -11,7 +11,7 @@
         <input
           type="text"
           name="fname"
-          class="form-control"
+          class="form-control custom-text-input"
           id="fname"
           :value="customer.first_name"
         />
@@ -20,7 +20,7 @@
         <input
           type="text"
           name="sname"
-          class="form-control"
+          class="form-control custom-text-input"
           id="sname"
           :value="customer.family_name"
         />
@@ -29,13 +29,13 @@
         <input
           type="text"
           name="phone"
-          class="form-control"
+          class="form-control custom-text-input"
           id="phone"
           :value="customer.contact_number"
         />
 
         <label for="dob" class="control-label">Date of birth:</label>
-        <input type="date" name="dob" class="form-control" id="dob" :value="customer.date_of_birth" required />
+        <input type="date" name="dob" class="form-control custom-text-input" id="dob" :value="customer.date_of_birth" required />
 
         <div class='row'>
           <div class='col'>
@@ -113,7 +113,6 @@ export default {
 <style lang="scss">
 .btn-scss-lg {
     margin-top: 1rem;
-    font-family: Hack, monospace;
     background: transparent;
     color: rgb(63, 63, 63);
     cursor: pointer;
@@ -127,7 +126,6 @@ export default {
 
     &::after {
         content: "\f054";
-        font-family: "Font Awesome 5 Pro";
         font-weight: 400;
         position: absolute;
         left: 85%;
@@ -143,7 +141,7 @@ export default {
         transition: all 0.5s;
         border-radius: 10px;
         box-shadow: 0px 6px 15px #47474761;
-        padding: 1.5rem 3.5rem 1.5rem 1.5rem;
+        padding:  1.0rem;
 
     
     }

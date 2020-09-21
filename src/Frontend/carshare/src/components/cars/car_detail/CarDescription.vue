@@ -46,7 +46,7 @@
 </template>
 
 <script>
-import Popular from "./Popular";
+import Popular from "../Popular";
 export default {
   name: "CarDescription",
   props: ["car"],
