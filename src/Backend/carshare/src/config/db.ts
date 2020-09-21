@@ -10,6 +10,8 @@ import envConfigs from '../config/config';
 import path from 'path';
 
 import Location from '../models/location';
+import Customer from '../models/customer';
+import License from '../models/license';
 import Car from '../models/car';
 import Bill from '../models/bill';
 import Rent from '../models/rent';
@@ -53,6 +55,11 @@ class database{
          sourceKey: 'id',
          foreignKey: 'bill_id'
          })
+        
+        Customer.hasOne(License, {
+            sourceKey: 'id',
+            foreignKey: 'user_id'
+        })
     }
 
     static getInstance() {

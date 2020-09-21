@@ -33,15 +33,14 @@
       <div class="rent-table-item">${{ rent.bill.fee }}</div>
       <div class="rent-table-item">
         <div v-if="this.rent.bill.isPaid">
-            <div v-if="this.rent.status === 'In progress'">
-              <a href="/locations">Find the nearst return location</a>
-            </div>
-            <div v-else>
-              {{ rent.status }}
-            </div>
+          <div v-if="this.rent.status === 'In progress'">
+            <a class="pay-now" href="/locations">Return</a>
+          </div>
+          <div v-else>{{ rent.status }}</div>
         </div>
         <div v-else>
-          <a class="pay-now">Pay now</a>
+          <a class="pay-now" @click="showModal">Pay now</a>
+           <PayNow v-show="isModalVisible" :rentId="rent.id" :fee="rent.bill.fee" @close="closeModal" />
         </div>
       </div>
     </div>
@@ -50,11 +49,28 @@
 
 <script>
 import authorizeMixin from "@/mixins/authorizeMixin";
-
+import PayNow from "./PayNow";
 export default {
   name: "RentRow",
   mixins: [authorizeMixin],
-  props: ["rent"]
+  components: {
+    PayNow
+  },
+  props: ["rent"],
+  data() {
+    return {
+      isModalVisible: false
+    };
+  },
+  methods: {
+    showModal() {
+      this.isModalVisible = true;
+    },
+    closeModal() {
+      this.isModalVisible = false;
+    }
+  },
+  created() {}
 };
 </script>
 

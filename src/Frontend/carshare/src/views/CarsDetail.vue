@@ -5,16 +5,19 @@
  ***********************************************************************/
 <template>
   <div class="container">
-    <div class="row">
-      <div class="col-lg car-description">
+    <div class="row justify-content-between">
+      <div class="col-md car-description">
         <CarDescription :car="car" />
       </div>
-      <div class="col-md">
-        <CarContent :car="car" />
+      <!-- <div class="col"></div> -->
+      <div class="col-md car-content">
+          <CarContent :car="car" />
       </div>
     </div>
+     
     <BackToTop />
   </div>
+  
 </template>
 
 <script>
@@ -55,13 +58,14 @@ export default {
 
 
 <style scoped>
-.container {
-  min-width: 1200px;
+.container{
+  max-width: 80%;
 }
-.row {
-  min-height: 800px;
-}
-.car-description {
-  margin-right: 200px;
+
+@media only screen and (max-width: 600px) {
+  .container {
+    overflow-y: auto;
+    overflow-wrap: break-word;
+  }
 }
 </style>  

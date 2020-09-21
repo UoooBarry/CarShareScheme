@@ -22,16 +22,7 @@
       </div>
       <div class="lines"></div>
     </button>
-    <!-- dribbble -->
-    <a
-      class="dribbble"
-      href="https://dribbble.com/shots/7112021-Order-confirm-animation"
-      target="_blank"
-    >
-      <img
-        src="https://cdn.dribbble.com/assets/dribbble-ball-mark-2bd45f09c2fb58dbbfb44766d5d1d07c5a12972d602ef8b32204d28fa3dda554.svg"
-      />
-    </a>
+  
   </div>
 </template>
 

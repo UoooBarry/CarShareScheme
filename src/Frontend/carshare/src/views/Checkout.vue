@@ -9,7 +9,7 @@
 <template>
 <div class="container-fluid" style="max-width:80%">
     <div class="row justify-content-between">
-      <div class="col-auto" style="max-width:800px">
+      <div class="col-auto order-el">
         <ProgressionBar id="progress" />
         <Review
           id="review"
@@ -158,5 +158,20 @@ button {
   display: none;
 }
 
+.order-el{
+  width:100%;
+  max-width: 800px;
+}
+@media only screen and (max-width: 1024px) {
+  .justify-content-between {
+    overflow-y: auto;
+    overflow-wrap: break-word;
+  }
+}
+@media only screen and (max-width: 414px) {
+  #progress{
+    display: none;
+  }
+}
 
 </style>  
