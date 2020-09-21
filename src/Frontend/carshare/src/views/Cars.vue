@@ -9,7 +9,7 @@
   <div>
     <Loading :key="loadingKey" />
 
-    <dir class="showing-result">
+    <dir class="sub-header">
       <h1>Car List Result</h1>
     </dir>
 
@@ -168,23 +168,7 @@ body {
 .main {
   min-height: 600px;
 }
-.showing-result {
-  text-align: center;
-  background: url("../../public/img/mountain_bg.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  height: 250px;
-}
 
-.showing-result h1 {
-  opacity: 1;
-  line-height: 250px;
-  color: white;
-  font-weight: 600;
-  -webkit-transition: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  transition: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  text-transform: uppercase;
-}
 .filter-col {
   width: 20%;
   margin: 20px;

@@ -35,7 +35,7 @@
             <span>Doors</span>
           </div>
         </div>
-        <div class="row ">
+        <div class="row">
           <div class="col function">
             <font-awesome-icon icon="suitcase" />
             {{car.luggages}}
@@ -95,10 +95,19 @@ export default {
   margin-top: 56px;
   margin-right: 30px;
 }
-.function{
-    text-align: left;
-    margin-left: 40px;
-    margin-top: 10px;
-    font-size: 20px;
+.function {
+  text-align: left;
+  margin-left: 40px;
+  margin-top: 10px;
+  font-size: 20px;
+}
+
+@media only screen and (max-width: 1010px) {
+  .car {
+    display: block;
+  }
+  .card-img {
+    width: 100%;
+  }
 }
 </style>
