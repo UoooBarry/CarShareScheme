@@ -59,11 +59,11 @@ router.post('/create', [OrderValidator.validate, verifyToken], async (req: Reque
       }
 });
 
-
-router.post('/extend', [verifyToken], async (req: Request, res: Response) => {
+//GET: api/orders/extend/:id
+router.post('/extend/:id', [verifyToken], async (req: Request, res: Response) => {
 
     try {
-        let originalRent = await _Rent.get(req.body.rent_id);
+        let originalRent = await _Rent.get(parseInt(req.params.id));
         if (!originalRent) throw new ItemNotFound('Rent not found');
         const feeToPay = (req.body.period*originalRent.car.price + originalRent.car.price*0.1).toFixed(2);
 
