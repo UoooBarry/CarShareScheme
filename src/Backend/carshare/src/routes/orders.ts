@@ -1,7 +1,8 @@
 /*************************************************
  * @AUTHOR YONGQIAN HUANG, CREATED AT 02/09/2020
  *         Yongqian Huang, 05/09/2020, Implement payment
- *         Yongqian Huang, 11/09/2020, Send receipt message *
+ *         Yongqian Huang, 11/09/2020, Send receipt message
+ *         Yongqian Huang, 22/09/2020, Extend rent and custom error *
  *************************************************/
 
 import express,{Request, Response} from 'express';
@@ -16,6 +17,8 @@ import PaymentValidator from '../validators/PaymentValidator';
 import Message from '../helpers/messageHelper';
 import ItemNotFound from '../exceptions/ItemNotFound';
 import IncorrectItem from '../exceptions/IncorrectItem';
+import { RentStatus } from '../models/rent';
+import ExtendRentValidator from '../validators/ExtendRentValidator';
 
 //POST: api/orders/create
 router.post('/create', [OrderValidator.validate, verifyToken], async (req: Request, res: Response) => {
@@ -31,8 +34,9 @@ router.post('/create', [OrderValidator.validate, verifyToken], async (req: Reque
             const car = await _Car.get(req.body.car_id);
             if(!car.available) throw new IncorrectItem('The car does not available yet');
     
-            const feeToPay = (req.body.period*car.price + car.price*0.1).toFixed(2);
-
+            const feeToPay = (req.body.period * car.price + car.price * 0.1).toFixed(2);
+            
+            
             //Create bill
             const bill = await _Bill.create({
                 user_id: req.user.id,
@@ -61,13 +65,13 @@ router.post('/create', [OrderValidator.validate, verifyToken], async (req: Reque
 });
 
 //GET: api/orders/extend/:id
-router.post('/extend/:id', [verifyToken], async (req: Request, res: Response) => {
+router.post('/extend/:id', [ExtendRentValidator.validate, verifyToken], async (req: Request, res: Response) => {
 
     try {
-        let originalRent = await _Rent.get(parseInt(req.params.id));
-        if (!originalRent) throw new ItemNotFound('Rent not found');
-        const feeToPay = (req.body.period*originalRent.car.price + originalRent.car.price*0.1).toFixed(2);
-
+        //Update to complete
+        await _Rent.update(parseInt(req.params.id), { status: RentStatus.Completed });
+        if (!req.originalRent) throw new ItemNotFound('Rent not found');
+        const feeToPay = (req.body.period*req.originalRent.car.price + req.originalRent.car.price*0.1).toFixed(2);
         //Create bill
         const bill = await _Bill.create({
             user_id: req.user.id,
@@ -75,14 +79,24 @@ router.post('/extend/:id', [verifyToken], async (req: Request, res: Response) =>
             type: BillType.RentFee
         });
 
-        
-        originalRent.start_from = originalRent.start_from + req.body.period;
-        originalRent.bill_id = bill.id;
+        //Calculate the new due date
+        let newDueDate = new Date();
+        newDueDate.setDate(req.originalRent.start_from.getDate() + req.body.period);
         //Create rent
-        const newRent = await _Rent.create(originalRent);
+        const newRent = await _Rent.create({
+            car_id: req.originalRent.car.id,
+            user_id: req.user.id,
+            start_from: newDueDate,
+            period: req.body.period,
+            bill_id: bill.id,
+            status: RentStatus.InProgress
+        });
+
 
         res.json({ bill, newRent });
-    }catch (err) {
+
+    } catch (err) {
+        console.log(err);
         res.sendStatus(404);
     }
    
