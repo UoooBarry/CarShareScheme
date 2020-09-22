@@ -15,6 +15,7 @@ import OrderValidator from '../validators/OrderValidator';
 import PaymentValidator from '../validators/PaymentValidator';
 import Message from '../helpers/messageHelper';
 import ItemNotFound from '../exceptions/ItemNotFound';
+import IncorrectItem from '../exceptions/IncorrectItem';
 
 //POST: api/orders/create
 router.post('/create', [OrderValidator.validate, verifyToken], async (req: Request, res: Response) => {
@@ -28,7 +29,7 @@ router.post('/create', [OrderValidator.validate, verifyToken], async (req: Reque
       }else{
         try {
             const car = await _Car.get(req.body.car_id);
-            if(!car.available) throw 'The car does not available yet';
+            if(!car.available) throw new IncorrectItem('The car does not available yet');
     
             const feeToPay = (req.body.period*car.price + car.price*0.1).toFixed(2);
 
@@ -92,7 +93,7 @@ router.post('/extend/:id', [verifyToken], async (req: Request, res: Response) =>
 router.get('/:id/', [verifyToken], (req: Request, res: Response) => {
     _Rent.get(parseInt(req.params.id))
             .then((rent) => {
-                if(rent?.user_id != req.user.id) throw 'Not correct user';
+                if(rent?.user_id != req.user.id) throw new IncorrectItem('Incorrect user');
                 res.json({rent});
             })
             .catch((err) => {
@@ -200,7 +201,7 @@ router.post('/pay', [PaymentValidator.validate, verifyToken], async (req: Reques
             //If pass payment validator
             
             //Update bill status
-            if(!req.bill) throw 'Not fond';
+            if(!req.bill) throw new ItemNotFound('Bill not found');
             await _Bill.pay(req.bill);
 
             //Send message to user only in production environment
