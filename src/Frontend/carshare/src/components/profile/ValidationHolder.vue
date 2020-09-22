@@ -10,7 +10,7 @@
         <input
           type="text"
           name="fname"
-          class="form-control"
+          class="form-control custom-text-input"
           id="fname"
           :value="customer.first_name"
           disabled
@@ -20,7 +20,7 @@
         <input
           type="text"
           name="sname"
-          class="form-control"
+          class="form-control custom-text-input"
           id="sname"
           :value="customer.family_name"
           disabled
@@ -28,7 +28,7 @@
         <label for="sname" class="control-label">License Validating Staus:</label>
         <input
           type="text"
-          class="form-control"
+          class="form-control custom-text-input"
           :value="validateResult"
           disabled
         />
@@ -89,5 +89,8 @@ export default {
   overflow: hidden;
   background-color: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(5px);
+}
+.btn-scss-lg{
+  margin-bottom: 10px;
 }
 </style>

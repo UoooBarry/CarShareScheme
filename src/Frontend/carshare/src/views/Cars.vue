@@ -9,13 +9,13 @@
   <div>
     <Loading :key="loadingKey" />
 
-    <dir class="showing-result">
-      <h1>Car List Result</h1>
+    <dir class="sub-header">
+      <h1>{{ $t('carListMsg') }}</h1>
     </dir>
 
     <div class="row">
       <div class="filter-col">
-        <CarFilter v-on:update-style.prevent="updateCard" />
+        <CarFilter />
       </div>
 
       <div class="car-list-col">
@@ -24,9 +24,10 @@
           :address="address"
           :card="card"
           v-on:onAddressChange="changeAddress"
-          
+          v-on:updateStyle="displayStyle"
         />
-        <CarList v-bind:cars="cars" />
+        <CarList id="car-list-style" v-bind:cars="cars" />
+        <CarRow id="car-row-style" v-bind:cars="cars" />
       </div>
     </div>
   </div>
@@ -36,8 +37,9 @@
 import CarMixin from "@/mixins/carMixin";
 import Loading from "@/components/Loading";
 import CarFilterHeader from "@/components/layouts/CarFilterHeader.vue";
-import CarList from "@/components/cars/CarList.vue";
+import CarList from "@/components/cars/card_style/CarCardList.vue";
 import CarFilter from "@/components/cars/CarFilter.vue";
+import CarRow from "@/components/cars/row_style/CarRowList.vue";
 export default {
   name: "Cars",
   mixins: [CarMixin],
@@ -46,8 +48,15 @@ export default {
       cars: [],
       address: "",
       loadingKey: 0,
-      card: true
+      card: 1
     };
+  },
+  mounted() {
+    if (sessionStorage.style == 1) {
+      this.listStyle();
+    } else {
+      this.rowStyle();
+    }
   },
   created() {
     navigator.geolocation.getCurrentPosition(position => {
@@ -94,18 +103,36 @@ export default {
     Loading,
     CarFilterHeader,
     CarList,
-    CarFilter
+    CarFilter,
+    CarRow
   },
   methods: {
     update(cars) {
       this.cars = cars;
       this.loadingKey++;
     },
-    updateCard(card) {
+    displayStyle(card) {
       this.card = card;
-      console.log(this.card);
+      sessionStorage.style = this.card;
+      if (sessionStorage.style == 1) {
+        this.listStyle();
+      } else {
+        this.rowStyle();
+      }
     },
     //Change address, resend request
+    listStyle() {
+      document.getElementById("car-list-style").style.display = "block";
+      document.getElementById("car-row-style").style.display = "none";
+      document.getElementById("list1").style.color = "black";
+      document.getElementById("list2").style.color = "#6c757d";
+    },
+    rowStyle() {
+      document.getElementById("car-row-style").style.display = "block";
+      document.getElementById("car-list-style").style.display = "none";
+      document.getElementById("list1").style.color = "#6c757d";
+      document.getElementById("list2").style.color = "black";
+    },
     changeAddress(address) {
       this.address = address;
       this.$axios
@@ -141,16 +168,7 @@ body {
 .main {
   min-height: 600px;
 }
-.showing-result {
-  text-align: center;
-}
 
-.showing-result h1 {
-  opacity: 1;
-  -webkit-transition: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  transition: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  text-transform: uppercase;
-}
 .filter-col {
   width: 20%;
   margin: 20px;

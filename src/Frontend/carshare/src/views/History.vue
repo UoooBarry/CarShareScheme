@@ -3,8 +3,11 @@
  ***********************************************************************/
 <template >
   <div>
+    <div class="sub-header">
+      <h1>Rent History</h1>
+    </div>
     <div class="container">
-      <RentList v-bind:rents="rents" class="user-list"/>
+      <RentList v-bind:rents="rents" class="user-list" />
     </div>
   </div>
 </template>
@@ -25,15 +28,28 @@ export default {
     };
   },
   async created() {
-    const response = await this.$axios.get(`${this.$carshare}/orders/list/personal`, {
-      headers: this.header
-    });
+    const response = await this.$axios.get(
+      `${this.$carshare}/orders/list/personal`,
+      {
+        headers: this.header
+      }
+    );
     this.rents = response.data.rents;
   }
 };
 </script>
 
-<style scoped>
+<style>
 
+@media only screen and (max-width: 1200px) {
+  .item-list-panel{
+    display: none;
+  }
+}
 
+@media only screen and (max-width: 400px) {
+  .sub-header h1{
+    font-size: 30px;
+  }
+}
 </style>

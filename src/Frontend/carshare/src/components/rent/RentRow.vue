@@ -5,7 +5,9 @@
   <div class="shadow-sm p-3 mb-4 bg-white rounded">
     <div
       class="row bill-id"
-    >{{ rent.createdAt | formatDate }} - Rent ID: {{ rent.id }} - Period: {{ rent.period }} days</div>
+    ><div class="col-auto">{{ rent.createdAt | formatDate }} - Rent ID: {{ rent.id }} - Period: {{ rent.period }} days</div>
+    <div class="col" style="text-align:right; margin-right:20px" v-if="this.rent.status === 'In progress' && this.rent.bill.isPaid">Extend</div>
+    </div>
     <hr class="user" />
     <div class="row">
       <div class="car-item">
@@ -84,7 +86,6 @@ img {
   margin: 0;
 }
 .bill-id {
-  display: block;
   text-align: left;
   padding-left: 30px;
 }
