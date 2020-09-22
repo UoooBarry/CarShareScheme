@@ -1,15 +1,12 @@
 <template>
   <div>
-    <div class="container">
-      <h1>Rent History</h1>
-
-      <hr class="user" />
+    <div class="container item-list-panel" >
       <div class="row" style="padding: 1rem!important;">
         <div class="car-item">Car</div>
         <div class="pickup-item">Pick Up Location</div>
         <div class="rent-table-item">Payment Status</div>
         <div class="rent-table-item">Total Price</div>
-        <div class="rent-table-item">Order Status</div>
+        <div class="rent-table-item">Action</div>
       </div>
       <hr class="user" />
     </div>

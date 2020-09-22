@@ -1,11 +1,11 @@
 <template>
   <div class="wrapper">
-    <h3>Filter:</h3>
+    <h3>{{ $t('filter') }}:</h3>
     <ul>
       <li>
         <input type="checkbox" id="list-item-1" />
         <label for="list-item-1" class="first">
-          Make
+          {{ $t('make') }}
           <font-awesome-icon icon="plus" class="plus" />
         </label>
         <ul>
@@ -25,7 +25,7 @@
       <li>
         <input type="checkbox" id="list-item-2" />
         <label for="list-item-2">
-          Door
+          {{ $t('door') }}
           <font-awesome-icon icon="plus" class="plus" />
         </label>
         <ul>
@@ -39,7 +39,7 @@
       <li>
         <input type="checkbox" id="list-item-3" />
         <label for="list-item-3" >
-          Seat
+          {{ $t('seat') }}
           <font-awesome-icon icon="plus" class="plus" />
         </label>
         <ul>
@@ -54,7 +54,7 @@
       <li>
         <input type="checkbox" id="list-item-4" />
         <label for="list-item-4" class="last">
-          Gear
+          {{ $t('gear') }}
           <font-awesome-icon icon="plus" class="plus" />
         </label>
         <ul>
