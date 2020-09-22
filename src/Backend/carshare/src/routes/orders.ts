@@ -7,13 +7,14 @@
 import express,{Request, Response} from 'express';
 const router = express.Router();
 import {verifyToken} from '../helpers/authorizationHelper';
-import {BillType} from '../models/bill'
+import { BillType } from '../models/bill';
 import _Rent from '../repository/rentRepository';
 import _Bill from '../repository/billRepository';
 import _Car from '../repository/carRepository';
 import OrderValidator from '../validators/OrderValidator';
 import PaymentValidator from '../validators/PaymentValidator';
 import Message from '../helpers/messageHelper';
+import ItemNotFound from '../exceptions/ItemNotFound';
 
 //POST: api/orders/create
 router.post('/create', [OrderValidator.validate, verifyToken], async (req: Request, res: Response) => {
@@ -57,6 +58,34 @@ router.post('/create', [OrderValidator.validate, verifyToken], async (req: Reque
         }
       }
 });
+
+
+router.post('/extend', [verifyToken], async (req: Request, res: Response) => {
+
+    try {
+        let originalRent = await _Rent.get(req.body.rent_id);
+        if (!originalRent) throw new ItemNotFound('Rent not found');
+        const feeToPay = (req.body.period*originalRent.car.price + originalRent.car.price*0.1).toFixed(2);
+
+        //Create bill
+        const bill = await _Bill.create({
+            user_id: req.user.id,
+            fee: feeToPay,
+            type: BillType.RentFee
+        });
+
+        
+        originalRent.start_from = originalRent.start_from + req.body.period;
+        originalRent.bill_id = bill.id;
+        //Create rent
+        const newRent = await _Rent.create(originalRent);
+
+        res.json({ bill, newRent });
+    }catch (err) {
+        res.sendStatus(404);
+    }
+   
+})
 
 
 //GET: api/orders/:id/
