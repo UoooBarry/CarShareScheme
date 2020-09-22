@@ -5,33 +5,36 @@
   <div>
     <div class="modal-backdrop" @click="close"></div>
     <div class="modal" id="modal">
-      <div class="extend">
-        <h1>Extend your rent</h1>
+      <div id="extend" class="extend">
+        <h1 class="card-header">Extend your rent</h1>
         <p>
           <b>Extend for</b>
           <input type="number" id="day" v-model="period" name="day" min="1" />
           <b>Days</b>
         </p>
-        <button class="btn btn-outline-dark mr-5" @click="close">Cancel</button>
-        <button class="btn btn-outline-dark" @click="nextStep">Confirm to payment</button>
       </div>
-
-      <footer class="modal-footer">
-        <slot name="footer">
-          <h3>Payment estimate:</h3>
-        </slot>
-      </footer>
+      <div id="extend-payment">
+        <Payment />
+        <footer class="modal-footer">
+          <slot name="footer">
+            <h3>Payment estimate: {{(fee*this.period).toFixed(2)}}</h3>
+          </slot>
+        </footer>
+      </div>
     </div>
   </div>
 </template>
 <script>
 import authorizeMixin from "@/mixins/authorizeMixin";
+import Payment from "@/components/order/Payment";
 
 export default {
   mixins: [authorizeMixin],
   name: "PayNow",
-  components: {},
-  props: ["rentId"],
+  components: {
+    Payment
+  },
+  props: ["rentId", "fee"],
   data() {
     return {
       period: 1
@@ -41,13 +44,16 @@ export default {
     close() {
       this.$emit("close");
     },
-    nextStep() {
-      if (confirm("Are you sure extend your rent for "+ this.period + " day(s)?")) {
+    extend() {
+      if (
+        confirm("Are you sure extend your rent for " + this.period + " day(s)?")
+      ) {
         this.$axios
           .post(
             `${this.$carshare}/orders/extend/${this.rentId}`,
             {
-              period: this.period
+              period: this.period,
+              payment_total: (this.fee*this.period).toFixed(2)
             },
             { headers: this.header }
           )
@@ -65,11 +71,14 @@ export default {
               title: "Order confirmed!",
               message: "Order confirmed successfully!"
             });
+
           });
       }
     }
   },
-  created() {}
+  created() {
+    document.getElementById('btn-order').addEventListener("click", this.extend);
+  }
 };
 </script>
 <style>
@@ -141,12 +150,22 @@ export default {
 }
 .extend {
   padding: 20px;
-  text-align: left;
+  padding-bottom: 0;
+  text-align: center;
 }
-input[type="number"] {
-  margin-left: 10px;
-  margin-right: 10px;
+.extend p{
+ font-size:20px;
+}
+#day {
+  margin: 30px 10px 0;
   border: 1px solid black;
   width: auto;
 }
+.card-header{
+  text-align: center;
+}
+.card a {
+  text-align: center;
+}
+
 </style>

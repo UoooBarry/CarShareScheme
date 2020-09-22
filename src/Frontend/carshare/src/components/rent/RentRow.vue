@@ -10,10 +10,10 @@
       <div
         class="col"
         style="text-align:right; margin-right:20px"
-        v-if="(this.rent.status === 'In progress' || this.rent.status === 'Not picked' ) && this.rent.bill.isPaid"
+        v-if="this.rent.status === 'In progress' && this.rent.bill.isPaid"
       >
         <a style="cursor:pointer" @click="showModal">Extend your rent</a>
-        <Extend v-show="isModalVisible" :rentId="rent.id"  @close="closeModal" />
+        <Extend v-show="isModalVisible" :rentId="rent.id" :fee="rent.car.price" @close="closeModal" />
       </div>
     </div>
     <hr class="user" />
@@ -65,7 +65,7 @@
 <script>
 import authorizeMixin from "@/mixins/authorizeMixin";
 import PayNow from "./PayNow";
-import Extend from "./extend/Extend"
+import Extend from "./Extend"
 export default {
   name: "RentRow",
   mixins: [authorizeMixin],

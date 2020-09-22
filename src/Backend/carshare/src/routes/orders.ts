@@ -75,7 +75,7 @@ router.post('/extend/:id', [ExtendRentValidator.validate, verifyToken], async (r
     } else {
         try {
             if (!req.originalRent) throw new ItemNotFound('Rent not found');
-            const feeToPay = (req.body.period * req.originalRent.car.price + req.originalRent.car.price * 0.1).toFixed(2);
+            const feeToPay = (req.body.period * req.originalRent.car.price).toFixed(2);
             //If pass payment validator
             if (req.body.payment_total !== feeToPay) throw new IncorrectItem('Payment amount incorrect');
             //Update to complete
