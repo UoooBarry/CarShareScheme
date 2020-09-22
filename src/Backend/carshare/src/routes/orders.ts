@@ -66,40 +66,46 @@ router.post('/create', [OrderValidator.validate, verifyToken], async (req: Reque
 
 //GET: api/orders/extend/:id
 router.post('/extend/:id', [ExtendRentValidator.validate, verifyToken], async (req: Request, res: Response) => {
-
-    try {
-        //Update to complete
-        await _Rent.update(parseInt(req.params.id), { status: RentStatus.Completed });
-        if (!req.originalRent) throw new ItemNotFound('Rent not found');
-        const feeToPay = (req.body.period*req.originalRent.car.price + req.originalRent.car.price*0.1).toFixed(2);
-        //Create bill
-        const bill = await _Bill.create({
-            user_id: req.user.id,
-            fee: feeToPay,
-            type: BillType.RentFee
+    const validationErrors = req.validationError;
+    if (validationErrors && validationErrors.length > 0) {
+        res.json({
+            message: "fail",
+            errors: { validationErrors },
         });
+    } else {
+        try {
+            //Update to complete
+            await _Rent.update(parseInt(req.params.id), { status: RentStatus.Completed });
+            if (!req.originalRent) throw new ItemNotFound('Rent not found');
+            const feeToPay = (req.body.period * req.originalRent.car.price + req.originalRent.car.price * 0.1).toFixed(2);
+            //Create bill
+            const bill = await _Bill.create({
+                user_id: req.user.id,
+                fee: feeToPay,
+                type: BillType.RentFee
+            });
 
-        //Calculate the new due date
-        let newDueDate = new Date();
-        newDueDate.setDate(req.originalRent.start_from.getDate() + req.body.period);
-        //Create rent
-        const newRent = await _Rent.create({
-            car_id: req.originalRent.car.id,
-            user_id: req.user.id,
-            start_from: newDueDate,
-            period: req.body.period,
-            bill_id: bill.id,
-            status: RentStatus.InProgress
-        });
+            //Calculate the new due date
+            let newDueDate = new Date();
+            newDueDate.setDate(req.originalRent.start_from.getDate() + req.body.period);
+            //Create rent
+            const newRent = await _Rent.create({
+                car_id: req.originalRent.car.id,
+                user_id: req.user.id,
+                start_from: newDueDate,
+                period: req.body.period,
+                bill_id: bill.id,
+                status: RentStatus.InProgress
+            });
 
 
-        res.json({ bill, newRent });
+            res.json({ bill, newRent });
 
-    } catch (err) {
-        console.log(err);
-        res.sendStatus(404);
+        } catch (err) {
+            console.log(err);
+            res.sendStatus(404);
+        }
     }
-   
 })
 
 
