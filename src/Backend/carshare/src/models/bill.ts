@@ -13,7 +13,7 @@ import Rent from "./rent";
 
 export enum BillType{
     RentFee = 'Rent fee',
-    OverdueFee = 'Overdue fee',
+    OverdueFee = 'Overdue fee'
 }
 
 

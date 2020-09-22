@@ -19,7 +19,7 @@ class ExtendRentValidator implements Validator{
     const originalRent = await _Rent.get(parseInt(req.params.id));
     if(!req.body.period || req.body.period <= 0) req.validationError.push('Period be empty');
     if(!req.params.id) req.validationError.push('Rent id cannot be empty');
-    if(originalRent?.status === RentStatus.Overdue || originalRent?.status === RentStatus.Completed) req.validationError.push('Rent is not available'); //If the rent is overdue or completed
+    if(originalRent?.status !== RentStatus.InProgress) req.validationError.push('Rent is not available'); //If the rent is overdue or completed
     req.originalRent = <Rent><unknown>originalRent;
     next();
   }
