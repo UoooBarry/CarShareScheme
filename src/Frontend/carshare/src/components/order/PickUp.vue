@@ -25,7 +25,7 @@
       </div>
     </div>
     <div class="space"></div>
-    <button id="btn-progress" type="button" class="btn btn-next customize-button" @click='nextStep()' >Confrim Order</button>
+    <button id="btn-progress" type="button" class="btn btn-next customize-button" @click='nextStep()' >Confirm Order</button>
   </div>
 </template>
 

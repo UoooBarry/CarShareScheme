@@ -3,10 +3,18 @@
  ***********************************************************************/
 <template>
   <div class="shadow-sm p-3 mb-4 bg-white rounded">
-    <div
-      class="row bill-id"
-    ><div class="col-auto">{{ rent.createdAt | formatDate }} - Rent ID: {{ rent.id }} - Period: {{ rent.period }} days</div>
-    <div class="col" style="text-align:right; margin-right:20px" v-if="this.rent.status === 'In progress' && this.rent.bill.isPaid">Extend</div>
+    <div class="row bill-id">
+      <div
+        class="col-auto"
+      >{{ rent.createdAt | formatDate }} - Rent ID: {{ rent.id }} - Period: {{ rent.period }} days</div>
+      <div
+        class="col"
+        style="text-align:right; margin-right:20px"
+        v-if="(this.rent.status === 'In progress' || this.rent.status === 'Not picked' ) && this.rent.bill.isPaid"
+      >
+        <a style="cursor:pointer" @click="showModal">Extend your rent</a>
+        <Extend v-show="isModalVisible" :rentId="rent.id"  @close="closeModal" />
+      </div>
     </div>
     <hr class="user" />
     <div class="row">
@@ -42,7 +50,12 @@
         </div>
         <div v-else>
           <a class="pay-now" @click="showModal">Pay now</a>
-           <PayNow v-show="isModalVisible" :rentId="rent.id" :fee="rent.bill.fee" @close="closeModal" />
+          <PayNow
+            v-show="isModalVisible"
+            :rentId="rent.id"
+            :fee="rent.bill.fee"
+            @close="closeModal"
+          />
         </div>
       </div>
     </div>
@@ -52,11 +65,13 @@
 <script>
 import authorizeMixin from "@/mixins/authorizeMixin";
 import PayNow from "./PayNow";
+import Extend from "./extend/Extend"
 export default {
   name: "RentRow",
   mixins: [authorizeMixin],
   components: {
-    PayNow
+    PayNow,
+    Extend
   },
   props: ["rent"],
   data() {
