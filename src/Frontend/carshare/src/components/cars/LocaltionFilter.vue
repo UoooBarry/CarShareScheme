@@ -1,6 +1,6 @@
 <template>
   <div class="my-1 btn">
-    <label class="sr-only" for="address">Address</label>
+    <label class="sr-only" for="address">{{ $t('changeAddress') }}</label>
     <div class="input-group">
       <input
         ref="autocomplete"
@@ -13,7 +13,7 @@
         type="submit"
         class="btn btn-find-address my-2 my-sm-0"
         @click="updateAdress"
-      >Change address</button>
+      >{{ $t('changeAddress') }}</button>
     </div>
   </div>
 </template>

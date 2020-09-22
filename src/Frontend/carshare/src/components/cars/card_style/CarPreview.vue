@@ -4,10 +4,10 @@
 <template>
   <div class="tip">
     <div class="tip-header">{{car.name}}</div>
-    <div class="row">Car brand: {{car.brand}}</div>
-    <div class="row">Car model: {{car.model}}</div>
-    <div class="row">Bought in: {{car.purchase_date | formatDate}}</div>
-    <div class="row">Car features:</div>
+    <div class="row">{{ $t('carBrand') }}: {{car.brand}}</div>
+    <div class="row">{{ $t('carModel') }}: {{car.model}}</div>
+    <div class="row">{{ $t('boughtIn') }}: {{car.purchase_date | formatDate}}</div>
+    <div class="row">{{ $t('carFeatures') }}:</div>
     <div class v-for="value in splitedFeatures()" v-bind:key="value.index">
       <div class="feature row">
         <font-awesome-icon icon="star" style="margin-right: 8px; " />

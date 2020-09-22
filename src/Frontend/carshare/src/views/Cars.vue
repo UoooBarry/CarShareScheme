@@ -10,7 +10,7 @@
     <Loading :key="loadingKey" />
 
     <dir class="sub-header">
-      <h1>Car List Result</h1>
+      <h1>{{ $t('carListMsg') }}</h1>
     </dir>
 
     <div class="row">

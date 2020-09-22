@@ -23,14 +23,14 @@
               <input
                 class="form-control input-1"
                 type="search"
-                placeholder="Search"
+                :placeholder="$t('search')"
                 v-model="searchItem"
               />
-              <button class="btn btn-outline-success" type="submit" v-on:click="update">Search</button>
+              <button class="btn btn-outline-success" type="submit" v-on:click="update">{{ $t('search') }}</button>
             </form>
           </li>
           <li class="nav-item dropdown">
-            <a class="inner_section_label">SORT BY</a>
+            <a class="inner_section_label">{{ $t('sortBy') }}</a>
             <label class="btn btn-outline-custom">
               <a
                 class="dropdown-toggle inner_section"
@@ -40,18 +40,18 @@
                 data-toggle="dropdown"
                 aria-haspopup="true"
                 aria-expanded="false"
-              >Default (By range)</a>
+              >{{ $t('byRange') }}</a>
               <div
                 class="dropdown-menu"
                 aria-labelledby="navbarDropdown"
                 style="margin-left: 100px"
               >
-                <a class="dropdown-item" @click="filter('name','ASC')">Default (By range)</a>
-                <a class="dropdown-item" @click="filter('price','ASC')">By price low</a>
-                <a class="dropdown-item" @click="filter('price','DESC')">By price high</a>
-                <a class="dropdown-item" @click="filter('createdAt','DESC')">By latest</a>
-                <a class="dropdown-item" @click="filter('brand','ASC')">By brand</a>
-                <a class="dropdown-item" @click="filter('viewed','DESC')">By popular</a>
+                <a class="dropdown-item" @click="filter('name','ASC')">{{ $t('byRange') }}</a>
+                <a class="dropdown-item" @click="filter('price','ASC')">{{ $t('byPriceLow') }}</a>
+                <a class="dropdown-item" @click="filter('price','DESC')">{{ $t('byPriceHigh') }}</a>
+                <a class="dropdown-item" @click="filter('createdAt','DESC')">{{ $t('byLatest') }}</a>
+                <a class="dropdown-item" @click="filter('brand','ASC')">{{ $t('byBrand') }}</a>
+                <a class="dropdown-item" @click="filter('viewed','DESC')">{{ $t('byPopular') }}</a>
               </div>
             </label>
           </li>

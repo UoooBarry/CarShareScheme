@@ -20,31 +20,31 @@
             <h1 class="car-model">{{car.brand}} {{car.model}}</h1>
           </div>
 
-          <div class="price col">${{car.price}}/day</div>
+          <div class="price col">${{car.price}}/{{ $t('day') }}</div>
         </div>
 
         <div class="row">
           <div class="col function">
             <font-awesome-icon icon="chair" />
             {{car.seats}}
-            <span>Seats</span>
+            <span>{{ $t('seat') }}</span>
           </div>
           <div class="col function">
             <font-awesome-icon icon="door-closed" />
             {{car.doors}}
-            <span>Doors</span>
+            <span>{{ $t('door') }}</span>
           </div>
         </div>
         <div class="row">
           <div class="col function">
             <font-awesome-icon icon="suitcase" />
             {{car.luggages}}
-            <span>Luggage Space</span>
+            <span>{{ $t('luggage') }}</span>
           </div>
           <div class="col function">
             <font-awesome-icon icon="cogs" />
             {{car.gear}}
-            <span>gearbox</span>
+            <span>{{ $t('gear') }}</span>
           </div>
         </div>
         <div class="row">
