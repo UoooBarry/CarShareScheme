@@ -1,6 +1,7 @@
 /***********************************************************************
  *           @AUTHOR: Bach Dao, Created AT: 28/08/2020 
-                 Yongqian Huang, add popular 30/08/2020               *
+                 Yongqian Huang, add popular 30/08/2020
+                 Yongqian Huang, add responsive 17/09/2020               *
  ***********************************************************************/
 <template>
   <div id="car-description">

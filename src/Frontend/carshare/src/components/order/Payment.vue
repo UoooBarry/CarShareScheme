@@ -130,8 +130,10 @@
       <!-- card-body.// -->
     </article>
     <!-- card.// -->
-      
-        <CompleteOrderButton id="btn-order" @click="pay"/>
+      <a @click="pay">
+        <CompleteOrderButton id="btn-order" />
+      </a>
+        
    
       
   

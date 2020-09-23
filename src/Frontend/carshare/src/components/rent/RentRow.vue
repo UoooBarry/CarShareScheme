@@ -28,9 +28,8 @@
           </div>
           <div class="col">
             <p class="mb-0" style="font-size: 24px; margin-top:20px">
-              <b>{{rent.car.model}}</b>
+              <b>{{rent.car.name}}</b>
             </p>
-            <small class="text-muted" style="font-size:18px">{{rent.car.brand}}</small>
           </div>
         </div>
       </div>
