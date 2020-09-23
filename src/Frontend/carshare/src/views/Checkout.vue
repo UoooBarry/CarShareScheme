@@ -7,7 +7,7 @@
  ***********************************************************************/
 <!-- Yongqian Huang updated at 04/09/2020, fixed mutated error-->
 <template>
-<div class="container-fluid" style="max-width:80%">
+  <div class="container-fluid" style="max-width:80%">
     <div class="row justify-content-between">
       <div class="col-auto order-el">
         <ProgressionBar id="progress" />
@@ -25,16 +25,24 @@
           :period="day"
           v-on:createRent="creatRent"
           v-on:createBill="createBill"
+          v-on:updateFee="updateFee"
           :start_from="start_from"
           v-on:nextStep="nextStep()"
         />
-        <Payment id="payment" v-on:lastStep="lastStep" :bill="bill" :rent="rent" v-on:nextStep="nextStep()" />
+        <Payment
+          id="payment"
+          v-on:lastStep="lastStep"
+          :billId="bill.id"
+          :rentId="rent.id"
+          :fee="fee"
+          v-on:nextStep="nextStep()"
+        />
       </div>
       <div class="col-auto" style="min-height:700px">
         <SubTotal :car="car" :day="day" />
       </div>
     </div>
-    </div>
+  </div>
 </template>
 
 <script>
@@ -61,7 +69,8 @@ export default {
       stepElements: "",
       start_from: new Date().toISOString().substring(0, 10),
       bill: "",
-      rent: ''
+      rent: "",
+      fee: 0
     };
   },
   methods: {
@@ -74,7 +83,10 @@ export default {
     createBill(bill) {
       this.bill = bill;
     },
-    creatRent(rent){
+    updateFee(fee) {
+      this.fee = fee;
+    },
+    creatRent(rent) {
       this.rent = rent;
     },
     nextStep() {
@@ -158,8 +170,8 @@ button {
   display: none;
 }
 
-.order-el{
-  width:100%;
+.order-el {
+  width: 100%;
   max-width: 800px;
 }
 @media only screen and (max-width: 1024px) {
@@ -169,9 +181,8 @@ button {
   }
 }
 @media only screen and (max-width: 414px) {
-  #progress{
+  #progress {
     display: none;
   }
 }
-
 </style>  

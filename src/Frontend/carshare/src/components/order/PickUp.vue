@@ -64,6 +64,7 @@ export default {
 
           this.$emit('createRent', res.data.rent);
           this.$emit('createBill', res.data.bill);
+          this.$emit('updateFee', res.data.feeToPay);
           this.$emit('nextStep');
         })
     },

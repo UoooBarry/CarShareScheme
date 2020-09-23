@@ -54,6 +54,7 @@
             v-show="isModalVisible"
             :rentId="rent.id"
             :fee="rent.bill.fee"
+            :billId="rent.bill.id"
             @close="closeModal"
           />
         </div>

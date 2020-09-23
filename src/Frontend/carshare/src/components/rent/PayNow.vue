@@ -5,7 +5,7 @@
   <div>
     <div class="modal-backdrop" @click="close"></div>
     <div class="modal" id="modal">
-      <Payment />
+      <Payment :billId="billId" :rentId="rentId" :fee="fee" />
       <footer class="modal-footer">
         <slot name="footer">
           <h3>Payment estimate: ${{fee}}</h3>
@@ -23,7 +23,7 @@ export default {
   components: {
     Payment
   },
-  props: ["rentId", "fee"],
+  props: ["rentId", "fee" , "billId"],
   data() {
     return {};
   },

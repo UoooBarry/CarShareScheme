@@ -130,9 +130,9 @@
       <!-- card-body.// -->
     </article>
     <!-- card.// -->
-      <a @click="pay">
-        <CompleteOrderButton id="btn-order" />
-      </a>
+      
+        <CompleteOrderButton id="btn-order" @click="pay"/>
+   
       
   
   </div>
@@ -146,7 +146,7 @@ import CompleteOrderButton from "@/components/order/CompleteOrderButton";
 import authorizeMixin from "@/mixins/authorizeMixin";
 export default {
   name: "Payment",
-  props: ["bill", "rent"],
+  props: ["billId", "rentId", "fee"],
   mixins: [authorizeMixin],
   components: {
     CompleteOrderButton
@@ -214,8 +214,8 @@ export default {
       //Only pass when validation pass
       if(this.verifyCreditcard()){
         this.$axios.post(`${this.$carshare}/orders/pay`,{
-          bill_id: this.bill.id,
-          total: this.bill.fee //Not implment with pay api
+          bill_id: this.billId,
+          total: this.fee //Not implment with pay api
         },{headers: this.header})
           .then((res) => {
             if (res.data.message == "fail") {
@@ -238,9 +238,8 @@ export default {
              setTimeout(() => {
                this.$router.push({
                 name: "Receipt",
-                params:{ id: this.rent.id }
-                });
-                
+                params:{ id: this.rentId }
+                });    
             }, 8000);
             
           });

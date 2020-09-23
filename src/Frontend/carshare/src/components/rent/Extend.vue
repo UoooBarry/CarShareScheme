@@ -14,7 +14,7 @@
         </p>
       </div>
       <div id="extend-payment">
-        <Payment />
+        <Payment v-on:payForExtend="extend" />
         <footer class="modal-footer">
           <slot name="footer">
             <h3>Payment estimate: {{(fee*this.period).toFixed(2)}}</h3>
@@ -37,23 +37,23 @@ export default {
   props: ["rentId", "fee"],
   data() {
     return {
-      period: 1
+      period: 1,
+      isVerified: false
     };
   },
   methods: {
     close() {
       this.$emit("close");
     },
-    extend() {
-      if (
-        confirm("Are you sure extend your rent for " + this.period + " day(s)?")
-      ) {
+    extend(isVerified) {
+      this.isVerified = isVerified;
+      if (isVerified) {
         this.$axios
           .post(
             `${this.$carshare}/orders/extend/${this.rentId}`,
             {
               period: this.period,
-              payment_total: (this.fee*this.period).toFixed(2)
+              payment_total: (this.fee * this.period).toFixed(2)
             },
             { headers: this.header }
           )
@@ -71,13 +71,22 @@ export default {
               title: "Order confirmed!",
               message: "Order confirmed successfully!"
             });
-
           });
+      } else {
+        this.flashMessage.error({
+          title: "Order failed!",
+          message: "Invalid credit card information!"
+        });
+        return;
       }
     }
   },
-  created() {
-    document.getElementById('btn-order').addEventListener("click", this.extend);
+  mounted() {
+    // document.getElementById("btn-order").style.display = "none";
+    // document.getElementById("btn-order-extend").style.display = "inline-block";
+    // document
+    //   .getElementById("btn-order-extend")
+    //   .addEventListener("click", this.extend);
   }
 };
 </script>
@@ -153,19 +162,18 @@ export default {
   padding-bottom: 0;
   text-align: center;
 }
-.extend p{
- font-size:20px;
+.extend p {
+  font-size: 20px;
 }
 #day {
   margin: 30px 10px 0;
   border: 1px solid black;
   width: auto;
 }
-.card-header{
+.card-header {
   text-align: center;
 }
 .card a {
   text-align: center;
 }
-
 </style>
