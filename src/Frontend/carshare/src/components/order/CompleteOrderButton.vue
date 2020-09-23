@@ -2,7 +2,7 @@
  *           @AUTHOR: Bach Dao, CREATED AT: 26/08/2020                *
  ***********************************************************************/
 <template>
-  <div class="container">
+
     <button class="order" id='order-button'>
       <span class="default">Complete Order</span>
       <span class="success">
@@ -23,7 +23,7 @@
       <div class="lines"></div>
     </button>
   
-  </div>
+
 </template>
 
 <script>

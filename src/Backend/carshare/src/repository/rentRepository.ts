@@ -63,7 +63,7 @@ class rentRepository implements DataRepository{
             },
             {
               model: Car,
-              attributes: ['id', 'name', 'location_id'],
+              attributes: ['id', 'name', 'location_id', 'price'],
               include:[{
                 model: Location
               }]

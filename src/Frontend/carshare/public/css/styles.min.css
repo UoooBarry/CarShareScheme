@@ -25,14 +25,14 @@ html, body {
 } 
 
 .car-item {
-  display: flex;
+  display: flex !important;
   margin: 10px;
-  max-width: 375px;
+  width: 375px;
   justify-content: center;
   align-items: center;
 }
 .pickup-item{
-    display: flex !important;
+  display: flex !important;
   margin: 10px;
   width: 225px; 
   justify-content: center;
@@ -209,25 +209,26 @@ html, body {
 }
 
 
-input[type="text"] {
-  background: transparent;
-  border: none;
+.custom-text-input{
+  background: transparent !important;
+  border: none !important;
+  border-bottom: 1px solid #000000 !important;
+  -webkit-box-shadow: none ;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+}
+
+.custom-text-input:disabled {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  background-color: transparent;
+}
+
+.custom-text-input:focus {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  background-color: transparent;
   border-bottom: 1px solid #000000;
-  -webkit-box-shadow: none;
-  box-shadow: none;
-  border-radius: 0;
-}
-
-input[type="text"]:disabled {
-  -webkit-box-shadow: none;
-  box-shadow: none;
-  background-color: transparent;
-}
-
-input[type="text"]:focus {
-  -webkit-box-shadow: none;
-  box-shadow: none;
-  background-color: transparent;
 }
 
 .control-label {
@@ -518,4 +519,26 @@ img {
   color: #fff;
   background: #a9a0a0 !important;
   border-color:  #b1bfd8 !important;
+}
+/* Sub-header with image */
+.sub-header {
+  margin-top: 0;
+  padding: 0;
+  text-align: center;
+  background: url("../../public/img/mountain_bg.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 100% 20%;
+  height: 300px;
+}
+
+.sub-header h1 {
+  opacity: 1;
+  font-size: 52px;
+  line-height: 300px;
+  color: white;
+  font-weight: 600;
+  -webkit-transition: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  text-transform: uppercase;
 }
