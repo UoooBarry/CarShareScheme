@@ -19,7 +19,7 @@ import orderRouter from './routes/orders';
 import licenseRouter from './routes/licenses';
 import cors from 'cors';
 import CleanBillTask from './tasks/cleanBillTask';
-
+import OverdueRentTask from './tasks/overdueRentTask';
 
 // Database
 import db from './config/db';
@@ -63,7 +63,9 @@ db.authenticate()
 
 //Tasks
 const cleanBill: CleanBillTask = new CleanBillTask(24);
+const overdueDetect: OverdueRentTask = new OverdueRentTask(24);
 cleanBill.run();
+overdueDetect.run();
 
 // error handler
 app.use( (err: any, req: Request, res: Response, next: NextFunction) => {

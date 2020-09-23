@@ -10,6 +10,7 @@ import Location from '../models/location';
 import Customer from '../models/customer';
 import DataRepository from './dataRepository';
 import ItemNotFound from '../exceptions/ItemNotFound';
+import { Op, Sequelize } from 'sequelize';
 
 class rentRepository implements DataRepository{
   private static instance?: rentRepository;
@@ -142,6 +143,20 @@ class rentRepository implements DataRepository{
       await rent.update(data);
 
       return Promise.resolve(rent);
+    }catch (err) {
+      return Promise.reject(err);
+    }
+  }
+
+  async getOverdue() {
+    try {
+      const rents = Rent.findAll({
+        where: {
+          status: RentStatus.InProgress,
+          [Op.and]: Sequelize.literal("start_from + CAST(period || ' days' AS interval) < CURRENT_DATE") // start_from + period < today
+        }
+      })
+      return Promise.resolve(rents);
     }catch (err) {
       return Promise.reject(err);
     }
