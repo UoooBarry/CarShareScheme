@@ -15,6 +15,7 @@ export default  {
     methods: {
         filter(item, order){
             const target = event.target;
+            this.selectedItem = target.innerHTML;
             target.parentNode.classList.add('active');
             this.sort = item;
             this.order = order;

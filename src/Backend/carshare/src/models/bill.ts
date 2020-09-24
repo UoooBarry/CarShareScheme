@@ -2,7 +2,8 @@
 /********************************************************
  *   @AUTHOR: YONGQIAN HUANG, CREATED AT: 02/08/2020    *
  * @UPDATED: YONGQIAN HUANG, 02/08/2020, ADD BILL MODEL
- * YONGQIAN HUANG   Updated in 03/09/2020 migrate to typescrip *
+ * YONGQIAN HUANG   Updated in 03/09/2020 migrate to typescrip
+ *                                        Add bill type *
  ********************************************************/
     
 
@@ -12,7 +13,7 @@ import Rent from "./rent";
 
 export enum BillType{
     RentFee = 'Rent fee',
-    OverdueFee = 'Overdue fee',
+    OverdueFee = 'Overdue fee'
 }
 
 

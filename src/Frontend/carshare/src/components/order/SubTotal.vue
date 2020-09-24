@@ -36,7 +36,7 @@
         </div>
         <div class="flex-sm-col col-auto">
           <p class="mb-1">
-            {{day}}
+            {{(day * car.price).toFixed(2)}}
           </p>
         </div>
       </div>
@@ -44,12 +44,12 @@
       <div class="row justify-content-between">
         <div class="col-4">
           <p>
-            Extra fee
+            Reserve fee
           </p>
         </div>
         <div class="flex-sm-col col-auto">
           <p class="mb-1">
-            fee
+            {{(car.price*0.1).toFixed(2)}}
           </p>
         </div>
       </div>
@@ -62,7 +62,7 @@
         </div>
         <div class="flex-sm-col col-auto">
           <p class="mb-1 total-text">
-            <b>fee</b>
+            <b>{{(day * car.price + car.price*0.1).toFixed(2)}}</b>
           </p>
         </div>
       </div>
@@ -132,5 +132,14 @@ p {
   cursor: pointer;
   font-weight: bold;
   text-transform: uppercase;
+}
+
+@media only screen and (max-width: 414px) {
+  .item-row {
+    width: 100%;
+    margin: 0 !important;
+    overflow-y: auto;
+    overflow-wrap: break-word;
+  }
 }
 </style>  

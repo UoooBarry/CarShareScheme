@@ -1,5 +1,6 @@
 /***********************************************************************
- *           @AUTHOR: Bach Dao, Created AT: 24/08/2020                *
+ *           @AUTHOR: Bach Dao, Created AT: 24/08/2020
+                      Yongqian Huang, add preview 24/08/2020           *
  ***********************************************************************/
 <template>
   <div>
@@ -27,7 +28,7 @@
         <div class="card-body">
           <h5 class="card-title car">{{car.model}}</h5>
           <h6 class="card-subtitle mb-2 text-muted">{{car.brand}}</h6>
-          <p class="price">${{car.price}}/day</p>
+          <p class="price">${{car.price}}/{{ $t('day') }}</p>
         </div>
       </div>
       <CarPreview :id="`preview${car.id}`" v-if="hovering" v-bind:car="this.car" />

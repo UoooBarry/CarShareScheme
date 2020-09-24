@@ -88,11 +88,11 @@
         <span class="amount">${{car.price}}</span>
         <span class="daily">/day</span>
       </div>
-      <div class="col price" style="margin-left:-100px">
-   
+      <div class="col price" style="margin-left:-30px">
         <router-link class="button" :to="{name: 'Checkout', params:{ id: car.id}}">Check out</router-link>
-        <div></div>
-        <div></div>
+        <router-link class="ip-checkout" :to="{name: 'Checkout', params:{ id: car.id}}">
+          <font-awesome-icon icon="shopping-cart" />
+        </router-link>
       </div>
     </div>
   </div>
@@ -102,9 +102,7 @@
 export default {
   name: "CarContent",
   props: ["car"],
-  methods: {
-
-  }
+  methods: {}
 };
 </script>
 
@@ -123,12 +121,13 @@ ul li {
   text-transform: capitalize;
 }
 .product-content {
-  min-width: 600px;
+  width: 100%;
   margin-top: 48px;
   margin-bottom: 128px;
+  margin-left: 50px;
   display: block;
   box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.12);
-  padding: 32px 0 32px 32px;
+  padding: 32px;
   border-radius: 8px;
   background-color: #fff;
   box-sizing: border-box;
@@ -146,19 +145,65 @@ ul li {
   font-size: 30px;
   padding: 0;
 }
+.ip-checkout {
+  display: none;
+  color: black;
+  margin-left: 30px;
+  font-size: 30px;
+}
 /* ORDER BUTTON */
 .button {
-  width: 300px;
-  height: 60px;
+  width: 70%;
+  min-width: 177px;
+  padding: 5px 0;
+  text-align: center !important;
   border-radius: 30px;
   background-color: black;
   z-index: 0;
-  display: flex;
+  display: block;
   cursor: pointer;
-  padding: 12px 0 0 65px;
   text-decoration: none;
   font-size: 26px;
   color: white;
+  margin-left: 30px;
 }
 
+@media only screen and (max-width: 600px) {
+  .product-content {
+    overflow-y: auto;
+    overflow-wrap: scroll;
+    min-width: 600px;
+    margin-left: 0 !important;
+  }
+}
+@media only screen and (max-width: 414px) {
+  .product-content {
+    overflow-y: auto;
+    overflow-wrap: scroll;
+    min-width: 280px;
+    margin-left: 0;
+  }
+  .price {
+    font-size: 20px !important;
+  }
+  .ip-checkout {
+    display: block;
+  }
+  .button {
+    display: none;
+  }
+}
+@media only screen and (max-width: 1024) {
+  .product-content {
+    overflow-y: auto;
+    overflow-wrap: scroll;
+    max-width: 20%;
+  }
+  .ip-checkout {
+    display: block;
+  }
+  .button {
+    display: none;
+  }
+}
 </style>

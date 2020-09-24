@@ -9,7 +9,16 @@ import AdminHeader from '@/components/layouts/AdminHeader';
 
 Vue.use(VueRouter)
 
-const routes = [{
+const routes = [
+{
+  path: '*',
+  name: 'NotFound',
+  components: {
+    header: Header,
+    main: () => import('@/views/NotFound')
+  }
+},
+{
   path: '/',
   name: 'Home',
   components: {
@@ -88,6 +97,14 @@ const routes = [{
   },
 },
 {
+  path: '/rents',
+  name: 'Rents',
+  components: {
+    header: Header,
+    main: () => import('../views/History.vue')
+  },
+},
+{
   path: '/FAQ',
   name: 'FAQ',
   components: {
@@ -142,6 +159,17 @@ const routes = [{
   components: {
     header: AdminHeader,
     main: () => import('../views/admin/AddCar.vue')
+  },
+  meta: {
+    requiresAuth: true
+  }
+},
+{
+  path: '/admin36737123719368365255336327043632505/orders',
+  name: 'AdminOrders',
+  components: {
+    header: AdminHeader,
+    main: () => import('../views/admin/Orders.vue')
   },
   meta: {
     requiresAuth: true

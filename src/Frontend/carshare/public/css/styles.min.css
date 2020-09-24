@@ -25,16 +25,16 @@ html, body {
 } 
 
 .car-item {
-  display: flex;
+  display: flex !important;
   margin: 10px;
   width: 375px;
   justify-content: center;
   align-items: center;
 }
 .pickup-item{
-    display: flex !important;
+  display: flex !important;
   margin: 10px;
-  width: 225px;
+  width: 225px; 
   justify-content: center;
   align-items: center;
 }
@@ -153,11 +153,16 @@ html, body {
 .footer-dark {
   padding: 20px 0;
   color: #f0f9ff;
-  background-color: #282d32;
-  height: 200px;
+  background: url("../img/footerbg.jpg") ;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 100% 70%;
+  height: 100%;
   width: 100%;
   overflow: hidden;
   position: relative;
+
+  background-color: #282d32;
 }
 
 .nav-item{
@@ -194,32 +199,62 @@ html, body {
 }
 
 .p1{
-  background-image: url('../img/b1.png');
+  background-image: url('../img/b1.webp');
 }
 .p2{
-  background-image: url('../img/b2.png');
+  background-image: url('../img/b2.webp');
 }
 .p3{
-  background-image: url('../img/b3.png');
+  background-image: url('../img/b3.webp');
 }
 
 
+.custom-text-input{
+  background: transparent !important;
+  border: none !important;
+  border-bottom: 1px solid #000000 !important;
+  -webkit-box-shadow: none ;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+}
 
+.custom-text-input:disabled {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  background-color: transparent;
+}
+
+.custom-text-input:focus {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  background-color: transparent;
+  border-bottom: 1px solid #000000;
+}
+
+.control-label {
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-bottom: 0;
+  float: left;
+  font-weight: bold;
+  color: gray;
+}
 
 .footer-dark h3 {
   margin-top: 0;
   margin-bottom: 12px;
   font-weight: 700;
-  font-size: 16px;
+  font-size: 26px;
 }
 .footer-dark ul {
   padding: 0;
   list-style: none;
   line-height: 1.6;
-  font-size: 14px;
+  font-size: 18px;
   margin-bottom: 0;
 }
 .footer-dark ul a {
+  font-size: 15px;
   color: inherit;
   text-decoration: none;
   opacity: 0.6;
@@ -234,6 +269,7 @@ html, body {
 .footer-dark .item.text p {
   opacity: 0.6;
   margin-bottom: 0;
+  font-size: 16px;
 }
 .footer-dark .item.social {
   text-align: center;
@@ -281,6 +317,13 @@ img {
   border-radius: 2px;
   box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
 }
+
+@media (min-width: 600px) {
+  br.hidden-ss {
+    display: none !important;
+  }
+}
+
 .login-card .profile-img-card {
   width: 96px;
   height: 96px;
@@ -476,4 +519,26 @@ img {
   color: #fff;
   background: #a9a0a0 !important;
   border-color:  #b1bfd8 !important;
+}
+/* Sub-header with image */
+.sub-header {
+  margin-top: 0;
+  padding: 0;
+  text-align: center;
+  background: url("../../public/img/mountain_bg.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 100% 20%;
+  height: 230px;
+}
+
+.sub-header h1 {
+  opacity: 1;
+  font-size: 52px;
+  line-height: 300px;
+  color: white;
+  font-weight: 600;
+  -webkit-transition: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  text-transform: uppercase;
 }

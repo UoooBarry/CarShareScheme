@@ -19,8 +19,8 @@ import moment from "moment";
 import { ToggleButton } from "vue-js-toggle-button";
 import JwPagination from "jw-vue-pagination";
 import VueNumericInput from "vue-numeric-input";
-
-
+import i18n from '@/plugins/i18n';
+import FlagIcon from 'vue-flag-icon';
 
 //numeric input
 Vue.use(VueNumericInput);
@@ -40,8 +40,10 @@ Vue.prototype.$admin = process.env.VUE_APP_ADMIN;
 Vue.prototype.$google_api_key = process.env.VUE_APP_GOOGLE_API;
 Vue.config.productionTip = false;
 
+Vue.use(FlagIcon);
 new Vue({
   router,
+  i18n,
   render: (h) => h(App),
 }).$mount("#app");
 

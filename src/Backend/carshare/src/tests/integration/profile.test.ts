@@ -7,6 +7,7 @@ import chai from 'chai';
 const assert = chai.assert;
 import app from '../../app';
 import Customer from '../../models/customer';
+import License from '../../models/license'
 import db from '../../config/db'
 import chaiHttp from 'chai-http';
 import {generateAccessToken} from '../../helpers/authorizationHelper';
@@ -19,6 +20,7 @@ describe('/api/customers', () => {
             //Sync all database before start testing
             await db.authenticate();
             await Customer.sync();
+            await License.sync();
             //Pre create a customer
             const customer = await Customer.create({
                 first_name: "Dummy",

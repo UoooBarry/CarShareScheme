@@ -3,9 +3,19 @@
  ***********************************************************************/
 <template>
   <div class="shadow-sm p-3 mb-4 bg-white rounded">
-    <div
-      class="row bill-id"
-    >{{ rent.createdAt | formatDate }} - Rent ID: {{ rent.id }} - Period: {{ rent.period }} days</div>
+    <div class="row bill-id">
+      <div
+        class="col-auto"
+      >{{ rent.createdAt | formatDate }} - Rent ID: {{ rent.id }} - Period: {{ rent.period }} days</div>
+      <div
+        class="col"
+        style="text-align:right; margin-right:20px"
+        v-if="this.rent.status === 'In progress' && this.rent.bill.isPaid"
+      >
+        <a style="cursor:pointer" @click="showModal">Extend your rent</a>
+        <Extend v-show="isModalVisible" :rentId="rent.id" :fee="rent.car.price" @close="closeModal" />
+      </div>
+    </div>
     <hr class="user" />
     <div class="row">
       <div class="car-item">
@@ -18,9 +28,8 @@
           </div>
           <div class="col">
             <p class="mb-0" style="font-size: 24px; margin-top:20px">
-              <b>{{rent.car.model}}</b>
+              <b>{{rent.car.name}}</b>
             </p>
-            <small class="text-muted" style="font-size:18px">{{rent.car.brand}}</small>
           </div>
         </div>
       </div>
@@ -33,15 +42,20 @@
       <div class="rent-table-item">${{ rent.bill.fee }}</div>
       <div class="rent-table-item">
         <div v-if="this.rent.bill.isPaid">
-            <div v-if="this.rent.status === 'In progress'">
-              <a href="/locations">Find the nearst return location</a>
-            </div>
-            <div v-else>
-              {{ rent.status }}
-            </div>
+          <div v-if="this.rent.status === 'In progress'">
+            <a class="pay-now" href="/locations">Return</a>
+          </div>
+          <div v-else>{{ rent.status }}</div>
         </div>
         <div v-else>
-          <a class="pay-now">Pay now</a>
+          <a class="pay-now" @click="showModal">Pay now</a>
+          <PayNow
+            v-show="isModalVisible"
+            :rentId="rent.id"
+            :fee="rent.bill.fee"
+            :billId="rent.bill.id"
+            @close="closeModal"
+          />
         </div>
       </div>
     </div>
@@ -50,11 +64,30 @@
 
 <script>
 import authorizeMixin from "@/mixins/authorizeMixin";
-
+import PayNow from "./PayNow";
+import Extend from "./Extend"
 export default {
   name: "RentRow",
   mixins: [authorizeMixin],
-  props: ["rent"]
+  components: {
+    PayNow,
+    Extend
+  },
+  props: ["rent"],
+  data() {
+    return {
+      isModalVisible: false
+    };
+  },
+  methods: {
+    showModal() {
+      this.isModalVisible = true;
+    },
+    closeModal() {
+      this.isModalVisible = false;
+    }
+  },
+  created() {}
 };
 </script>
 
@@ -68,7 +101,6 @@ img {
   margin: 0;
 }
 .bill-id {
-  display: block;
   text-align: left;
   padding-left: 30px;
 }

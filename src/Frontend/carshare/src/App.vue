@@ -15,9 +15,9 @@ export default {
   components: {
     DarkFooter
   },
-  created(){
-    const localToken = localStorage.getItem('authToken');
-    if(localToken !== null) sessionStorage.setItem('authToken', localToken);
+  created() {
+    const localToken = localStorage.getItem("authToken");
+    if (localToken !== null) sessionStorage.setItem("authToken", localToken);
   }
 };
 </script>
@@ -28,9 +28,8 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  background-color: #F8F8F8;
+  background-color: #f8f8f8;
 }
-
 #nav {
   padding: 30px;
 }
@@ -43,5 +42,4 @@ export default {
 #nav a.router-link-exact-active {
   color: #42b983;
 }
-
 </style>

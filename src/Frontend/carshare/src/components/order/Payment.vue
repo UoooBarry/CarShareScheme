@@ -1,4 +1,3 @@
-
 /***********************************************************************
 *           @AUTHOR: Bach Dao, CREATED AT: 03/09/2020                  *
 *          Shuyuan Zhang, Updated at: 03/09/2020                       *
@@ -12,7 +11,7 @@
       <p class="card-text text-muted mt-md-4 mb-2" style="font-size:30px">PAYMENT METHOD</p>
     </div>
     <article class="card">
-      <h3>Payment estimate: ${{bill.fee}}</h3>
+     
       <div class="card-body p-5">
         <ul class="nav nav-pills rounded nav-fill mb-3" role="tablist">
           <li class="nav-item">
@@ -134,6 +133,8 @@
       <a @click="pay">
         <CompleteOrderButton id="btn-order" />
       </a>
+        
+   
       
   
   </div>
@@ -147,7 +148,7 @@ import CompleteOrderButton from "@/components/order/CompleteOrderButton";
 import authorizeMixin from "@/mixins/authorizeMixin";
 export default {
   name: "Payment",
-  props: ["bill", "rent"],
+  props: ["billId", "rentId", "fee"],
   mixins: [authorizeMixin],
   components: {
     CompleteOrderButton
@@ -203,7 +204,6 @@ export default {
           });
           result = false
       }
-
       return result;
     },
     nextStep(){
@@ -216,8 +216,8 @@ export default {
       //Only pass when validation pass
       if(this.verifyCreditcard()){
         this.$axios.post(`${this.$carshare}/orders/pay`,{
-          bill_id: this.bill.id,
-          total: this.bill.fee //Not implment with pay api
+          bill_id: this.billId,
+          total: this.fee //Not implment with pay api
         },{headers: this.header})
           .then((res) => {
             if (res.data.message == "fail") {
@@ -234,19 +234,15 @@ export default {
               title: "Order confrimed!",
               message: "Order payed successfully!"
             });
-
             const order_button = document.getElementById('order-button');
             order_button.classList.add('animate');
             order_button.disabled = true;
              setTimeout(() => {
                this.$router.push({
                 name: "Receipt",
-                params:{ id: this.rent.id }
-                });
-                
+                params:{ id: this.rentId }
+                });    
             }, 8000);
-
-
             
           });
         }
@@ -268,7 +264,6 @@ export default {
   border: none;
   margin-top: 5px;
 }
-
 .card,
 .card-header {
   background-color: #f8f8f8;

@@ -2,11 +2,13 @@
 /***********************************************************************
  *           @AUTHOR: YONGQIAN HUANG, CREATED AT: 06/07/2020           *
  * @UPDATED: YONGQIAN HUANG, 06/08/2020, GET USER by auth token  
- * updated in 03/09/2020 migrate to typescript                           *
+ * updated in 03/09/2020 migrate to typescript
+ * updated in 19/09/2020 Add license validation                        *
  ***********************************************************************/
 
 import Customer from '../models/customer';
 import DataRepository from './dataRepository';
+import License from '../models/license';
 
 class customerRepository implements DataRepository{
     private static instance?: customerRepository;
@@ -31,7 +33,14 @@ class customerRepository implements DataRepository{
 
     async get(id: number) {
         try{
-            const customer = await Customer.findOne({where: {id: id}});
+            const customer = await Customer.findOne({
+                where: { id: id },
+                include: [
+                    {
+                        model: License
+                    }
+                ]
+            });
             return Promise.resolve(customer);
         }catch(error){
             return Promise.reject(error);
