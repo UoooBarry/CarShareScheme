@@ -71,12 +71,10 @@
 </template>
 
 <script>
-import authorizeMixin from "@/mixins/authorizeMixin";
 import Brand from "@/components/layouts/Brand";
 import i18n from "@/plugins/i18n";
 export default {
   name: "Header",
-  mixins: [authorizeMixin],
   components: {
     Brand
   },

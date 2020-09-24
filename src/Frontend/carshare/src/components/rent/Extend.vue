@@ -9,7 +9,7 @@
         <h1 class="card-header">Extend your rent</h1>
         <p>
           <b>Extend for</b>
-          <input type="number" id="day" v-model="period" name="day" min="1" />
+          <input type="number" v-model="period" name="day" min="1" />
           <b>Days</b>
         </p>
       </div>

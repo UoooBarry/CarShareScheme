@@ -1,5 +1,6 @@
 /***********************************************************************
- *           @AUTHOR: Bach Dao, CREATED AT: 16/08/2020                *
+ *           @AUTHOR: Bach Dao, CREATED AT: 16/08/2020
+*Yongqian Huang, make authorze mixin global 24/09/2020                *
  ***********************************************************************/
 <template >
   <div>
@@ -13,7 +14,6 @@
 </template>
 
 <script>
-import authorizeMixin from "@/mixins/authorizeMixin";
 import RentList from "@/components/rent/RentList";
 
 export default {
@@ -21,7 +21,6 @@ export default {
   components: {
     RentList
   },
-  mixins: [authorizeMixin],
   data() {
     return {
       rents: []

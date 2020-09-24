@@ -145,11 +145,9 @@
 
 <script>
 import CompleteOrderButton from "@/components/order/CompleteOrderButton";
-import authorizeMixin from "@/mixins/authorizeMixin";
 export default {
   name: "Payment",
   props: ["billId", "rentId", "fee"],
-  mixins: [authorizeMixin],
   components: {
     CompleteOrderButton
   },

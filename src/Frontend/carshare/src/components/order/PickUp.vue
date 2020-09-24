@@ -30,11 +30,8 @@
 </template>
 
 <script>
-import authorizeMixin from '@/mixins/authorizeMixin';
 export default {
   name: "Pickup",
-  components: {},
-  mixins: [authorizeMixin],
   props: ["location", "period", "start_from"],
   data() {
     return {};

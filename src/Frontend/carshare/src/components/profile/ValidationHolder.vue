@@ -47,7 +47,6 @@
 </template>
 
 <script>
-import authorizeMixin from '@/mixins/authorizeMixin';
 import ValidationUploader from '@/components/profile/ValidationUploader'
 
 
@@ -62,7 +61,6 @@ export default {
   components:{
     ValidationUploader
   },
-  mixins: [authorizeMixin],
   created() {
     this.firstName = this.customer.first_name;
   },

@@ -3,6 +3,7 @@
  *         Yongqian Huang, 05/09/2020, Implement payment
  *         Yongqian Huang, 11/09/2020, Send receipt message
  *         Yongqian Huang, 22/09/2020, Extend rent and custom error *
+ *         Yongqian Huang, 22/09/2020, Add validation of licenses *
  *************************************************/
 
 import express,{Request, Response} from 'express';
@@ -12,6 +13,7 @@ import { BillType } from '../models/bill';
 import _Rent from '../repository/rentRepository';
 import _Bill from '../repository/billRepository';
 import _Car from '../repository/carRepository';
+import _License from '../repository/licenseRepository';
 import OrderValidator from '../validators/OrderValidator';
 import PaymentValidator from '../validators/PaymentValidator';
 import Message from '../helpers/messageHelper';
@@ -32,6 +34,8 @@ router.post('/create', [OrderValidator.validate, verifyToken], async (req: Reque
       }else{
         try {
             const car = await _Car.get(req.body.car_id);
+            const license = await _License.getByUserId(req.user.id);
+            if (!license || !license.isValidated) throw new IncorrectItem('Your account is not validate yet, please go to license validation page.');
             if(!car.available) throw new IncorrectItem('The car does not available yet');
     
             const feeToPay = (req.body.period * car.price + car.price * 0.1).toFixed(2);
@@ -55,10 +59,9 @@ router.post('/create', [OrderValidator.validate, verifyToken], async (req: Reque
     
             res.json({ bill, rent, feeToPay });
         } catch (err) {
-            console.log(err);
             res.json({
                 message: "fail",
-                errors: err,
+                errors: err.message,
             });
         }
       }
@@ -105,7 +108,6 @@ router.post('/extend/:id', [ExtendRentValidator.validate, verifyToken], async (r
             res.json({ bill, newRent });
 
         } catch (err) {
-            console.log(err);
             res.sendStatus(404);
         }
     }
@@ -120,7 +122,6 @@ router.get('/:id/', [verifyToken], (req: Request, res: Response) => {
                 res.json({rent});
             })
             .catch((err) => {
-                console.log(err);
                 res.sendStatus(404);
             })
 })

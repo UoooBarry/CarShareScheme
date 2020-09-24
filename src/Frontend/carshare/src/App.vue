@@ -3,6 +3,9 @@
     <FlashMessage></FlashMessage>
     <router-view class name="header"></router-view>
     <router-view class="main" name="main" />
+    
+    <ChatBot />
+    
     <DarkFooter id="dark-footer" />
   </div>
 </template>
@@ -10,10 +13,11 @@
 
 <script>
 import DarkFooter from "@/components/layouts/DarkFooter.vue";
-
+import ChatBot from "@/components/chatbot/ChatBot.vue";
 export default {
   components: {
-    DarkFooter
+    DarkFooter,
+    ChatBot
   },
   created() {
     const localToken = localStorage.getItem("authToken");
@@ -42,4 +46,5 @@ export default {
 #nav a.router-link-exact-active {
   color: #42b983;
 }
+
 </style>
