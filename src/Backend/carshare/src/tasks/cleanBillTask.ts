@@ -10,7 +10,7 @@ export default class cleanBillTask implements TaskI{
     period: number;
 
     constructor(hours: number) {
-        this.period = hours * 36000;
+        this.period = hours * 36000 * 60;
     }
 
      async task(): Promise<void> {

@@ -9,6 +9,8 @@ import Car from '../models/car';
 import Location from '../models/location';
 import Customer from '../models/customer';
 import DataRepository from './dataRepository';
+import ItemNotFound from '../exceptions/ItemNotFound';
+import { Op, Sequelize } from 'sequelize';
 
 class rentRepository implements DataRepository{
   private static instance?: rentRepository;
@@ -35,7 +37,7 @@ class rentRepository implements DataRepository{
           },
           {
             model: Car,
-            attributes: ['id', 'name', 'location_id'],
+            attributes: ['id', 'name', 'location_id', 'price'],
             include:[{
               model: Location
             }]
@@ -61,7 +63,7 @@ class rentRepository implements DataRepository{
             },
             {
               model: Car,
-              attributes: ['id', 'name', 'location_id'],
+              attributes: ['id', 'name', 'location_id', 'price'],
               include:[{
                 model: Location
               }]
@@ -111,7 +113,7 @@ class rentRepository implements DataRepository{
     }
   }
 
-    async return(id: number, location_id: number){
+  async return(id: number, location_id: number){
       try{
         const rent = await Rent.findOne({
           where: {id: id},
@@ -128,6 +130,36 @@ class rentRepository implements DataRepository{
       }catch (err) {
         return Promise.reject(err);
       }
+  }
+
+
+  async update(id: number, data: any) {
+    try{
+      const rent = await Rent.findOne({
+        where: {id: id},
+      });
+      if (!rent) throw new ItemNotFound('No rent error');
+      
+      await rent.update(data);
+
+      return Promise.resolve(rent);
+    }catch (err) {
+      return Promise.reject(err);
+    }
+  }
+
+  async getOverdue() {
+    try {
+      const rents = Rent.findAll({
+        where: {
+          status: RentStatus.InProgress,
+          [Op.and]: Sequelize.literal("start_from + CAST(period || ' days' AS interval) < CURRENT_DATE") // start_from + period < today
+        }
+      })
+      return Promise.resolve(rents);
+    }catch (err) {
+      return Promise.reject(err);
+    }
   }
   
   static getInstance(): rentRepository{

@@ -1,19 +1,24 @@
 /*************************************************
  * @AUTHOR YONGQIAN HUANG, CREATED AT 02/09/2020
  *         Yongqian Huang, 05/09/2020, Implement payment
- *         Yongqian Huang, 11/09/2020, Send receipt message *
+ *         Yongqian Huang, 11/09/2020, Send receipt message
+ *         Yongqian Huang, 22/09/2020, Extend rent and custom error *
  *************************************************/
 
 import express,{Request, Response} from 'express';
 const router = express.Router();
 import {verifyToken} from '../helpers/authorizationHelper';
-import {BillType} from '../models/bill'
+import { BillType } from '../models/bill';
 import _Rent from '../repository/rentRepository';
 import _Bill from '../repository/billRepository';
 import _Car from '../repository/carRepository';
 import OrderValidator from '../validators/OrderValidator';
 import PaymentValidator from '../validators/PaymentValidator';
 import Message from '../helpers/messageHelper';
+import ItemNotFound from '../exceptions/ItemNotFound';
+import IncorrectItem from '../exceptions/IncorrectItem';
+import { RentStatus } from '../models/rent';
+import ExtendRentValidator from '../validators/ExtendRentValidator';
 
 //POST: api/orders/create
 router.post('/create', [OrderValidator.validate, verifyToken], async (req: Request, res: Response) => {
@@ -27,10 +32,11 @@ router.post('/create', [OrderValidator.validate, verifyToken], async (req: Reque
       }else{
         try {
             const car = await _Car.get(req.body.car_id);
-            if(!car.available) throw 'The car does not available yet';
+            if(!car.available) throw new IncorrectItem('The car does not available yet');
     
-            const feeToPay = (req.body.period*car.price + car.price*0.1).toFixed(2);
-
+            const feeToPay = (req.body.period * car.price + car.price * 0.1).toFixed(2);
+            
+            
             //Create bill
             const bill = await _Bill.create({
                 user_id: req.user.id,
@@ -58,12 +64,59 @@ router.post('/create', [OrderValidator.validate, verifyToken], async (req: Reque
       }
 });
 
+//GET: api/orders/extend/:id
+router.post('/extend/:id', [ExtendRentValidator.validate, verifyToken], async (req: Request, res: Response) => {
+    const validationErrors = req.validationError;
+    if (validationErrors && validationErrors.length > 0) {
+        res.json({
+            message: "fail",
+            errors: { validationErrors },
+        });
+    } else {
+        try {
+            if (!req.originalRent) throw new ItemNotFound('Rent not found');
+            const feeToPay = (req.body.period * req.originalRent.car.price).toFixed(2);
+            //If pass payment validator
+            if (req.body.payment_total !== feeToPay) throw new IncorrectItem('Payment amount incorrect');
+            //Update to complete
+            await _Rent.update(parseInt(req.params.id), { status: RentStatus.Completed });
+            
+            //Create bill
+            const bill = await _Bill.create({
+                user_id: req.user.id,
+                fee: feeToPay,
+                type: BillType.RentFee
+            });
+
+            //Calculate the new due date
+            let newDueDate = new Date();
+            newDueDate.setDate(req.originalRent.start_from.getDate() + req.body.period);
+            //Create rent
+            const newRent = await _Rent.create({
+                car_id: req.originalRent.car.id,
+                user_id: req.user.id,
+                start_from: newDueDate,
+                period: req.body.period,
+                bill_id: bill.id,
+                status: RentStatus.InProgress
+            });
+
+
+            res.json({ bill, newRent });
+
+        } catch (err) {
+            console.log(err);
+            res.sendStatus(404);
+        }
+    }
+})
+
 
 //GET: api/orders/:id/
 router.get('/:id/', [verifyToken], (req: Request, res: Response) => {
     _Rent.get(parseInt(req.params.id))
             .then((rent) => {
-                if(rent?.user_id != req.user.id) throw 'Not correct user';
+                if(rent?.user_id != req.user.id) throw new IncorrectItem('Incorrect user');
                 res.json({rent});
             })
             .catch((err) => {
@@ -171,7 +224,7 @@ router.post('/pay', [PaymentValidator.validate, verifyToken], async (req: Reques
             //If pass payment validator
             
             //Update bill status
-            if(!req.bill) throw 'Not fond';
+            if(!req.bill) throw new ItemNotFound('Bill not found');
             await _Bill.pay(req.bill);
 
             //Send message to user only in production environment
