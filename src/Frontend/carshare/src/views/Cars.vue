@@ -9,9 +9,10 @@
   <div>
     <Loading :key="loadingKey" />
 
-    <dir class="sub-header">
+    <div class="sub-header">
       <h1>{{ $t('carListMsg') }}</h1>
-    </dir>
+    </div>
+    
 
     <div class="row">
       <div class="filter-col">

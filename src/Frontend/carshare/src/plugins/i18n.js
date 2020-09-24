@@ -65,6 +65,7 @@ const messages = {
   cn: {
     carListMsg: "汽车列表结果",
     filter: "过滤条件",
+    Make: "品牌",
     make: "品牌",
     door: "门",
     seat: "座位",

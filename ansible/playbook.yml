@@ -48,6 +48,13 @@
         dest: "{{systemd_dir}}"
         owner: root
         group: root
+
+    - name: Restart the service
+      become: yes
+      systemd:
+        state: restarted
+        name: authserver
+
     
     - name: Ensure authentication service is running
       become: yes
@@ -64,12 +71,18 @@
         owner: root
         group: root
       
-    - name: Ensure authentication service is running
+    - name: Ensure carshare service is running
       become: yes
       systemd:
         name: carshare
         state: started
         enabled: yes
+
+    - name: Restart the service
+      become: yes
+      systemd:
+        state: restarted
+        name: carshare
 
 
 
