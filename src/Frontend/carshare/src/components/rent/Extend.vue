@@ -9,12 +9,12 @@
         <h1 class="card-header">Extend your rent</h1>
         <p>
           <b>Extend for</b>
-          <input type="number" id="day" v-model="period" name="day" min="1" />
+          <input type="number" v-model="period" name="day" min="1" />
           <b>Days</b>
         </p>
       </div>
       <div id="extend-payment">
-        <Payment v-on:payForExtend="extend" />
+        <!-- <Payment v-on:payForExtend="extend" /> -->
         <footer class="modal-footer">
           <slot name="footer">
             <h3>Payment estimate: {{(fee*this.period).toFixed(2)}}</h3>
@@ -26,13 +26,13 @@
 </template>
 <script>
 import authorizeMixin from "@/mixins/authorizeMixin";
-import Payment from "@/components/order/Payment";
+// import Payment from "@/components/order/Payment";
 
 export default {
   mixins: [authorizeMixin],
   name: "PayNow",
   components: {
-    Payment
+    // Payment
   },
   props: ["rentId", "fee"],
   data() {

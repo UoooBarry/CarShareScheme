@@ -1,5 +1,6 @@
 /***********************************************************************
- *           @AUTHOR: Bach Dao, Created AT: 15/08/2020                *
+ *           @AUTHOR: Bach Dao, Created AT: 15/08/2020
+                Yongqian Huang Make authorize mixin global 24/09/020                *
  ***********************************************************************/
 <template>
     <div>
@@ -24,11 +25,8 @@
 </template>
 
 <script>
-import authorizeMixin from "@/mixins/authorizeMixin";
-
 export default {
     name: "UserRow",
-    mixins: [authorizeMixin],
     props: ['customer'],
     methods:{
         activate() {

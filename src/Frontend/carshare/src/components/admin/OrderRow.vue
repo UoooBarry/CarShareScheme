@@ -41,7 +41,6 @@
 </template>
 
 <script>
-import authorizeMixin from "@/mixins/authorizeMixin";
 export default {
     name: 'OrderRow',
     props: ['rent', 'locations'],
@@ -50,7 +49,6 @@ export default {
             selectedLocation: ''
         }
     },
-    mixins: [authorizeMixin],
     methods:{
         returnCar(){
             this.$axios.patch(`${this.$carshare}/orders/return`, {

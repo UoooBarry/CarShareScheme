@@ -1,5 +1,6 @@
+<!-- @Author Yongqian Huang created at 24/09/2020 -->
 <template>
-  <div>
+  <div class='admin-main'>
     <div>
       <CarList v-bind:cars="this.cars"/>
     </div>
@@ -8,11 +9,9 @@
 
 <script>
 import CarList from "@/components/admin/CarList"
-import authorizeMixin from "@/mixins/authorizeMixin";
 
 export default {
     name: "AdminCars",
-    mixins: [authorizeMixin],
     components:{
         CarList
     },

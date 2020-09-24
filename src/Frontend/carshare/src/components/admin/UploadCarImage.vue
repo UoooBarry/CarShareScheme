@@ -35,9 +35,7 @@
   </div>
 </template>
 <script>
-import authorizeMixin from "@/mixins/authorizeMixin";
 export default {
-  mixins: [authorizeMixin],
   name: "uploadCarImage",
   props: ["carid"],
   data() {

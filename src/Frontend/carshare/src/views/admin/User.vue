@@ -1,8 +1,10 @@
 /***********************************************************************
- *           @AUTHOR: Bach Dao, CREATED AT: 16/08/2020                *
+ *           @AUTHOR: Bach Dao, CREATED AT: 16/08/2020
+                      Yongqian Huang add admin-main class 24/09/2020    *
+*Yongqian Huang, make authorze mixin global 24/09/2020                *
  ***********************************************************************/
 <template >
-  <div>
+  <div class='admin-main'>
     <div class="container">
       <UserList v-bind:customers="this.customers" class='user-list' v-if='this.customers.length > 0'/>
     </div>
@@ -10,7 +12,6 @@
 </template>
 
 <script>
-import authorizeMixin from "@/mixins/authorizeMixin";
 import UserList from "@/components/admin/UserList";
 
 export default {
@@ -18,7 +19,6 @@ export default {
   components: {
     UserList
   },
-  mixins: [authorizeMixin],
   data() {
     return {
       customers: []

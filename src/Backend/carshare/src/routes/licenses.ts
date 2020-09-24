@@ -14,6 +14,7 @@ const imageUpload = multer({
 })
  
 
+
 //GET /api/licenses/pending get all the pending licenses validation requests
 router.get('/pending', [verifyToken], (req: Request, res: Response) => {
   if (!req.user.admin) res.sendStatus(403); //Admin only
@@ -30,7 +31,20 @@ router.get('/pending', [verifyToken], (req: Request, res: Response) => {
 
 
 //PATCH /api/licenses/:id/accept
+router.patch('/:id/accept', [verifyToken], (req: Request, res: Response) => {
+  if (!req.user.admin) res.sendStatus(403); //Admin only
+  
+  _License.update(parseInt(req.params.id), {isValidated: true})
+    .then(() => {
+      res.json({message: 'success'})
+    })
+    .catch((err) => {
+      console.log(err);
+      res.json({ message: "fail" });
+    })
+});
 
+//POST /api/licenses/upload/:dimension
 router.post('/upload/:dimension', [verifyToken, imageUpload.single('image')], async (req: Request, res: Response) => {
   if (! await _License.get(req.user.id)) { //If user currently has no license table create one
     await _License.create({
@@ -59,7 +73,7 @@ router.post('/upload/:dimension', [verifyToken, imageUpload.single('image')], as
     return;
   }
 
-  uploadFile(req.user.id, `license/${req.params.dimension}`, req.file.path) //upload file to avatar path
+  uploadFile(req.user.id, `license/${req.params.dimension}`, req.file.path) //upload file to license path
     .then(() => {
       _License.updateImage(req.user.id);
       res.json({ message: "success" })

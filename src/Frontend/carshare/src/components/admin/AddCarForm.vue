@@ -104,12 +104,10 @@
 </template>
 
 <script>
-import authorizeMixin from "@/mixins/authorizeMixin";
 export default {
   name: "AddCarForm",
   components: {},
   props: ["locations"],
-  mixins: [authorizeMixin],
   data() {
     return {
       name: "",

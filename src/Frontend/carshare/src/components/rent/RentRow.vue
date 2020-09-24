@@ -63,12 +63,10 @@
 </template>
 
 <script>
-import authorizeMixin from "@/mixins/authorizeMixin";
 import PayNow from "./PayNow";
 import Extend from "./Extend"
 export default {
   name: "RentRow",
-  mixins: [authorizeMixin],
   components: {
     PayNow,
     Extend

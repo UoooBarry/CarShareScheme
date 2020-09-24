@@ -529,16 +529,20 @@ img {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: 100% 20%;
-  height: 230px;
+  height: 270px;
 }
 
 .sub-header h1 {
   opacity: 1;
   font-size: 52px;
-  line-height: 300px;
+  line-height: 270px;
   color: white;
   font-weight: 600;
   -webkit-transition: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   transition: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   text-transform: uppercase;
+}
+
+.admin-main{
+  min-height: 800px;
 }
