@@ -520,6 +520,12 @@ img {
   background: #a9a0a0 !important;
   border-color:  #b1bfd8 !important;
 }
+
+.carlist {
+  min-height: 800px;
+  max-width: 1500px;
+}
+
 /* Sub-header with image */
 .sub-header {
   margin-top: 0;
@@ -529,7 +535,7 @@ img {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: 100% 20%;
-  height: 230px;
+  height: 300px;
 }
 
 .sub-header h1 {

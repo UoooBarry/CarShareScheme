@@ -53,7 +53,7 @@ router.post('/create', [OrderValidator.validate, verifyToken], async (req: Reque
                 bill_id: bill.id
             });
     
-            res.json({ bill, rent });
+            res.json({ bill, rent, feeToPay });
         } catch (err) {
             console.log(err);
             res.json({

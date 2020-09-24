@@ -14,7 +14,82 @@
         </p>
       </div>
       <div id="extend-payment">
-        <Payment v-on:payForExtend="extend" />
+        <div class="card border-0">
+          <div class="card-header card-2">
+            <p class="card-text text-muted mt-md-4 mb-2" style="font-size:30px">PAYMENT METHOD</p>
+          </div>
+          <article class="card">
+            <div class="card-body p-5">
+              <div class="tab-content">
+                <div class="tab-pane fade show active">
+                  <form role="form">
+                    <div class="form-group">
+                      <label for="username">Full name (on the card)</label>
+                      <input type="text" class="form-control" name="username" placeholder required />
+                    </div>
+                    <!-- form-group.// -->
+
+                    <div class="form-group">
+                      <label for="cardNumber">Card number</label>
+                      <div class="input-group">
+                        <input
+                          type="text"
+                          class="form-control"
+                          name="cardNumber"
+                          id="cardNumberExtend"
+                          @change="creditCardCheck"
+                          placeholder
+                        />
+                        <div class="input-group-append">
+                          <span class="input-group-text text-muted">
+                            <font-awesome-icon :icon="[ 'fab', 'cc-visa' ]" id="visa-extend" />
+                            <font-awesome-icon :icon="[ 'fab', 'cc-amex' ]" id="amex-extend" />
+                            <font-awesome-icon :icon="[ 'fab', 'cc-mastercard' ]" id="master-extend" />
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- form-group.// -->
+
+                    <div class="row">
+                      <div class="col-sm-8">
+                        <div class="form-group">
+                          <label>
+                            <span class="hidden-xs">Expiration</span>
+                          </label>
+                          <div class="input-group">
+                            <input type="number" class="form-control" placeholder="MM" id="mm-extend" name />
+                            <input type="number" class="form-control" placeholder="YY" id="yy-extend" name />
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label
+                            data-toggle="tooltip"
+                            title
+                            data-original-title="3 digits code on back side of the card"
+                          >
+                            CVV
+                            <font-awesome-icon icon="question-circle"  />
+                          </label>
+                          <input type="number" class="form-control" id="cvv-extend" required />
+                        </div>
+                        <!-- form-group.// -->
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+              <!-- tab-content .// -->
+            </div>
+            <!-- card-body.// -->
+          </article>
+          <!-- card.// -->
+          <a @click="extend">
+            <CompleteOrderButton id="btn-order-extend" />
+          </a>
+        </div>
         <footer class="modal-footer">
           <slot name="footer">
             <h3>Payment estimate: {{(fee*this.period).toFixed(2)}}</h3>
@@ -26,13 +101,12 @@
 </template>
 <script>
 import authorizeMixin from "@/mixins/authorizeMixin";
-import Payment from "@/components/order/Payment";
-
+import CompleteOrderButton from "@/components/order/CompleteOrderButton"
 export default {
   mixins: [authorizeMixin],
   name: "PayNow",
   components: {
-    Payment
+    CompleteOrderButton
   },
   props: ["rentId", "fee"],
   data() {
@@ -45,9 +119,57 @@ export default {
     close() {
       this.$emit("close");
     },
-    extend(isVerified) {
-      this.isVerified = isVerified;
-      if (isVerified) {
+    creditCardCheck(event) {
+      const inputCard = event.target.value;
+      const visaRegex = /^(?:4[0-9]{12}(?:[0-9]{3})?)$/;
+      const masterRegex = /^(?:5[1-5][0-9]{2}|222[1-9]|22[3-9][0-9]|2[3-6][0-9]{2}|27[01][0-9]|2720)[0-9]{12}$/;
+      const amexRegex = /^3[47][0-9]{13}$/;
+      if (visaRegex.test(inputCard)) {
+        document.getElementById("visa-extend").style.color = "black";
+      } else if (masterRegex.test(inputCard)) {
+        document.getElementById("master-extend").style.color = "black";
+      } else if (amexRegex.test(inputCard)) {
+        document.getElementById("amex-extend").style.color = "black";
+      } else {
+        document.getElementById("visa-extend").style.color = "#6c757d";
+        document.getElementById("master-extend").style.color = "#6c757d";
+        document.getElementById("amex-extend").style.color = "#6c757d";
+      }
+    },
+    verifyCreditcard() {
+      let result = true;
+      const creditCard = document.getElementById("cardNumberExtend").value;
+      const cvv = document.getElementById("cvv-extend").value;
+      const year = document.getElementById("yy-extend").value;
+      const month = document.getElementById("mm-extend").value;
+      const creditCardRegex = /^(?:4[0-9]{12}(?:[0-9]{3})?|[25][1-7][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})$/;
+      const expireDate = new Date(`1/${month}/${year}`);
+      if (expireDate <= new Date()) {
+        this.flashMessage.error({
+          title: "Order failed",
+          message: "Credit card's expire date cannot be today or before."
+        });
+        result = false;
+      }
+
+      if (!creditCardRegex.test(creditCard)) {
+        this.flashMessage.error({
+          title: "Order failed",
+          message: "Credit card entered is not correct."
+        });
+        result = false;
+      }
+      if (cvv == null) {
+        this.flashMessage.error({
+          title: "Order failed",
+          message: "CVV cannot be empty."
+        });
+        result = false;
+      }
+      return result;
+    },
+    extend() {
+      if (this.verifyCreditcard()) {
         this.$axios
           .post(
             `${this.$carshare}/orders/extend/${this.rentId}`,
@@ -82,11 +204,7 @@ export default {
     }
   },
   mounted() {
-    // document.getElementById("btn-order").style.display = "none";
-    // document.getElementById("btn-order-extend").style.display = "inline-block";
-    // document
-    //   .getElementById("btn-order-extend")
-    //   .addEventListener("click", this.extend);
+
   }
 };
 </script>
