@@ -46,7 +46,7 @@ class carRepository implements DataRepository {
     };
     try {
       const cars = await Car.findAll({
-        where: { whereClause, seats: parseInt(word) }
+        where: whereClause
 
       });
       return Promise.resolve(cars);
