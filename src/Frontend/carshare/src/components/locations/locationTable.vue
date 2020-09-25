@@ -1,8 +1,10 @@
 <!-- @Author Yongqian Huang, created at 10/09/2020-->
 <template>
   <div class="row">
-    <div class="col-lg-auto item1" v-for="location in locations" v-bind:key="location.id">
-      <LocationRow :location="location" />
+    <div class="col-lg-auto item1">
+      <div v-for="location in locations" v-bind:key="location.id" class="location-item">
+        <LocationRow :location="location" />
+      </div>
     </div>
     <div class="col item2">
       <div id="location-map"></div>
@@ -67,11 +69,15 @@ export default {
 }
 .item1 {
   width: 400px;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
-#location-map{
-    width: 100%;
-    height: 100%;
-    background-color: grey;
+#location-map {
+  width: 100%;
+  height: 100%;
+  background-color: grey;
 }
-
+.location-item {
+  margin-bottom: 20px;
+}
 </style>

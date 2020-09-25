@@ -3,6 +3,7 @@
  * @UPDATED: YONGQIAN HUANG, 23/07/2020, INIT CREATION 
  *           Yongqian Huang, 03/09/2020, Migrate to ts*
  * * Updated Bach Dao, 03/09/2020, Get Location by ID *
+ *   Updated Bach Dao, 26/09/2020, return all locations base on user location *
  * *******************************************************/
 
 import express,{Request, Response} from 'express';
@@ -41,7 +42,7 @@ router.get('/:id', (req: Request, res:Response) => {
 
   //GET: /api/locations/nearest
 router.get('/location/nearest', (req: Request, res: Response) => {
-    _Location.getNearestLocation(<string>req.query.from)
+    _Location.getNearestAllLocations(<string>req.query.from)
                 .then((locations) => {
                     res.json({
                         locations
