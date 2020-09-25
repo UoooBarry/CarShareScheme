@@ -15,7 +15,7 @@
           </div>
         </div>
         <hr class="my-3" />
-        <div class="chatarea-cover">
+        <div class="chatarea-cover" id="chatarea-cover">
           <div id="chatarea"></div>
         </div>
 
@@ -50,20 +50,21 @@
 
 /* Add styles to the form container */
 .form-container {
-  width: 300px;
+  width: 350px;
   padding: 10px;
   background-color: white;
 }
 .chatarea-cover {
-  max-height: 200px;
-  overflow-y: scroll;
+  max-height: 300px;
+  overflow-y: auto; 
 }
 #chatarea {
   padding-right: 10px;
   width: 300px;
-  height: 200px;
+  height: 300px;
   display: table-cell;
   vertical-align: bottom;
+
 }
 /* Full-width textarea */
 .form-container input {
@@ -120,6 +121,6 @@ export default {
     closeForm() {
       document.getElementById("myForm").style.display = "none";
     }
-  }
+  },
 };
 </script>

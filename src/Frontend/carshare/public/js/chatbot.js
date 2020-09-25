@@ -135,14 +135,25 @@ function addChat(input, product) {
   userDiv.className = "userchat";
   userDiv.innerHTML = `You <span class="user-response">${input}</span> <p style="margin-top:15px">${dateTime}</p>`;
   mainDiv.appendChild(userDiv);
-
   let botDiv = document.createElement("div");
   botDiv.className = "botchat";
   botDiv.innerHTML = `<span class="bot-response">${product}</span> Chatbot <p style="margin-top:15px">${dateTime}</p>`;
   mainDiv.appendChild(botDiv);
+  updateScroll();
+
   speak(product);
 }
+var scrolled = false;
+function updateScroll() {
+  if (!scrolled) {
+    var element = document.getElementById("chatarea-cover");
+    element.scrollTop = element.scrollHeight;
+  }
+}
 
+$("#chatarea-cover").on("scroll", function() {
+  scrolled = true;
+});
 const synth = window.speechSynthesis;
 let voices = synth.getVoices();
 
