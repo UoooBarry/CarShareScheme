@@ -9,90 +9,19 @@
         <h1 class="card-header">Extend your rent</h1>
         <p>
           <b>Extend for</b>
-          <input type="number" id="day" v-model="period" name="day" min="1" />
+          <input type="number" v-model="period" name="day" min="1" @change='onPeriodChange'/>
           <b>Days</b>
         </p>
+        <input type="checkbox" class="form-check-input" @change='agreeOnCharge'>
+        <label class="form-check-label">Agree on continue charge from my previous payment of this rent.</label>
+        <br>
+        <button class="btn btn-outline-secondary btn-lg" type="button" ref='confirm' @click='extend' disabled>Confirm</button>
       </div>
-      <div id="extend-payment">
-        <div class="card border-0">
-          <div class="card-header card-2">
-            <p class="card-text text-muted mt-md-4 mb-2" style="font-size:30px">PAYMENT METHOD</p>
-          </div>
-          <article class="card">
-            <div class="card-body p-5">
-              <div class="tab-content">
-                <div class="tab-pane fade show active">
-                  <form role="form">
-                    <div class="form-group">
-                      <label for="username">Full name (on the card)</label>
-                      <input type="text" class="form-control" name="username" placeholder required />
-                    </div>
-                    <!-- form-group.// -->
-
-                    <div class="form-group">
-                      <label for="cardNumber">Card number</label>
-                      <div class="input-group">
-                        <input
-                          type="text"
-                          class="form-control"
-                          name="cardNumber"
-                          id="cardNumberExtend"
-                          @change="creditCardCheck"
-                          placeholder
-                        />
-                        <div class="input-group-append">
-                          <span class="input-group-text text-muted">
-                            <font-awesome-icon :icon="[ 'fab', 'cc-visa' ]" id="visa-extend" />
-                            <font-awesome-icon :icon="[ 'fab', 'cc-amex' ]" id="amex-extend" />
-                            <font-awesome-icon :icon="[ 'fab', 'cc-mastercard' ]" id="master-extend" />
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                    <!-- form-group.// -->
-
-                    <div class="row">
-                      <div class="col-sm-8">
-                        <div class="form-group">
-                          <label>
-                            <span class="hidden-xs">Expiration</span>
-                          </label>
-                          <div class="input-group">
-                            <input type="number" class="form-control" placeholder="MM" id="mm-extend" name />
-                            <input type="number" class="form-control" placeholder="YY" id="yy-extend" name />
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-sm-4">
-                        <div class="form-group">
-                          <label
-                            data-toggle="tooltip"
-                            title
-                            data-original-title="3 digits code on back side of the card"
-                          >
-                            CVV
-                            <font-awesome-icon icon="question-circle"  />
-                          </label>
-                          <input type="number" class="form-control" id="cvv-extend" required />
-                        </div>
-                        <!-- form-group.// -->
-                      </div>
-                    </div>
-                  </form>
-                </div>
-              </div>
-              <!-- tab-content .// -->
-            </div>
-            <!-- card-body.// -->
-          </article>
-          <!-- card.// -->
-          <a @click="extend">
-            <CompleteOrderButton id="btn-order-extend" />
-          </a>
-        </div>
+      <div>
+        <!-- <Payment v-on:payForExtend="extend" /> -->
         <footer class="modal-footer">
           <slot name="footer">
-            <h3>Payment estimate: {{(fee*this.period).toFixed(2)}}</h3>
+            <h3>Payment estimate: {{total}}</h3>
           </slot>
         </footer>
       </div>
@@ -101,21 +30,29 @@
 </template>
 <script>
 import authorizeMixin from "@/mixins/authorizeMixin";
-import CompleteOrderButton from "@/components/order/CompleteOrderButton"
+// import Payment from "@/components/order/Payment";
+
 export default {
   mixins: [authorizeMixin],
   name: "PayNow",
   components: {
-    CompleteOrderButton
+    // Payment
   },
   props: ["rentId", "fee"],
   data() {
     return {
       period: 1,
-      isVerified: false
+      isVerified: false,
+      total: 0
     };
   },
   methods: {
+    onPeriodChange(){
+      this.total = (this.fee*this.period).toFixed(2);
+    },
+    agreeOnCharge(){
+      this.$refs.confirm.disabled = !this.$refs.confirm.disabled;
+    },
     close() {
       this.$emit("close");
     },
@@ -175,25 +112,24 @@ export default {
             `${this.$carshare}/orders/extend/${this.rentId}`,
             {
               period: this.period,
-              payment_total: (this.fee * this.period).toFixed(2)
+              payment_total: this.total
             },
             { headers: this.header }
           )
-          .then(res => {
-            if (res.data.message == "fail") {
-              this.flashMessage.error({
-                title: "Order failed",
-                message: res.data.errors
-              });
-
-              return;
-            }
-
+          .then(() => {
             this.flashMessage.success({
               title: "Order confirmed!",
               message: "Order confirmed successfully!"
             });
-          });
+
+            this.$router.go();
+          })
+          .catch(() => {
+              this.flashMessage.error({
+                title: "Order failed",
+                message: "Incorrect Payment"
+              });
+            })
       } else {
         this.flashMessage.error({
           title: "Order failed!",
@@ -203,8 +139,8 @@ export default {
       }
     }
   },
-  mounted() {
-
+  created(){
+    this.total = (this.fee*this.period).toFixed(2);
   }
 };
 </script>

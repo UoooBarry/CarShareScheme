@@ -10,7 +10,7 @@ import Sequelize from 'sequelize';
 const Op = Sequelize.Op;
 import DataRepository from './dataRepository';
 
-class carRepository implements DataRepository{
+class carRepository implements DataRepository {
   private static instance?: carRepository;
 
   async getAll() {
@@ -39,11 +39,15 @@ class carRepository implements DataRepository{
         Sequelize.where(Sequelize.fn("LOWER", Sequelize.col("model")), {
           [Op.like]: `%${search}%`,
         }),
+        Sequelize.where(Sequelize.fn("LOWER", Sequelize.col("gear")), {
+          [Op.like]: `%${search}%`,
+        })
       ],
     };
     try {
       const cars = await Car.findAll({
-        where: whereClause,
+        where: { whereClause, seats: parseInt(word) }
+
       });
       return Promise.resolve(cars);
     } catch (err) {
@@ -53,13 +57,13 @@ class carRepository implements DataRepository{
 
   async get(id: number) {
     try {
-      const car:any = await Car.findOne({ where: { id: id } });
+      const car: any = await Car.findOne({ where: { id: id } });
       //Update the view number by 1
-      if(car){
+      if (car) {
         car.update({
           viewed: (car.viewed += 1),
         });
-      }else{
+      } else {
         throw 'Car not found';
       }
       return Promise.resolve(car);
@@ -70,17 +74,17 @@ class carRepository implements DataRepository{
 
   async getMostViewed() {
     try {
-      const cars = await Car.findAll({ 
+      const cars = await Car.findAll({
         attributes: ["id"],
         order: [["viewed", "DESC"]],
-        limit: 3 
+        limit: 3
       });
 
       //Map cars with id, return array of id that is popular
       const carsArr = cars.map((car: any) => {
         return car.id;
       })
-      
+
       return Promise.resolve(carsArr);
     } catch (err) {
       return Promise.reject(err);
@@ -127,9 +131,9 @@ class carRepository implements DataRepository{
     }
   }
 
-  async deactivate(id: number){
+  async deactivate(id: number) {
     try {
-      const car = await Car.findOne({where: {id: id}});
+      const car = await Car.findOne({ where: { id: id } });
       await car?.update({
         available: false
       })
@@ -139,10 +143,10 @@ class carRepository implements DataRepository{
     }
   }
 
-  static getInstance(): carRepository{
-    if (!carRepository.instance) 
+  static getInstance(): carRepository {
+    if (!carRepository.instance)
       carRepository.instance = new carRepository()
-    
+
     return carRepository.instance;
   }
 }

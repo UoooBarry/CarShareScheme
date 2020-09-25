@@ -19,10 +19,8 @@
 </template>
 
 <script>
-import authorizeMixin from "@/mixins/authorizeMixin";
 export default {
   name: "ValidationUploader",
-  mixins: [authorizeMixin],
   props: ['dimension','customer_id'],
   data(){
     return{

@@ -3,7 +3,8 @@
 *          Shuyuan Zhang, Updated at: 03/09/2020                       *
 *           Bach Dao, updated at AT: 04/09/2020                        *
 *   Yongqian Huang updated at: 09/09/2020 Add payment validation       *
-*Bach Dao updated at 13/09/2020 fix button payment validation          *
+*Bach Dao updated at 13/09/2020 fix button payment validation
+*   Yongqian Huang updated at: 25/09/2020 Fix unique id issue          *
  ***********************************************************************/
 <template>
   <div class="card border-0">
@@ -47,7 +48,7 @@
                     type="text"
                     class="form-control"
                     name="cardNumber"
-                    id="cardNumber"
+                    v-model='card'
                     @change="creditCardCheck"
                     placeholder
                   />
@@ -69,8 +70,8 @@
                       <span class="hidden-xs">Expiration</span>
                     </label>
                     <div class="input-group">
-                      <input type="number" class="form-control" placeholder="MM" id="mm" name />
-                      <input type="number" class="form-control" placeholder="YY" id="yy" name />
+                      <input type="number" class="form-control" placeholder="MM" v-model="mm" name />
+                      <input type="number" class="form-control" placeholder="YY" v-model="yy" name />
                     </div>
                   </div>
                 </div>
@@ -84,7 +85,7 @@
                       CVV
                       <font-awesome-icon icon="question-circle" id="tooltip-target-1" />
                     </label>
-                    <input type="number" class="form-control" id="cvv" required />
+                    <input type="number" class="form-control" v-model="cvv" required />
                   </div>
                   <!-- form-group.// -->
                 </div>
@@ -145,16 +146,19 @@
 
 <script>
 import CompleteOrderButton from "@/components/order/CompleteOrderButton";
-import authorizeMixin from "@/mixins/authorizeMixin";
 export default {
   name: "Payment",
   props: ["billId", "rentId", "fee"],
-  mixins: [authorizeMixin],
   components: {
     CompleteOrderButton
   },
   data() {
-    return {};
+    return {
+      card: '',
+      yy: '',
+      mm: '',
+      cvv: ''
+    };
   },
   methods: {
     creditCardCheck(event){
@@ -176,10 +180,10 @@ export default {
     },
     verifyCreditcard(){
       let result = true;
-      const creditCard = document.getElementById('cardNumber').value;
-      const cvv = document.getElementById('cvv').value;
-      const year = document.getElementById('yy').value;
-      const month = document.getElementById('mm').value;
+      const creditCard = this.card;
+      const cvv = this.cvv;
+      const year = this.yy;
+      const month = this.mm;
       const creditCardRegex = /^(?:4[0-9]{12}(?:[0-9]{3})?|[25][1-7][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})$/;
       const expireDate = new Date(`1/${month}/${year}`);
       if(expireDate <= new Date()){
@@ -214,7 +218,7 @@ export default {
     },
     pay(){
       //Only pass when validation pass
-      if(this.verifyCreditcard()){
+      if(this.verifyCreditcard()){ 
         this.$axios.post(`${this.$carshare}/orders/pay`,{
           bill_id: this.billId,
           total: this.fee //Not implment with pay api
@@ -234,10 +238,10 @@ export default {
               title: "Order confrimed!",
               message: "Order payed successfully!"
             });
-            const order_button = document.getElementById('order-button');
-            order_button.classList.add('animate');
-            order_button.disabled = true;
-             setTimeout(() => {
+            // const order_button = document.getElementById('order-button');
+            // order_button.classList.add('animate');
+            // order_button.disabled = true;
+            setTimeout(() => {
                this.$router.push({
                 name: "Receipt",
                 params:{ id: this.rentId }

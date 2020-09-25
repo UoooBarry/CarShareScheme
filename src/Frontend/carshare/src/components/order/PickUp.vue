@@ -30,11 +30,8 @@
 </template>
 
 <script>
-import authorizeMixin from '@/mixins/authorizeMixin';
 export default {
   name: "Pickup",
-  components: {},
-  mixins: [authorizeMixin],
   props: ["location", "period", "start_from"],
   data() {
     return {};
@@ -64,7 +61,7 @@ export default {
 
           this.$emit('createRent', res.data.rent);
           this.$emit('createBill', res.data.bill);
-          this.$emit('updateFee', res.data.feeToPay);
+          this.$emit('updateFee', res.data.bill.fee);
           this.$emit('nextStep');
         })
     },
