@@ -50,80 +50,44 @@ class locationRepository implements DataRepository {
         try {
             if (!from) throw new ItemNotFound('No from');
             let locations = await Location.findAll({});
-            for await (const location of locations) {
+            for await (const location of locations) { //Set distance to locations
                 const result = await calculateDistance(from, location.address);
                 const distance = result.distance.value;
                 location.setDataValue('distance', distance);
             }
             
-            //selection sort
-            const length = locations.length;
-            let min;
-            for (let i = 0; i < length; i++){
-                min = i;
-                //Check the rest of the array, any smaller?
-                for (let j = i + 1; j < length; j++){
-                    if (locations[j].getDataValue('distance') < locations[min].getDataValue('distance')) {
-                        min = j;
-                    }
-                }
-
-                //Swap if not in position
-                if (i !== min) {
-                    this.swap(locations, i, min);
-                }
-            }
-            // for (let i = 0; i < n - 1; i++) {
-            //     for (let j = 0; j < n - i - 1; j++) {
-            //         if (allDistance[j] > allDistance[j + 1]) {//track array by the distance value
-            //             // swap both arr[j+1] and arr[i] (2 adjacent elements)  
-            //             let temp: number = allDistance[j];
-            //             let newLocation: any = sortedLocation[j];
-            //             allDistance[j] = allDistance[j + 1];
-            //             sortedLocation[j] = sortedLocation[j + 1]
-            //             allDistance[j + 1] = temp;
-            //             sortedLocation[j + 1] = newLocation;
-            //         }
-            //     }
-            // }
+            locations = this.sortByDistance(locations); //Sort the return locations
             return Promise.resolve(locations);
         } catch (err) {
             return Promise.reject(err);
         }
     }
 
+    private sortByDistance(locations: Location[]){
+            //selection sort
+        const length = locations.length;
+        let min;
+        for (let i = 0; i < length; i++) {
+            min = i;
+            //Check the rest of the array, any smaller?
+            for (let j = i + 1; j < length; j++) {
+                if (locations[j].getDataValue('distance') < locations[min].getDataValue('distance')) {
+                    min = j;
+                }
+            }
+
+            //Swap if not in position
+            if (i !== min) {
+                this.swap(locations, i, min);
+            }
+        }
+        return locations;
+    }
+
     private swap(items: Location[], i:number, j:number) {
         const temp = items[i];
         items[i] = items[j];
         items[j] = temp;
-    }
-
-    async getNearestLocation(from: string | undefined) {
-        try {
-            if (!from) throw 'No from';
-            let validLocation = [];
-            const locations = await Location.findAll({});
-            //Record the last element to sort the array
-            let lowest = this.maximumRange;
-            for await (const location of locations) {
-                const result = await calculateDistance(from, location.address);
-                const distance = result.distance.value;
-                location.setDataValue('distance', distance);
-
-                //Default sort by distance
-                if (distance <= this.maximumRange) {
-                    if (distance < lowest) {
-                        lowest = distance;
-                        validLocation.unshift(location);
-                    } else {
-                        validLocation.push(location);
-                    }
-                }
-            }
-            return Promise.resolve(validLocation);
-        } catch (err) {
-            return Promise.reject(err);
-        }
     }
 
     async getAllValidateCars(from: string, sort: string | undefined, order: string | undefined) {
@@ -143,22 +107,17 @@ class locationRepository implements DataRepository {
                     [Car, sort, order]
                 ]
             });
-            //Record the last element to sort the array
-            let lowest = this.maximumRange;
             for await (const location of locations) {
                 const result = await calculateDistance(from, location.address);
                 const distance = result.distance.value;
-                //Default sort by distance
                 if (distance <= this.maximumRange) {
-                    if (distance < lowest) {
-                        lowest = distance;
-                        validLocation.unshift(location);
-                    } else {
-                        validLocation.push(location);
-                    }
+                    location.setDataValue('distance', distance);
+                    validLocation.push(location);
                 }
             }
 
+            //Default sort by distance
+            validLocation = this.sortByDistance(validLocation);
             return Promise.resolve(validLocation);
 
         } catch (error) {
