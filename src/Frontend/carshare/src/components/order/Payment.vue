@@ -238,9 +238,9 @@ export default {
               title: "Order confrimed!",
               message: "Order payed successfully!"
             });
-            // const order_button = document.getElementById('order-button');
-            // order_button.classList.add('animate');
-            // order_button.disabled = true;
+            const order_button = document.getElementById('btn-order');
+            order_button.classList.add('animate');
+            order_button.disabled = true;
             setTimeout(() => {
                this.$router.push({
                 name: "Receipt",

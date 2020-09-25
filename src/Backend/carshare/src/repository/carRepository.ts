@@ -1,7 +1,8 @@
 /******************************************************
  * @AUTHOR YONGQIAN HUANG, 19/08/2020, CAR SORT LOGIC *
  * updated in 27/09/2020 Bach Dao, get all cars/ car by id *
- * updated in 03/09/2020 migrate to typescript       *
+ * updated in 03/09/2020 migrate to typescript       
+ * updated in 25/09/2020 filter helpers*
  ******************************************************/
 
 import Car from '../models/car';
@@ -50,6 +51,15 @@ class carRepository implements DataRepository {
 
       });
       return Promise.resolve(cars);
+    } catch (err) {
+      return Promise.reject(err);
+    }
+  }
+
+  async getBySeats(seat: number) {
+    try {
+      const car: any = await Car.findAll({ where: { seats: seat } });
+      return Promise.resolve(car);
     } catch (err) {
       return Promise.reject(err);
     }

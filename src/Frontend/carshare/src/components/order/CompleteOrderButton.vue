@@ -2,28 +2,25 @@
  *           @AUTHOR: Bach Dao, CREATED AT: 26/08/2020                *
  ***********************************************************************/
 <template>
-
-    <button class="order" id='order-button'>
-      <span class="default">Complete Order</span>
-      <span class="success">
-        Order Placed
-        <svg viewBox="0 0 12 10">
-          <polyline points="1.5 6 4.5 9 10.5 1" />
-        </svg>
-      </span>
-      <div class="box"></div>
-      <div class="truck">
-        <div class="back"></div>
-        <div class="front">
-          <div class="window"></div>
-        </div>
-        <div class="light top"></div>
-        <div class="light bottom"></div>
+  <button class="order" id="order-button">
+    <span class="default">Complete Order</span>
+    <span class="success">
+      Order Placed
+      <svg viewBox="0 0 12 10">
+        <polyline points="1.5 6 4.5 9 10.5 1" />
+      </svg>
+    </span>
+    <div class="box"></div>
+    <div class="truck">
+      <div class="back"></div>
+      <div class="front">
+        <div class="window"></div>
       </div>
-      <div class="lines"></div>
-    </button>
-  
-
+      <div class="light top"></div>
+      <div class="light bottom"></div>
+    </div>
+    <div class="lines"></div>
+  </button>
 </template>
 
 <script>
@@ -33,9 +30,7 @@ export default {
   data() {
     return {};
   },
-  mounted() {
-   
-  }
+  mounted() {}
 };
 </script>
 
@@ -55,7 +50,6 @@ export default {
 }
 
 .order {
-
   appearance: none;
   border: 0;
   background-color: black !important;

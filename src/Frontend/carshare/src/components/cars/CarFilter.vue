@@ -1,3 +1,6 @@
+/***********************************************************************
+ *           @AUTHOR: Bach Dao, CREATED AT: 25/09/2020                *
+ ***********************************************************************/
 <template>
   <div class="wrapper">
     <h3>{{ $t('filter') }}:</h3>
@@ -12,43 +15,43 @@
           <li>
             <form @submit.prevent="search">
               <input type="hidden" v-model="searchItem" />
-              <button type="submit" class="carFilterItem" v-on:click="filter('audi')">Audi</button>
+              <button type="submit" class="carFilterItem" v-on:click="filterWord('audi')">Audi</button>
             </form>
           </li>
           <li>
             <form @submit.prevent="search">
               <input type="hidden" v-model="searchItem" />
-              <button type="submit" class="carFilterItem" v-on:click="filter('BMW')">BMW</button>
+              <button type="submit" class="carFilterItem" v-on:click="filterWord('BMW')">BMW</button>
             </form>
           </li>
           <li>
             <form @submit.prevent="search">
               <input type="hidden" v-model="searchItem" />
-              <button type="submit" class="carFilterItem" v-on:click="filter('Ferrari')">Ferrari</button>
+              <button type="submit" class="carFilterItem" v-on:click="filterWord('Ferrari')">Ferrari</button>
             </form>
           </li>
           <li>
             <form @submit.prevent="search">
               <input type="hidden" v-model="searchItem" />
-              <button type="submit" class="carFilterItem" v-on:click="filter('Ford')">Ford</button>
+              <button type="submit" class="carFilterItem" v-on:click="filterWord('Ford')">Ford</button>
             </form>
           </li>
           <li>
             <form @submit.prevent="search">
               <input type="hidden" v-model="searchItem" />
-              <button type="submit" class="carFilterItem" v-on:click="filter('kia')">KIA</button>
+              <button type="submit" class="carFilterItem" v-on:click="filterWord('kia')">KIA</button>
             </form>
           </li>
           <li>
             <form @submit.prevent="search">
               <input type="hidden" v-model="searchItem" />
-              <button type="submit" class="carFilterItem" v-on:click="filter('holden')">Holden</button>
+              <button type="submit" class="carFilterItem" v-on:click="filterWord('holden')">Holden</button>
             </form>
           </li>
           <li>
             <form @submit.prevent="search">
               <input type="hidden" v-model="searchItem" />
-              <button type="submit" class="carFilterItem" v-on:click="filter('nissan')">Nissan</button>
+              <button type="submit" class="carFilterItem" v-on:click="filterWord('nissan')">Nissan</button>
             </form>
           </li>
           <li>
@@ -57,14 +60,14 @@
               <button
                 type="submit"
                 class="carFilterItem"
-                v-on:click="filter('lamborghini')"
+                v-on:click="filterWord('lamborghini')"
               >Lamborghini</button>
             </form>
           </li>
           <li>
             <form @submit.prevent="search">
               <input type="hidden" v-model="searchItem" />
-              <button type="submit" class="carFilterItem" v-on:click="filter('isuzu')">ISUZU</button>
+              <button type="submit" class="carFilterItem" v-on:click="filterWord('isuzu')">ISUZU</button>
             </form>
           </li>
           <li>
@@ -73,14 +76,14 @@
               <button
                 type="submit"
                 class="carFilterItem"
-                v-on:click="filter('range rover')"
+                v-on:click="filterWord('range rover')"
               >Range Rover</button>
             </form>
           </li>
           <li>
             <form @submit.prevent="search">
               <input type="hidden" v-model="searchItem" />
-              <button type="submit" class="carFilterItem" v-on:click="filter('toyota')">Toyota</button>
+              <button type="submit" class="carFilterItem" v-on:click="filterWord('toyota')">Toyota</button>
             </form>
           </li>
         </ul>
@@ -93,27 +96,27 @@
         </label>
         <ul>
           <li>
-            <form @submit.prevent="search">
+            <form @submit.prevent="filterSeat">
               <input type="hidden" v-model="searchItem" />
-              <button type="submit" class="carFilterItem" v-on:click="filter('7')">7</button>
+              <button type="submit" class="carFilterItem" v-on:click="filterNumber(7)">7</button>
             </form>
           </li>
           <li>
-            <form @submit.prevent="search">
+            <form @submit.prevent="filterSeat">
               <input type="hidden" v-model="searchItem" />
-              <button type="submit" class="carFilterItem" v-on:click="filter('5')">5</button>
+              <button type="submit" class="carFilterItem" v-on:click="filterNumber(5)">5</button>
             </form>
           </li>
           <li>
-            <form @submit.prevent="search">
+            <form @submit.prevent="filterSeat">
               <input type="hidden" v-model="searchItem" />
-              <button type="submit" class="carFilterItem" v-on:click="filter('4')">4</button>
+              <button type="submit" class="carFilterItem" v-on:click="filterNumber(4)">4</button>
             </form>
           </li>
           <li>
-            <form @submit.prevent="search">
+            <form @submit.prevent="filterSeat">
               <input type="hidden" v-model="searchItem" />
-              <button type="submit" class="carFilterItem" v-on:click="filter('2')">2</button>
+              <button type="submit" class="carFilterItem" v-on:click="filterNumber(2)">2</button>
             </form>
           </li>
         </ul>
@@ -129,13 +132,17 @@
           <li>
             <form @submit.prevent="search">
               <input type="hidden" v-model="searchItem" />
-              <button type="submit" class="carFilterItem" v-on:click="filter('automatic')">Automatic</button>
+              <button
+                type="submit"
+                class="carFilterItem"
+                v-on:click="filterWord('automatic')"
+              >Automatic</button>
             </form>
           </li>
           <li>
             <form @submit.prevent="search">
               <input type="hidden" v-model="searchItem" />
-              <button type="submit" class="carFilterItem" v-on:click="filter('manual')">Manual</button>
+              <button type="submit" class="carFilterItem" v-on:click="filterWord('manual')">Manual</button>
             </form>
           </li>
         </ul>
@@ -153,8 +160,12 @@ export default {
     };
   },
   methods: {
-    filter(carName) {
+    filterWord(carName) {
       this.searchItem = carName;
+      this.update();
+    },
+    filterNumber(seat) {
+      this.searchItem = seat;
       this.update();
     }
   }
