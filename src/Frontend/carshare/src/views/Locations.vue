@@ -42,7 +42,7 @@ export default {
           //Get the first result as formatted_address
           this.address = res.data.results[0].formatted_address;
           this.$axios
-            .get(`${this.$carshare}/locations/location/nearest`, {
+            .get(`${this.$carshare}/locations//list/nearest`, {
               params: {
                 from: this.address
               }

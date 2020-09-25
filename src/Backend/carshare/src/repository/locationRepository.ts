@@ -1,13 +1,15 @@
 /**************************
  * @AUTHOR YONGQIAN HUANG
  * Updated in 03/09/2020 migrate to typescript *
- * Updated in 03/09/2020 Bach Dao get location by ID*
+ * Updated in 03/09/2020 Bach Dao add get location by ID*
  * Updated in 26/09/2020 Bach Dao return all locations base on user location*
+ * Updated in 26/09/2020 Yongqian Huang return all locations optimized sorting*
  **************************/
 import Location from '../models/location';
 import Car from '../models/car';
 import { calculateDistance } from '../helpers/distanceHelper';
 import DataRepository from './dataRepository';
+import ItemNotFound from '../exceptions/ItemNotFound';
 
 class locationRepository implements DataRepository {
     maximumRange: number;
@@ -46,38 +48,56 @@ class locationRepository implements DataRepository {
 
     async getNearestAllLocations(from: string | undefined) {
         try {
-            if (!from) throw 'No from';
-            let sortedLocation = []; //array to be sorted
-            let allDistance = []; //distance array to keep track with location array
-            const locations = await Location.findAll({});
+            if (!from) throw new ItemNotFound('No from');
+            let locations = await Location.findAll({});
             for await (const location of locations) {
                 const result = await calculateDistance(from, location.address);
                 const distance = result.distance.value;
                 location.setDataValue('distance', distance);
-                //initialize array with all return location
-                allDistance.push(distance);
-                sortedLocation.push(location); 
             }
-            //sort location array base on its distance to user location applying bubble sort algorithm
-            let n = allDistance.length;
-            for (let i = 0; i < n - 1; i++) {
-                for (let j = 0; j < n - i - 1; j++) {
-                    if (allDistance[j] > allDistance[j + 1]) {//track array by the distance value
-                        // swap both arr[j+1] and arr[i] (2 adjacent elements)  
-                        let temp: number = allDistance[j];
-                        let newLocation: any = sortedLocation[j];
-                        allDistance[j] = allDistance[j + 1];
-                        sortedLocation[j] = sortedLocation[j + 1]
-                        allDistance[j + 1] = temp;
-                        sortedLocation[j + 1] = newLocation;
+            
+            //selection sort
+            const length = locations.length;
+            let min;
+            for (let i = 0; i < length; i++){
+                min = i;
+                //Check the rest of the array, any smaller?
+                for (let j = i + 1; j < length; j++){
+                    if (locations[j].getDataValue('distance') < locations[min].getDataValue('distance')) {
+                        min = j;
                     }
                 }
+
+                //Swap if not in position
+                if (i !== min) {
+                    this.swap(locations, i, min);
+                }
             }
-            return Promise.resolve(sortedLocation);
+            // for (let i = 0; i < n - 1; i++) {
+            //     for (let j = 0; j < n - i - 1; j++) {
+            //         if (allDistance[j] > allDistance[j + 1]) {//track array by the distance value
+            //             // swap both arr[j+1] and arr[i] (2 adjacent elements)  
+            //             let temp: number = allDistance[j];
+            //             let newLocation: any = sortedLocation[j];
+            //             allDistance[j] = allDistance[j + 1];
+            //             sortedLocation[j] = sortedLocation[j + 1]
+            //             allDistance[j + 1] = temp;
+            //             sortedLocation[j + 1] = newLocation;
+            //         }
+            //     }
+            // }
+            return Promise.resolve(locations);
         } catch (err) {
             return Promise.reject(err);
         }
     }
+
+    private swap(items: Location[], i:number, j:number) {
+        const temp = items[i];
+        items[i] = items[j];
+        items[j] = temp;
+    }
+
     async getNearestLocation(from: string | undefined) {
         try {
             if (!from) throw 'No from';
