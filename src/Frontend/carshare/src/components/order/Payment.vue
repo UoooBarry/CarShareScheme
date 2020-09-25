@@ -218,7 +218,7 @@ export default {
     },
     pay(){
       //Only pass when validation pass
-      if(this.verifyCreditcard()){
+      if(this.verifyCreditcard()){ 
         this.$axios.post(`${this.$carshare}/orders/pay`,{
           bill_id: this.billId,
           total: this.fee //Not implment with pay api
@@ -238,10 +238,10 @@ export default {
               title: "Order confrimed!",
               message: "Order payed successfully!"
             });
-            const order_button = document.getElementById('order-button');
-            order_button.classList.add('animate');
-            order_button.disabled = true;
-             setTimeout(() => {
+            // const order_button = document.getElementById('order-button');
+            // order_button.classList.add('animate');
+            // order_button.disabled = true;
+            setTimeout(() => {
                this.$router.push({
                 name: "Receipt",
                 params:{ id: this.rentId }

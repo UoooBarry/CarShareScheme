@@ -1,8 +1,9 @@
 /***********************************************************************
- *           @AUTHOR: Bach Dao, Created AT: 28/08/2020                *
+ *           @AUTHOR: Bach Dao, Created AT: 28/08/2020
+*      Yongqian Huang updated at 25/09/2020  Fixed router              *
  ***********************************************************************/
 <template>
-  <div class="product-content">
+  <div class="product-content" v-if="car">
     <div id="new-tab"></div>
     <div class="intro">
       <h3 class="title">{{car.brand}}</h3>
@@ -89,7 +90,7 @@
         <span class="daily">/day</span>
       </div>
       <div class="col price" style="margin-left:-30px">
-        <router-link class="button" :to="{name: 'Checkout', params:{ id: car.id}}">Check out</router-link>
+        <router-link class="button" :to="{name: 'Checkout', params:{ id: car.id }}">Check out</router-link>
         <router-link class="ip-checkout" :to="{name: 'Checkout', params:{ id: car.id}}">
           <font-awesome-icon icon="shopping-cart" />
         </router-link>
@@ -102,7 +103,7 @@
 export default {
   name: "CarContent",
   props: ["car"],
-  methods: {}
+  methods: {},
 };
 </script>
 

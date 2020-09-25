@@ -9,15 +9,15 @@
         <h1 class="card-header">Extend your rent</h1>
         <p>
           <b>Extend for</b>
-          <input type="number" v-model="period" name="day" min="1" />
+          <input type="number" v-model="period" name="day" min="1" @change='onPeriodChange'/>
           <b>Days</b>
         </p>
         <input type="checkbox" class="form-check-input" @change='agreeOnCharge'>
         <label class="form-check-label">Agree on continue charge from my previous payment of this rent.</label>
         <br>
-        <button class="btn btn-outline-secondary btn-lg" type="button" ref='confirm' disabled>Confirm</button>
+        <button class="btn btn-outline-secondary btn-lg" type="button" ref='confirm' @click='extend' disabled>Confirm</button>
       </div>
-      <div id="extend-payment">
+      <div>
         <!-- <Payment v-on:payForExtend="extend" /> -->
         <footer class="modal-footer">
           <slot name="footer">
@@ -47,6 +47,9 @@ export default {
     };
   },
   methods: {
+    onPeriodChange(){
+      this.total = (this.fee*this.period).toFixed(2);
+    },
     agreeOnCharge(){
       this.$refs.confirm.disabled = !this.$refs.confirm.disabled;
     },
@@ -61,25 +64,24 @@ export default {
             `${this.$carshare}/orders/extend/${this.rentId}`,
             {
               period: this.period,
-              payment_total: (this.fee * this.period).toFixed(2)
+              payment_total: this.total
             },
             { headers: this.header }
           )
-          .then(res => {
-            if (res.data.message == "fail") {
-              this.flashMessage.error({
-                title: "Order failed",
-                message: res.data.errors
-              });
-
-              return;
-            }
-
+          .then(() => {
             this.flashMessage.success({
               title: "Order confirmed!",
               message: "Order confirmed successfully!"
             });
-          });
+
+            this.$router.go();
+          })
+          .catch(() => {
+              this.flashMessage.error({
+                title: "Order failed",
+                message: "Incorrect Payment"
+              });
+            })
       } else {
         this.flashMessage.error({
           title: "Order failed!",

@@ -73,7 +73,7 @@ router.post('/extend/:id', [ExtendRentValidator.validate, verifyToken], async (r
     if (validationErrors && validationErrors.length > 0) {
         res.json({
             message: "fail",
-            errors: { validationErrors },
+            errors: validationErrors,
         });
     } else {
         try {
@@ -81,6 +81,7 @@ router.post('/extend/:id', [ExtendRentValidator.validate, verifyToken], async (r
             const feeToPay = (req.body.period * req.originalRent.car.price).toFixed(2);
             //If pass payment validator
             if (req.body.payment_total !== feeToPay) throw new IncorrectItem('Payment amount incorrect');
+            
             //Update to complete
             await _Rent.update(parseInt(req.params.id), { status: RentStatus.Completed });
             
@@ -88,18 +89,17 @@ router.post('/extend/:id', [ExtendRentValidator.validate, verifyToken], async (r
             const bill = await _Bill.create({
                 user_id: req.user.id,
                 fee: feeToPay,
+                isPaid: true,
                 type: BillType.RentFee
             });
-
-            //Calculate the new due date
-            let newDueDate = new Date();
-            newDueDate.setDate(req.originalRent.start_from.getDate() + req.body.period);
+            
+            const newPeriod: number = req.originalRent.period + parseInt(req.body.period);  //old period + new period = new period
             //Create rent
             const newRent = await _Rent.create({
                 car_id: req.originalRent.car.id,
                 user_id: req.user.id,
-                start_from: newDueDate,
-                period: req.body.period,
+                start_from: req.originalRent.start_from, //Use the original start from date
+                period: newPeriod,
                 bill_id: bill.id,
                 status: RentStatus.InProgress
             });
@@ -108,6 +108,7 @@ router.post('/extend/:id', [ExtendRentValidator.validate, verifyToken], async (r
             res.json({ bill, newRent });
 
         } catch (err) {
+            console.log(err);
             res.sendStatus(404);
         }
     }
@@ -218,7 +219,7 @@ router.post('/pay', [PaymentValidator.validate, verifyToken], async (req: Reques
     if(validationErrors && validationErrors.length > 0){
         res.json({
           message: "fail",
-          errors: {validationErrors},
+          errors: validationErrors,
         });
       }else{
         try{
