@@ -12,12 +12,16 @@
           <input type="number" v-model="period" name="day" min="1" />
           <b>Days</b>
         </p>
+        <input type="checkbox" class="form-check-input" @change='agreeOnCharge'>
+        <label class="form-check-label">Agree on continue charge from my previous payment of this rent.</label>
+        <br>
+        <button class="btn btn-outline-secondary btn-lg" type="button" ref='confirm' disabled>Confirm</button>
       </div>
       <div id="extend-payment">
         <!-- <Payment v-on:payForExtend="extend" /> -->
         <footer class="modal-footer">
           <slot name="footer">
-            <h3>Payment estimate: {{(fee*this.period).toFixed(2)}}</h3>
+            <h3>Payment estimate: {{total}}</h3>
           </slot>
         </footer>
       </div>
@@ -38,10 +42,14 @@ export default {
   data() {
     return {
       period: 1,
-      isVerified: false
+      isVerified: false,
+      total: 0
     };
   },
   methods: {
+    agreeOnCharge(){
+      this.$refs.confirm.disabled = !this.$refs.confirm.disabled;
+    },
     close() {
       this.$emit("close");
     },
@@ -81,12 +89,8 @@ export default {
       }
     }
   },
-  mounted() {
-    // document.getElementById("btn-order").style.display = "none";
-    // document.getElementById("btn-order-extend").style.display = "inline-block";
-    // document
-    //   .getElementById("btn-order-extend")
-    //   .addEventListener("click", this.extend);
+  created(){
+    this.total = (this.fee*this.period).toFixed(2);
   }
 };
 </script>
