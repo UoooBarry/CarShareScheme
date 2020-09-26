@@ -10,6 +10,7 @@ import Location from '../models/location';
 import Sequelize from 'sequelize';
 const Op = Sequelize.Op;
 import DataRepository from './dataRepository';
+import ItemNotFound from '../exceptions/ItemNotFound';
 
 class carRepository implements DataRepository {
   private static instance?: carRepository;
@@ -74,7 +75,7 @@ class carRepository implements DataRepository {
           viewed: (car.viewed += 1),
         });
       } else {
-        throw 'Car not found';
+        throw new ItemNotFound('Car not found');
       }
       return Promise.resolve(car);
     } catch (err) {
