@@ -1,5 +1,6 @@
 /***********************************************************************
- *           @AUTHOR: Bach Dao, Created AT: 27/08/2020                *
+ *           @AUTHOR: Bach Dao, Created AT: 27/08/2020
+            Yongqian Huang updated at 26/09/2020 finish    extend            *
  ***********************************************************************/
 <template>
   <div>
@@ -18,7 +19,6 @@
         <button class="btn btn-outline-secondary btn-lg" type="button" ref='confirm' @click='extend' disabled>Confirm</button>
       </div>
       <div>
-        <!-- <Payment v-on:payForExtend="extend" /> -->
         <footer class="modal-footer">
           <slot name="footer">
             <h3>Payment estimate: {{total}}</h3>
@@ -30,7 +30,6 @@
 </template>
 <script>
 import authorizeMixin from "@/mixins/authorizeMixin";
-// import Payment from "@/components/order/Payment";
 
 export default {
   mixins: [authorizeMixin],
@@ -56,88 +55,31 @@ export default {
     close() {
       this.$emit("close");
     },
-    creditCardCheck(event) {
-      const inputCard = event.target.value;
-      const visaRegex = /^(?:4[0-9]{12}(?:[0-9]{3})?)$/;
-      const masterRegex = /^(?:5[1-5][0-9]{2}|222[1-9]|22[3-9][0-9]|2[3-6][0-9]{2}|27[01][0-9]|2720)[0-9]{12}$/;
-      const amexRegex = /^3[47][0-9]{13}$/;
-      if (visaRegex.test(inputCard)) {
-        document.getElementById("visa-extend").style.color = "black";
-      } else if (masterRegex.test(inputCard)) {
-        document.getElementById("master-extend").style.color = "black";
-      } else if (amexRegex.test(inputCard)) {
-        document.getElementById("amex-extend").style.color = "black";
-      } else {
-        document.getElementById("visa-extend").style.color = "#6c757d";
-        document.getElementById("master-extend").style.color = "#6c757d";
-        document.getElementById("amex-extend").style.color = "#6c757d";
-      }
-    },
-    verifyCreditcard() {
-      let result = true;
-      const creditCard = document.getElementById("cardNumberExtend").value;
-      const cvv = document.getElementById("cvv-extend").value;
-      const year = document.getElementById("yy-extend").value;
-      const month = document.getElementById("mm-extend").value;
-      const creditCardRegex = /^(?:4[0-9]{12}(?:[0-9]{3})?|[25][1-7][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})$/;
-      const expireDate = new Date(`1/${month}/${year}`);
-      if (expireDate <= new Date()) {
-        this.flashMessage.error({
-          title: "Order failed",
-          message: "Credit card's expire date cannot be today or before."
-        });
-        result = false;
-      }
-
-      if (!creditCardRegex.test(creditCard)) {
-        this.flashMessage.error({
-          title: "Order failed",
-          message: "Credit card entered is not correct."
-        });
-        result = false;
-      }
-      if (cvv == null) {
-        this.flashMessage.error({
-          title: "Order failed",
-          message: "CVV cannot be empty."
-        });
-        result = false;
-      }
-      return result;
     },
     extend() {
-      if (this.verifyCreditcard()) {
-        this.$axios
-          .post(
-            `${this.$carshare}/orders/extend/${this.rentId}`,
-            {
-              period: this.period,
-              payment_total: this.total
-            },
-            { headers: this.header }
-          )
-          .then(() => {
-            this.flashMessage.success({
-              title: "Order confirmed!",
-              message: "Order confirmed successfully!"
-            });
+      this.$axios
+        .post(
+          `${this.$carshare}/orders/extend/${this.rentId}`,
+          {
+            period: this.period,
+            payment_total: this.total
+          },
+          { headers: this.header }
+        )
+        .then(() => {
+          this.flashMessage.success({
+            title: "Order confirmed!",
+            message: "Order confirmed successfully!"
+          });
 
-            this.$router.go();
+          this.$router.go();
+        })
+        .catch(() => {
+            this.flashMessage.error({
+              title: "Order failed",
+              message: "Incorrect Payment"
+            });
           })
-          .catch(() => {
-              this.flashMessage.error({
-                title: "Order failed",
-                message: "Incorrect Payment"
-              });
-            })
-      } else {
-        this.flashMessage.error({
-          title: "Order failed!",
-          message: "Invalid credit card information!"
-        });
-        return;
-      }
-    }
   },
   created(){
     this.total = (this.fee*this.period).toFixed(2);
