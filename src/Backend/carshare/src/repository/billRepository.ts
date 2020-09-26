@@ -11,6 +11,7 @@ import { Op } from 'sequelize';
 import { throws } from 'assert';
 
 class billRepository implements DataRepository{
+  instance?: DataRepository | undefined;
   private static instance?: billRepository;
 
    async create(bill: any){
@@ -65,7 +66,17 @@ class billRepository implements DataRepository{
       }catch (err) {
         return Promise.reject(err);
       }
+  }
+  
+  async update(id: number, data: any) {
+    try {
+      let bill: any = await Bill.findOne({ where: { id: id } });
+      await bill.update(data);
+      return Promise.resolve(true);
+    } catch (err) {
+      return Promise.reject(err);
     }
+  }
 
     async getUnPaidBills(){
       try{

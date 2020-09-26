@@ -7,6 +7,7 @@ interface dataRepository{
   create(object: any): void,
   getAll(): any,
   get(id: number): any
+  update(id: number, data: any): any
 }
 
 export default dataRepository;

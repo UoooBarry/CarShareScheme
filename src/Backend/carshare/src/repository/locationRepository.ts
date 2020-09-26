@@ -34,6 +34,16 @@ class locationRepository implements DataRepository{
         }
     }
 
+    async update(id: number, data: any) {
+        try {
+          let location: any = await Location.findOne({ where: { id: id } });
+          await location.update(data);
+          return Promise.resolve(true);
+        } catch (err) {
+          return Promise.reject(err);
+        }
+      }
+
     async get(id: number) {
         try {
           const location:any = await Location.findOne({ where: { id: id } });
