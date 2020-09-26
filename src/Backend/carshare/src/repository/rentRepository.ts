@@ -132,6 +132,20 @@ class rentRepository implements DataRepository{
       }
   }
 
+  async delete(id: number) {
+    try{
+      const rent = await Rent.findOne({
+        where: {id: id},
+      });
+      if (!rent) throw new ItemNotFound('No rent error');
+      
+      await rent.destroy();
+
+      return Promise.resolve(true);
+    }catch (err) {
+      return Promise.reject(err);
+    }
+  }
 
   async update(id: number, data: any) {
     try{

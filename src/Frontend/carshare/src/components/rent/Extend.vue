@@ -1,6 +1,6 @@
 /***********************************************************************
  *           @AUTHOR: Bach Dao, Created AT: 27/08/2020
-            Yongqian Huang updated at 26/09/2020 finish    extend            *
+*         Yongqian Huang updated at 26/09/2020 finish    extend      *
  ***********************************************************************/
 <template>
   <div>
@@ -33,10 +33,7 @@ import authorizeMixin from "@/mixins/authorizeMixin";
 
 export default {
   mixins: [authorizeMixin],
-  name: "PayNow",
-  components: {
-    // Payment
-  },
+  name: "Extend",
   props: ["rentId", "fee"],
   data() {
     return {
@@ -54,7 +51,6 @@ export default {
     },
     close() {
       this.$emit("close");
-    },
     },
     extend() {
       this.$axios
@@ -80,6 +76,7 @@ export default {
               message: "Incorrect Payment"
             });
           })
+    }
   },
   created(){
     this.total = (this.fee*this.period).toFixed(2);

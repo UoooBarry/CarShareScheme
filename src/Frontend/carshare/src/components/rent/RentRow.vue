@@ -14,7 +14,7 @@
           v-if="this.rent.status === 'In progress' && this.rent.bill.isPaid"
         >
           <a style="cursor:pointer" @click="showModal">Extend your rent</a>
-          <Extend v-show="isModalVisible" :rentId="rent.id" :fee="rent.car.price" @close="closeModal" />
+          <Extend v-if="rent" v-show="isModalVisible" :rentId="rent.id" :fee="rent.car.price" @close="closeModal" />
         </div>
       </div>
 
@@ -66,7 +66,7 @@
 
 <script>
 import PayNow from "./PayNow";
-import Extend from "./Extend"
+import Extend from "./Extend";
 export default {
   name: "RentRow",
   components: {
@@ -86,8 +86,7 @@ export default {
     closeModal() {
       this.isModalVisible = false;
     }
-  },
-  created() {}
+  }
 };
 </script>
 

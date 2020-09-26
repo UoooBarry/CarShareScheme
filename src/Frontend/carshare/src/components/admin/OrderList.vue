@@ -6,7 +6,7 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th scope="col">Rent id</th>
+                    <th scope="col" > <a @click="sortLocationsById()" href='#'>Rent id</a> </th>
                     <th scope="col">Start from</th>
                     <th scope="col">Period</th>
                     <th scope="col">Car</th>
@@ -15,6 +15,7 @@
                     <th scope="col">Fee</th>
                     <th scope="col">Status</th>
                     <th scope="col">Return</th>
+                    <th scope="col">Delete</th>
                 </tr>
             </thead>
             <tbody v-for="rent in rents" v-bind:key="rent.id">
@@ -31,6 +32,18 @@ export default {
     props: ['rents', 'locations'],
     components:{
         OrderRow
+    },
+    methods:{
+       compareId(a,b) {
+        if (a.id < b.id)
+          return 1;
+        if (a.id > b.id)
+          return -1;
+        return 0;
+      },
+      sortLocationsById(){
+        this.rents.sort(this.compareId);
+      }
     }
 }
 </script>
