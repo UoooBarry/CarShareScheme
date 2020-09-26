@@ -83,7 +83,7 @@ router.post('/extend/:id', [ExtendRentValidator.validate, verifyToken], async (r
             if (req.body.payment_total !== feeToPay) throw new IncorrectItem('Payment amount incorrect');
             
             //Update to complete
-            await _Rent.update(parseInt(req.params.id), { status: RentStatus.Completed });
+            await _Rent.update(parseInt(req.params.id), { status: RentStatus.Extended });
             
             //Create bill
             const bill = await _Bill.create({
@@ -121,6 +121,18 @@ router.get('/:id/', [verifyToken], (req: Request, res: Response) => {
             .then((rent) => {
                 if(rent?.user_id != req.user.id) throw new IncorrectItem('Incorrect user');
                 res.json({rent});
+            })
+            .catch((err) => {
+                res.sendStatus(404);
+            })
+})
+
+//Delete: /api/orders/:id
+router.delete('/:id/', [verifyToken], (req: Request, res: Response) => {
+    if(!req.user.admin) res.sendStatus(403);
+    _Rent.delete(parseInt(req.params.id))
+            .then(() => {
+                res.json({message: 'success'});
             })
             .catch((err) => {
                 res.sendStatus(404);
