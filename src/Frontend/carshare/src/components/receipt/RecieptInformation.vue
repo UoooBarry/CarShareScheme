@@ -1,3 +1,4 @@
+<!-- @Author Yongqian Huang, created at 10/09/2020-->
 <template>
     <div class='receipt-container'>
         <div class='order-confirm-text'>Receipt information</div>

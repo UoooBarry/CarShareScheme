@@ -1,5 +1,6 @@
 /***********************************************************************
- *           @AUTHOR: Bach Dao, Updated AT: 13/08/2020                *
+ *           @AUTHOR: Bach Dao, Updated AT: 13/08/2020
+              Yongqian Huang Updated at 19/09/2020 Responsive and selected logic         *
  ***********************************************************************/
 <template>
   <header>
