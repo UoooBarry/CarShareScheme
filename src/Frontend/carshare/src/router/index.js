@@ -154,6 +154,17 @@ const routes = [
   }
 },
 {
+  path: '/admin36737123719368365255336327043632505/licenses',
+  name: 'AdminLicenses',
+  components: {
+    header: AdminHeader,
+    main: () => import('../views/admin/Licenses.vue')
+  },
+  meta: {
+    requiresAuth: true
+  }
+},
+{
   path: '/admin36737123719368365255336327043632505/addcar',
   name: 'AdminAddCar',
   components: {

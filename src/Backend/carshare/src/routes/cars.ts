@@ -7,7 +7,8 @@
  *  Bach Dao. 27/08/2020, Get car by id/all endpoint  *
  * Yongqian Huang. 28/08/2020, Car creating Validation  *
  * Yongqian Huang, 29/08/2020, Add car share image upload
- * Yongqian Huang, 02/09/2020, Return if the car is popular*
+ * Yongqian Huang, 02/09/2020, Return if the car is popular
+ * Bach Dao, 25/09/2020, return car by seat id*
  *******************************************************/
 
 import express,{Request, Response, NextFunction} from 'express';
@@ -50,6 +51,19 @@ router.get("/", (req: Request, res: Response) => {
 router.get("/search", (req: Request, res: Response) => {
   _Car
     .getBy(<string>req.query.query)
+    .then((cars: Car[]) => {
+      res.json({ cars });
+    })
+    .catch((err: Error) => {
+      console.log(err);
+      res.sendStatus(403);
+    });
+});
+
+//GET: /api/cars/filter/seat
+router.get("/filter/seat", (req: Request, res: Response) => {
+  _Car
+    .getBySeats(parseInt(<string>req.query.query))
     .then((cars: Car[]) => {
       res.json({ cars });
     })

@@ -1,8 +1,10 @@
 /***********************************************************************
- *           @AUTHOR: Bach Dao, CREATED AT: 31/08/2020                *
+ *           @AUTHOR: Bach Dao, CREATED AT: 31/08/2020
+                      Yongqian Huang add admin-main class 24/09/2020    *
+*Yongqian Huang, make authorze mixin global 24/09/2020                *
  ***********************************************************************/
 <template >
-  <div>
+  <div class='admin-main'>
     <div class="container">
       <AddCarForm v-bind:locations="this.locations" class="car-form" />
     </div>

@@ -1,5 +1,6 @@
 /*************************************
  * @AUTHOR YONGQIAN HUANG 10/09/2020 *
+                 Yongqian Huang Make authorize mixin global 24/09/020                *
  *************************************/
 <template>
 
@@ -63,11 +64,9 @@
 </template>
 
 <script>
-import authorizeMixin from "@/mixins/authorizeMixin";
 import uploadCarImage from "./UploadCarImage";
 export default {
   props: ["car"],
-  mixins: [authorizeMixin],
   components: {
     uploadCarImage
   },

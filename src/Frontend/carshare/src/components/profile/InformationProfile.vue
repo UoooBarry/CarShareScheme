@@ -55,7 +55,6 @@
 </template>
 
 <script>
-import authorizeMixin from '@/mixins/authorizeMixin';
 export default {
   name: "InformationProfile",
   data() {
@@ -63,7 +62,6 @@ export default {
       firstName: ""
     };
   },
-  mixins: [authorizeMixin],
   methods: {
     nextStep(){
       this.$emit('nextStep')
@@ -81,7 +79,7 @@ export default {
           { headers: this.header }
         )
         .then(res => {
-          if (res.data.message == "fail") {
+          if (res.data.message === "fail") {
             res.data.errors.forEach(error => {
               this.flashMessage.error({
                 title: "Update detail",
