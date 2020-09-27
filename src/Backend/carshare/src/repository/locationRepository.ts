@@ -16,7 +16,7 @@ class locationRepository implements DataRepository {
     private static instance?: locationRepository;
 
     constructor() {
-        this.maximumRange = 20000000000; //COUNT IN M
+        this.maximumRange = 20000; //COUNT IN M
     }
 
     async create(object: any) {
