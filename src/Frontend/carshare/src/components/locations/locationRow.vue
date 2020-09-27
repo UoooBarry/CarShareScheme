@@ -1,7 +1,11 @@
 <!-- @Author Yongqian Huang, created at 10/09/2020-->
 <template>
   <div>
-    <div class="row" style="background: white; padding-top:10px;padding-bottom:20px">
+    <div
+      class="row location-backdrop-1"
+      :id="id"
+      style="background: white; padding-top:10px;padding-bottom:20px"
+    >
       <div class="col">
         <img id="location-img" src="../../../public/img/location.jpg" />
       </div>
@@ -29,11 +33,41 @@
 <script>
 export default {
   name: "LocationRow",
-  props: ["location"],
+  props: ["location", "map"],
   data() {
     return {
-      linkToGoogleMap: `https://www.google.com/maps/place/${this.location.address}/`
+      linkToGoogleMap: `https://www.google.com/maps/place/${this.location.address}/`,
+      id: "location-backdrop-" + this.location.id
     };
+  },
+  created() {
+    var iconBase = "https://maps.google.com/mapfiles/kml/shapes/";
+    this.$axios
+      .get(
+        "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/geocode/json",
+        {
+          params: {
+            address: this.location.address,
+            key: this.$google_api_key
+          }
+        }
+      )
+      .then(res => {
+        var marker = new window.google.maps.Marker({
+          position: res.data.results[0].geometry.location,
+          title: this.location.name,
+          icon: iconBase + "parking_lot_maps.png",
+          animation: window.google.maps.Animation.DROP
+        });
+        marker.addListener("click", this.highlight);
+        marker.setMap(this.map);
+      });
+  },
+  methods: {
+    highlight() {
+      var idToGet = "location-backdrop-" + this.location.id;
+      document.getElementById(idToGet).style.background = "blue";
+    }
   }
 };
 </script>

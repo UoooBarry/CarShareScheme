@@ -3,7 +3,7 @@
   <div class="row">
     <div class="col-lg-auto item1">
       <div v-for="location in locations" v-bind:key="location.id" class="location-item">
-        <LocationRow :location="location" />
+        <LocationRow :map="map" :location="location" />
       </div>
     </div>
     <div class="col item2">
@@ -14,12 +14,14 @@
 
 <script>
 import LocationRow from "@/components/locations/locationRow";
+import LocationMixin from "@/mixins/locationMixin";
 export default {
   name: "LocationTable",
   props: ["locations"],
+  mixins: [LocationMixin],
   data() {
     return {
-      // locationAddresses: this.locations.address
+      map: {},
       position: {},
       address: "100 Furlong Rd, Cairnlea VIC 3023"
     };
@@ -47,15 +49,15 @@ export default {
   methods: {
     initMap() {
       // The map, centered at Uluru
-      const map = new window.google.maps.Map(
+      this.map = new window.google.maps.Map(
         document.getElementById("location-map"),
         {
-          zoom: 15,
+          zoom: 10,
           center: this.position
         }
       );
       //   The marker, positioned at Uluru
-      new window.google.maps.Marker({ position: this.position, map: map });
+      // new window.google.maps.Marker({ position: this.position, map: map });
     }
   }
 };
