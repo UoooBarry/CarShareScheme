@@ -7,10 +7,10 @@
       style="background-color: #a9a0a0; font-weight: bold;; color: white;font-size: 20px;padding: 20px;border-bottom:none;"
     >
       <div v-if="step == 1">
-        <font-awesome-icon icon="user-cog" style="margin-right:8px" />Personal Information
+        <font-awesome-icon icon="user-cog" style="margin-right:8px" />{{ $t('PersonalInformation') }}
       </div>
       <div v-if="step == 2">
-        <font-awesome-icon icon="id-badge" style="margin-right:8px" />License Infromation
+        <font-awesome-icon icon="id-badge" style="margin-right:8px" />{{ $t('LicenseInformation') }}
       </div>
     </div>
         <InformationProfile v-bind:customer="customer"  v-on:nextStep="step++" v-if="step == 1"/>

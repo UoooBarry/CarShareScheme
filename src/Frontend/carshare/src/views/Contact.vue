@@ -3,26 +3,26 @@
           <div class="row">
               <!-- Section Titile -->
               <div class="col-md-12 wow animated fadeInLeft" data-wow-delay=".2s">
-                  <h1 class="section-title">Love to Hear From You</h1>
+                  <h1 class="section-title">{{ $t('WeLoveToHearFromYou') }}</h1>
               </div>
           </div>
           <div class="row">
               <!-- Section Titile -->
               <div class="col-md-6 mt-3 contact-widget-section2 wow animated fadeInLeft" data-wow-delay=".2s">
-                <p>Any queries will be responded with 2 days during business hours. You can also try to contact us by following ways (Working hours 8:00am - 5:00pm everyday)</p>
+                <p>{{ $t('AnyQueries') }}</p>
 
                 <div class="find-widget">
-                 Company:  <a href="https://hostriver.ro">CarShareScheme PBD</a>
+                 {{ $t('Company') }}:  <a href="https://hostriver.ro">CarShareScheme PBD</a>
                 </div>
                 <div class="find-widget">
-                 Address: <a href="/locations">You can find our nearest company locations here</a>
+                 {{ $t('Address') }}: <a href="/locations">You can find our nearest company locations here</a>
                 </div>
                 <div class="find-widget">
-                  Phone:  <a href="#">+ 619-890-9767</a>
+                 {{ $t('Phone') }}:  <a href="#">+ 619-890-9767</a>
                 </div>
                 
                 <div class="find-widget">
-                  Website:  <a href="https://carshare.uooobarry.com/">https://carshare.uooobarry.com/</a>
+                  {{ $t('Website') }}:  <a href="https://carshare.uooobarry.com/">https://carshare.uooobarry.com/</a>
                 </div>
                
               </div>
@@ -31,26 +31,26 @@
                   <form class="shake" role="form" action="mailto:Bach.rmit.5499@gmail.com" method="post" id="contactForm" name="contact-form" enctype="text/plain">
                       <!-- Name -->
                       <div class="form-group label-floating">
-                        <label class="control-label" for="name">Name</label>
+                        <label class="control-label" for="name">{{ $t('Name') }}</label>
                         <input class="form-control" id="name" type="text" name="name" required data-error="Please enter your name">
                         <div class="help-block with-errors"></div>
                       </div>
                
                       <!-- Subject -->
                       <div class="form-group label-floating">
-                        <label class="control-label">Subject</label>
+                        <label class="control-label">{{ $t('Subject') }}</label>
                         <input class="form-control" id="msg_subject" type="text" name="subject" required data-error="Please enter your message subject">
                         <div class="help-block with-errors"></div>
                       </div>
                       <!-- Message -->
                       <div class="form-group label-floating">
-                          <label for="message" class="control-label">Message</label>
+                          <label for="message" class="control-label">{{ $t('Message') }}</label>
                           <textarea class="form-control" rows="3" id="message" name="message" required data-error="Write your message"></textarea>
                           <div class="help-block with-errors"></div>
                       </div>
                       <!-- Form Submit -->
                       <div class="form-submit mt-5">
-                          <button class="btn btn-outline-dark" type="submit" id="form-submit"><i class="material-icons mdi mdi-message-outline"></i> Send Message</button>
+                          <button class="btn btn-outline-dark" type="submit" id="form-submit"><i class="material-icons mdi mdi-message-outline"></i> {{ $t('SendMessage') }}</button>
                           <div id="msgSubmit" class="h3 text-center hidden"></div>
                           <div class="clearfix"></div>
                       </div>
