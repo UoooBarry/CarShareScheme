@@ -175,6 +175,26 @@ class rentRepository implements DataRepository{
       return Promise.reject(err);
     }
   }
+
+  async getReadyRents() {
+    try {
+      let scheduledDate = new Date();
+      scheduledDate.setDate(scheduledDate.getDate() - 1);
+      const rents = Rent.findAll({
+        where: {
+          start_from: {[Op.gte]: scheduledDate} 
+        },
+        include: [
+          {
+            model: Car
+          }
+        ]
+      })
+      return Promise.resolve(rents);
+    }catch (err) {
+      return Promise.reject(err);
+    }
+  }
   
   static getInstance(): rentRepository{
     if (!rentRepository.instance) 
