@@ -2,7 +2,7 @@
 <template>
   <div>
     <div class="sub-header">
-      <h1>Nearest return location</h1>
+      <h1>Return locations</h1>
     </div>
     <div class="container">
       <Loading />
@@ -60,5 +60,11 @@ export default {
 .container {
   margin-top: 20px;
   min-height: 700px;
+}
+
+@media only screen and (max-width: 400px) {
+  .sub-header h1 {
+    font-size: 30px;
+  }
 }
 </style>
