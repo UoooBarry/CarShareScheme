@@ -1,5 +1,5 @@
 /**************************
- * @AUTHOR YONGQIAN HUANG 
+ * @Author Yongqian Hunag created at 23/07/2020
  * @UPDATE Bach Dao       *
  **************************/
 import Vue from 'vue'

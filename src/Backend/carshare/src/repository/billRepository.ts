@@ -9,6 +9,7 @@ import Rent, {RentStatus} from '../models/rent'
 import Car from '../models/car';
 import { Op } from 'sequelize';
 import { throws } from 'assert';
+import ItemNotFound from '../exceptions/ItemNotFound';
 
 class billRepository implements DataRepository{
   instance?: DataRepository | undefined;
@@ -42,7 +43,7 @@ class billRepository implements DataRepository{
 
     async pay(bill: Bill | null){
       try {
-        if(!bill) throw 'No bill found';
+        if(!bill) throw new ItemNotFound('No bill found');
         await bill.update({
           isPaid: true
         });

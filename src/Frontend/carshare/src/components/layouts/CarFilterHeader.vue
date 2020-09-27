@@ -1,5 +1,6 @@
 /***********************************************************************
- *           @AUTHOR: Bach Dao, CREATED AT: 24/08/2020                *
+ *           @AUTHOR: Bach Dao, CREATED AT: 24/08/2020
+            Yongqian Huang updated at: 25/08/2020 Shorten code with better filter method                *
  ***********************************************************************/
 <template>
   <div>
