@@ -1,7 +1,7 @@
 // These are words/phrases the user could type in
 
 const trigger = [
-  ["hi", "hey", "hello", "good morning", "good afternoon"],
+  ["hi", "hey", "hello", "good morning", "good afternoon", "start"],
   ["how are you", "how is life", "how are things"],
   ["what are you doing", "what is going on", "what is up"],
   ["how old are you"],
@@ -29,7 +29,7 @@ const trigger = [
 // These are bot responses, paired in order with the above 'trigger' phrases
 
 const reply = [
-  ["Hi bro"],
+  ["Hello, what can I help you today? Try 'Car' 'Support' 'FAQ' Hello, what can I help you today? Try 'Car' 'Support' 'FAQ' Hello, what can I help you today? Try 'Car' 'Support' 'FAQ' Hello, what can I help you today? Try 'Car' 'Support' 'FAQ' Hello, what can I help you today? Try 'Car' 'Support' 'FAQ' Hello, what can I help you today? Try 'Car' 'Support' 'FAQ' Hello, what can I help you today? Try 'Car' 'Support' 'FAQ' Hello, what can I help you today? Try 'Car' 'Support' 'FAQ'"],
   [
     "Fine... how are you?",
     "Pretty well, how are you?",
