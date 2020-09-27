@@ -16,7 +16,7 @@
 
     <div class="row">
       <div class="filter-col">
-        <CarFilter />
+        <CarFilter v-on:onFilter="update"/>
       </div>
 
       <div class="car-list-col">

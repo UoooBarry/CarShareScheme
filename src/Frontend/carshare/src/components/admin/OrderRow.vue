@@ -37,11 +37,13 @@
         <td v-else>
 
         </td>
+        <td>
+            <button class='btn btn-danger' @click="remove">Delete</button>
+        </td>
     </tr>
 </template>
 
 <script>
-import authorizeMixin from "@/mixins/authorizeMixin";
 export default {
     name: 'OrderRow',
     props: ['rent', 'locations'],
@@ -50,8 +52,27 @@ export default {
             selectedLocation: ''
         }
     },
-    mixins: [authorizeMixin],
     methods:{
+        remove(){
+             this.$axios.delete(`${this.$carshare}/orders/${this.rent.id}`,
+                {
+                    headers: this.header
+                }
+             )
+             .then(() => {
+                this.flashMessage.success({
+                    title: "Update success!",
+                    message: "Update successfully!"
+                });
+                this.$router.go();
+            })
+            .catch(()=> {
+                this.flashMessage.error({
+                        title: "Update detail",
+                        message: "Fail"
+                });
+            })
+        },
         returnCar(){
             this.$axios.patch(`${this.$carshare}/orders/return`, {
                     rent_id: this.rent.id,

@@ -35,7 +35,6 @@ export default {
         })
         .then((res) => {
             this.locations = res.data.locations;
-            console.log(this.locations);
         })
         .catch((err)=> {
             console.log(err);

@@ -1,5 +1,6 @@
 /***********************************************************************
- *           @AUTHOR: Bach Dao, Updated AT: 13/08/2020                *
+ *           @AUTHOR: Bach Dao, Updated AT: 13/08/2020
+              Yongqian Huang Updated at 19/09/2020 Responsive and selected logic         *
  ***********************************************************************/
 <template>
   <header>
@@ -71,12 +72,10 @@
 </template>
 
 <script>
-import authorizeMixin from "@/mixins/authorizeMixin";
 import Brand from "@/components/layouts/Brand";
 import i18n from "@/plugins/i18n";
 export default {
   name: "Header",
-  mixins: [authorizeMixin],
   components: {
     Brand
   },

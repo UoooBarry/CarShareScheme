@@ -132,6 +132,20 @@ class rentRepository implements DataRepository{
       }
   }
 
+  async delete(id: number) {
+    try{
+      const rent = await Rent.findOne({
+        where: {id: id},
+      });
+      if (!rent) throw new ItemNotFound('No rent error');
+      
+      await rent.destroy();
+
+      return Promise.resolve(true);
+    }catch (err) {
+      return Promise.reject(err);
+    }
+  }
 
   async update(id: number, data: any) {
     try{
@@ -155,6 +169,26 @@ class rentRepository implements DataRepository{
           status: RentStatus.InProgress,
           [Op.and]: Sequelize.literal("start_from + CAST(period || ' days' AS interval) < CURRENT_DATE") // start_from + period < today
         }
+      })
+      return Promise.resolve(rents);
+    }catch (err) {
+      return Promise.reject(err);
+    }
+  }
+
+  async getReadyRents() {
+    try {
+      let scheduledDate = new Date();
+      scheduledDate.setDate(scheduledDate.getDate() - 1);
+      const rents = Rent.findAll({
+        where: {
+          start_from: {[Op.gte]: scheduledDate} 
+        },
+        include: [
+          {
+            model: Car
+          }
+        ]
       })
       return Promise.resolve(rents);
     }catch (err) {

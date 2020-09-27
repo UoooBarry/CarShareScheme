@@ -29,8 +29,6 @@
 // import Loading from '@/components/Loading';
 import ProfileAndValidation from '@/components/profile/ProfileAndValidation';
 import AvatarHolder from "@/components/profile/AvatarHolder";
-import authorizeMixin from '@/mixins/authorizeMixin';
-
 export default {
   name: "Profile",
   components: {
@@ -38,13 +36,11 @@ export default {
     ProfileAndValidation,
     // Loading
   },
-  mixins: [authorizeMixin],
   data(){
     return{
       customer: ""
     }
   },
- 
   async created(){ 
     const response = await this.$axios.get(`${this.$carshare}/customers/`,{headers: this.header});
     if(response.data.message === "success"){
@@ -54,7 +50,7 @@ export default {
             title: 'Error',
             message: 'Need to sign in first!'
           });
-          this.$router.push({name: 'Home'});
+      this.$router.push({name: 'Home'});
     }
   }
 };

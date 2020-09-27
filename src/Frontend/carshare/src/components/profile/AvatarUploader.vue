@@ -16,10 +16,8 @@
 </template>
 
 <script>
-import authorizeMixin from "@/mixins/authorizeMixin";
 export default {
   name: "AvatarUploader",
-  mixins: [authorizeMixin],
   methods: {
     upload() {
       const file = this.$refs.file.files[0];

@@ -1,6 +1,7 @@
 /***********************************************************************
 *           @AUTHOR: Bach Dao, CREATED AT: 11/08/2020                  *
-*       Updated: Yongqian Huang, 11/09/2020  Optmize code              *
+*       Updated: Yongqian Huang, 11/09/2020  Optmize code
+                 Yongqian Huang, 24/09/2020 add validation header       *
 ************************************************************************/
 <template>
   <header>
@@ -18,6 +19,7 @@
       <a class="subnav-item" id="cars"  v-bind:class="{'activate': getActive('AdminCars')}" v-on:click="$router.push({name: 'AdminCars'})">Car list</a>
       <a class="subnav-item" id="add" v-bind:class="{'activate': getActive('AdminAddCar')}" v-on:click="$router.push({name: 'AdminAddCar'})">Add new car</a>
       <a class="subnav-item" id="orders" v-bind:class="{'activate': getActive('AdminOrders')}"  v-on:click="$router.push({name: 'AdminOrders'})">Order list</a>
+       <a class="subnav-item" id="orders" v-bind:class="{'activate': getActive('AdminLicenses')}"  v-on:click="$router.push({name: 'AdminLicenses'})">Pending validations</a>
     </nav>
   </header>
 </template>

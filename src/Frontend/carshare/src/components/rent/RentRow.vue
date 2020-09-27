@@ -3,19 +3,21 @@
  ***********************************************************************/
 <template>
   <div class="shadow-sm p-3 mb-4 bg-white rounded">
-    <div class="row bill-id">
-      <div
-        class="col-auto"
-      >{{ rent.createdAt | formatDate }} - Rent ID: {{ rent.id }} - Period: {{ rent.period }} days</div>
-      <div
-        class="col"
-        style="text-align:right; margin-right:20px"
-        v-if="this.rent.status === 'In progress' && this.rent.bill.isPaid"
-      >
-        <a style="cursor:pointer" @click="showModal">Extend your rent</a>
-        <Extend v-show="isModalVisible" :rentId="rent.id" :fee="rent.car.price" @close="closeModal" />
+      <div class="row bill-id">
+        <a
+          :href="'/receipt/' + rent.id"
+          class="col-auto"
+        >{{ rent.createdAt | formatDate }} - Rent ID: {{ rent.id }} - Period: {{ rent.period }} days</a>
+        <div
+          class="col"
+          style="text-align:right; margin-right:20px"
+          v-if="this.rent.status === 'In progress' && this.rent.bill.isPaid"
+        >
+          <a style="cursor:pointer" @click="showModal">Extend your rent</a>
+          <Extend v-if="rent" v-show="isModalVisible" :rentId="rent.id" :fee="rent.car.price" @close="closeModal" />
+        </div>
       </div>
-    </div>
+
     <hr class="user" />
     <div class="row">
       <div class="car-item">
@@ -63,12 +65,10 @@
 </template>
 
 <script>
-import authorizeMixin from "@/mixins/authorizeMixin";
 import PayNow from "./PayNow";
-import Extend from "./Extend"
+import Extend from "./Extend";
 export default {
   name: "RentRow",
-  mixins: [authorizeMixin],
   components: {
     PayNow,
     Extend
@@ -86,8 +86,7 @@ export default {
     closeModal() {
       this.isModalVisible = false;
     }
-  },
-  created() {}
+  }
 };
 </script>
 

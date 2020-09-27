@@ -6,6 +6,7 @@ import TaskI from './taskI';
 import _Bill from '../repository/billRepository';
 import _Rent from '../repository/rentRepository';
 import { BillType } from '../models/bill';
+import { RentStatus } from '../models/rent';
 
 export default class overdueRentTask implements TaskI{
     period: number;
@@ -20,7 +21,8 @@ export default class overdueRentTask implements TaskI{
 
       console.log('Now detecting overdue fee...');
       const rents = await _Rent.getOverdue();
-      for await (const rent of rents) {
+       for await (const rent of rents) {
+         await rent.update({ status: RentStatus.Overdue });
         await _Bill.create({
           user_id: rent.user_id,
           type: BillType.OverdueFee,
