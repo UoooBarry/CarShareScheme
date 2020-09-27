@@ -43,7 +43,7 @@ export default {
       marker: "",
       infowindow: new window.google.maps.InfoWindow({
         content:
-          '    <div class="row location-backdrop-1" style="background: white; padding-top:10px;padding-bottom:20px; width:350px;"><div class="col" style="margin-left:0; margin-right:0; width: 50% !important"><img id="another-location-img" style="max-width: 100% !important" src="https://www.abc.net.au/cm/rimage/5391246-16x9-xlarge.jpg?v=5" /></div><div class="col"><div class="location-name">' +
+          '    <div class="row location-backdrop-1" style="background: white; padding-top:10px;padding-bottom:20px; width:320px;"><div class="col" style="margin-left:0; padding-right:0;margin-right:0; width: 50% !important"><img id="another-location-img" style="max-width: 100% !important" src="https://www.abc.net.au/cm/rimage/5391246-16x9-xlarge.jpg?v=5" /></div><div class="col"><div class="location-name">' +
           this.location.name +
           '</div><div class="location-address">' +
           this.location.address +
