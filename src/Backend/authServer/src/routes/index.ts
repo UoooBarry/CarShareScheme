@@ -8,6 +8,7 @@
  *      Yongqian Huang, 13/08/2020, Improve security                   *
  *      Bach Dao, 18/08/2020, Change register router 
  *      Yongqian Huang, 04/09/2020 Migrate to typescript               *
+ *        Yongqian Huang, 29/09/2020, Apply factor pattern
  ***********************************************************************/
 
 require('dotenv').config();
@@ -17,9 +18,10 @@ import passwordHash from 'password-hash';
 import _login from '../repository/loginRepository';
 import _customer from '../repository/customerRepository';
 import _services from '../helpers/serviceHelper';
-import {generateAccessToken} from '../helpers/authorizationHelper';
-import mobileValidator from '../validators/MobileValidator';
-import registerValidator from '../validators/RegisterValidator';
+import { generateAccessToken } from '../helpers/authorizationHelper';
+import validatorFactory from '../helpers/validatorFactory';
+const mobileValidator = validatorFactory.getValidator('mobile');
+const registerValidator = validatorFactory.getValidator('register');
 
 
 router.get('/getCode', mobileValidator.validate ,(req: Request,res: Response) => {
