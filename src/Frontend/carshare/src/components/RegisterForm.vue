@@ -265,9 +265,6 @@ export default {
       document.getElementById("login").style.display = "inline-block";
     },
     async register() {
-      //Genrate a recaptcha token to verify user's identity
-      await this.$recaptchaLoaded();
-      const token = await this.$recaptcha("register");
     //   var dob = new Date(document.getElementById("year").value, document.getElementById("month").value - 1, document.getElementById("day").value); 
       var dob =
         document.getElementById("year").value +
@@ -290,7 +287,6 @@ export default {
           first_name: this.first_name,
           family_name: this.family_name,
           contact_number: this.contact,
-          recaptcha_token: token,
           code: this.validation_code,
           gender: this.gender,
           date_of_birth: dob
