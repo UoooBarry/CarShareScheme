@@ -56,14 +56,11 @@ router.post('/upload/:dimension', [verifyToken, imageUpload.single('image')], as
   //Get the file type
   const fileName: string = req.file.originalname;
   const fileType: string = fileName.split('.')[1];
-  if (fileType != "png") {
-    if (fileType != "jpg") {
+  if (fileType !== "png" && fileType != "jpg") {
       res.json({
         message: "fail",
         reason: 'File format unsupported.'
       });
-      return;
-    }
   }
   if (req.file.size > 200000) {
     res.json({
