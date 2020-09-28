@@ -127,7 +127,7 @@ router.post("/create", [ CarValidator.validate, verifyToken], (req: Request, res
   if(validationErrors && validationErrors.length > 0){
     res.json({
       message: "fail",
-      validationErrors,
+      errors: validationErrors,
     });
   }else{
     const car = {
@@ -154,7 +154,7 @@ router.post("/create", [ CarValidator.validate, verifyToken], (req: Request, res
       .catch((err: Error) => {
         res.json({
           message: "fail",
-          err,
+          errors: err,
         });
       });
   }

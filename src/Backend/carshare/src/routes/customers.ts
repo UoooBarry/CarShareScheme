@@ -32,14 +32,11 @@ router.patch('/avatar', [verifyToken, avatarUpload.single('image')], (req: Reque
         //Get the file type
         const fileName:string = req.file.originalname;
         const fileType:string = fileName.split('.')[1];
-        if(fileType != "png"){
-            if(fileType != "jpg"){
-                res.json({
-                    message: "fail",
-                    reason: 'File format unsupported.'
-                });
-                return;
-            }
+        if (fileType !== "png" && fileType != "jpg") {
+            res.json({
+              message: "fail",
+              reason: 'File format unsupported.'
+            });
         }
         if(req.file.size > 200000){
             res.json({

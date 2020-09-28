@@ -57,16 +57,6 @@ router.post('/register', registerValidator.validate, async (req: Request,res: Re
             return;
         }
 
-        //check captcha response
-        const captchaResponse = await _services.getRecaptchaRes(req.body.recaptcha_token);
-        if (!captchaResponse  && process.env.NODE_ENV != 'test') {
-            res.json({
-                message: "fail",
-                errors: ["Captcha verified failed"]
-            });
-            return;
-        }
-
         if(validationErrors && validationErrors.length > 0){
             res.json({
               message: "fail",
