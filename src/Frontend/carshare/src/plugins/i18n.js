@@ -43,7 +43,7 @@ const messages = {
     Name:"Name",
     Subject:"Subject",
     Message:"Message",
-    SendMessgae:"Send Message",
+    SendMessage:"Send Message",
     FirstName:"First Name",
     FamilyName:"Family Name",
     Birth:"Date of birth",
