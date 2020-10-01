@@ -2,6 +2,7 @@
  *           @AUTHOR: Bach Dao, CREATED AT: 03/09/2020                 *
  *   Bach Dao, Updated AT: 04/08/2020      added 2 components          *
  *   Bach Dao, Updated AT: 04/08/2020      description for car         *
+ * Yongqian Huang 1/10/2020 Add comment test                           *
  ***********************************************************************/
 <template>
   <div class="container">
@@ -12,6 +13,7 @@
       <!-- <div class="col"></div> -->
       <div class="col-md car-content">
           <CarContent :car="car" />
+          <Comment :comments="car.Comments" />
       </div>
     </div>
      
@@ -24,11 +26,13 @@
 import BackToTop from "@/components/BackToTop";
 import CarContent from "@/components/cars/car_detail/CarContent";
 import CarDescription from "@/components/cars/car_detail/CarDescription";
+import Comment from '@/components/comment/Comment';
 export default {
   name: "CarDetail",
   components: {
     CarContent,
     CarDescription,
+    Comment,
     BackToTop
   },
   data() {

@@ -3,7 +3,7 @@ import { timeStamp } from "console";
 @Author Yongqian Huang 1/10/2020
 */
 
-import { Model, Table, Column, NotEmpty, Default, ForeignKey, DataType, BelongsTo } from "sequelize-typescript";
+import { Model, Table, Column, NotEmpty, Default, ForeignKey, DataType, BelongsTo, NotNull, AllowNull } from "sequelize-typescript";
 import Car from "./car";
 import Customer from './customer';
 
@@ -23,11 +23,13 @@ export interface CommentI{
 )
 export default class Comment extends Model implements CommentI{
     @NotEmpty
+    @AllowNull(false)
     @ForeignKey(() => Customer)
     @Column
     user_id!: number;
 
     @NotEmpty
+    @AllowNull(false)
     @ForeignKey(() => Car)
     @Column
     car_id!: number;

@@ -11,7 +11,10 @@ class commentRepository implements DataRepository {
 
     async create(object: any) {
         try {
-            const comment = await Comment.create({object});
+            const comment = await Comment.create(object);
+            const customer = await Customer.findOne({where: {id: object.user_id}});
+            if(!customer) throw new ItemNotFound('customer not exsited');
+            comment.setDataValue('user', customer); //Return with customer so that view can update
             return Promise.resolve(comment);
         }catch(error){
             return Promise.reject(error);

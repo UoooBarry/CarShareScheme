@@ -18,19 +18,21 @@ router.post('/create/:id', [CommentValidator.validate, verifyToken], (req: Reque
         });
     } else {
         //Create comment with passed body
-        _Comment.create({
-            id: req.user.id,
+        const newComment = {
+            user_id: req.user.id,
             stars: req.body.stars,
             comment: req.body.comment,
-            car_id: req.params.car_id
-        })
+            car_id: req.params.id
+        }
+        _Comment.create(newComment)
             .then((comment) => {
                 res.json({
                     message: 'success',
                     comment
                 });
             })
-            .catch(() => {
+            .catch((err) => {
+                console.log(err);
                 res.json({
                     message: 'fail'
                 });

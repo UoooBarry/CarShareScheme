@@ -3,7 +3,7 @@
 */
 <template>
     <div class="form-group">
-        <form @submit.prevent="comment">
+        <form @submit.prevent="submitComment">
             <div class='form-group'>
                 <label for="stars">Stars: </label>
                 <input type="number" class="form-control" max="5" id='stars' v-model="stars">
@@ -27,8 +27,8 @@ export default {
         }
     },
     methods:{
-        comment(){
-            this.$axios.post(`${this.$carshare}/comment/create/${this.$route.params.id}`, {
+        submitComment(){
+            this.$axios.post(`${this.$carshare}/comments/create/${this.$route.params.id}`, {
                 stars: this.stars,
                 comment: this.comment
             }, {
@@ -40,6 +40,7 @@ export default {
                             title: "Comment create successfully!",
                             message: "Comment create successfully"
                         });
+                        console.log(res.data);
                         this.$emit('onCommentCreate', res.data.comment); //update comment list
                     } else {
                         res.data.errors.forEach(error => {
@@ -49,7 +50,14 @@ export default {
                             });
                         });
                     }
-            });
+            })
+            .catch(() => {
+                this.flashMessage.error({
+                            title: "Comment create fail!",
+                            message: "Please make sure you have login."
+                });
+            })
+            ;
         }
     }
 }

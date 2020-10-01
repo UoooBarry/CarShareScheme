@@ -4,21 +4,24 @@
 <template>
     <div>
         <CommentForm @onCommentCreate='pushComment'/>
+        <CommentList :comments='comments' :key='comments.length' v-if='comments'/>
     </div>
 </template>
 
 
 <script>
 import CommentForm from './CommentForm';
+import CommentList from './CommentList';
 export default {
     name: 'Comment',
     props: ['comments'],
     components:{
-        CommentForm
+        CommentForm,
+        CommentList
     },
     methods:{
         pushComment(comment){
-            this.components.push(comment);
+            this.comments.push(comment);
         }
     }
 }

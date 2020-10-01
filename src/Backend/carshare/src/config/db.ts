@@ -66,6 +66,11 @@ class database{
             sourceKey: 'id',
             foreignKey: 'car_id'
         })
+
+        Customer.hasMany(Comment, {
+            sourceKey: 'id',
+            foreignKey: 'user_id'
+        })
     }
 
     static getInstance() {

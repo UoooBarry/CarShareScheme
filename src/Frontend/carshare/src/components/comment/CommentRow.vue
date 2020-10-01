@@ -1,3 +1,6 @@
+/*
+    @Author Yongqian Huang 1/10/2020
+*/
 <template>
     <tr>
         <td>{{comment.user.first_name}} {{comment.user.family_name}}</td>
