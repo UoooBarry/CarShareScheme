@@ -9,7 +9,7 @@ import ExtendRentValidator from "../validators/ExtendRentValidator";
 import OrderValidator from "../validators/OrderValidator";
 import PaymentValidator from "../validators/PaymentValidator";
 import ProfileValidator from "../validators/ProfileValidator";
-import NoRepository from "../exceptions/IncorrectFactory";
+import CommentValidator from '../validators/CommentValidator';
 import IncorrectFactory from "../exceptions/IncorrectFactory";
 
 class RepositoryFactory{
@@ -36,6 +36,9 @@ class RepositoryFactory{
       }
       case "profile": {
         return ProfileValidator;
+      }
+      case "comment": {
+        return CommentValidator;
       }
       default: {
         throw new IncorrectFactory('Incorrect input for repository');

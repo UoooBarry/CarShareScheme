@@ -9,6 +9,7 @@
 import Customer from '../models/customer';
 import DataRepository from './dataRepository';
 import License from '../models/license';
+import ItemNotFound from '../exceptions/ItemNotFound';
 
 class customerRepository implements DataRepository{
     private static instance?: customerRepository;
@@ -51,7 +52,7 @@ class customerRepository implements DataRepository{
     async update(id: number, data: any){
         const customer = await Customer.findOne({where:{id: id}});
         try{
-            if(!customer) throw 'Customer not found';
+            if(!customer) throw new ItemNotFound('Customer not found');
             await customer.update(data);
             return Promise.resolve(true);
         }catch(error){

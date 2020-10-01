@@ -12,6 +12,7 @@ import path from 'path';
 import Location from '../models/location';
 import Customer from '../models/customer';
 import License from '../models/license';
+import Comment from '../models/comment';
 import Car from '../models/car';
 import Bill from '../models/bill';
 import Rent from '../models/rent';
@@ -59,6 +60,16 @@ class database{
         Customer.hasOne(License, {
             sourceKey: 'id',
             foreignKey: 'user_id'
+        })
+
+        Customer.hasMany(Comment, {
+            sourceKey: 'id',
+            foreignKey: 'user_id'
+        })
+
+        Rent.hasMany(Comment, {
+            sourceKey: 'id',
+            foreignKey: 'rent_id'
         })
     }
 
