@@ -9,14 +9,17 @@
  * Yongqian Huang, 29/08/2020, Add car share image upload
  * Yongqian Huang, 02/09/2020, Return if the car is popular
  * Bach Dao, 25/09/2020, return car by seat id*
+ * Yongqian Huang, 29/09/2020, Apply factor pattern
  *******************************************************/
 
 import express,{Request, Response, NextFunction} from 'express';
 const router = express.Router();
 import _Car from '../repository/carRepository';
 import _Location from '../repository/locationRepository';
-import {verifyToken} from '../helpers/authorizationHelper';
-import CarValidator from '../validators/CarValidator';
+import { verifyToken } from '../helpers/authorizationHelper';
+import validatorFactory from '../helpers/validatorFactory';
+
+const CarValidator = validatorFactory.getValidator('car');
 import uploadFile from "../helpers/Uploader";
 import multer from 'multer';
 import Car from '../models/car';

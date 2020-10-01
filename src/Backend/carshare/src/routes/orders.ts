@@ -4,6 +4,7 @@
  *         Yongqian Huang, 11/09/2020, Send receipt message
  *         Yongqian Huang, 22/09/2020, Extend rent and custom error *
  *         Yongqian Huang, 22/09/2020, Add validation of licenses *
+ * Yongqian Huang, 29/09/2020, Apply factor pattern
  *************************************************/
 
 import express,{Request, Response} from 'express';
@@ -14,13 +15,15 @@ import _Rent from '../repository/rentRepository';
 import _Bill from '../repository/billRepository';
 import _Car from '../repository/carRepository';
 import _License from '../repository/licenseRepository';
-import OrderValidator from '../validators/OrderValidator';
-import PaymentValidator from '../validators/PaymentValidator';
+import validatorFactory from '../helpers/validatorFactory';
+const OrderValidator = validatorFactory.getValidator('order');
+const PaymentValidator = validatorFactory.getValidator('payment');
+const ExtendRentValidator = validatorFactory.getValidator('extend');
 import Message from '../helpers/messageHelper';
 import ItemNotFound from '../exceptions/ItemNotFound';
 import IncorrectItem from '../exceptions/IncorrectItem';
 import { RentStatus } from '../models/rent';
-import ExtendRentValidator from '../validators/ExtendRentValidator';
+
 
 //POST: api/orders/create
 router.post('/create', [OrderValidator.validate, verifyToken], async (req: Request, res: Response) => {
