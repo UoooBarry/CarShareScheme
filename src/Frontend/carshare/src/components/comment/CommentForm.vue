@@ -1,3 +1,6 @@
+/*
+    @Author Yongqian Huang 1/10/2020
+*/
 <template>
     <div class="form-group">
         <form @submit.prevent="comment">
@@ -9,6 +12,7 @@
                 <label for="comment">Comment: </label>
                 <input type="text" class="form-control" id='comment' v-model="comment">
             </div>
+            <button type="submit" class='btn btn-lg btn-primary'>Submit</button>
         </form>
     </div>
 </template>

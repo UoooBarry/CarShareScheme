@@ -11,6 +11,8 @@ import Sequelize from 'sequelize';
 const Op = Sequelize.Op;
 import DataRepository from './dataRepository';
 import ItemNotFound from '../exceptions/ItemNotFound';
+import Comment from '../models/comment';
+import Customer from '../models/customer';
 
 class carRepository implements DataRepository {
   private static instance?: carRepository;
@@ -68,7 +70,20 @@ class carRepository implements DataRepository {
 
   async get(id: number) {
     try {
-      const car: any = await Car.findOne({ where: { id: id } });
+      const car: any = await Car.findOne({ 
+        where: { id: id },
+        include:[
+          {
+            model: Comment,
+            include:[
+              {
+                model: Customer,
+                attributes: ['id','first_name','family_name']
+              }
+            ]
+          }
+        ] 
+      });
       //Update the view number by 1
       if (car) {
         car.update({
