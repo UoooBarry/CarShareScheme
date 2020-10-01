@@ -5,6 +5,7 @@
  *           Yongqian Huang, 03/09/2020, Get nearest Location*
  * * Updated Bach Dao, 03/09/2020, Get Location by ID *
  *   Updated Bach Dao, 26/09/2020, return all locations base on user location *
+ * Yongqian Huang, 29/09/2020, Apply factor pattern  *
  * *******************************************************/
 
 import express,{Request, Response} from 'express';
