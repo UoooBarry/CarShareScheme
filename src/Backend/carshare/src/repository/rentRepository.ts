@@ -103,10 +103,16 @@ class rentRepository implements DataRepository{
   async pickUp(id: number) {
     try{
       const rent = await Rent.findOne({
-        where: {id: id}
+        where: {id: id},
+        include: [
+          {
+            model: Car
+          }
+        ]
       });
-      if(!rent) throw 'No rent error';
+      if(!rent) throw new ItemNotFound('No rent found');
       await rent.update({status: RentStatus.InProgress});
+      await rent.car.update({available: false});
       return Promise.resolve(true);
     }catch (err) {
       return Promise.reject(err);
