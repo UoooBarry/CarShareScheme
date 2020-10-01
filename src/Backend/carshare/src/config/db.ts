@@ -62,14 +62,9 @@ class database{
             foreignKey: 'user_id'
         })
 
-        Customer.hasMany(Comment, {
+        Car.hasMany(Comment, {
             sourceKey: 'id',
-            foreignKey: 'user_id'
-        })
-
-        Rent.hasMany(Comment, {
-            sourceKey: 'id',
-            foreignKey: 'rent_id'
+            foreignKey: 'car_id'
         })
     }
 

@@ -4,13 +4,13 @@ import { timeStamp } from "console";
 */
 
 import { Model, Table, Column, NotEmpty, Default, ForeignKey, DataType, BelongsTo } from "sequelize-typescript";
+import Car from "./car";
 import Customer from './customer';
-import Rent from "./rent";
 
 export interface CommentI{
     id?: number | null
     user_id: number
-    rent: Rent
+    car_id: number
     stars: number
     comment: string
 }
@@ -28,12 +28,12 @@ export default class Comment extends Model implements CommentI{
     user_id!: number;
 
     @NotEmpty
-    @ForeignKey(() => Rent)
+    @ForeignKey(() => Car)
     @Column
-    rent_id!: number;
+    car_id!: number;
 
-    @BelongsTo(() => Rent, 'rent_id')
-    rent!: Rent;
+    @BelongsTo(() => Car, 'car_id')
+    car!: Car;
 
     @BelongsTo(() => Customer, 'user_id')
     user!: Customer;

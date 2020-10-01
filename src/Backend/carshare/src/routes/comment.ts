@@ -9,7 +9,7 @@ import _Comment from '../repository/commentRepository';
 import { verifyToken } from '../helpers/authorizationHelper';
 const router = express.Router();
 
-router.post('/create', [CommentValidator.validate, verifyToken], (req: Request, res: Response) => {
+router.post('/create/:id', [CommentValidator.validate, verifyToken], (req: Request, res: Response) => {
     const validationErrors = req.validationError;
     if (validationErrors && validationErrors.length > 0) {
         res.json({
@@ -21,11 +21,13 @@ router.post('/create', [CommentValidator.validate, verifyToken], (req: Request, 
         _Comment.create({
             id: req.user.id,
             stars: req.body.stars,
-            comment: req.body.comment
+            comment: req.body.comment,
+            car_id: req.params.car_id
         })
-            .then(() => {
+            .then((comment) => {
                 res.json({
-                    message: 'success'
+                    message: 'success',
+                    comment
                 });
             })
             .catch(() => {
@@ -35,3 +37,5 @@ router.post('/create', [CommentValidator.validate, verifyToken], (req: Request, 
             });
     }
 })
+
+export default router;

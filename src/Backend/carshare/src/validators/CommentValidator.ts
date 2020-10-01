@@ -14,8 +14,9 @@ class CommentValidator implements Validator{
 
     validate(req: Request, res: Response, next: NextFunction): void {
         req.validationError = [];
+        if(!req.params.id) req.validationError.push('Car id cannot be empty');
         if(!req.body.stars) req.validationError.push('Stars cannot be empty');
-        if(req.body.stars < 0) req.validationError.push('Stars cannot be less than 0');
+        if(req.body.stars < 0 || req.body.stars > 5) req.validationError.push('Stars number incorrect');
         if(!req.body.comment) req.validationError.push('Comment cannot be empty');
         next();
     }
