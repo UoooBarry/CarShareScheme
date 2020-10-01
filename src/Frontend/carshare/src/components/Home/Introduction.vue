@@ -1,11 +1,12 @@
 /***********************************************************************
  *           @AUTHOR: Bach Dao, Updated AT: 21/08/2020                *
+ *           @UPDATING AUTHOR: DAWANAME DAWANAME, Updated AT: 01/10/2020                *
  ***********************************************************************/
 <template>
   <div v-on:scroll.native="scrollFunction">
     <div class="parallax p1">
       <div class="description main">
-        <h1>The new car share system is there</h1>
+        <h1>The New Car Share System Is There</h1>
         <p>
           Get your favorite car anytime, anywhere,
           <br />everything as you want
@@ -17,23 +18,19 @@
         <h1>Top pick for family car renting</h1>
         <p>
           We have the best renting policies with insurance
-          <br />covered in the renting package, Users can enjoy a
-          <br />self-driving weekends with the family to a new location
-          <br />without and worry!
+          covered in the <br />renting package, Users can enjoy a
+          fun weekend with<br /> the family to a new location
+          without any problem!
         </p>
       </div>
     </div>
     <div class="parallax p3">
       <div class="description purpose">
-        <h1>
-          Easy Renting process
-          supports all purpose of
-          renting
-        </h1>
+        <h1> Easy Renting process with enough supports </h1>  
         <p>
-          Our company has wide range of cars and many
-          <br />off-site locations for users to rent the cars easily
-          <br />for all kinds of renting purpose.
+          Our company has wide range of cars that supports all purpose of <br /> renting
+          and many off-site locations for users to rentthe cars  easily<br />
+          for all kinds of renting purpose.
         </p>
         <a class="btn btn-light btn-lg action-button car-list-btn" href="/Login">Get A Car Now</a>
       </div>
