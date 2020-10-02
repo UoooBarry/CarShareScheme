@@ -16,6 +16,7 @@ export enum RentStatus{
     NotPicked = 'Not picked',
     InProgress = 'In progress',
     Completed = 'Completed',
+    WaitForReview = 'Wait for review',
     Extended = 'Extended',
     Overdue = 'Overdue'
 }

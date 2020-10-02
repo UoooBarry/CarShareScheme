@@ -130,7 +130,7 @@ class rentRepository implements DataRepository{
           ]
         });
         if(!rent) throw 'No rent error';
-        await rent.update({status: RentStatus.Completed});
+        await rent.update({status: RentStatus.WaitForReview});
         await rent.car.update({location_id: location_id, available: true});
         return Promise.resolve(true);
       }catch (err) {

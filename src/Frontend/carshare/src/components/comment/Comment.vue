@@ -5,6 +5,7 @@
     <div>
         <CommentForm @onCommentCreate='pushComment'/>
         <CommentList :comments='comments' :key='comments.length' v-if='comments'/>
+        
     </div>
 </template>
 
