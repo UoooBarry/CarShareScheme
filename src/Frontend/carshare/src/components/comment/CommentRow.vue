@@ -37,11 +37,10 @@
 export default {
   name: "CommentRow",
   props: ["comment"],
-
   mounted() {
     var i = 0;
     for (i; i < this.comment.stars; i++) {
-      document.getElementsByClassName("rate-star")[i].classList.add("checked");
+      this.$el.getElementsByClassName("rate-star")[i].classList.add("checked");
     }
   }
 };
