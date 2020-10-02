@@ -18,7 +18,7 @@ const calculateDistance = async (from: string, to: string) => {
                 key: process.env.GOOGLE_MAPS_API_KEY
             }
         });
-        return Promise.resolve(result.data.rows[0].elements[0]);
+        return Promise.resolve(result.data.rows[0].elements[0]); //return the result of the matrix api
     }catch(error){
         return Promise.reject(error);
     }

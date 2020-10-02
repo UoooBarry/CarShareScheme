@@ -18,7 +18,7 @@ const verifyToken =  (req: Request, res:Response, next:NextFunction) => {
     //Check exsit
     if (typeof header === 'undefined') {
         res.sendStatus(403) //Forbidden
-        return;
+        next();
     }
     let token = header.split(' ')[1];
     JWT.verify(token,process.env.ACCESS_TOKEN_SECRET, (err: any, data: any) => {

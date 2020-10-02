@@ -6,7 +6,6 @@
  ******************************************************/
 
 import Car from '../models/car';
-import Location from '../models/location';
 import Sequelize from 'sequelize';
 const Op = Sequelize.Op;
 import DataRepository from './dataRepository';

@@ -20,7 +20,7 @@ class RepositoryFactory{
     
   }
 
-  getValidator(type: string): Validator {
+  getValidator(type: string): Validator { //return different kind of validator
     switch (type) {
       case "car": {
         return CarValidator;  
