@@ -8,11 +8,6 @@ import _Rent from '../repository/rentRepository';
 import Rent, { RentStatus } from '../models/rent';
 
 class ExtendRentValidator implements Validator{
-  validationError: string[];
-
-  constructor(){
-      this.validationError = [];
-  }
 
   async validate(req: Request, res: Response, next: NextFunction) {
     req.validationError = [];

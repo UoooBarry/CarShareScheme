@@ -9,11 +9,6 @@ import ItemNotFound from '../exceptions/ItemNotFound';
 import { RentStatus } from '../models/rent';
 
 class CommentValidator implements Validator{
-    validationError: string[];
-
-    constructor(){
-        this.validationError = [];
-    }
 
     async validate(req: Request, res: Response, next: NextFunction) {
         req.validationError = [];
