@@ -69,19 +69,19 @@ class carRepository implements DataRepository {
 
   async get(id: number) {
     try {
-      const car: any = await Car.findOne({ 
+      const car: any = await Car.findOne({
         where: { id: id },
-        include:[
+        include: [
           {
             model: Comment,
-            include:[
+            include: [
               {
                 model: Customer,
-                attributes: ['id','first_name','family_name']
+                attributes: ['id', 'first_name', 'family_name']
               }
             ]
           }
-        ] 
+        ]
       });
       //Update the view number by 1
       if (car) {

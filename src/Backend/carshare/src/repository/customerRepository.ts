@@ -1,4 +1,4 @@
- 
+
 /***********************************************************************
  *           @AUTHOR: YONGQIAN HUANG, CREATED AT: 06/07/2020           *
  * @UPDATED: YONGQIAN HUANG, 06/08/2020, GET USER by auth token  
@@ -11,29 +11,29 @@ import DataRepository from './dataRepository';
 import License from '../models/license';
 import ItemNotFound from '../exceptions/ItemNotFound';
 
-class customerRepository implements DataRepository{
+class customerRepository implements DataRepository {
     private static instance?: customerRepository;
 
     async create(object: any) {
         try {
-            const customer = await Customer.create({object})
+            const customer = await Customer.create({ object })
             return Promise.resolve(customer);
-        }catch(error){
+        } catch (error) {
             return Promise.reject(error);
         }
     }
-    
+
     async getAll() {
-        try{
-            const customers = await Customer.findAll({where: {}});
+        try {
+            const customers = await Customer.findAll({ where: {} });
             return Promise.resolve(customers);
-        }catch(error){
+        } catch (error) {
             return Promise.reject(error);
         }
     }
 
     async get(id: number) {
-        try{
+        try {
             const customer = await Customer.findOne({
                 where: { id: id },
                 include: [
@@ -43,27 +43,27 @@ class customerRepository implements DataRepository{
                 ]
             });
             return Promise.resolve(customer);
-        }catch(error){
+        } catch (error) {
             return Promise.reject(error);
         }
     }
 
     /*Update customer with json array */
-    async update(id: number, data: any){
-        const customer = await Customer.findOne({where:{id: id}});
-        try{
-            if(!customer) throw new ItemNotFound('Customer not found');
+    async update(id: number, data: any) {
+        const customer = await Customer.findOne({ where: { id: id } });
+        try {
+            if (!customer) throw new ItemNotFound('Customer not found');
             await customer.update(data);
             return Promise.resolve(true);
-        }catch(error){
+        } catch (error) {
             return Promise.reject(error);
         }
     }
 
-    static getInstance(): customerRepository{
-        if (!customerRepository.instance) 
+    static getInstance(): customerRepository {
+        if (!customerRepository.instance)
             customerRepository.instance = new customerRepository()
-        
+
         return customerRepository.instance;
     }
 
