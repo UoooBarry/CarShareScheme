@@ -9,7 +9,7 @@
         <CommentRow :comment="comment" />
       </div>
     </div>
-    <div class="page-footer" :if="cars">
+    <div class="page-footer" :if="comments">
       <jw-pagination
         :items="comments"
         :pageSize="4"

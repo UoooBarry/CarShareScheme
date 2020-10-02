@@ -276,6 +276,19 @@ body {
   padding-top: 10px;
   width: 96%;
 }
+.pay-now {
+  color: #4c4c4c;
+  border: 2px solid #4c4c4c;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: bold;
+  padding: 8px;
+  font-size: 15px;
+  cursor: pointer;
+  position: relative;
+  border-radius: 5px;
+  letter-spacing: 1.3px;
+}
 .footer-dark .item.social > a {
   font-size: 20px;
   width: 36px;
