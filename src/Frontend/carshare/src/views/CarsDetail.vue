@@ -12,27 +12,26 @@
       </div>
       <!-- <div class="col"></div> -->
       <div class="col-md car-content">
-          <CarContent :car="car" />
-          <Comment :comments="car.Comments" />
+        <CarContent :car="car" />
+        <CommentList :comments="car.Comments" :key="car.Comments.length" v-if="car.Comments" />
       </div>
     </div>
-     
+
     <BackToTop />
   </div>
-  
 </template>
 
 <script>
 import BackToTop from "@/components/BackToTop";
 import CarContent from "@/components/cars/car_detail/CarContent";
 import CarDescription from "@/components/cars/car_detail/CarDescription";
-import Comment from '@/components/comment/Comment';
+import CommentList from "@/components/comment/CommentList";
 export default {
   name: "CarDetail",
   components: {
     CarContent,
     CarDescription,
-    Comment,
+    CommentList,
     BackToTop
   },
   data() {
@@ -54,15 +53,13 @@ export default {
         this.$router.push({ name: "Cars" });
       });
   },
-  mounted() {
- 
-  }
+  mounted() {}
 };
 </script>
 
 
 <style scoped>
-.container{
+.container {
   max-width: 80%;
 }
 
