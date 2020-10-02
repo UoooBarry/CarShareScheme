@@ -8,7 +8,6 @@ import Bill from '../models/bill';
 import Rent, {RentStatus} from '../models/rent'
 import Car from '../models/car';
 import { Op } from 'sequelize';
-import { throws } from 'assert';
 import ItemNotFound from '../exceptions/ItemNotFound';
 
 class billRepository implements DataRepository{
