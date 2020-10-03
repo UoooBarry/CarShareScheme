@@ -51,29 +51,6 @@ body {
   align-items: center;
 }
 
-.description {
-  position: relative;
-
-  transform: translate(-50%, -50%);
-  color: whitesmoke;
-  padding: 10px;
-  font-size: 20px;
-  font-weight: 500;
-  font-family: Montserrat;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 20px;
-  line-height: 24px;
-}
-
-.description.main,
-.description.family,
-.description.purpose {
-  box-shadow: 0 0 32px rgba(0, 0, 0, 0.5);
-  overflow: hidden;
-  background-color: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(5px);
-}
 
 .form-check {
   margin-bottom: 10px;
