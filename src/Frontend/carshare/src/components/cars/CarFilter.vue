@@ -1,5 +1,6 @@
 /***********************************************************************
  *           @AUTHOR: Bach Dao, CREATED AT: 25/09/2020                *
+              Yongqian Huang updated at: 03/10/2020 rewrite filter   *
  ***********************************************************************/
 <template>
   <div class="wrapper">
@@ -13,78 +14,68 @@
         </label>
         <ul>
           <li>
-            <form @submit.prevent="search">
-              <input type="hidden" v-model="searchItem" />
-              <button type="submit" class="carFilterItem" v-on:click="filterWord('audi')">Audi</button>
-            </form>
+            <div>
+              <button type="submit" class="carFilterItem" v-on:click="$emit('filter-brand','Audi')">Audi</button>
+            </div>
           </li>
           <li>
-            <form @submit.prevent="search">
-              <input type="hidden" v-model="searchItem" />
-              <button type="submit" class="carFilterItem" v-on:click="filterWord('BMW')">BMW</button>
-            </form>
+            <div>
+              <button type="submit" class="carFilterItem" v-on:click="$emit('filter-brand','BMW')">BMW</button>
+            </div>
           </li>
           <li>
-            <form @submit.prevent="search">
-              <input type="hidden" v-model="searchItem" />
-              <button type="submit" class="carFilterItem" v-on:click="filterWord('Ferrari')">Ferrari</button>
-            </form>
+            <div>
+              <button type="submit" class="carFilterItem" v-on:click="$emit('filter-brand','Ferrari')">Ferrari</button>
+            </div>
           </li>
           <li>
-            <form @submit.prevent="search">
-              <input type="hidden" v-model="searchItem" />
-              <button type="submit" class="carFilterItem" v-on:click="filterWord('Ford')">Ford</button>
-            </form>
+            <div>
+              <button type="submit" class="carFilterItem" v-on:click="$emit('filter-brand','Ford')">Ford</button>
+            </div>
           </li>
           <li>
-            <form @submit.prevent="search">
-              <input type="hidden" v-model="searchItem" />
-              <button type="submit" class="carFilterItem" v-on:click="filterWord('kia')">KIA</button>
-            </form>
+            <div>
+              <button type="submit" class="carFilterItem" v-on:click="$emit('filter-brand','kia')">KIA</button>
+            </div>
           </li>
           <li>
-            <form @submit.prevent="search">
-              <input type="hidden" v-model="searchItem" />
-              <button type="submit" class="carFilterItem" v-on:click="filterWord('holden')">Holden</button>
-            </form>
+            <div>
+              <button type="submit" class="carFilterItem" v-on:click="$emit('filter-brand','holden')">Holden</button>
+            </div>
           </li>
           <li>
-            <form @submit.prevent="search">
-              <input type="hidden" v-model="searchItem" />
-              <button type="submit" class="carFilterItem" v-on:click="filterWord('nissan')">Nissan</button>
-            </form>
+            <div>
+              <button type="submit" class="carFilterItem" v-on:click="$emit('filter-brand','nissan')">Nissan</button>
+            </div>
           </li>
           <li>
-            <form @submit.prevent="search">
-              <input type="hidden" v-model="searchItem" />
+            <form>
               <button
                 type="submit"
                 class="carFilterItem"
-                v-on:click="filterWord('lamborghini')"
+                v-on:click="$emit('filter-brand','lamborghini')"
               >Lamborghini</button>
             </form>
           </li>
           <li>
-            <form @submit.prevent="search">
-              <input type="hidden" v-model="searchItem" />
-              <button type="submit" class="carFilterItem" v-on:click="filterWord('isuzu')">ISUZU</button>
-            </form>
+            <div>
+              <button type="submit" class="carFilterItem" v-on:click="$emit('filter-brand','isuzu')">ISUZU</button>
+            </div>
           </li>
           <li>
-            <form @submit.prevent="search">
-              <input type="hidden" v-model="searchItem" />
+            <div>
               <button
                 type="submit"
                 class="carFilterItem"
                 v-on:click="filterWord('range rover')"
               >Range Rover</button>
-            </form>
+            </div>
           </li>
           <li>
-            <form @submit.prevent="search">
+            <div>
               <input type="hidden" v-model="searchItem" />
-              <button type="submit" class="carFilterItem" v-on:click="filterWord('toyota')">Toyota</button>
-            </form>
+              <button type="submit" class="carFilterItem" v-on:click="$emit('filter-brand','toyota')">Toyota</button>
+            </div>
           </li>
         </ul>
       </li>
@@ -96,28 +87,24 @@
         </label>
         <ul>
           <li>
-            <form @submit.prevent="filterSeat">
-              <input type="hidden" v-model="searchItem" />
-              <button type="submit" class="carFilterItem" v-on:click="filterNumber(7)">7</button>
-            </form>
+            <div>
+              <button type="button" class="carFilterItem" v-on:click="$emit('filter-seat', 7)">7</button>
+            </div>
           </li>
           <li>
-            <form @submit.prevent="filterSeat">
-              <input type="hidden" v-model="searchItem" />
-              <button type="submit" class="carFilterItem" v-on:click="filterNumber(5)">5</button>
-            </form>
+            <div>
+              <button type="button" class="carFilterItem" v-on:click="$emit('filter-seat', 5)">5</button>
+            </div>
           </li>
           <li>
-            <form @submit.prevent="filterSeat">
-              <input type="hidden" v-model="searchItem" />
-              <button type="submit" class="carFilterItem" v-on:click="filterNumber(4)">4</button>
-            </form>
+            <div>
+              <button type="button" class="carFilterItem" v-on:click="$emit('filter-seat', 4)">4</button>
+            </div>
           </li>
           <li>
-            <form @submit.prevent="filterSeat">
-              <input type="hidden" v-model="searchItem" />
-              <button type="submit" class="carFilterItem" v-on:click="filterNumber(2)">2</button>
-            </form>
+            <div>
+              <button type="button" class="carFilterItem" v-on:click="$emit('filter-seat', 2)">2</button>
+            </div>
           </li>
         </ul>
       </li>
@@ -130,47 +117,28 @@
         </label>
         <ul>
           <li>
-            <form @submit.prevent="search">
-              <input type="hidden" v-model="searchItem" />
+            <div>
               <button
-                type="submit"
+                type="button"
                 class="carFilterItem"
-                v-on:click="filterWord('automatic')"
+                v-on:click="$emit('filter-gear','automatic')"
               >Automatic</button>
-            </form>
+            </div>
           </li>
           <li>
-            <form @submit.prevent="search">
-              <input type="hidden" v-model="searchItem" />
-              <button type="submit" class="carFilterItem" v-on:click="filterWord('manual')">Manual</button>
-            </form>
+            <div>
+              <button type="button" class="carFilterItem" v-on:click="$emit('filter-gear','manual')">Manual</button>
+            </div>
           </li>
         </ul>
       </li>
     </ul>
+    <button type="button" class="carFilterItem" v-on:click="$router.go()">Clear filter</button>
   </div>
 </template>
-<script>
-import CarMixin from "@/mixins/carMixin";
-export default {
-  mixins: [CarMixin],
-  data() {
-    return {
-      searchItem: ""
-    };
-  },
-  methods: {
-    filterWord(carName) {
-      this.searchItem = carName;
-      this.update();
-    },
-    filterNumber(seat) {
-      this.searchItem = seat;
-      this.update();
-    }
-  }
-};
-</script>
+
+
+
 <style scoped>
 h3 {
   text-align: left;

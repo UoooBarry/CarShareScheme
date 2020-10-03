@@ -1,6 +1,7 @@
 /**************************************************
  * @AUTHOR YONGQIAN HUANG, CREATEED AT 27/08/2020
  * Bach Dao, Updated at 25/09/2020*
+ * Yongqian Huang updated at: 03/10/2020 rewrite filter   *
  **************************************************/
 
 export default {
@@ -11,10 +12,11 @@ export default {
       order: "",
       cars: [],
       searchItem: "",
+      loadingKey: 0
     };
   },
   methods: {
-    filter(item, order) {
+    sort_car(item, order) {
       const target = event.target;
       document.getElementById("navbarDropdown").innerHTML = target.innerHTML;
       this.selectedItem = target.innerHTML;
@@ -61,18 +63,23 @@ export default {
         })
         .catch((err) => console.log(err));
     },
-    filterSeat() {
-      this.$axios
-        .get(`${this.$carshare}/cars/filter/seat`, {
-          params: {
-            query: this.searchItem,
-          },
-        })
-        .then((res) => {
-          this.cars = res.data.cars;
-          this.update();
-        })
-        .catch((err) => console.log(err));
+    filterSeats(number) {
+      this.cars = this.cars.filter((car) => {
+        return car.seats === number
+      });
+      this.loadingKey ++;
+    },
+    filterBrand(brand) {
+      this.cars = this.cars.filter((car) => {
+        return car.brand.toUpperCase() === brand.toUpperCase(); //ignore case
+      });
+      this.loadingKey ++;
+    },
+    filterGear(gear) {
+      this.cars = this.cars.filter((car) => {
+        return car.gear.toUpperCase() === gear.toUpperCase(); //ignore case
+      });
+      this.loadingKey ++;
     },
     update() {
       this.$emit("onFilter", this.cars);

@@ -4,6 +4,7 @@
  *   Bach Dao, Updated AT: 25/08/2020      navigation layout            *
  *   Bach Dao, Updated AT: 27/08/2020      tool tips                    *  
  *Yongqian Huang updated at 27/08/2020 Add location check to display cars*
+               Yongqian Huang updated at: 03/10/2020 rewrite filter     *
  ***********************************************************************/
 <template>
   <div>
@@ -16,7 +17,11 @@
 
     <div class="row">
       <div class="filter-col">
-        <CarFilter v-on:onFilter="update"/>
+        <CarFilter 
+          @filter-seat="filterSeats"
+          @filter-brand="filterBrand"
+          @filter-gear="filterGear"
+        />
       </div>
 
       <div class="car-list-col">
