@@ -6,11 +6,6 @@ import Validator from './Validator';
 import {Request, Response, NextFunction} from 'express';
 
 class OrderValidator implements Validator{
-    validationError: string[];
-
-    constructor(){
-        this.validationError = [];
-    }
 
     validate(req: Request, res: Response, next: NextFunction){
        req.validationError = [];
