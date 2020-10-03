@@ -31,7 +31,7 @@ router.get('/:id/', async (req, res) => {
     }
 });
 
-//GET /api/customers/overdue/:id
+//GET /api/customers/overdue/
 router.get('/overdue/', verifyToken, (req: Request,res: Response) => {
     const cluster = {
         user_id: req.user.id,

@@ -1,6 +1,7 @@
 /*************************************************
  * @AUTHOR YONGQIAN HUANG, CREATED AT 02/09/2020 
  * Updated in 03/09/2020 migrate to typescript   *
+ * Updated in 03/1-/2020 Add constraint of rent  *
  *************************************************/
 
 import Rent, {RentStatus} from '../models/rent';
@@ -189,6 +190,28 @@ class rentRepository implements DataRepository{
       const rents = Rent.findAll({
         where: {
           start_from: {[Op.gte]: scheduledDate} 
+        },
+        include: [
+          {
+            model: Car
+          }
+        ]
+      })
+      return Promise.resolve(rents);
+    }catch (err) {
+      return Promise.reject(err);
+    }
+  }
+
+  async getUserPendingRents(user_id: number){
+    try {
+      const rents = Rent.findAll({
+        where: {
+          user_id: user_id,
+          [Op.or]:[{
+            status: RentStatus.NotPicked,
+            stauts: RentStatus.InProgress
+          }]     
         },
         include: [
           {

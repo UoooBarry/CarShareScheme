@@ -23,6 +23,7 @@ import Message from '../helpers/messageHelper';
 import ItemNotFound from '../exceptions/ItemNotFound';
 import IncorrectItem from '../exceptions/IncorrectItem';
 import { RentStatus } from '../models/rent';
+import AccountUnavailable from '../exceptions/AccountUnavailable';
 
 
 //POST: api/orders/create
@@ -36,12 +37,13 @@ router.post('/create', [OrderValidator.validate, verifyToken], async (req: Reque
         });
       }else{
         try {
-            const car = await _Car.get(req.body.car_id);
+            const pendingRents = await _Rent.getUserPendingRents(req.user.id); //Get not picked and in progress rent of the user.
+            if(pendingRents.length > 0) throw new AccountUnavailable("Your account already had one pending rent"); //Cannot have exsited rent
             const license = await _License.getByUserId(req.user.id);
-            if (!license || !license.isValidated) throw new IncorrectItem('Your account is not validate yet, please go to license validation page.');
-            if(!car.available) throw new IncorrectItem('The car does not available yet');
-    
-            const feeToPay = (req.body.period * car.price + car.price * 0.1).toFixed(2);
+            if (!license || !license.isValidated) throw new AccountUnavailable('Your account is not validate yet, please go to license validation page.');
+            
+            if(!req.car) throw new ItemNotFound('Incorrect request car');
+            const feeToPay = (req.body.period * req.car.price + req.car.price * 0.1).toFixed(2);
             
             
             //Create bill
