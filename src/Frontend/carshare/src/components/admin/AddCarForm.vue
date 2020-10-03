@@ -158,8 +158,8 @@ export default {
           }
           console.log("step 1");
           this.flashMessage.success({
-            title: "Register success!",
-            message: "Register successfully!"
+            title: "Create car success!",
+            message: "create car successfully!"
           });
         })
         .catch(err => console.log(err));
