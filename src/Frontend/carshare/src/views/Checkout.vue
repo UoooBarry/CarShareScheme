@@ -38,7 +38,7 @@
           v-on:nextStep="nextStep()"
         />
       </div>
-      <div class="col-auto" style="min-height:700px">
+      <div class="col-auto" style="min-height:700px" id="subtotal">
         <SubTotal :car="car" :day="day" />
       </div>
     </div>
@@ -163,7 +163,9 @@ button {
   border: none;
   background: none;
 }
-
+#subtotal{
+  margin-bottom: 20px;
+}
 #payment,
 #pickup,
 #btn-order {

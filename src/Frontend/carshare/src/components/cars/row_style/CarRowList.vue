@@ -7,9 +7,10 @@
       <CarRow v-bind:car="car" style="max-width: 100%" />
     </div>
 
-    <div class="page-footer" :if="cars">
+    <div class="page-footer" v-if="cars.length">
       <jw-pagination :items="cars" :pageSize="6" @changePage="onChangePage" :labels="customLabels"></jw-pagination>
     </div>
+    <div class="page-footer" v-else><h1>There is no car available</h1></div>
   </div>
 </template>
 

@@ -1,5 +1,5 @@
 /**************************************************
- * @AUTHOR YONGQIAN HUANG, CREATEED AT 27/08/2020 
+ * @AUTHOR YONGQIAN HUANG, CREATEED AT 27/08/2020
  * Bach Dao, Updated at 25/09/2020*
  **************************************************/
 
@@ -16,6 +16,7 @@ export default {
   methods: {
     filter(item, order) {
       const target = event.target;
+      document.getElementById("navbarDropdown").innerHTML = target.innerHTML;
       this.selectedItem = target.innerHTML;
       target.parentNode.classList.add("active");
       this.sort = item;
