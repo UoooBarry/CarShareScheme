@@ -43,7 +43,7 @@
 export default {
   name: "Admin",
   created(){
-    localStorage.removeItem('authToken');
+    sessionStorage.removeItem('authToken');
   },
   data() {
     return {
@@ -60,7 +60,7 @@ export default {
         })
         .then(async (res) => {
           if (res.data.message === "success") {
-            localStorage.setItem("authToken", res.data.token);
+            sessionStorage.setItem("authToken", res.data.token);
             
             const header = {
               authorization: `PBD ${res.data.token}`
@@ -72,7 +72,7 @@ export default {
                 title: "Login as Admin success",
                 message: `Welcome admin!`
               });
-              this.$router.push("/admin36737123719368365255336327043632505/users");
+              this.$router.push({name: 'AdminUser'});
             } else {
               this.flashMessage.warning({
                 title: "Login fail",

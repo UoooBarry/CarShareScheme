@@ -73,7 +73,6 @@
           </li>
           <li>
             <div>
-              <input type="hidden" v-model="searchItem" />
               <button type="submit" class="carFilterItem" v-on:click="$emit('filter-brand','toyota')">Toyota</button>
             </div>
           </li>
