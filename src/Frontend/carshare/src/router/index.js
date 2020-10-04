@@ -139,7 +139,8 @@ const routes = [
     main: () => import('../views/admin/User.vue')
   },
   meta: {
-    requiresAuth: true
+    requiresAuth: true,
+    requiresAdminAuth: true
   }
 },
 {
@@ -150,7 +151,8 @@ const routes = [
     main: () => import('../views/admin/Cars.vue')
   },
   meta: {
-    requiresAuth: true
+    requiresAuth: true,
+    requiresAdminAuth: true
   }
 },
 {
@@ -161,7 +163,8 @@ const routes = [
     main: () => import('../views/admin/Licenses.vue')
   },
   meta: {
-    requiresAuth: true
+    requiresAuth: true,
+    requiresAdminAuth: true
   }
 },
 {
@@ -172,7 +175,8 @@ const routes = [
     main: () => import('../views/admin/AddCar.vue')
   },
   meta: {
-    requiresAuth: true
+    requiresAuth: true,
+    requiresAdminAuth: true
   }
 },
 {
@@ -183,7 +187,8 @@ const routes = [
     main: () => import('../views/admin/Orders.vue')
   },
   meta: {
-    requiresAuth: true
+    requiresAuth: true,
+    requiresAdminAuth: true
   }
 }
 ]

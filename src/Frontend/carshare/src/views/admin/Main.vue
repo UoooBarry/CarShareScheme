@@ -1,5 +1,6 @@
 /***********************************************************************
  *           @AUTHOR: Bach Dao, CREATED AT: 16/08/2020                *
+ * Yongqian Huang updated at: 04/10/2020 Fixed admin portal login issue*
  ***********************************************************************/
 <template>
   <div>
@@ -60,12 +61,9 @@ export default {
         })
         .then(async (res) => {
           if (res.data.message === "success") {
-            sessionStorage.setItem("authToken", res.data.token);
+            this.authorize(res.data.token); //from global mixin
             
-            const header = {
-              authorization: `PBD ${res.data.token}`
-            };
-            const authRes = await this.$axios.get(`${this.$admin}/verify`, { headers: header});
+            const authRes = await this.$axios.get(`${this.$admin}/verify`, { headers: this.header});
             if (authRes.data.authorize) {
               //if the requested user is an admin   
               this.flashMessage.success({
