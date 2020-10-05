@@ -59,6 +59,7 @@
             <div class="dropdown-menu" role="menu">
               <a class="dropdown-item" role="presentation" href="/user/profile">{{ $t('profile') }}</a>
               <a class="dropdown-item" role="presentation" href="/rents">{{ $t('rentHistory') }}</a>
+              <a class="dropdown-item" role="presentation" href="/rents">Over due bill</a>
               <a class="dropdown-item" role="presentation" href="#" v-on:click="this.logout">{{ $t('logout') }}</a>
             </div>
           </li>

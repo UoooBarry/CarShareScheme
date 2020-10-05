@@ -210,7 +210,7 @@ class rentRepository implements DataRepository{
           user_id: user_id,
           [Op.or]:[{
             status: RentStatus.NotPicked,
-            stauts: RentStatus.InProgress
+            status: RentStatus.InProgress
           }]     
         },
         include: [
