@@ -2,59 +2,27 @@
 
 const trigger = [
   ["hi", "hey", "hello", "good morning", "good afternoon", "start"],
-  ["how are you", "how is life", "how are things"],
-  ["what are you doing", "what is going on", "what is up"],
-  ["how old are you"],
-  ["who are you", "are you human", "are you bot", "are you human or bot"],
-  ["who created you", "who made you"],
   [
-    "your name please",
-    "your name",
-    "may i know your name",
-    "what is your name",
-    "what call yourself",
+    "car",
+    "what car do you have",
+    "i am looking for car",
+    "car suggestion",
+    "cars",
   ],
-  ["i love you"],
-  ["happy", "good", "fun", "wonderful", "fantastic", "cool"],
-  ["bad", "bored", "tired"],
-  ["help me", "tell me story", "tell me joke"],
-  ["ah", "yes", "ok", "okay", "nice"],
-  ["thanks", "thank you"],
-  ["bye", "good bye", "goodbye", "see you later"],
-  ["what should i eat today"],
-  ["bro"],
+  ["cheap", "cheap car", "cheap cars"],
   ["what", "why", "how", "where", "when"],
 ];
 
 // These are bot responses, paired in order with the above 'trigger' phrases
 
 const reply = [
-  ["Hello, what can I help you today? Try 'Car' 'Support' 'FAQ' Hello, what can I help you today? Try 'Car' 'Support' 'FAQ' Hello, what can I help you today? Try 'Car' 'Support' 'FAQ' Hello, what can I help you today? Try 'Car' 'Support' 'FAQ' Hello, what can I help you today? Try 'Car' 'Support' 'FAQ' Hello, what can I help you today? Try 'Car' 'Support' 'FAQ' Hello, what can I help you today? Try 'Car' 'Support' 'FAQ' Hello, what can I help you today? Try 'Car' 'Support' 'FAQ'"],
+  ["Hello, what can I help you today? Try 'Car' 'Support' 'FAQ'."],
   [
-    "Fine... how are you?",
-    "Pretty well, how are you?",
-    "Fantastic, how are you?",
+    "We have wide range of cars to choose from, from every day cars to traveling cars, or from family car to luxury cars.",
+    "I can help you to find your car, Try to type in a keyword, for example 'traveling' 'family' 'luxury' 'cheap'.",
   ],
-  [
-    "Nothing much",
-    "About to go to sleep",
-    "Can you guess?",
-    "I don't know actually",
-  ],
-  ["I am infinite"],
-  ["I am just a bot", "I am a bot. What are you?"],
-  ["The one true God, JavaScript"],
-  ["I am nameless", "I don't have a name"],
-  ["I love you too", "Me too"],
-  ["Have you ever felt bad?", "Glad to hear it"],
-  ["Why?", "Why? You shouldn't!", "Try watching TV"],
-  ["What about?", "Once upon a time..."],
-  ["Tell me a story", "Tell me a joke", "Tell me about yourself"],
-  ["You're welcome"],
-  ["Bye", "Goodbye", "See you later"],
-  ["Sushi", "Pizza"],
-  ["Bro!"],
-  ["Yes?"],
+  ["How about Toyota?"],
+  ["Yes?", "Can you be more specific?"],
 ];
 
 // This is a small set of basically random 'catch alls' for anything that the user enters outside of the possible trigger phrases
@@ -133,11 +101,11 @@ function addChat(input, product) {
     today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
   var dateTime = date + " " + time;
   userDiv.className = "userchat";
-  userDiv.innerHTML = `You <span class="user-response">${input}</span> <p style="margin-top:15px">${dateTime}</p>`;
+  userDiv.innerHTML = `You <div  class="user-response"><span>${input}</span></div> <p style="margin-top:15px">${dateTime}</p>`;
   mainDiv.appendChild(userDiv);
   let botDiv = document.createElement("div");
   botDiv.className = "botchat";
-  botDiv.innerHTML = `<span class="bot-response">${product}</span> Chatbot <p style="margin-top:15px">${dateTime}</p>`;
+  botDiv.innerHTML = `<div class="bot-response"><span>${product}</span></div> Chatbot <p style="margin-top:15px">${dateTime}</p>`;
   mainDiv.appendChild(botDiv);
   updateScroll();
 

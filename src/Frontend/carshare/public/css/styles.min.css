@@ -1,18 +1,19 @@
-html, body {
+html,
+body {
   height: 100%;
   margin: 0;
   width: 100%;
   margin: 0px;
   padding: 0px;
-  overflow-x: hidden; 
+  overflow-x: hidden;
   scroll-behavior: smooth;
-  font-family: AvenirLTStd-Book,Arial,sans-serif;
-    font-size: .875rem;
-    letter-spacing: .03125rem;
-    line-height: 1.4;
+  font-family: AvenirLTStd-Book, Arial, sans-serif;
+  font-size: 0.875rem;
+  letter-spacing: 0.03125rem;
+  line-height: 1.4;
 }
 .navbar {
-  font-family: 'Suisseintl webm', sans-serif;
+  font-family: "Suisseintl webm", sans-serif;
   min-height: 40px;
   box-shadow: none;
   border: none;
@@ -21,8 +22,8 @@ html, body {
   font-size: 16px;
   margin-right: auto;
   margin-left: auto;
-  box-shadow: 0 2px 2px -2px rgba(0,0,0,.2);
-} 
+  box-shadow: 0 2px 2px -2px rgba(0, 0, 0, 0.2);
+}
 
 .car-item {
   display: flex !important;
@@ -31,10 +32,10 @@ html, body {
   justify-content: center;
   align-items: center;
 }
-.pickup-item{
+.pickup-item {
   display: flex !important;
   margin: 10px;
-  width: 225px; 
+  width: 225px;
   justify-content: center;
   align-items: center;
 }
@@ -74,16 +75,15 @@ html, body {
   backdrop-filter: blur(5px);
 }
 
-.form-check{
+.form-check {
   margin-bottom: 10px;
 }
 
-.price{
+.price {
   text-transform: uppercase;
-  letter-spacing: .125rem;
+  letter-spacing: 0.125rem;
   width: 100%;
 }
-
 
 .btn {
   display: inline-block;
@@ -141,9 +141,8 @@ html, body {
   font-size: 20px;
 }
 
-
 .space {
-  background-color: #F8F8F8;
+  background-color: #f8f8f8;
   width: 100%;
   float: left;
   clear: both;
@@ -153,7 +152,7 @@ html, body {
 .footer-dark {
   padding: 20px 0;
   color: #f0f9ff;
-  background: url("../img/footerbg.jpg") ;
+  background: url("../img/footerbg.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: 100% 70%;
@@ -165,8 +164,8 @@ html, body {
   background-color: #282d32;
 }
 
-.nav-item{
-  font-family: 'Suisseintl webm', sans-serif;
+.nav-item {
+  font-family: "Suisseintl webm", sans-serif;
   color: #1b212c;
   font-size: 16px;
   line-height: 20px;
@@ -175,19 +174,19 @@ html, body {
   text-transform: none;
 }
 
-.brand-img{
+.brand-img {
   margin-top: 0;
   margin-right: 10px;
   max-width: 60%;
   max-height: 60%;
 }
 
-.brand{
+.brand {
   display: inline;
 }
 
-.parallax{
-        /* Set a specific height */
+.parallax {
+  /* Set a specific height */
   min-height: 800px;
 
   /* Create the parallax scrolling effect */
@@ -195,25 +194,23 @@ html, body {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  
 }
 
-.p1{
-  background-image: url('../img/b1.webp');
+.p1 {
+  background-image: url("../img/b1.webp");
 }
-.p2{
-  background-image: url('../img/b2.webp');
+.p2 {
+  background-image: url("../img/b2.webp");
 }
-.p3{
-  background-image: url('../img/b3.webp');
+.p3 {
+  background-image: url("../img/b3.webp");
 }
 
-
-.custom-text-input{
+.custom-text-input {
   background: transparent !important;
   border: none !important;
   border-bottom: 1px solid #000000 !important;
-  -webkit-box-shadow: none ;
+  -webkit-box-shadow: none;
   box-shadow: none !important;
   border-radius: 0 !important;
 }
@@ -350,12 +347,12 @@ img {
   white-space: nowrap;
   box-sizing: border-box;
 }
-.phone-holder{
+.phone-holder {
   min-height: 650px;
 }
-#picture img{
+#picture img {
   width: 60%;
-  height:60%;
+  height: 60%;
 }
 .login-card .form-signin button,
 .login-card .form-signin input[type="email"],
@@ -397,7 +394,6 @@ img {
 }
 .login-card .forgot-password {
   color: #6891a2;
-  
 }
 .login-card .forgot-password:active,
 .login-card .forgot-password:focus,
@@ -450,7 +446,7 @@ img {
   .navbar .navbar-nav > li > a {
     margin: 0 0 0 1px;
   }
- 
+
   .header-blue .navbar {
     padding-top: 1rem;
     padding-bottom: 1rem;
@@ -478,7 +474,6 @@ img {
   outline: 0;
 }
 
-
 .header-blue .hero h1 {
   color: #fff;
   font-size: 40px;
@@ -494,8 +489,6 @@ img {
   font-weight: 300;
 }
 
-
-
 @media (min-width: 992px) {
   .header-blue .navbar-nav .nav-link,
   .header-dark .navbar.navbar .navbar-nav .nav-link {
@@ -509,16 +502,15 @@ img {
   }
 }
 
-
 ._vue-flash-msg-body {
   z-index: 1;
 }
 
-.page-item.active .page-link{
+.page-item.active .page-link {
   z-index: 3;
   color: #fff;
   background: #a9a0a0 !important;
-  border-color:  #b1bfd8 !important;
+  border-color: #b1bfd8 !important;
 }
 
 .carlist {
@@ -549,25 +541,29 @@ img {
   text-transform: uppercase;
 }
 
-.admin-main{
+.admin-main {
   min-height: 800px;
 }
 
 /* chat */
-.userchat{
+.userchat {
   text-align: left;
 }
-.botchat{
+.botchat {
   text-align: right;
 }
-.bot-response{
-  background-color: #f1f1f1;
-  padding: 10px;
- border-radius: 15px;
-}
-
-.user-response{
+.bot-response {
   background-color: #f1f1f1;
   padding: 10px;
   border-radius: 15px;
+  text-align: justify;
+  display: inline-block;
+}
+
+.user-response {
+  background-color: #f1f1f1;
+  padding: 10px;
+  border-radius: 15px;
+  text-align: justify;
+  display: inline-block;
 }
