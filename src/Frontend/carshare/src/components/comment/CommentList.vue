@@ -4,12 +4,12 @@
 
 <template>
   <div class="review-section">
-    <div v-for="comment in pageOfItems" v-bind:key="comment.id">
-      <div>
-        <CommentRow :comment="comment" />
-      </div>
-    </div>
     <div class="page-footer" v-if="comments.length">
+      <div v-for="comment in pageOfItems" v-bind:key="comment.id">
+        <div>
+          <CommentRow :comment="comment" />
+        </div>
+      </div>
       <jw-pagination
         :items="comments"
         :pageSize="4"
@@ -17,7 +17,9 @@
         :labels="customLabels"
       ></jw-pagination>
     </div>
-    <div class="page-footer" v-else><h1>Be first to rent this car and leave review</h1></div>
+    <div class="page-footer" v-else>
+      <h1>Be first to rent this car and leave review</h1>
+    </div>
   </div>
 </template>
 

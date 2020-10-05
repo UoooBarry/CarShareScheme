@@ -3,12 +3,17 @@
  ***********************************************************************/
 <template>
   <div class="carlist container">
-    <div v-for="(car) in pageOfItems" v-bind:key="car.id" class="row car">
-      <CarRow v-bind:car="car" style="max-width: 100%" />
-    </div>
-
     <div class="page-footer" v-if="cars.length > 0">
-      <jw-pagination :items="cars" :pageSize="6" @changePage="onChangePage" :labels="customLabels"></jw-pagination>
+      <div v-for="(car) in pageOfItems" v-bind:key="car.id" class="row car">
+        <CarRow v-bind:car="car" style="max-width: 100%" />
+      </div>
+      <jw-pagination
+        :key="cars.length"
+        :items="cars"
+        :pageSize="6"
+        @changePage="onChangePage"
+        :labels="customLabels"
+      ></jw-pagination>
     </div>
     <div class="page-footer" v-else>
       <h1>There is no car available</h1>
@@ -48,5 +53,4 @@ export default {
 
 
 <style scoped>
-
 </style>
