@@ -42,6 +42,7 @@ export default {
     }
   },
   async created(){ 
+    console.log(this.header);
     const response = await this.$axios.get(`${this.$carshare}/customers/`,{headers: this.header});
     if(response.data.message === "success"){
       this.customer = response.data.customer;
