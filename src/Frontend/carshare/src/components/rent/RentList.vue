@@ -11,10 +11,10 @@
       <hr class="user" />
     </div>
 
+    <div v-for="rent in pageOfItems" v-bind:key="rent.id" class="container">
+      <RentRow v-bind:rent="rent" />
+    </div>
     <div class="page-footer" v-if="rents.length">
-      <div v-for="rent in pageOfItems" v-bind:key="rent.id" class="container">
-        <RentRow v-bind:rent="rent" />
-      </div>
       <jw-pagination :items="rents" :pageSize="6" @changePage="onChangePage" :labels="customLabels"></jw-pagination>
     </div>
     <div class="page-footer" v-else>
