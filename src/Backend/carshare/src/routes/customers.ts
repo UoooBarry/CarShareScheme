@@ -32,12 +32,14 @@ router.get('/:id/', async (req, res) => {
 });
 
 //GET /api/customers/overdue/
-router.get('/overdue/', verifyToken, (req: Request,res: Response) => {
-    const cluster = {
-        user_id: req.user.id,
-        type: BillType.OverdueFee
+router.get('/overdue/all', verifyToken, (req: Request,res: Response) => {
+    const caluse = {
+        where:{
+            user_id: req.user.id,
+            type: BillType.OverdueFee
+        }
     }
-    _Bill.getBy(cluster)
+    _Bill.getBy(caluse)
         .then((bills) => {
             res.json({bills});
         })

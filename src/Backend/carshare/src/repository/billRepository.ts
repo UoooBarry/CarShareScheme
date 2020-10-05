@@ -4,7 +4,7 @@
  *************************************************/
 
 import DataRepository from './dataRepository';
-import Bill from '../models/bill';
+import Bill, { BillType } from '../models/bill';
 import Rent, {RentStatus} from '../models/rent'
 import Car from '../models/car';
 import { Op } from 'sequelize';
@@ -78,9 +78,9 @@ class billRepository implements DataRepository{
     }
   }
 
-  async getBy(cluster: any) {
+  async getBy(caluse: any) {
     try{
-      const bill = Bill.findAll(cluster);
+      const bill = Bill.findAll(caluse);
       return Promise.resolve(bill);
     }catch (err) {
       return Promise.reject(err);
