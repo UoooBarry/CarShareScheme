@@ -208,10 +208,14 @@ class rentRepository implements DataRepository{
       const rents = Rent.findAll({
         where: {
           user_id: user_id,
-          [Op.or]:[{
-            status: RentStatus.NotPicked,
-            status: RentStatus.InProgress
-          }]     
+          [Op.or]:[
+            {
+              status: RentStatus.NotPicked,
+            },
+            {
+              status: RentStatus.InProgress
+            }
+        ]     
         },
         include: [
           {
