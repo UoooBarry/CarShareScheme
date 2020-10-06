@@ -45,11 +45,5 @@ export default {
 
 
 <style scoped>
-.page-footer {
-  border-top: 1px solid lightgrey;
-  padding-top: 10px;
-  width: 96%;
-}
-
 
 </style>

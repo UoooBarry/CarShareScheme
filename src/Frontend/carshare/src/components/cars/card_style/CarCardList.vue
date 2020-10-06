@@ -46,18 +46,10 @@ export default {
 
 
 <style scoped>
-.page-footer{
-  border-top: 1px solid lightgrey;
-  padding-top:10px;
-  width: 96%;
-}
+
 .col-sm-3.car {
   margin-bottom: 40px;
 }
 
-.carlist {
-  min-height: 800px;
-  max-width: 1500px;
-}
 
 </style>

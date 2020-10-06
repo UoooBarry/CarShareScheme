@@ -62,7 +62,7 @@
     </p>
     <h4
       class="text-md-left mb-5 px-2 font-weight-bold font-italic"
-    >I{{ $t('FAQ28') }}</h4>
+    >{{ $t('FAQ28') }}</h4>
     <p class="text-md-left mb-5 px-2">
       {{ $t('FAQ29') }}
       <br />{{ $t('FAQ30') }}

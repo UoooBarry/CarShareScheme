@@ -3,20 +3,26 @@
  ***********************************************************************/
 <template>
   <div class="shadow-sm p-3 mb-4 bg-white rounded">
-      <div class="row bill-id">
-        <a
-          :href="'/receipt/' + rent.id"
-          class="col-auto"
-        >{{ rent.createdAt | formatDate }} - Rent ID: {{ rent.id }} - Period: {{ rent.period }} days</a>
-        <div
-          class="col"
-          style="text-align:right; margin-right:20px"
-          v-if="this.rent.status === 'In progress' && this.rent.bill.isPaid"
-        >
-          <a style="cursor:pointer" @click="showModal">Extend your rent</a>
-          <Extend v-if="rent" v-show="isModalVisible" :rentId="rent.id" :fee="rent.car.price" @close="closeModal" />
-        </div>
+    <div class="row bill-id">
+      <a
+        :href="'/receipt/' + rent.id"
+        class="col-auto"
+      >{{ rent.createdAt | formatDate }} - Rent ID: {{ rent.id }} - Period: {{ rent.period }} days</a>
+      <div
+        class="col"
+        style="text-align:right; margin-right:20px"
+        v-if="this.rent.status === 'In progress' && this.rent.bill.isPaid"
+      >
+        <a style="cursor:pointer" @click="showModal">Extend your rent</a>
+        <Extend
+          v-if="rent"
+          v-show="isModalVisible"
+          :rentId="rent.id"
+          :fee="rent.car.price"
+          @close="closeModal"
+        />
       </div>
+    </div>
 
     <hr class="user" />
     <div class="row">
@@ -47,6 +53,9 @@
           <div v-if="this.rent.status === 'In progress'">
             <a class="pay-now" href="/locations">Return</a>
           </div>
+          <div v-else-if="this.rent.status === 'Wait for review'">
+            <a class="pay-now collapsible" @click="showReviewBox">Review</a>
+          </div>
           <div v-else>{{ rent.status }}</div>
         </div>
         <div v-else>
@@ -60,6 +69,7 @@
           />
         </div>
       </div>
+      <ReviewBox :id="reviewBox" :carId="this.rent.car.id" :rentId="this.rent.id"/>
     </div>
   </div>
 </template>
@@ -67,16 +77,21 @@
 <script>
 import PayNow from "./PayNow";
 import Extend from "./Extend";
+import ReviewBox from "./ReviewBox"
 export default {
   name: "RentRow",
   components: {
     PayNow,
-    Extend
+    Extend,
+    ReviewBox
   },
   props: ["rent"],
   data() {
     return {
-      isModalVisible: false
+      isModalVisible: false,
+      reviewBox: "review-box-rent" + this.rent.id,
+      comment: "",
+      stars: 0
     };
   },
   methods: {
@@ -85,7 +100,16 @@ export default {
     },
     closeModal() {
       this.isModalVisible = false;
-    }
+    },
+    showReviewBox() {
+      var content = document.getElementById(this.reviewBox);
+      if (content.style.display === "block") {
+        content.style.display = "none";
+      } else {
+        content.style.display = "block";
+      }
+    },
+    
   }
 };
 </script>
@@ -103,17 +127,7 @@ img {
   text-align: left;
   padding-left: 30px;
 }
-.pay-now {
-  color: #4c4c4c;
-  border: 2px solid #4c4c4c;
-  text-align: center;
-  text-transform: uppercase;
-  font-weight: bold;
-  padding: 8px;
-  font-size: 15px;
-  cursor: pointer;
-  position: relative;
-  border-radius: 5px;
-  letter-spacing: 1.3px;
-}
+
+
+
 </style>

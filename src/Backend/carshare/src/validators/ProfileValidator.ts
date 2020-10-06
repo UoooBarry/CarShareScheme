@@ -5,11 +5,6 @@ import Validator from './Validator';
 import {Request, Response, NextFunction} from 'express';
 
 class ProfileValidator implements Validator{
-    validationError: string[];
-
-    constructor(){
-        this.validationError = [];
-    }
 
     validate(req: Request, res: Response, next: NextFunction): void {
         req.validationError = [];

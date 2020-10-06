@@ -29,7 +29,7 @@ export default {
   display: block;
   position: fixed;
   bottom: 20px;
-  right: 30px;
+  left: 30px;
   z-index: 99999;
   font-size: 18px;
   border: none;
