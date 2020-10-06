@@ -17,8 +17,16 @@ import moment from "moment";
 import { ToggleButton } from "vue-js-toggle-button";
 import JwPagination from "jw-vue-pagination";
 import VueNumericInput from "vue-numeric-input";
-import i18n from '@/plugins/i18n';
-import FlagIcon from 'vue-flag-icon';
+import i18n from "@/plugins/i18n";
+import FlagIcon from "vue-flag-icon";
+// import authorizeMixin from '@/mixins/authorizeMixin';
+import VueFbCustomerChat from "vue-fb-customer-chat";
+
+Vue.use(VueFbCustomerChat, {
+  page_id: 102140215002493, //  change 'null' to your Facebook Page ID,
+  theme_color: "#a9a0a0", // theme color in HEX
+  locale: "en_US", // default 'en_US'
+});
 
 //numeric input
 Vue.use(VueNumericInput);

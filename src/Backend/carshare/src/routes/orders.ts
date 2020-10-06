@@ -111,7 +111,6 @@ router.post('/extend/:id', [ExtendRentValidator.validate, verifyToken], async (r
             res.json({ bill, newRent });
 
         } catch (err) {
-            console.log(err);
             res.sendStatus(404);
         }
     }

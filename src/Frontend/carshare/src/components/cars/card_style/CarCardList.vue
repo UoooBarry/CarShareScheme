@@ -51,9 +51,5 @@ export default {
   margin-bottom: 40px;
 }
 
-.carlist {
-  min-height: 800px;
-  max-width: 1500px;
-}
 
 </style>

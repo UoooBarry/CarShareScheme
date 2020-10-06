@@ -50,8 +50,6 @@ body {
   justify-content: center;
   align-items: center;
 }
-
-
 .form-check {
   margin-bottom: 10px;
 }
@@ -538,3 +536,4 @@ body {
 .admin-main {
   min-height: 800px;
 }
+
