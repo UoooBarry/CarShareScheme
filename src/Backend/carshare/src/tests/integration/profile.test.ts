@@ -74,8 +74,9 @@ describe('/api/customers', () => {
                          })
     });
 
-    after(() => {
+    after(async () => {
         //Clean up table
-        Customer.destroy({ where: {} });
+        await License.destroy({where: {}});
+        await Customer.destroy({ where: {} });
     })
 })

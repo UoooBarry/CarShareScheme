@@ -34,6 +34,6 @@ export default class License extends Model implements LicenseI {
   @Column
   isValidated!: boolean;
 
-  @BelongsTo(() => Customer, 'user_id')
+  @BelongsTo(() => Customer)
   user!: Customer
 }
