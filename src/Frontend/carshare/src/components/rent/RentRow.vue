@@ -129,8 +129,5 @@ img {
   text-align: left;
   padding-left: 30px;
 }
-.overdue {
-  border-color: crimson;
-  color: crimson;
-}
+
 </style>

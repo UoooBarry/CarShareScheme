@@ -17,7 +17,7 @@
     <div class="page-footer" v-if="rents.length">
       <jw-pagination :items="rents" :pageSize="6" @changePage="onChangePage" :labels="customLabels"></jw-pagination>
     </div>
-    <div class="page-footer" v-else>
+    <div v-else>
       <h1>You don't have any rent history</h1>
     </div>
   </div>

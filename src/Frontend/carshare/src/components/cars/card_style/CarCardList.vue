@@ -3,13 +3,20 @@
  ***********************************************************************/
 <template>
   <div class="carlist container">
-    <div class="page-footer" v-if="cars.length > 0">
+    <div v-if="cars.length > 0">
       <div class="row">
         <div v-for="(car) in pageOfItems" v-bind:key="car.id" class="col-sm-3 car">
           <CarCard v-bind:car="car" style="max-width: 100%" />
         </div>
       </div>
-      <jw-pagination :items="cars" :pageSize="8" @changePage="onChangePage" :labels="customLabels"></jw-pagination>
+      <div class="page-footer">
+        <jw-pagination
+          :items="cars"
+          :pageSize="8"
+          @changePage="onChangePage"
+          :labels="customLabels"
+        ></jw-pagination>
+      </div>
     </div>
     <div class="page-footer" v-else>
       <h1>There is no car available</h1>

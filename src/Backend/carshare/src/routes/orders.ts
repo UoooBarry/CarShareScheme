@@ -46,12 +46,7 @@ router.post('/create', [OrderValidator.validate, verifyToken], async (req: Reque
             const feeToPay = (req.body.period * req.car.price + req.car.price * 0.1).toFixed(2);
             
             
-            //Create bill
-            const bill = await _Bill.create({
-                user_id: req.user.id,
-                fee: feeToPay,
-                type: BillType.RentFee
-            })
+            
     
             //Create rent
             const rent = await _Rent.create({
@@ -59,8 +54,15 @@ router.post('/create', [OrderValidator.validate, verifyToken], async (req: Reque
                 user_id: req.user.id,
                 start_from: req.body.start_from,
                 period: req.body.period,
-                bill_id: bill.id
             });
+
+            //Create bill
+            const bill = await _Bill.create({
+                user_id: req.user.id,
+                fee: feeToPay,
+                type: BillType.RentFee,
+                rent_id: rent.id
+            })
     
             res.json({ bill, rent, feeToPay });
         } catch (err) {

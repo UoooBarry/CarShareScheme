@@ -561,3 +561,7 @@ body {
 .admin-main {
   min-height: 800px;
 }
+.overdue, .overdue:hover {
+  border-color: crimson;
+  color: crimson;
+}

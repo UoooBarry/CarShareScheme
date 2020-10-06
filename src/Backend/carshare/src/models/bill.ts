@@ -20,6 +20,7 @@ export enum BillType{
 export interface BillI{
     id?: number | null;
     user_id: number;
+    rent_id: number;
     type: string;
     fee: number;
     isPaid: boolean;
@@ -42,6 +43,13 @@ export default class Bill extends Model implements BillI{
     @ForeignKey(() => Customer)
     @Column
     user_id!: number
+
+    @ForeignKey(() => Rent)
+    @Column
+    rent_id!: number
+
+    @BelongsTo(() => Rent)
+    rent!: Rent
     
     @NotEmpty
     @Column
@@ -49,9 +57,6 @@ export default class Bill extends Model implements BillI{
 
     @BelongsTo(() => Customer)
     user!: Customer
-
-    @HasOne(() => Rent)
-    rent!: Rent
 
     @Default(false)
     @Column
