@@ -33,7 +33,7 @@
           v-on:updateStyle="displayStyle"
         />
         <CarList id="car-list-style" v-bind:cars="cars" />
-        <CarRow id="car-row-style" v-bind:cars="cars" />
+        <CarRow id="car-row-style" v-bind:cars="cars"/>
       </div>
     </div>
   </div>
@@ -51,7 +51,6 @@ export default {
   mixins: [CarMixin],
   data() {
     return {
-      cars: [],
       address: "",
       loadingKey: 0,
       card: 1
@@ -98,6 +97,7 @@ export default {
               }
               //Set cars
               this.cars = this.getCarData(res);
+              this.temp_cars = this.cars;
             })
             .catch(err => {
               console.log(err);

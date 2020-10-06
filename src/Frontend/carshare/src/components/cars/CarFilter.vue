@@ -1,6 +1,7 @@
 /***********************************************************************
  *           @AUTHOR: Bach Dao, CREATED AT: 25/09/2020                *
               Yongqian Huang updated at: 03/10/2020 rewrite filter   *
+              Yongqian Huang updated at: 06/10/2020 imporve filter   *
  ***********************************************************************/
 <template>
   <div class="wrapper">
@@ -8,79 +9,60 @@
     <ul>
       <li>
         <input type="checkbox" id="list-item-1" />
-        <label for="list-item-1" class="first">
+        <label for="list-item-1" class="first filter-label">
           {{ $t('make') }}
           <font-awesome-icon icon="plus" class="plus" />
         </label>
         <ul>
           <li>
-            <div>
-              <button type="submit" class="carFilterItem" v-on:click="$emit('filter-brand','Audi')">Audi</button>
-            </div>
+              <input type="radio" class="form-check-input" v-on:click="$emit('filter-brand','Audi')" id='brand-audi' name='brand' />
+              <label for="brand-audi" class="filter-check-label">Audi</label>
           </li>
           <li>
-            <div>
-              <button type="submit" class="carFilterItem" v-on:click="$emit('filter-brand','BMW')">BMW</button>
-            </div>
+              <input type="radio" class="form-check-input" v-on:click="$emit('filter-brand','BMW')"  id='brand-bmw' name='brand'/>
+              <label for="brand-bmw" class="filter-check-label">Bmw</label>
           </li>
           <li>
-            <div>
-              <button type="submit" class="carFilterItem" v-on:click="$emit('filter-brand','Ferrari')">Ferrari</button>
-            </div>
+            <input type="radio" class="form-check-input" v-on:click="$emit('filter-brand','Ferrari')"  id='brand-ferrari' name='brand'/>
+            <label for="brand-ferrari" class="filter-check-label">Ferrari</label>
           </li>
           <li>
-            <div>
-              <button type="submit" class="carFilterItem" v-on:click="$emit('filter-brand','Ford')">Ford</button>
-            </div>
+            <input type="radio" class="form-check-input" v-on:click="$emit('filter-brand','ford')"  id='brand-ford' name='brand'/>
+            <label for="brand-ford" class="filter-check-label">Ford</label>
           </li>
           <li>
-            <div>
-              <button type="submit" class="carFilterItem" v-on:click="$emit('filter-brand','kia')">KIA</button>
-            </div>
+            <input type="radio" class="form-check-input" v-on:click="$emit('filter-brand','kia')"  id='brand-kia' name='brand'/>
+            <label for="brand-kia" class="filter-check-label">Kia</label>
           </li>
           <li>
-            <div>
-              <button type="submit" class="carFilterItem" v-on:click="$emit('filter-brand','holden')">Holden</button>
-            </div>
+            <input type="radio" class="form-check-input" v-on:click="$emit('filter-brand','holden')"  id='brand-holden' name='brand'/>
+            <label for="brand-holden" class="filter-check-label">Holden</label>
           </li>
           <li>
-            <div>
-              <button type="submit" class="carFilterItem" v-on:click="$emit('filter-brand','nissan')">Nissan</button>
-            </div>
+            <input type="radio" class="form-check-input" v-on:click="$emit('filter-brand','nissan')"  id='brand-nissan' name='brand'/>
+            <label for="brand-nissan" class="filter-check-label">Nissan</label>
           </li>
           <li>
-            <form>
-              <button
-                type="submit"
-                class="carFilterItem"
-                v-on:click="$emit('filter-brand','lamborghini')"
-              >Lamborghini</button>
-            </form>
+            <input type="radio" class="form-check-input" v-on:click="$emit('filter-brand','lamborghini')"  id='brand-lamborghini' name='brand'/>
+            <label for="brand-lamborghini" class="filter-check-label">Lamborghini</label>
           </li>
           <li>
-            <div>
-              <button type="submit" class="carFilterItem" v-on:click="$emit('filter-brand','isuzu')">ISUZU</button>
-            </div>
+            <input type="radio" class="form-check-input" v-on:click="$emit('filter-brand','isuzu')"  id='brand-isuzu' name='brand'/>
+            <label for="brand-isuzu" class="filter-check-label">ISUZU</label>
           </li>
           <li>
-            <div>
-              <button
-                type="submit"
-                class="carFilterItem"
-                v-on:click="filterWord('range rover')"
-              >Range Rover</button>
-            </div>
+            <input type="radio" class="form-check-input" v-on:click="$emit('filter-brand','range rover')"  id='brand-range' name='brand'/>
+            <label for="brand-range" class="filter-check-label">Range Rover</label>
           </li>
           <li>
-            <div>
-              <button type="submit" class="carFilterItem" v-on:click="$emit('filter-brand','toyota')">Toyota</button>
-            </div>
+            <input type="radio" class="form-check-input" v-on:click="$emit('filter-brand','toyota')"  id='brand-toyota' name='brand'/>
+            <label for="brand-toyota" class="filter-check-label">Toyota</label>
           </li>
         </ul>
       </li>
       <li>
         <input type="checkbox" id="list-item-2" />
-        <label for="list-item-2">
+        <label for="list-item-2" class='filter-label'>
           {{ $t('seat') }}
           <font-awesome-icon icon="plus" class="plus" />
         </label>
@@ -110,7 +92,7 @@
 
       <li>
         <input type="checkbox" id="list-item-3" />
-        <label for="list-item-3" class="last">
+        <label for="list-item-3" class="last filter-label">
           {{ $t('gear') }}
           <font-awesome-icon icon="plus" class="plus" />
         </label>
@@ -139,6 +121,30 @@
 
 
 <style scoped>
+[type='radio'] {
+  display: none; 
+}
+
+.filter-check-label{
+  display: inline-block;
+}
+
+[type='radio']:checked + .filter-check-label{
+  background-color: #c4bfbf;
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+}
+
+[type='radio']:checked + .filter-check-label,[type='radio'] + .filter-check-label{ padding: 10px}
+
+.filter-check-label:hover{
+  background-color: #c4bfbf;
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+}
+
 h3 {
   text-align: left;
 }
@@ -155,25 +161,25 @@ ul {
 .plus {
   float: right;
 }
-label {
+
+label{
   display: block;
   cursor: pointer;
+}
+
+label.filter-label {
   padding: 10px;
   border-top: 1px solid #a9a0a0;
   margin-bottom: 0;
   text-align: left;
 }
 
-label:hover {
+.filter-label:hover {
   background: #a9a0a0;
 }
 
-label.last {
+.filter-label.last {
   border-bottom: 1px solid #a9a0a0;
-}
-
-ul ul li {
-  padding: 10px;
 }
 
 input[type="checkbox"] {

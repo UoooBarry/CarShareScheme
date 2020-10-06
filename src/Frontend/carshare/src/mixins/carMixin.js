@@ -2,6 +2,7 @@
  * @AUTHOR YONGQIAN HUANG, CREATEED AT 27/08/2020
  * Bach Dao, Updated at 25/09/2020*
  * Yongqian Huang updated at: 03/10/2020 rewrite filter   *
+ * Yongqian Huang updated at: 06/10/2020 better filter logic   *
  **************************************************/
 
 export default {
@@ -11,9 +12,16 @@ export default {
       sort: "",
       order: "",
       cars: [],
+      temp_cars: [], //storing temporary cars
+      filtered: [], 
       searchItem: "",
       loadingKey: 0
     };
+  },
+  watch:{
+    filtered(val) { //watch when filter changed, change the display cars
+      this.cars = val;
+    }
   },
   methods: {
     sort_car(item, order) {
@@ -46,6 +54,7 @@ export default {
         })
         .then((res) => {
           this.cars = res.data.cars;
+          this.temp_cars = this.cars;
           this.update();
         })
         .catch((err) => console.log(err));
@@ -64,21 +73,24 @@ export default {
         .catch((err) => console.log(err));
     },
     filterSeats(number) {
-      this.cars = this.cars.filter((car) => {
+      const cars = this.temp_cars.filter((car) => {
         return car.seats === number
       });
+      this.filtered = this.filtered.concat(cars);
       this.loadingKey ++;
     },
     filterBrand(brand) {
-      this.cars = this.cars.filter((car) => {
+      const cars = this.temp_cars.filter((car) => {
         return car.brand.toUpperCase() === brand.toUpperCase(); //ignore case
       });
+      this.filtered = this.filtered.concat(cars);
       this.loadingKey ++;
     },
     filterGear(gear) {
-      this.cars = this.cars.filter((car) => {
+      const cars = this.temp_cars.filter((car) => {
         return car.gear.toUpperCase() === gear.toUpperCase(); //ignore case
       });
+      this.filtered = this.filtered.concat(cars);
       this.loadingKey ++;
     },
     update() {
