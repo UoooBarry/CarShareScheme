@@ -2,12 +2,12 @@
  *           @AUTHOR: Bach Dao, Created AT: 15/08/2020                *
  ***********************************************************************/
 <template>
-  <div class="shadow-sm p-3 mb-4 bg-white rounded">
+  <div class="shadow-sm p-3 mb-4 bg-white rounded" style="padding-bottom: 0 !important;">
     <div class="row bill-id">
       <a
         :href="'/receipt/' + bill.rent.id"
         class="col-auto"
-      >Bill created at {{ bill.createdAt | formatDate }} - Rent ID: {{ bill.rent.id }} </a>
+      >Bill created at {{ bill.createdAt | formatDate }} - Rent ID: {{ bill.rent.id }} - Bill ID: {{bill.id}}</a>
     </div>
 
     <hr class="user" />
@@ -37,7 +37,15 @@
       <div class="rent-table-item">
         <div v-if="this.bill.isPaid">Completed</div>
         <div v-else>
-          <a class="pay-now overdue" href="/overdue">Pay now</a>
+          <a class="pay-now overdue" @click="showModal">Pay now</a>
+          <PayNow
+            v-show="isModalVisible"
+            :rentId="bill.rent.id"
+            :fee="bill.fee"
+            :billId="bill.id"
+            :billType="bill.type"
+            @close="closeModal"
+          />
         </div>
       </div>
     </div>
@@ -45,14 +53,24 @@
 </template>
 
 <script>
+import PayNow from "../rent/PayNow";
 export default {
   name: "OverdueRow",
-  components: {},
+  components: { PayNow },
   props: ["bill"],
   data() {
-    return {};
+    return {
+      isModalVisible: false
+    };
   },
-  methods: {}
+  methods: {
+    showModal() {
+      this.isModalVisible = true;
+    },
+    closeModal() {
+      this.isModalVisible = false;
+    }
+  }
 };
 </script>
 

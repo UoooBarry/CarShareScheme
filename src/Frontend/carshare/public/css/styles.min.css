@@ -562,6 +562,6 @@ body {
   min-height: 800px;
 }
 .overdue, .overdue:hover {
-  border-color: crimson;
-  color: crimson;
+  border-color: crimson !important;
+  color: crimson !important;
 }

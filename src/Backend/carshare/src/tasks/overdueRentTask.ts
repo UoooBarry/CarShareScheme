@@ -12,7 +12,7 @@ export default class overdueRentTask implements TaskI{
     period: number;
 
     constructor(hours: number) {
-        this.period = hours * 60;
+        this.period = hours * 36000 * 60;
     }
 
      async task(): Promise<void> {

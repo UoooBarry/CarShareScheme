@@ -12,7 +12,6 @@
       <p class="card-text text-muted mt-md-4 mb-2" style="font-size:30px">PAYMENT METHOD</p>
     </div>
     <article class="card">
-     
       <div class="card-body p-5">
         <ul class="nav nav-pills rounded nav-fill mb-3" role="tablist">
           <li class="nav-item">
@@ -48,7 +47,7 @@
                     type="text"
                     class="form-control"
                     name="cardNumber"
-                    v-model='card'
+                    v-model="card"
                     @change="creditCardCheck"
                     placeholder
                   />
@@ -131,13 +130,9 @@
       <!-- card-body.// -->
     </article>
     <!-- card.// -->
-      <a @click="pay">
-        <CompleteOrderButton id="btn-order" />
-      </a>
-        
-   
-      
-  
+    <a @click="pay">
+      <CompleteOrderButton id="btn-order" />
+    </a>
   </div>
   <!-- row.// -->
 
@@ -148,37 +143,37 @@
 import CompleteOrderButton from "@/components/order/CompleteOrderButton";
 export default {
   name: "Payment",
-  props: ["billId", "rentId", "fee"],
+  props: ["billId", "rentId", "fee", "billType"],
   components: {
     CompleteOrderButton
   },
   data() {
     return {
-      card: '',
-      yy: '',
-      mm: '',
-      cvv: ''
+      card: "",
+      yy: "",
+      mm: "",
+      cvv: ""
     };
   },
   methods: {
-    creditCardCheck(event){
+    creditCardCheck(event) {
       const inputCard = event.target.value;
       const visaRegex = /^(?:4[0-9]{12}(?:[0-9]{3})?)$/;
       const masterRegex = /^(?:5[1-5][0-9]{2}|222[1-9]|22[3-9][0-9]|2[3-6][0-9]{2}|27[01][0-9]|2720)[0-9]{12}$/;
       const amexRegex = /^3[47][0-9]{13}$/;
-      if(visaRegex.test(inputCard)){
-        document.getElementById('visa').style.color = "black";
-      }else if(masterRegex.test(inputCard)){
-        document.getElementById('master').style.color = "black";
-      }else if(amexRegex.test(inputCard)){
-        document.getElementById('amex').style.color = "black";
-      }else{
-         document.getElementById('visa').style.color = "#6c757d";
-        document.getElementById('master').style.color = "#6c757d";
-        document.getElementById('amex').style.color = "#6c757d";
+      if (visaRegex.test(inputCard)) {
+        document.getElementById("visa").style.color = "black";
+      } else if (masterRegex.test(inputCard)) {
+        document.getElementById("master").style.color = "black";
+      } else if (amexRegex.test(inputCard)) {
+        document.getElementById("amex").style.color = "black";
+      } else {
+        document.getElementById("visa").style.color = "#6c757d";
+        document.getElementById("master").style.color = "#6c757d";
+        document.getElementById("amex").style.color = "#6c757d";
       }
     },
-    verifyCreditcard(){
+    verifyCreditcard() {
       let result = true;
       const creditCard = this.card;
       const cvv = this.cvv;
@@ -186,45 +181,50 @@ export default {
       const month = this.mm;
       const creditCardRegex = /^(?:4[0-9]{12}(?:[0-9]{3})?|[25][1-7][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})$/;
       const expireDate = new Date(`1/${month}/${year}`);
-      if(expireDate <= new Date()){
+      if (expireDate <= new Date()) {
         this.flashMessage.error({
-                title: "Order failed",
-                message: "Credit card's expire date cannot be today or before."
-          });
-          result = false
+          title: "Order failed",
+          message: "Credit card's expire date cannot be today or before."
+        });
+        result = false;
       }
-      
-      if(!creditCardRegex.test(creditCard)){
-         this.flashMessage.error({
-                title: "Order failed",
-                message: 'Credit card entered is not correct.'
-          });
-          result = false;
-      }
-      if(cvv == null){
+
+      if (!creditCardRegex.test(creditCard)) {
         this.flashMessage.error({
-                title: "Order failed",
-                message: 'CVV cannot be empty.'
-          });
-          result = false
+          title: "Order failed",
+          message: "Credit card entered is not correct."
+        });
+        result = false;
+      }
+      if (cvv == null) {
+        this.flashMessage.error({
+          title: "Order failed",
+          message: "CVV cannot be empty."
+        });
+        result = false;
       }
       return result;
     },
-    nextStep(){
-      this.$emit('nextStep');
+    nextStep() {
+      this.$emit("nextStep");
     },
     lastStep() {
       this.$emit("lastStep");
     },
-    pay(){
+    pay() {
       //Only pass when validation pass
-      if(this.verifyCreditcard()){ 
-        this.$axios.post(`${this.$carshare}/orders/pay`,{
-          bill_id: this.billId,
-          total: this.fee, //Not implment with pay api,
-          type: 'rent'
-        },{headers: this.header})
-          .then((res) => {
+      if (this.verifyCreditcard()) {
+        this.$axios
+          .post(
+            `${this.$carshare}/orders/pay`,
+            {
+              bill_id: this.billId,
+              total: this.fee, //Not implment with pay api,
+              type: "rent"
+            },
+            { headers: this.header }
+          )
+          .then(res => {
             if (res.data.message == "fail") {
               res.data.errors.forEach(error => {
                 this.flashMessage.error({
@@ -234,24 +234,29 @@ export default {
               });
               return;
             }
-            
+
             this.flashMessage.success({
               title: "Order confrimed!",
               message: "Order payed successfully!"
             });
-            const order_button = document.getElementById('btn-order');
-            order_button.classList.add('animate');
-            order_button.disabled = true;
-            setTimeout(() => {
-               this.$router.push({
-                name: "Receipt",
-                params:{ id: this.rentId }
-                });    
-            }, 8000);
-            
+            if (this.billType === "Rent fee") {
+              const order_button = document.getElementById("btn-order");
+              order_button.classList.add("animate");
+              order_button.disabled = true;
+              setTimeout(() => {
+                this.$router.push({
+                  name: "Receipt",
+                  params: { id: this.rentId }
+                });
+              }, 8000);
+            } else {
+              setTimeout(() => {
+                location.reload();
+              }, 3000);
+            }
           });
-        }
-   }
+      }
+    }
   }
 };
 </script>

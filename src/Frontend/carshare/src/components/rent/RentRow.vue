@@ -68,6 +68,7 @@
             :rentId="rent.id"
             :fee="rent.bill.fee"
             :billId="rent.bill.id"
+            :billType="rent.bill.type"
             @close="closeModal"
           />
         </div>

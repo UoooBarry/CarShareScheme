@@ -35,6 +35,7 @@
           :billId="bill.id"
           :rentId="rent.id"
           :fee="fee"
+          :billType="bill.type"
           v-on:nextStep="nextStep()"
         />
       </div>
