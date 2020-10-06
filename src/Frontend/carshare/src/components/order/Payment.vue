@@ -221,7 +221,8 @@ export default {
       if(this.verifyCreditcard()){ 
         this.$axios.post(`${this.$carshare}/orders/pay`,{
           bill_id: this.billId,
-          total: this.fee //Not implment with pay api
+          total: this.fee, //Not implment with pay api,
+          type: 'rent'
         },{headers: this.header})
           .then((res) => {
             if (res.data.message == "fail") {

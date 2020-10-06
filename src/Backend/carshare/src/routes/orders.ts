@@ -248,13 +248,16 @@ router.post('/pay', [PaymentValidator.validate, verifyToken], async (req: Reques
             if(!req.bill) throw new ItemNotFound('Bill not found');
             await _Bill.pay(req.bill);
 
-            //Send message to user only in production environment
-            if (process.env.NODE_ENV == 'production') {
-                const text: string = `Thanks for order our rent services. Your rent id: ${req.bill?.id} will start at ${req.bill?.rent.start_from}. You will soon receive a detail receipt in your email. `;
-                Message.sendMessage(req.user.contact_number, text);
+            if(req.body.type === 'rent'){ //If the type of payment is for rent
+                //Send message to user only in production environment
+                if (process.env.NODE_ENV == 'production') {
+                    const text: string = `Thanks for order our rent services. Your rent id: ${req.bill?.rent.id} will start at ${req.bill?.rent.start_from}. You will soon receive a detail receipt in your email. `;
+                    Message.sendMessage(req.user.contact_number, text);
+                }
+                
+                await _Car.deactivate(req.bill.rent.car.id);
             }
             
-            await _Car.deactivate(req.bill.rent.car.id);
 
             res.json({
                 message: "success"
