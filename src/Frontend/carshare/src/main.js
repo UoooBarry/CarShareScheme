@@ -19,9 +19,16 @@ import moment from "moment";
 import { ToggleButton } from "vue-js-toggle-button";
 import JwPagination from "jw-vue-pagination";
 import VueNumericInput from "vue-numeric-input";
-import i18n from '@/plugins/i18n';
-import FlagIcon from 'vue-flag-icon';
+import i18n from "@/plugins/i18n";
+import FlagIcon from "vue-flag-icon";
 // import authorizeMixin from '@/mixins/authorizeMixin';
+import VueFbCustomerChat from "vue-fb-customer-chat";
+
+Vue.use(VueFbCustomerChat, {
+  page_id: 102140215002493, //  change 'null' to your Facebook Page ID,
+  theme_color: "#a9a0a0", // theme color in HEX
+  locale: "en_US", // default 'en_US'
+});
 
 //numeric input
 Vue.use(VueNumericInput);
@@ -67,32 +74,31 @@ Vue.use(VueReCaptcha, {
   },
 });
 
-
 Vue.mixin({
   data() {
-    return{
-        header: this.getHeader(),
-        id: sessionStorage.getItem("authToken")
-    }
-},
-methods: {
-    getHeader(){
-        const header = {
-            authorization: `Bearer ${sessionStorage.getItem("authToken")}`
-        };
-        return header;
+    return {
+      header: this.getHeader(),
+      id: sessionStorage.getItem("authToken"),
+    };
+  },
+  methods: {
+    getHeader() {
+      const header = {
+        authorization: `Bearer ${sessionStorage.getItem("authToken")}`,
+      };
+      return header;
     },
     logout() {
-        sessionStorage.removeItem('authToken');
-        localStorage.removeItem('authToken');
-        this.$session.remove('username');
-        this.flashMessage.info({
-          title: 'Logout success',
-          message: 'See you!'
-        });
-        this.$router.push({name: 'Login'});
-    }
-}
+      sessionStorage.removeItem("authToken");
+      localStorage.removeItem("authToken");
+      this.$session.remove("username");
+      this.flashMessage.info({
+        title: "Logout success",
+        message: "See you!",
+      });
+      this.$router.push({ name: "Login" });
+    },
+  },
 });
 
 // Make a router check, required logged in when meta has requiresAuth

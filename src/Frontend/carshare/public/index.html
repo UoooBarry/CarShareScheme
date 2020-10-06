@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-    <meta name="theme-color" content="#317EFB"/>
+    <meta name="theme-color" content="#317EFB" />
     <link rel="icon" href="<%= BASE_URL %>favicon.ico" />
 
     <link
@@ -29,15 +29,13 @@
       as="script"
     />
 
-    <script src="./js/chatbot.js"></script>
-
     <script
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyASOX5gC3hM0b4AiRZ6vsD64IEsx52whzY&libraries=places"
       defer
     ></script>
 
-    <link rel="preload" href="./public/css/styles.min.css" as="style"/>
-    <link rel="preload" href="./public/fonts/ionicons.min.css" as="style"/>
+    <link rel="preload" href="./public/css/styles.min.css" as="style" />
+    <link rel="preload" href="./public/fonts/ionicons.min.css" as="style" />
 
     <link rel="stylesheet" href="./public/fonts/ionicons.min.css" />
     <link rel="stylesheet" href="./public/css/styles.min.css" />
@@ -54,4 +52,32 @@
     <div id="app"></div>
     <!-- built files will be auto injected -->
   </body>
+  <!-- Load Facebook SDK for JavaScript -->
+  <div id="fb-root"></div>
+  <script>
+    window.fbAsyncInit = function() {
+      FB.init({
+        xfbml: true,
+        version: "v8.0",
+      });
+    };
+
+    (function(d, s, id) {
+      var js,
+        fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s);
+      js.id = id;
+      js.src = "https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js";
+      fjs.parentNode.insertBefore(js, fjs);
+    })(document, "script", "facebook-jssdk");
+  </script>
+
+  <!-- Your Chat Plugin code -->
+  <!-- <div
+    class="fb-customerchat"
+    attribution="setup_tool"
+    page_id="102140215002493"
+    theme_color="#a9a0a0"
+  ></div> -->
 </html>

@@ -545,25 +545,3 @@ img {
   min-height: 800px;
 }
 
-/* chat */
-.userchat {
-  text-align: left;
-}
-.botchat {
-  text-align: right;
-}
-.bot-response {
-  background-color: #f1f1f1;
-  padding: 10px;
-  border-radius: 15px;
-  text-align: justify;
-  display: inline-block;
-}
-
-.user-response {
-  background-color: #f1f1f1;
-  padding: 10px;
-  border-radius: 15px;
-  text-align: justify;
-  display: inline-block;
-}
