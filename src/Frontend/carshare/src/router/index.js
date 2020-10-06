@@ -70,6 +70,14 @@ const routes = [
   },
 },
 {
+  path: '/overdue',
+  name: 'Overdue',
+  components: {
+    header: Header,
+    main: () => import('../views/Overdue.vue')
+  },
+},
+{
   path: '/receipt/:id',
   name: 'Receipt',
   components: {

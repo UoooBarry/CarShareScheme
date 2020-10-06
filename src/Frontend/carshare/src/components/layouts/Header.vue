@@ -59,8 +59,13 @@
             <div class="dropdown-menu" role="menu">
               <a class="dropdown-item" role="presentation" href="/user/profile">{{ $t('profile') }}</a>
               <a class="dropdown-item" role="presentation" href="/rents">{{ $t('rentHistory') }}</a>
-              <a class="dropdown-item" role="presentation" href="/rents">Over due bill</a>
-              <a class="dropdown-item" role="presentation" href="#" v-on:click="this.logout">{{ $t('logout') }}</a>
+              <a class="dropdown-item" role="presentation" href="/overdue">Over due bill</a>
+              <a
+                class="dropdown-item"
+                role="presentation"
+                href="#"
+                v-on:click="this.logout"
+              >{{ $t('logout') }}</a>
             </div>
           </li>
           <li class="nav-item" role="presentation" id="login" style="display: none">
@@ -129,8 +134,8 @@ export default {
 #navcol-1 {
   margin-right: 40px;
 }
-.language-menu{
-    min-width: 11rem;
+.language-menu {
+  min-width: 11rem;
 }
 button {
   font-size: 14px;

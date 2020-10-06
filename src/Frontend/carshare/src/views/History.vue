@@ -17,7 +17,7 @@
 import RentList from "@/components/rent/RentList";
 
 export default {
-  name: "User",
+  name: "History",
   components: {
     RentList
   },
