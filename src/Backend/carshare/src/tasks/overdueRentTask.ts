@@ -27,6 +27,7 @@ export default class overdueRentTask implements TaskI{
           user_id: rent.user_id,
           type: BillType.OverdueFee,
           fee: rent.car.price * 1.1, //10% extra fee
+          rent_id: rent.id
         })
         tasks++;
       }

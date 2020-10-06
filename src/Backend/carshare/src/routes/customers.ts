@@ -19,6 +19,7 @@ const avatarUpload = multer({
 })
 import validatorFactory from '../helpers/validatorFactory';
 import { BillType } from '../models/bill';
+import Rent from '../models/rent';
 const ProfileValidator = validatorFactory.getValidator('profile');
 
 //GET /api/customers/:id
@@ -37,7 +38,12 @@ router.get('/overdue/all', verifyToken, (req: Request,res: Response) => {
         where:{
             user_id: req.user.id,
             type: BillType.OverdueFee
-        }
+        },
+        include:[
+            {
+                model: Rent
+            }
+        ]
     }
     _Bill.getBy(caluse)
         .then((bills) => {
