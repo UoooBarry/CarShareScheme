@@ -173,7 +173,14 @@ class rentRepository implements DataRepository {
     try {
       const rents = Rent.findAll({
         where: {
-          status: RentStatus.InProgress,
+          [Op.or]: [
+            {
+              status: RentStatus.InProgress,
+            },
+            {
+              status: RentStatus.Overdue
+            }
+          ],
           [Op.and]: Sequelize.literal("start_from + CAST(period || ' days' AS interval) < CURRENT_DATE") // start_from + period < today
         },
         include: [

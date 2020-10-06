@@ -70,6 +70,7 @@ export default {
       this.$emit('lastStep');
     },
     getValidateResult(){
+      if(!this.customer.License) return "Not upload license yet";
       if(this.customer.License.isValidated)
         return 'Validated'
       else
