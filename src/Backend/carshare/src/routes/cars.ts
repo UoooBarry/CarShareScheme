@@ -7,15 +7,19 @@
  *  Bach Dao. 27/08/2020, Get car by id/all endpoint  *
  * Yongqian Huang. 28/08/2020, Car creating Validation  *
  * Yongqian Huang, 29/08/2020, Add car share image upload
- * Yongqian Huang, 02/09/2020, Return if the car is popular*
+ * Yongqian Huang, 02/09/2020, Return if the car is popular
+ * Bach Dao, 25/09/2020, return car by seat id*
+ * Yongqian Huang, 29/09/2020, Apply factor pattern
  *******************************************************/
 
 import express,{Request, Response, NextFunction} from 'express';
 const router = express.Router();
 import _Car from '../repository/carRepository';
 import _Location from '../repository/locationRepository';
-import {verifyToken} from '../helpers/authorizationHelper';
-import CarValidator from '../validators/CarValidator';
+import { verifyToken } from '../helpers/authorizationHelper';
+import validatorFactory from '../helpers/validatorFactory';
+
+const CarValidator = validatorFactory.getValidator('car');
 import uploadFile from "../helpers/Uploader";
 import multer from 'multer';
 import Car from '../models/car';
@@ -50,6 +54,19 @@ router.get("/", (req: Request, res: Response) => {
 router.get("/search", (req: Request, res: Response) => {
   _Car
     .getBy(<string>req.query.query)
+    .then((cars: Car[]) => {
+      res.json({ cars });
+    })
+    .catch((err: Error) => {
+      console.log(err);
+      res.sendStatus(403);
+    });
+});
+
+//GET: /api/cars/filter/seat
+router.get("/filter/seat", (req: Request, res: Response) => {
+  _Car
+    .getBySeats(parseInt(<string>req.query.query))
     .then((cars: Car[]) => {
       res.json({ cars });
     })
@@ -113,7 +130,7 @@ router.post("/create", [ CarValidator.validate, verifyToken], (req: Request, res
   if(validationErrors && validationErrors.length > 0){
     res.json({
       message: "fail",
-      validationErrors,
+      errors: validationErrors,
     });
   }else{
     const car = {
@@ -140,7 +157,7 @@ router.post("/create", [ CarValidator.validate, verifyToken], (req: Request, res
       .catch((err: Error) => {
         res.json({
           message: "fail",
-          err,
+          errors: err,
         });
       });
   }

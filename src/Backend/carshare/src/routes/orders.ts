@@ -4,6 +4,7 @@
  *         Yongqian Huang, 11/09/2020, Send receipt message
  *         Yongqian Huang, 22/09/2020, Extend rent and custom error *
  *         Yongqian Huang, 22/09/2020, Add validation of licenses *
+ * Yongqian Huang, 29/09/2020, Apply factor pattern
  *************************************************/
 
 import express,{Request, Response} from 'express';
@@ -14,13 +15,15 @@ import _Rent from '../repository/rentRepository';
 import _Bill from '../repository/billRepository';
 import _Car from '../repository/carRepository';
 import _License from '../repository/licenseRepository';
-import OrderValidator from '../validators/OrderValidator';
-import PaymentValidator from '../validators/PaymentValidator';
+import validatorFactory from '../helpers/validatorFactory';
+const OrderValidator = validatorFactory.getValidator('order');
+const PaymentValidator = validatorFactory.getValidator('payment');
+const ExtendRentValidator = validatorFactory.getValidator('extend');
 import Message from '../helpers/messageHelper';
 import ItemNotFound from '../exceptions/ItemNotFound';
 import IncorrectItem from '../exceptions/IncorrectItem';
 import { RentStatus } from '../models/rent';
-import ExtendRentValidator from '../validators/ExtendRentValidator';
+
 
 //POST: api/orders/create
 router.post('/create', [OrderValidator.validate, verifyToken], async (req: Request, res: Response) => {
@@ -73,7 +76,7 @@ router.post('/extend/:id', [ExtendRentValidator.validate, verifyToken], async (r
     if (validationErrors && validationErrors.length > 0) {
         res.json({
             message: "fail",
-            errors: { validationErrors },
+            errors: validationErrors,
         });
     } else {
         try {
@@ -81,25 +84,25 @@ router.post('/extend/:id', [ExtendRentValidator.validate, verifyToken], async (r
             const feeToPay = (req.body.period * req.originalRent.car.price).toFixed(2);
             //If pass payment validator
             if (req.body.payment_total !== feeToPay) throw new IncorrectItem('Payment amount incorrect');
+            
             //Update to complete
-            await _Rent.update(parseInt(req.params.id), { status: RentStatus.Completed });
+            await _Rent.update(parseInt(req.params.id), { status: RentStatus.Extended });
             
             //Create bill
             const bill = await _Bill.create({
                 user_id: req.user.id,
                 fee: feeToPay,
+                isPaid: true,
                 type: BillType.RentFee
             });
-
-            //Calculate the new due date
-            let newDueDate = new Date();
-            newDueDate.setDate(req.originalRent.start_from.getDate() + req.body.period);
+            
+            const newPeriod: number = req.originalRent.period + parseInt(req.body.period);  //old period + new period = new period
             //Create rent
             const newRent = await _Rent.create({
                 car_id: req.originalRent.car.id,
                 user_id: req.user.id,
-                start_from: newDueDate,
-                period: req.body.period,
+                start_from: req.originalRent.start_from, //Use the original start from date
+                period: newPeriod,
                 bill_id: bill.id,
                 status: RentStatus.InProgress
             });
@@ -120,6 +123,18 @@ router.get('/:id/', [verifyToken], (req: Request, res: Response) => {
             .then((rent) => {
                 if(rent?.user_id != req.user.id) throw new IncorrectItem('Incorrect user');
                 res.json({rent});
+            })
+            .catch((err) => {
+                res.sendStatus(404);
+            })
+})
+
+//Delete: /api/orders/:id
+router.delete('/:id/', [verifyToken], (req: Request, res: Response) => {
+    if(!req.user.admin) res.sendStatus(403);
+    _Rent.delete(parseInt(req.params.id))
+            .then(() => {
+                res.json({message: 'success'});
             })
             .catch((err) => {
                 res.sendStatus(404);
@@ -218,7 +233,7 @@ router.post('/pay', [PaymentValidator.validate, verifyToken], async (req: Reques
     if(validationErrors && validationErrors.length > 0){
         res.json({
           message: "fail",
-          errors: {validationErrors},
+          errors: validationErrors,
         });
       }else{
         try{

@@ -1,3 +1,4 @@
+<!-- @AUTHOR Yongqian Huang -->
 <template>
   <div class="my-1 btn">
     <label class="sr-only" for="address">{{ $t('changeAddress') }}</label>

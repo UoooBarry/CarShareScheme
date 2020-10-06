@@ -1,16 +1,19 @@
 /******************************************************
  * @AUTHOR YONGQIAN HUANG, 19/08/2020, CAR SORT LOGIC *
  * updated in 27/09/2020 Bach Dao, get all cars/ car by id *
- * updated in 03/09/2020 migrate to typescript       *
+ * updated in 03/09/2020 migrate to typescript       
+ * updated in 25/09/2020 filter helpers*
  ******************************************************/
 
 import Car from '../models/car';
-import Location from '../models/location';
 import Sequelize from 'sequelize';
 const Op = Sequelize.Op;
 import DataRepository from './dataRepository';
+import ItemNotFound from '../exceptions/ItemNotFound';
+import Comment from '../models/comment';
+import Customer from '../models/customer';
 
-class carRepository implements DataRepository{
+class carRepository implements DataRepository {
   private static instance?: carRepository;
 
   async getAll() {
@@ -39,11 +42,15 @@ class carRepository implements DataRepository{
         Sequelize.where(Sequelize.fn("LOWER", Sequelize.col("model")), {
           [Op.like]: `%${search}%`,
         }),
+        Sequelize.where(Sequelize.fn("LOWER", Sequelize.col("gear")), {
+          [Op.like]: `%${search}%`,
+        })
       ],
     };
     try {
       const cars = await Car.findAll({
-        where: whereClause,
+        where: whereClause
+
       });
       return Promise.resolve(cars);
     } catch (err) {
@@ -51,16 +58,38 @@ class carRepository implements DataRepository{
     }
   }
 
+  async getBySeats(seat: number) {
+    try {
+      const car: any = await Car.findAll({ where: { seats: seat } });
+      return Promise.resolve(car);
+    } catch (err) {
+      return Promise.reject(err);
+    }
+  }
+
   async get(id: number) {
     try {
-      const car:any = await Car.findOne({ where: { id: id } });
+      const car: any = await Car.findOne({
+        where: { id: id },
+        include: [
+          {
+            model: Comment,
+            include: [
+              {
+                model: Customer,
+                attributes: ['id', 'first_name', 'family_name']
+              }
+            ]
+          }
+        ]
+      });
       //Update the view number by 1
-      if(car){
+      if (car) {
         car.update({
           viewed: (car.viewed += 1),
         });
-      }else{
-        throw 'Car not found';
+      } else {
+        throw new ItemNotFound('Car not found');
       }
       return Promise.resolve(car);
     } catch (err) {
@@ -70,17 +99,17 @@ class carRepository implements DataRepository{
 
   async getMostViewed() {
     try {
-      const cars = await Car.findAll({ 
+      const cars = await Car.findAll({
         attributes: ["id"],
         order: [["viewed", "DESC"]],
-        limit: 3 
+        limit: 3
       });
 
       //Map cars with id, return array of id that is popular
       const carsArr = cars.map((car: any) => {
         return car.id;
       })
-      
+
       return Promise.resolve(carsArr);
     } catch (err) {
       return Promise.reject(err);
@@ -127,9 +156,9 @@ class carRepository implements DataRepository{
     }
   }
 
-  async deactivate(id: number){
+  async deactivate(id: number) {
     try {
-      const car = await Car.findOne({where: {id: id}});
+      const car = await Car.findOne({ where: { id: id } });
       await car?.update({
         available: false
       })
@@ -139,10 +168,10 @@ class carRepository implements DataRepository{
     }
   }
 
-  static getInstance(): carRepository{
-    if (!carRepository.instance) 
+  static getInstance(): carRepository {
+    if (!carRepository.instance)
       carRepository.instance = new carRepository()
-    
+
     return carRepository.instance;
   }
 }

@@ -8,9 +8,10 @@ import Bill from '../models/bill';
 import Rent, {RentStatus} from '../models/rent'
 import Car from '../models/car';
 import { Op } from 'sequelize';
-import { throws } from 'assert';
+import ItemNotFound from '../exceptions/ItemNotFound';
 
 class billRepository implements DataRepository{
+  instance?: DataRepository | undefined;
   private static instance?: billRepository;
 
    async create(bill: any){
@@ -41,7 +42,7 @@ class billRepository implements DataRepository{
 
     async pay(bill: Bill | null){
       try {
-        if(!bill) throw 'No bill found';
+        if(!bill) throw new ItemNotFound('No bill found');
         await bill.update({
           isPaid: true
         });
@@ -65,26 +66,45 @@ class billRepository implements DataRepository{
       }catch (err) {
         return Promise.reject(err);
       }
+  }
+  
+  async update(id: number, data: any) {
+    try {
+      let bill: any = await Bill.findOne({ where: { id: id } });
+      await bill.update(data);
+      return Promise.resolve(true);
+    } catch (err) {
+      return Promise.reject(err);
     }
+  }
 
-    async getUnPaidBills(){
-      try{
-        const bill = Bill.findAll({
-          where: {
-            isPaid: false,
-            createdAt: {[Op.lt]: new Date()}
-          },
+  async getBy(cluster: any) {
+    try{
+      const bill = Bill.findAll(cluster);
+      return Promise.resolve(bill);
+    }catch (err) {
+      return Promise.reject(err);
+    }
+  }
+
+  async getUnPaidBills(){
+    try{
+      const bill = Bill.findAll({
+        where: {
+          isPaid: false,
+          createdAt: {[Op.lt]: new Date()}
+        },
+        include:[{
+          model: Rent,
           include:[{
-            model: Rent,
-            include:[{
-              model: Car
-            }]
+            model: Car
           }]
-        })
-        return Promise.resolve(bill);
-      }catch (err) {
-        return Promise.reject(err);
-      }
+        }]
+      })
+      return Promise.resolve(bill);
+    }catch (err) {
+      return Promise.reject(err);
+    }
   }
   
   static getInstance(): billRepository{

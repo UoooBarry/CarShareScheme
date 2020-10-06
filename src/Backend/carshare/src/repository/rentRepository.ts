@@ -103,10 +103,16 @@ class rentRepository implements DataRepository{
   async pickUp(id: number) {
     try{
       const rent = await Rent.findOne({
-        where: {id: id}
+        where: {id: id},
+        include: [
+          {
+            model: Car
+          }
+        ]
       });
-      if(!rent) throw 'No rent error';
+      if(!rent) throw new ItemNotFound('No rent found');
       await rent.update({status: RentStatus.InProgress});
+      await rent.car.update({available: false});
       return Promise.resolve(true);
     }catch (err) {
       return Promise.reject(err);
@@ -124,7 +130,7 @@ class rentRepository implements DataRepository{
           ]
         });
         if(!rent) throw 'No rent error';
-        await rent.update({status: RentStatus.Completed});
+        await rent.update({status: RentStatus.WaitForReview});
         await rent.car.update({location_id: location_id, available: true});
         return Promise.resolve(true);
       }catch (err) {
@@ -132,6 +138,20 @@ class rentRepository implements DataRepository{
       }
   }
 
+  async delete(id: number) {
+    try{
+      const rent = await Rent.findOne({
+        where: {id: id},
+      });
+      if (!rent) throw new ItemNotFound('No rent error');
+      
+      await rent.destroy();
+
+      return Promise.resolve(true);
+    }catch (err) {
+      return Promise.reject(err);
+    }
+  }
 
   async update(id: number, data: any) {
     try{
@@ -155,6 +175,26 @@ class rentRepository implements DataRepository{
           status: RentStatus.InProgress,
           [Op.and]: Sequelize.literal("start_from + CAST(period || ' days' AS interval) < CURRENT_DATE") // start_from + period < today
         }
+      })
+      return Promise.resolve(rents);
+    }catch (err) {
+      return Promise.reject(err);
+    }
+  }
+
+  async getReadyRents() {
+    try {
+      let scheduledDate = new Date();
+      scheduledDate.setDate(scheduledDate.getDate() - 1);
+      const rents = Rent.findAll({
+        where: {
+          start_from: {[Op.gte]: scheduledDate} 
+        },
+        include: [
+          {
+            model: Car
+          }
+        ]
       })
       return Promise.resolve(rents);
     }catch (err) {

@@ -7,10 +7,8 @@ import App from "./App.vue";
 import router from "./router";
 import axios from "axios";
 import "bootstrap";
-import VueSession from "vue-session";
 import "bootstrap/dist/css/bootstrap.min.css";
 import FlashMessage from "@smartweb/vue-flash-message";
-import { VueReCaptcha } from "vue-recaptcha-v3";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fas } from "@fortawesome/free-solid-svg-icons";
 import { fab } from "@fortawesome/free-brands-svg-icons";
@@ -62,43 +60,34 @@ Vue.filter("formatDate", function(value) {
   }
 });
 
-// Session storage
-Vue.use(VueSession);
 // Flash messages
 Vue.use(FlashMessage);
-//Recaptcha
-Vue.use(VueReCaptcha, {
-  siteKey: "6LcTY7sZAAAAAJeN_bq5d-F7S-I2Qq9yPTCMQmoA",
-  loaderOptions: {
-    autoHideBadge: true,
-  },
-});
+
 
 Vue.mixin({
   data() {
-    return {
-      header: this.getHeader(),
-      id: sessionStorage.getItem("authToken"),
-    };
-  },
-  methods: {
-    getHeader() {
-      const header = {
-        authorization: `Bearer ${sessionStorage.getItem("authToken")}`,
-      };
-      return header;
+    return{
+        header: this.getHeader(),
+        id: sessionStorage.getItem("authToken")
+    }
+},
+methods: {
+    getHeader(){
+        const header = {
+            authorization: `Bearer ${sessionStorage.getItem("authToken")}`
+        };
+        return header;
     },
     logout() {
-      sessionStorage.removeItem("authToken");
-      localStorage.removeItem("authToken");
-      this.$session.remove("username");
-      this.flashMessage.info({
-        title: "Logout success",
-        message: "See you!",
-      });
-      this.$router.push({ name: "Login" });
-    },
-  },
+        sessionStorage.removeItem('authToken');
+        localStorage.removeItem('authToken');
+        this.flashMessage.info({
+          title: 'Logout success',
+          message: 'See you!'
+        });
+        this.$router.push({name: 'Login'});
+    }
+}
 });
 
 // Make a router check, required logged in when meta has requiresAuth

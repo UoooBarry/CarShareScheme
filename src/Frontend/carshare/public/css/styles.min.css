@@ -50,31 +50,6 @@ body {
   justify-content: center;
   align-items: center;
 }
-
-.description {
-  position: relative;
-
-  transform: translate(-50%, -50%);
-  color: whitesmoke;
-  padding: 10px;
-  font-size: 20px;
-  font-weight: 500;
-  font-family: Montserrat;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 20px;
-  line-height: 24px;
-}
-
-.description.main,
-.description.family,
-.description.purpose {
-  box-shadow: 0 0 32px rgba(0, 0, 0, 0.5);
-  overflow: hidden;
-  background-color: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(5px);
-}
-
 .form-check {
   margin-bottom: 10px;
 }
@@ -271,7 +246,24 @@ body {
 .footer-dark .item.social {
   text-align: center;
 }
-
+.page-footer {
+  border-top: 1px solid lightgrey;
+  padding-top: 10px;
+  width: 96%;
+}
+.pay-now {
+  color: #4c4c4c;
+  border: 2px solid #4c4c4c;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: bold;
+  padding: 8px;
+  font-size: 15px;
+  cursor: pointer;
+  position: relative;
+  border-radius: 5px;
+  letter-spacing: 1.3px;
+}
 .footer-dark .item.social > a {
   font-size: 20px;
   width: 36px;
@@ -295,7 +287,7 @@ body {
   font-size: 13px;
   margin-bottom: 0;
 }
-img {
+#elephant-img {
   margin-top: 150px;
 }
 .login-card {

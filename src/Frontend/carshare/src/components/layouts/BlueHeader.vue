@@ -28,7 +28,7 @@
           <!-- End: Text -->
           <div class="col-md-6 offset-md-0 phone-holder">
             <div class="container iphone-mockup" id="picture">
-              <img src="../../../public/img/elephant.jpg" />
+              <img id="elephant-img" src="../../../public/img/elephant.jpg" />
             </div>
 
             <div class="container iphone-mockup" >

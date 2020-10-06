@@ -1,3 +1,6 @@
+/***********************************************************************
+ *           @AUTHOR: Bach Dao, CREATED AT: 25/09/2020                *
+ ***********************************************************************/
 <template>
   <div class="wrapper">
     <h3>{{ $t('filter') }}:</h3>
@@ -9,67 +12,164 @@
           <font-awesome-icon icon="plus" class="plus" />
         </label>
         <ul>
-          <li>Audi</li>
-          <li>BMW</li>
-          <li>Ferrari</li>
-          <li>Ford</li>
-          <li>KIA</li>
-          <li>Holden</li>
-          <li>Nissan</li>
-          <li>Lamborghini</li>
-          <li>ISUZU</li>
-          <li>Range Rover</li>
-          <li>Toyota</li>
+          <li>
+            <form @submit.prevent="search">
+              <input type="hidden" v-model="searchItem" />
+              <button type="submit" class="carFilterItem" v-on:click="filterWord('audi')">Audi</button>
+            </form>
+          </li>
+          <li>
+            <form @submit.prevent="search">
+              <input type="hidden" v-model="searchItem" />
+              <button type="submit" class="carFilterItem" v-on:click="filterWord('BMW')">BMW</button>
+            </form>
+          </li>
+          <li>
+            <form @submit.prevent="search">
+              <input type="hidden" v-model="searchItem" />
+              <button type="submit" class="carFilterItem" v-on:click="filterWord('Ferrari')">Ferrari</button>
+            </form>
+          </li>
+          <li>
+            <form @submit.prevent="search">
+              <input type="hidden" v-model="searchItem" />
+              <button type="submit" class="carFilterItem" v-on:click="filterWord('Ford')">Ford</button>
+            </form>
+          </li>
+          <li>
+            <form @submit.prevent="search">
+              <input type="hidden" v-model="searchItem" />
+              <button type="submit" class="carFilterItem" v-on:click="filterWord('kia')">KIA</button>
+            </form>
+          </li>
+          <li>
+            <form @submit.prevent="search">
+              <input type="hidden" v-model="searchItem" />
+              <button type="submit" class="carFilterItem" v-on:click="filterWord('holden')">Holden</button>
+            </form>
+          </li>
+          <li>
+            <form @submit.prevent="search">
+              <input type="hidden" v-model="searchItem" />
+              <button type="submit" class="carFilterItem" v-on:click="filterWord('nissan')">Nissan</button>
+            </form>
+          </li>
+          <li>
+            <form @submit.prevent="search">
+              <input type="hidden" v-model="searchItem" />
+              <button
+                type="submit"
+                class="carFilterItem"
+                v-on:click="filterWord('lamborghini')"
+              >Lamborghini</button>
+            </form>
+          </li>
+          <li>
+            <form @submit.prevent="search">
+              <input type="hidden" v-model="searchItem" />
+              <button type="submit" class="carFilterItem" v-on:click="filterWord('isuzu')">ISUZU</button>
+            </form>
+          </li>
+          <li>
+            <form @submit.prevent="search">
+              <input type="hidden" v-model="searchItem" />
+              <button
+                type="submit"
+                class="carFilterItem"
+                v-on:click="filterWord('range rover')"
+              >Range Rover</button>
+            </form>
+          </li>
+          <li>
+            <form @submit.prevent="search">
+              <input type="hidden" v-model="searchItem" />
+              <button type="submit" class="carFilterItem" v-on:click="filterWord('toyota')">Toyota</button>
+            </form>
+          </li>
         </ul>
       </li>
       <li>
         <input type="checkbox" id="list-item-2" />
         <label for="list-item-2">
-          {{ $t('door') }}
-          <font-awesome-icon icon="plus" class="plus" />
-        </label>
-        <ul>
-          <li>Open Sans</li>
-          <li>Roboto</li>
-          <li>Lato</li>
-          <li>Stabo</li>
-          <li>Oswald</li>
-        </ul>
-      </li>
-      <li>
-        <input type="checkbox" id="list-item-3" />
-        <label for="list-item-3" >
           {{ $t('seat') }}
           <font-awesome-icon icon="plus" class="plus" />
         </label>
         <ul>
-          <li>Inconsolata</li>
-          <li>Source Code Pro</li>
-          <li>Droid Sans Mono</li>
-          <li>Ubuntu Mono</li>
-          <li>Cousine</li>
+          <li>
+            <form @submit.prevent="filterSeat">
+              <input type="hidden" v-model="searchItem" />
+              <button type="submit" class="carFilterItem" v-on:click="filterNumber(7)">7</button>
+            </form>
+          </li>
+          <li>
+            <form @submit.prevent="filterSeat">
+              <input type="hidden" v-model="searchItem" />
+              <button type="submit" class="carFilterItem" v-on:click="filterNumber(5)">5</button>
+            </form>
+          </li>
+          <li>
+            <form @submit.prevent="filterSeat">
+              <input type="hidden" v-model="searchItem" />
+              <button type="submit" class="carFilterItem" v-on:click="filterNumber(4)">4</button>
+            </form>
+          </li>
+          <li>
+            <form @submit.prevent="filterSeat">
+              <input type="hidden" v-model="searchItem" />
+              <button type="submit" class="carFilterItem" v-on:click="filterNumber(2)">2</button>
+            </form>
+          </li>
         </ul>
       </li>
 
       <li>
-        <input type="checkbox" id="list-item-4" />
-        <label for="list-item-4" class="last">
+        <input type="checkbox" id="list-item-3" />
+        <label for="list-item-3" class="last">
           {{ $t('gear') }}
           <font-awesome-icon icon="plus" class="plus" />
         </label>
         <ul>
-          <li>Inconsolata</li>
-          <li>Source Code Pro</li>
-          <li>Droid Sans Mono</li>
-          <li>Ubuntu Mono</li>
-          <li>Cousine</li>
+          <li>
+            <form @submit.prevent="search">
+              <input type="hidden" v-model="searchItem" />
+              <button
+                type="submit"
+                class="carFilterItem"
+                v-on:click="filterWord('automatic')"
+              >Automatic</button>
+            </form>
+          </li>
+          <li>
+            <form @submit.prevent="search">
+              <input type="hidden" v-model="searchItem" />
+              <button type="submit" class="carFilterItem" v-on:click="filterWord('manual')">Manual</button>
+            </form>
+          </li>
         </ul>
       </li>
     </ul>
   </div>
 </template>
 <script>
-export default {};
+import CarMixin from "@/mixins/carMixin";
+export default {
+  mixins: [CarMixin],
+  data() {
+    return {
+      searchItem: ""
+    };
+  },
+  methods: {
+    filterWord(carName) {
+      this.searchItem = carName;
+      this.update();
+    },
+    filterNumber(seat) {
+      this.searchItem = seat;
+      this.update();
+    }
+  }
+};
 </script>
 <style scoped>
 h3 {
@@ -118,7 +218,14 @@ input[type="checkbox"] ~ ul {
   height: 0;
   transform: scaleY(0);
 }
-
+.carFilterItem,
+.carFilterItem:focus,
+button:focus {
+  border: none !important;
+  width: 100%;
+  background-color: transparent;
+  outline: none !important;
+}
 input[type="checkbox"]:checked ~ ul {
   height: 100%;
   transform-origin: top;
