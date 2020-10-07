@@ -1,12 +1,13 @@
 /***********************************************************************
  *           @AUTHOR: Bach Dao, Updated AT: 21/08/2020                *
+ *           @UPDATING AUTHOR: DAWANAME DAWANAME, Updated AT: 01/10/2020                *
  ***********************************************************************/
 <template>
   <div v-on:scroll.native="scrollFunction">
     <div class="parallax p1">
       <div class="description main">
         <div class="description-text show-on-scroll">
-          <h1>The new car share system is there</h1>
+          <h1>The new car share system is here</h1>
           <p>
             Get your favorite car anytime, anywhere,
             <br />everything as you want
@@ -19,10 +20,10 @@
         <div class="description-text show-on-scroll">
           <h1>Top pick for family car renting</h1>
           <p>
-            We have the best renting policies with insurance
-            <br />covered in the renting package, Users can enjoy a
-            <br />self-driving weekends with the family to a new location
-            <br />without and worry!
+            We have the best renting policies with insurance covered in the
+            <br />renting package, Users can enjoy a fun weekend with
+            <br />the family to a new location
+            <br />without any problem!
           </p>
         </div>
       </div>
@@ -31,12 +32,12 @@
       <div class="description purpose">
         <div class="description-text show-on-scroll">
           <h1>
-            Easy Renting process supports
+            Easy Renting process with enough supports 
             <br />all purpose of renting
           </h1>
           <p>
-            Our company has wide range of cars and many
-            <br />off-site locations for users to rent the cars easily
+            Our company has wide range of cars that supports all purpose of
+            <br />renting and many off-site locations for users to rentthe cars  easily
             <br />for all kinds of renting purpose.
           </p>
           <a class="btn btn-light btn-lg action-button car-list-btn" href="/Login">Get A Car Now</a>
