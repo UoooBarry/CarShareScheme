@@ -23,9 +23,9 @@ export default {
     filtered(val) {
       //watch when filter changed, change the display cars
       this.cars = val;
-    },
-    checkedTrack(val) {
-      this.checkedTrack = val;
+      if(this.checkedTrack <= 0){
+        this.$router.go();
+      }
     },
   },
   methods: {
@@ -86,16 +86,11 @@ export default {
         this.filtered = this.filtered.concat(cars);
         this.checkedTrack++;
       } else {
-        if (this.checkedTrack > 0) {
           this.checkedTrack--;
           for (const car of cars) {
             const index = this.filtered.indexOf(car);
             this.filtered.splice(index, 1);
           }
-        } else {
-          this.checkedTrack = 0;
-          location.reload();
-        }
       }
     },
     filterBrand(brand, checked) {
@@ -106,19 +101,12 @@ export default {
         this.checkedTrack++;
         this.filtered = this.filtered.concat(cars); //If checked then concat to array
       } else {
-        if (this.checkedTrack > 0) {
           this.checkedTrack--;
-          console.log(this.checkedTrack);
           for (const car of cars) {
             const index = this.filtered.indexOf(car); //get the filtered car index
             this.filtered.splice(index, 1);
           }
-        } else {
-          this.checkedTrack = 0;
-          console.log("reload");
-          location.reload();
         }
-      }
     },
     filterGear(gear, checked) {
       const cars = this.temp_cars.filter((car) => {
@@ -128,20 +116,15 @@ export default {
         this.checkedTrack++;
         this.filtered = this.filtered.concat(cars); //If checked then concat to array
       } else {
-        if (this.checkedTrack > 0) {
           this.checkedTrack--;
           for (const car of cars) {
             const index = this.filtered.indexOf(car); //get the filtered car index
             this.filtered.splice(index, 1);
           }
-        } else {
-          this.checkedTrack = 0;
-          location.reload();
-        }
       }
     },
     update() {
       this.$emit("onFilter", this.cars);
     },
-  },
+  }
 };
