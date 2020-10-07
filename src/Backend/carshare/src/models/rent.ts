@@ -6,7 +6,7 @@
  ****************************************************************/
 
 
-import { Model, Table, AutoIncrement, PrimaryKey, Column, AllowNull, NotEmpty, BelongsTo, Default, ForeignKey } from "sequelize-typescript";
+import { Model, Table, AutoIncrement, PrimaryKey, HasOne, Column, AllowNull, NotEmpty, BelongsTo, Default, ForeignKey } from "sequelize-typescript";
 import Location from './location';
 import Car from './car';
 import Customer from './customer';
@@ -16,6 +16,7 @@ export enum RentStatus{
     NotPicked = 'Not picked',
     InProgress = 'In progress',
     Completed = 'Completed',
+    WaitForReview = 'Wait for review',
     Extended = 'Extended',
     Overdue = 'Overdue'
 }
@@ -26,7 +27,6 @@ export interface RentI{
     user_id: number;
     period: number;
     start_from: Date;
-    bill_id: number;
     status: RentStatus
 }
 
@@ -61,12 +61,7 @@ export default class Rent extends Model implements RentI{
     @Column
     period!: number
 
-    @NotEmpty
-    @ForeignKey(() => Bill)
-    @Column
-    bill_id!: number
-
-    @BelongsTo(() => Bill, 'bill_id')
+    @HasOne(() => Bill)
     bill!: Bill
 
     @Default(RentStatus.NotPicked)

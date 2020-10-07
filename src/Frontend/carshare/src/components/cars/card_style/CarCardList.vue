@@ -2,15 +2,25 @@
  *           @AUTHOR: Bach Dao, Created AT: 24/08/2020                *
  ***********************************************************************/
 <template>
-  <div class="carlist container" >
-    <div class="row">
-      <div v-for="(car) in pageOfItems" v-bind:key="car.id" class="col-sm-3 car">
-        <CarCard v-bind:car="car" style="max-width: 100%"/> 
+  <div class="carlist container">
+    <div v-if="cars.length > 0">
+      <div class="row">
+        <div v-for="(car) in pageOfItems" v-bind:key="car.id" class="col-sm-3 car">
+          <CarCard v-bind:car="car" style="max-width: 100%" />
+        </div>
+      </div>
+      <div class="page-footer">
+        <jw-pagination
+          :items="cars"
+          :pageSize="8"
+          @changePage="onChangePage"
+          :labels="customLabels"
+        ></jw-pagination>
       </div>
     </div>
-    <div class="page-footer"  :if="cars">
-            <jw-pagination :items="cars" :pageSize=8 @changePage="onChangePage" :labels="customLabels"></jw-pagination>
-      </div>
+    <div class="page-footer" v-else>
+      <h1>There is no car available</h1>
+    </div>
   </div>
 </template>
 
@@ -18,10 +28,10 @@
 import CarCard from "./CarCard.vue";
 
 const customLabels = {
-    first: 'First',
-    last: 'Last',
-    previous: '<',
-    next: '>'
+  first: "First",
+  last: "Last",
+  previous: "<",
+  next: ">"
 };
 export default {
   name: "CarList",
@@ -46,11 +56,6 @@ export default {
 
 
 <style scoped>
-.page-footer{
-  border-top: 1px solid lightgrey;
-  padding-top:10px;
-  width: 96%;
-}
 .col-sm-3.car {
   margin-bottom: 40px;
 }

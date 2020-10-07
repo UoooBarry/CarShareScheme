@@ -17,7 +17,10 @@ const generateAccessToken = (customer: Customer) => {
 const verifyToken =  (req: Request, res:Response, next:NextFunction) => {
     const header:any = req.headers['authorization'];
     //Check exsit
-    if(typeof header === 'undefined') res.sendStatus(403) //Forbidden
+   if (typeof header === 'undefined') {
+        res.sendStatus(403); //Forbidden
+        next();
+    } //Forbidden
     let token = header.split(' ')[1];
     JWT.verify(token,process.env.ACCESS_TOKEN_SECRET, (err: any, data: any) => {
         if(err) res.sendStatus(403) 

@@ -2,6 +2,8 @@
  *           @AUTHOR: Bach Dao, CREATED AT: 03/09/2020                 *
  *   Bach Dao, Updated AT: 04/08/2020      added 2 components          *
  *   Bach Dao, Updated AT: 04/08/2020      description for car         *
+ * Yongqian Huang 1/10/2020 Add comment test            
+  Bach Dao updated 2/10/2020 add comment new view               *
  ***********************************************************************/
 <template>
   <div class="container">
@@ -11,24 +13,26 @@
       </div>
       <!-- <div class="col"></div> -->
       <div class="col-md car-content">
-          <CarContent :car="car" />
+        <CarContent :car="car" />
+        <CommentList :comments="car.Comments" :key="car.Comments.length" v-if="car.Comments" />
       </div>
     </div>
-     
+
     <BackToTop />
   </div>
-  
 </template>
 
 <script>
 import BackToTop from "@/components/BackToTop";
 import CarContent from "@/components/cars/car_detail/CarContent";
 import CarDescription from "@/components/cars/car_detail/CarDescription";
+import CommentList from "@/components/comment/CommentList";
 export default {
   name: "CarDetail",
   components: {
     CarContent,
     CarDescription,
+    CommentList,
     BackToTop
   },
   data() {
@@ -50,15 +54,13 @@ export default {
         this.$router.push({ name: "Cars" });
       });
   },
-  mounted() {
- 
-  }
+  mounted() {}
 };
 </script>
 
 
 <style scoped>
-.container{
+.container {
   max-width: 80%;
 }
 

@@ -18,7 +18,9 @@
      <a> <img src='https://img.shields.io/badge/Framework-Vue.Js-brightgreen' /> </a>
 </p>
 
-
+## Technical stack
+Postgres + Express.js + Vue.js + Node.js<br>
+Backend and authroization servers are wirttern in typescript. Using sequelize library to interact with postgres. Frontend is wirttern in Vue.js. using axios libary to interact with frontend.
 
 ## Run the servers in development mode
 Under windows environment, you can just run `make up` to start up 2 backend servers locally.<br>
@@ -27,19 +29,10 @@ Before running the servers, ensure postgres is running. And config the .env file
 In `src/Backend/authServer` and `src/Backend/carshare`, run `npm run start:dev` to start backend servers in development mode.
 In `src/Frontend/carshare` to start client side app in development mode.
 
-## Endpoints
-### Customer information: 
-`http://localhost:3000/api/customers/:id` `${this.$carshare}/customers/:id`
-<br>
-
-### Patch customer:
-PATCH: `http://localhost:3000/api/customers/:id`<br>
-        Please patch with authorization token in header, format: 'pbdAuth token' (Bearer + space + token)<br>
-        The token is store in local storage, use `localStorage.getItem('authToken');` to fetch it.
-
 
 ## Deployment
 ### How to deploy
+Workflow path: `.circleCi\config.yml`<br>
 We have setup an auto deployment for  `release` branch workflow via circleCi. Authentication server and car share system server will be deployed to our aws ec2 instance automatically. <h3>Need to click approve in circleCi workflow.</h3><br>
 The next thing to do is to just host the static frontend to S3 bucket. Run `npm run build` in dir 'src/Frontend/carshare'. Upload all the contents in the generated dist folder, to a public S3 bucket.
 #### Release

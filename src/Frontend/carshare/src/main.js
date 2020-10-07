@@ -7,10 +7,8 @@ import App from "./App.vue";
 import router from "./router";
 import axios from "axios";
 import "bootstrap";
-import VueSession from "vue-session";
 import "bootstrap/dist/css/bootstrap.min.css";
 import FlashMessage from "@smartweb/vue-flash-message";
-import { VueReCaptcha } from "vue-recaptcha-v3";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fas } from "@fortawesome/free-solid-svg-icons";
 import { fab } from "@fortawesome/free-brands-svg-icons";
@@ -19,9 +17,18 @@ import moment from "moment";
 import { ToggleButton } from "vue-js-toggle-button";
 import JwPagination from "jw-vue-pagination";
 import VueNumericInput from "vue-numeric-input";
-import i18n from '@/plugins/i18n';
-import FlagIcon from 'vue-flag-icon';
+import i18n from "@/plugins/i18n";
+import FlagIcon from "vue-flag-icon";
+import authorizationMixin from "@/mixins/authorizeMixin";
 // import authorizeMixin from '@/mixins/authorizeMixin';
+import VueFbCustomerChat from "vue-fb-customer-chat";
+
+Vue.use(VueFbCustomerChat, {
+  page_id: 102140215002493, //  change 'null' to your Facebook Page ID,
+  theme_color: "#a9a0a0", // theme color in HEX
+  locale: "en_US", // default 'en_US'
+});
+
 
 //numeric input
 Vue.use(VueNumericInput);
@@ -55,48 +62,32 @@ Vue.filter("formatDate", function(value) {
   }
 });
 
-// Session storage
-Vue.use(VueSession);
 // Flash messages
 Vue.use(FlashMessage);
-//Recaptcha
-Vue.use(VueReCaptcha, {
-  siteKey: "6LcTY7sZAAAAAJeN_bq5d-F7S-I2Qq9yPTCMQmoA",
-  loaderOptions: {
-    autoHideBadge: true,
-  },
-});
 
-
-Vue.mixin({
-  data() {
-    return{
-        header: this.getHeader(),
-        id: sessionStorage.getItem("authToken")
-    }
-},
-methods: {
-    getHeader(){
-        const header = {
-            authorization: `Bearer ${sessionStorage.getItem("authToken")}`
-        };
-        return header;
-    },
-    logout() {
-        sessionStorage.removeItem('authToken');
-        localStorage.removeItem('authToken');
-        this.$session.remove('username');
-        this.flashMessage.info({
-          title: 'Logout success',
-          message: 'See you!'
-        });
-        this.$router.push({name: 'Login'});
-    }
-}
-});
+Vue.mixin(authorizationMixin);
 
 // Make a router check, required logged in when meta has requiresAuth
 router.beforeEach((to, from, next) => {
+  if (to.matched.some((record) => record.meta.requiresAdminAuth)) {
+    const header = {
+      authorization: `Bearer ${sessionStorage.getItem("authToken")}`
+    };
+    axios
+      .get(`${Vue.prototype.$admin}/verify`, { headers: header }) //access the admin verify endpoint
+      .then((res) => {
+        if (res.data.authorize) { //if authorize go next
+          next();
+        } else {
+          throw "Not authorized";
+        }
+      })
+      .catch(() => { //not authorized, return to /notfound
+        next({
+          path: "/notfound",
+        });
+      });
+  }
   if (to.matched.some((record) => record.meta.requiresAuth)) {
     // this route requires auth, check if logged in
     // if not, redirect to login page.
@@ -111,6 +102,7 @@ router.beforeEach((to, from, next) => {
     next(); // make sure to always call next()!
   }
 });
+
 
 //Global Mixin
 Vue.mixin({

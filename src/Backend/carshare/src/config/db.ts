@@ -12,6 +12,7 @@ import path from 'path';
 import Location from '../models/location';
 import Customer from '../models/customer';
 import License from '../models/license';
+import Comment from '../models/comment';
 import Car from '../models/car';
 import Bill from '../models/bill';
 import Rent from '../models/rent';
@@ -51,12 +52,22 @@ class database{
          foreignKey: 'location_id'
          })
  
-         Bill.hasOne(Rent,{
+         Rent.hasOne(Bill,{
          sourceKey: 'id',
-         foreignKey: 'bill_id'
+         foreignKey: 'rent_id'
          })
         
         Customer.hasOne(License, {
+            sourceKey: 'id',
+            foreignKey: 'user_id'
+        })
+
+        Car.hasMany(Comment, {
+            sourceKey: 'id',
+            foreignKey: 'car_id'
+        })
+
+        Customer.hasMany(Comment, {
             sourceKey: 'id',
             foreignKey: 'user_id'
         })

@@ -2,7 +2,7 @@
  * @AUTHOR YONGQIAN HUANG, CREATEED AT 27/08/2020 *
  **************************************************/
 
-export default  {
+const authorizeMixin = {
     data() {
         return{
             header: this.getHeader(),
@@ -10,6 +10,11 @@ export default  {
         }
     },
     methods: {
+        authorize(token,remember){
+            if(remember) localStorage.setItem('authToken', token);
+            sessionStorage.setItem("authToken", token);
+            return; 
+        },
         getHeader(){
             const header = {
                 authorization: `Bearer ${sessionStorage.getItem("authToken")}`
@@ -28,3 +33,5 @@ export default  {
         }
     }
 }
+
+export default authorizeMixin;
