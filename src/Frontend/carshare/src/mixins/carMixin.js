@@ -23,10 +23,12 @@ export default {
     filtered(val) {
       //watch when filter changed, change the display cars
       this.cars = val;
-      if(this.checkedTrack <= 0){
+    },
+    checkedTrack(val){
+      if(val <= 0){
         this.$router.go();
       }
-    },
+    }
   },
   methods: {
     sort_car(item, order) {

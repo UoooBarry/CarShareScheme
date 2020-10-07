@@ -221,7 +221,6 @@ li ul li [type="checkbox"] {
 li ul li{
   padding: 10px 0 10px 30px;
   text-align: left;
-  font-size: 18px;
 }
 .filter-check-label {
   display: inline-block;
@@ -254,7 +253,6 @@ label.filter-label {
   border-top: 1px solid #a9a0a0;
   margin-bottom: 0;
   text-align: left;
-  font-size: 20px;
 }
 
 .filter-label:hover {
