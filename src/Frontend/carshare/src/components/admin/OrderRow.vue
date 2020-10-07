@@ -25,7 +25,7 @@
         <td>
             {{rent.status}}
         </td>
-        <td v-if="rent.bill.isPaid">
+        <td v-if="!rent.bill.isPaid">
             Wait for pay...
         </td>
         <td v-else-if="rent.status == 'In progress'">
