@@ -13,15 +13,20 @@ export default {
       order: "",
       cars: [],
       temp_cars: [], //storing temporary cars
-      filtered: [], 
+      filtered: [],
+      checkedTrack: 0,
       searchItem: "",
-      loadingKey: 0
+      loadingKey: 0,
     };
   },
-  watch:{
-    filtered(val) { //watch when filter changed, change the display cars
+  watch: {
+    filtered(val) {
+      //watch when filter changed, change the display cars
       this.cars = val;
-    }
+    },
+    checkedTrack(val) {
+      this.checkedTrack = val;
+    },
   },
   methods: {
     sort_car(item, order) {
@@ -72,47 +77,68 @@ export default {
         })
         .catch((err) => console.log(err));
     },
-    filterSeats(number,checked) {
+    filterSeats(number, checked) {
       const cars = this.temp_cars.filter((car) => {
-        return car.seats === number
+        return car.seats === number;
       });
-      if(checked){
-        this.filtered = this.filtered.concat(cars); //If checked then concat to array
-      }else{
-        for(const car of cars){
-          const index = this.filtered.indexOf(car); //get the filtered car index
-          this.filtered.splice(index,1)
+
+      if (checked) {
+        this.filtered = this.filtered.concat(cars);
+        this.checkedTrack++;
+      } else {
+        if (this.checkedTrack > 0) {
+          this.checkedTrack--;
+          for (const car of cars) {
+            const index = this.filtered.indexOf(car);
+            this.filtered.splice(index, 1);
+          }
+        } else {
+          this.checkedTrack = 0;
+          location.reload();
         }
       }
-      this.loadingKey ++;
     },
-    filterBrand(brand,checked) {
+    filterBrand(brand, checked) {
       const cars = this.temp_cars.filter((car) => {
         return car.brand.toUpperCase() === brand.toUpperCase(); //ignore case
       });
-      if(checked){
+      if (checked) {
+        this.checkedTrack++;
         this.filtered = this.filtered.concat(cars); //If checked then concat to array
-      }else{
-        for(const car of cars){
-          const index = this.filtered.indexOf(car); //get the filtered car index
-          this.filtered.splice(index,1)
+      } else {
+        if (this.checkedTrack > 0) {
+          this.checkedTrack--;
+          console.log(this.checkedTrack);
+          for (const car of cars) {
+            const index = this.filtered.indexOf(car); //get the filtered car index
+            this.filtered.splice(index, 1);
+          }
+        } else {
+          this.checkedTrack = 0;
+          console.log("reload");
+          location.reload();
         }
       }
-      this.loadingKey ++;
     },
-    filterGear(gear,checked) {
+    filterGear(gear, checked) {
       const cars = this.temp_cars.filter((car) => {
         return car.gear.toUpperCase() === gear.toUpperCase(); //ignore case
       });
-      if(checked){
+      if (checked) {
+        this.checkedTrack++;
         this.filtered = this.filtered.concat(cars); //If checked then concat to array
-      }else{
-        for(const car of cars){
-          const index = this.filtered.indexOf(car); //get the filtered car index
-          this.filtered.splice(index,1)
+      } else {
+        if (this.checkedTrack > 0) {
+          this.checkedTrack--;
+          for (const car of cars) {
+            const index = this.filtered.indexOf(car); //get the filtered car index
+            this.filtered.splice(index, 1);
+          }
+        } else {
+          this.checkedTrack = 0;
+          location.reload();
         }
       }
-      this.loadingKey ++;
     },
     update() {
       this.$emit("onFilter", this.cars);
