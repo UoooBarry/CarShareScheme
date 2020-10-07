@@ -1,5 +1,6 @@
 /*
     @Author Yongqian Huang 1/10/2020
+    Bach Dao updated 2/10/2020
 */
 <template>
   <div class="reviews">

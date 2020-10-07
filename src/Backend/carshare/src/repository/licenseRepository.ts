@@ -4,6 +4,7 @@ import License from '../models/license';
 import Customer from '../models/customer'
 import { Op } from 'sequelize';
 
+
 class licenseRepository implements DataRepository {
   private static instance?: licenseRepository;
 

@@ -3,6 +3,7 @@
     <FlashMessage></FlashMessage>
     <router-view class name="header"></router-view>
     <router-view class="main" name="main" />
+
     <DarkFooter id="dark-footer" />
   </div>
 </template>
@@ -10,7 +11,6 @@
 
 <script>
 import DarkFooter from "@/components/layouts/DarkFooter.vue";
-
 export default {
   components: {
     DarkFooter
