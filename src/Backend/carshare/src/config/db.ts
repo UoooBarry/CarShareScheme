@@ -52,9 +52,9 @@ class database{
          foreignKey: 'location_id'
          })
  
-         Bill.hasOne(Rent,{
+         Rent.hasOne(Bill,{
          sourceKey: 'id',
-         foreignKey: 'bill_id'
+         foreignKey: 'rent_id'
          })
         
         Customer.hasOne(License, {

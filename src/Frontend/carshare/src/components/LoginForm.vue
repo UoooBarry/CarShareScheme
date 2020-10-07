@@ -67,8 +67,7 @@ export default {
       })
       .then( (res) => {
         if(res.data.message === 'success'){
-          if(this.remember) localStorage.setItem('authToken', res.data.token);
-          sessionStorage.setItem('authToken', res.data.token);
+          this.authorize(res.data.token,this.remember); //from global mixin
           this.flashMessage.success({
             title: 'Login success',
             message: `Welcome! ${res.data.customer_name}`

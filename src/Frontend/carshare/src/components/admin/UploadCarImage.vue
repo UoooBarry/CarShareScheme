@@ -1,5 +1,6 @@
 /***********************************************************************
  *           @AUTHOR: Bach Dao, Created AT: 27/08/2020                *
+ * Yongqian Huang, updated at 04/10/2020 try to fixed image upload internel error*
  ***********************************************************************/
 <template>
   <div class="modal-backdrop">
@@ -13,13 +14,11 @@
           <div class="custom-file" style="margin-top: 10px">
             <input
               type="file"
-              id="file"
               accept="image/*"
-              ref="file"
               name="file"
               style="margin-top:20px; margin-bottom:10px; border: 1px solid #ada7a7;"
               class="custom-file-input"
-              v-on:change="bindFile()"
+              v-on:change="bindFile($event)"
             />
             <label class="custom-file-label" for="file">Choose file</label>
             <button class="btn btn-primary" v-on:click="upload()"> Upload </button>
@@ -44,8 +43,8 @@ export default {
     };
   },
   methods: {
-    bindFile() {
-      this.file = this.$refs.file.files[0];
+    bindFile(event) {
+      this.file = event.target.files[0];
     },
     upload() {
       let formData = new FormData();

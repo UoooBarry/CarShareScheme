@@ -55,7 +55,7 @@
       </div>
       <hr class="my-3" />
       <div class="row justify-content-between" style="margin-bottom: 50px">
-        <div class="col-4">
+        <div class="col-4 total-col">
           <p class="total-text">
             <b>Total</b>
           </p>
@@ -100,7 +100,7 @@ p {
 }
 .total-text {
   font-weight: bold;
-  font-size: 24px;
+  font-size: 3vh;
 }
 .my-3 {
   padding-left: 30px;
@@ -117,12 +117,13 @@ p {
   text-transform: uppercase;
 }
 .coupon__input {
-  -webkit-box-flex: 1;
-  -ms-flex-positive: 1;
   flex-grow: 1;
   margin-right: 8px;
   font-size:22px;
 }
+ .coupon_input_field{
+    width: 100%;
+  }
 .coupon_button {
   height: 40px;
   padding: 8px;
@@ -139,7 +140,22 @@ p {
     width: 100%;
     margin: 0 !important;
     overflow-y: auto;
-    overflow-wrap: break-word;
+    overflow-wrap: visible;
   }
+  .total-text{
+    font-size: 3vh;
+  }
+  .img-fluid{
+    margin-left: 0;
+    margin-right: 0;
+    width: 100%;
+  }
+  .media-body{
+    width: 100%;
+  }
+  .total-col{
+    display: flex;
+  }
+ 
 }
 </style>  

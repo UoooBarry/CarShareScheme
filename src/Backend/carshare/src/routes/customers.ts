@@ -9,6 +9,7 @@
 import express,{Request, Response, NextFunction} from 'express';
 const router = express.Router();
 import _Customer from '../repository/customerRepository';
+import _Bill from '../repository/billRepository';
 import uploadFile from '../helpers/Uploader';
 import { verifyToken } from '../helpers/authorizationHelper';
 import _License from '../repository/licenseRepository';
@@ -17,6 +18,10 @@ const avatarUpload = multer({
     dest: 'uploads/'
 })
 import validatorFactory from '../helpers/validatorFactory';
+import { BillType } from '../models/bill';
+import Rent from '../models/rent';
+import Car from '../models/car';
+import Location from '../models/location';
 const ProfileValidator = validatorFactory.getValidator('profile');
 
 //GET /api/customers/:id
@@ -28,6 +33,34 @@ router.get('/:id/', async (req, res) => {
         res.sendStatus(403);
     }
 });
+
+//GET /api/customers/overdue/
+router.get('/overdue/all', verifyToken, (req: Request,res: Response) => {
+    const caluse = {
+        where:{
+            user_id: req.user.id,
+            type: BillType.OverdueFee
+        },
+        include:[
+            {
+                model: Rent,
+                include: [{
+                    model: Car,
+                    include: [{
+                        model: Location
+                      }]
+                  }]
+            }
+        ]
+    }
+    _Bill.getBy(caluse)
+        .then((bills) => {
+            res.json({bills});
+        })
+        .catch((err) => {
+            res.sendStatus(500);
+        })
+})
 
 //Use multer middleware to handle image
 router.patch('/avatar', [verifyToken, avatarUpload.single('image')], (req: Request, res: Response) => {

@@ -19,6 +19,7 @@ import JwPagination from "jw-vue-pagination";
 import VueNumericInput from "vue-numeric-input";
 import i18n from "@/plugins/i18n";
 import FlagIcon from "vue-flag-icon";
+import authorizationMixin from "@/mixins/authorizeMixin";
 // import authorizeMixin from '@/mixins/authorizeMixin';
 import VueFbCustomerChat from "vue-fb-customer-chat";
 
@@ -27,6 +28,7 @@ Vue.use(VueFbCustomerChat, {
   theme_color: "#a9a0a0", // theme color in HEX
   locale: "en_US", // default 'en_US'
 });
+
 
 //numeric input
 Vue.use(VueNumericInput);
@@ -63,35 +65,29 @@ Vue.filter("formatDate", function(value) {
 // Flash messages
 Vue.use(FlashMessage);
 
-
-Vue.mixin({
-  data() {
-    return{
-        header: this.getHeader(),
-        id: sessionStorage.getItem("authToken")
-    }
-},
-methods: {
-    getHeader(){
-        const header = {
-            authorization: `Bearer ${sessionStorage.getItem("authToken")}`
-        };
-        return header;
-    },
-    logout() {
-        sessionStorage.removeItem('authToken');
-        localStorage.removeItem('authToken');
-        this.flashMessage.info({
-          title: 'Logout success',
-          message: 'See you!'
-        });
-        this.$router.push({name: 'Login'});
-    }
-}
-});
+Vue.mixin(authorizationMixin);
 
 // Make a router check, required logged in when meta has requiresAuth
 router.beforeEach((to, from, next) => {
+  if (to.matched.some((record) => record.meta.requiresAdminAuth)) {
+    const header = {
+      authorization: `Bearer ${sessionStorage.getItem("authToken")}`
+    };
+    axios
+      .get(`${Vue.prototype.$admin}/verify`, { headers: header }) //access the admin verify endpoint
+      .then((res) => {
+        if (res.data.authorize) { //if authorize go next
+          next();
+        } else {
+          throw "Not authorized";
+        }
+      })
+      .catch(() => { //not authorized, return to /notfound
+        next({
+          path: "/notfound",
+        });
+      });
+  }
   if (to.matched.some((record) => record.meta.requiresAuth)) {
     // this route requires auth, check if logged in
     // if not, redirect to login page.
@@ -106,6 +102,7 @@ router.beforeEach((to, from, next) => {
     next(); // make sure to always call next()!
   }
 });
+
 
 //Global Mixin
 Vue.mixin({

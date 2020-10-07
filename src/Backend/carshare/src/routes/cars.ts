@@ -63,19 +63,6 @@ router.get("/search", (req: Request, res: Response) => {
     });
 });
 
-//GET: /api/cars/filter/seat
-router.get("/filter/seat", (req: Request, res: Response) => {
-  _Car
-    .getBySeats(parseInt(<string>req.query.query))
-    .then((cars: Car[]) => {
-      res.json({ cars });
-    })
-    .catch((err: Error) => {
-      console.log(err);
-      res.sendStatus(403);
-    });
-});
-
 //GET: /api/cars/:id
 router.get("/:id/", (req: Request, res: Response) => {
   _Car
