@@ -287,7 +287,6 @@ input[type="checkbox"]:checked ~ ul {
 }
 
 input[type="checkbox"]:checked + label {
-  background: #a9a0a0;
   border-bottom: 1px solid #fff;
 }
 </style>
