@@ -69,7 +69,7 @@
             </div>
           </li>
           <li class="nav-item" role="presentation" id="login" style="display: none">
-            <a class="nav-link" href="/login">Login/Register</a>
+            <a class="nav-link" href="/login">{{ $t('loginregister') }}</a>
           </li>
         </ul>
       </div>
