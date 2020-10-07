@@ -94,6 +94,7 @@ router.beforeEach((to, from, next) => {
   }
 });
 
+
 //Global Mixin
 Vue.mixin({
   methods: {

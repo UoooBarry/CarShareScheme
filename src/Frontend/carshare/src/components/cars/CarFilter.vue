@@ -15,47 +15,47 @@
         </label>
         <ul>
           <li>
-              <input type="radio" class="form-check-input" v-on:change="$emit('filter-brand','Audi')" id='brand-audi' name='brand' />
+              <input type="checkbox" class="form-check-input" v-on:change="$emit('filter-brand','Audi', $event.target.checked)" id='brand-audi' name='brand' />
               <label for="brand-audi" class="filter-check-label">Audi</label>
           </li>
           <li>
-              <input type="radio" class="form-check-input" v-on:change="$emit('filter-brand','BMW')"  id='brand-bmw' name='brand'/>
+              <input type="checkbox" class="form-check-input" v-on:change="$emit('filter-brand','BMW', $event.target.checked)"  id='brand-bmw' name='brand'/>
               <label for="brand-bmw" class="filter-check-label">Bmw</label>
           </li>
           <li>
-            <input type="radio" class="form-check-input" v-on:change="$emit('filter-brand','Ferrari')"  id='brand-ferrari' name='brand'/>
+            <input type="checkbox" class="form-check-input" v-on:change="$emit('filter-brand','Ferrari', $event.target.checked)"  id='brand-ferrari' name='brand'/>
             <label for="brand-ferrari" class="filter-check-label">Ferrari</label>
           </li>
           <li>
-            <input type="radio" class="form-check-input" v-on:change="$emit('filter-brand','ford')"  id='brand-ford' name='brand'/>
+            <input type="checkbox" class="form-check-input" v-on:change="$emit('filter-brand','ford', $event.target.checked)"  id='brand-ford' name='brand'/>
             <label for="brand-ford" class="filter-check-label">Ford</label>
           </li>
           <li>
-            <input type="radio" class="form-check-input" v-on:change="$emit('filter-brand','kia')"  id='brand-kia' name='brand'/>
+            <input type="checkbox" class="form-check-input" v-on:change="$emit('filter-brand','kia', $event.target.checked)"  id='brand-kia' name='brand'/>
             <label for="brand-kia" class="filter-check-label">Kia</label>
           </li>
           <li>
-            <input type="radio" class="form-check-input" v-on:change="$emit('filter-brand','holden')"  id='brand-holden' name='brand'/>
+            <input type="checkbox" class="form-check-input" v-on:change="$emit('filter-brand','holden', $event.target.checked)"  id='brand-holden' name='brand'/>
             <label for="brand-holden" class="filter-check-label">Holden</label>
           </li>
           <li>
-            <input type="radio" class="form-check-input" v-on:change="$emit('filter-brand','nissan')"  id='brand-nissan' name='brand'/>
+            <input type="radio" class="form-check-input" v-on:change="$emit('filter-brand','nissan', $event.target.checked)"  id='brand-nissan' name='brand'/>
             <label for="brand-nissan" class="filter-check-label">Nissan</label>
           </li>
           <li>
-            <input type="radio" class="form-check-input" v-on:change="$emit('filter-brand','lamborghini')"  id='brand-lamborghini' name='brand'/>
+            <input type="radio" class="form-check-input" v-on:change="$emit('filter-brand','lamborghini', $event.target.checked)"  id='brand-lamborghini' name='brand'/>
             <label for="brand-lamborghini" class="filter-check-label">Lamborghini</label>
           </li>
           <li>
-            <input type="radio" class="form-check-input" v-on:change="$emit('filter-brand','isuzu')"  id='brand-isuzu' name='brand'/>
+            <input type="radio" class="form-check-input" v-on:change="$emit('filter-brand','isuzu', $event.target.checked)"  id='brand-isuzu' name='brand'/>
             <label for="brand-isuzu" class="filter-check-label">ISUZU</label>
           </li>
           <li>
-            <input type="radio" class="form-check-input" v-on:change="$emit('filter-brand','range rover')"  id='brand-range' name='brand'/>
+            <input type="radio" class="form-check-input" v-on:change="$emit('filter-brand','range rover', $event.target.checked)"  id='brand-range' name='brand'/>
             <label for="brand-range" class="filter-check-label">Range Rover</label>
           </li>
           <li>
-            <input type="radio" class="form-check-input" v-on:change="$emit('filter-brand','toyota')"  id='brand-toyota' name='brand'/>
+            <input type="radio" class="form-check-input" v-on:change="$emit('filter-brand','toyota', $event.target.checked)"  id='brand-toyota' name='brand'/>
             <label for="brand-toyota" class="filter-check-label">Toyota</label>
           </li>
         </ul>
@@ -69,22 +69,22 @@
         <ul>
           <li>
             <div>
-              <button type="button" class="carFilterItem" v-on:click="$emit('filter-seat', 7)">7</button>
+              <button type="button" class="carFilterItem" v-on:change="$emit('filter-seat', 7, $event.target.checked)">7</button>
             </div>
           </li>
           <li>
             <div>
-              <button type="button" class="carFilterItem" v-on:click="$emit('filter-seat', 5)">5</button>
+              <button type="button" class="carFilterItem" v-on:change="$emit('filter-seat', 5, $event.target.checked)">5</button>
             </div>
           </li>
           <li>
             <div>
-              <button type="button" class="carFilterItem" v-on:click="$emit('filter-seat', 4)">4</button>
+              <button type="button" class="carFilterItem" v-on:change="$emit('filter-seat', 4, $event.target.checked)">4</button>
             </div>
           </li>
           <li>
             <div>
-              <button type="button" class="carFilterItem" v-on:click="$emit('filter-seat', 2)">2</button>
+              <button type="button" class="carFilterItem" v-on:change="$emit('filter-seat', 2, $event.target.checked)">2</button>
             </div>
           </li>
         </ul>
@@ -102,19 +102,19 @@
               <button
                 type="button"
                 class="carFilterItem"
-                v-on:click="$emit('filter-gear','automatic')"
+                v-on:change="$emit('filter-gear','automatic', $event.target.checked)"
               >Automatic</button>
             </div>
           </li>
           <li>
             <div>
-              <button type="button" class="carFilterItem" v-on:click="$emit('filter-gear','manual')">Manual</button>
+              <button type="button" class="carFilterItem" v-on:change="$emit('filter-gear','manual', $event.target.checked)">Manual</button>
             </div>
           </li>
         </ul>
       </li>
     </ul>
-    <button type="button" class="carFilterItem" v-on:click="$router.go()">Clear filter</button>
+    <button type="button" class="carFilterItem" v-on:change="$router.go()">Clear filter</button>
   </div>
 </template>
 
