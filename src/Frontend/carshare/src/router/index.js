@@ -70,6 +70,14 @@ const routes = [
   },
 },
 {
+  path: '/overdue',
+  name: 'Overdue',
+  components: {
+    header: Header,
+    main: () => import('../views/Overdue.vue')
+  },
+},
+{
   path: '/receipt/:id',
   name: 'Receipt',
   components: {
@@ -139,7 +147,8 @@ const routes = [
     main: () => import('../views/admin/User.vue')
   },
   meta: {
-    requiresAuth: true
+    requiresAuth: true,
+    requiresAdminAuth: true
   }
 },
 {
@@ -150,7 +159,8 @@ const routes = [
     main: () => import('../views/admin/Cars.vue')
   },
   meta: {
-    requiresAuth: true
+    requiresAuth: true,
+    requiresAdminAuth: true
   }
 },
 {
@@ -161,7 +171,8 @@ const routes = [
     main: () => import('../views/admin/Licenses.vue')
   },
   meta: {
-    requiresAuth: true
+    requiresAuth: true,
+    requiresAdminAuth: true
   }
 },
 {
@@ -172,7 +183,8 @@ const routes = [
     main: () => import('../views/admin/AddCar.vue')
   },
   meta: {
-    requiresAuth: true
+    requiresAuth: true,
+    requiresAdminAuth: true
   }
 },
 {
@@ -183,7 +195,8 @@ const routes = [
     main: () => import('../views/admin/Orders.vue')
   },
   meta: {
-    requiresAuth: true
+    requiresAuth: true,
+    requiresAdminAuth: true
   }
 }
 ]

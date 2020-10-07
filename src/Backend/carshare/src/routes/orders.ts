@@ -23,6 +23,7 @@ import Message from '../helpers/messageHelper';
 import ItemNotFound from '../exceptions/ItemNotFound';
 import IncorrectItem from '../exceptions/IncorrectItem';
 import { RentStatus } from '../models/rent';
+import AccountUnavailable from '../exceptions/AccountUnavailable';
 
 
 //POST: api/orders/create
@@ -36,20 +37,16 @@ router.post('/create', [OrderValidator.validate, verifyToken], async (req: Reque
         });
       }else{
         try {
-            const car = await _Car.get(req.body.car_id);
+            const pendingRents = await _Rent.getUserPendingRents(req.user.id); //Get not picked and in progress rent of the user.
+            if(pendingRents.length > 0) throw new AccountUnavailable("Your account already had one pending rent"); //Cannot have exsited rent
             const license = await _License.getByUserId(req.user.id);
-            if (!license || !license.isValidated) throw new IncorrectItem('Your account is not validate yet, please go to license validation page.');
-            if(!car.available) throw new IncorrectItem('The car does not available yet');
-    
-            const feeToPay = (req.body.period * car.price + car.price * 0.1).toFixed(2);
+            if (!license || !license.isValidated) throw new AccountUnavailable('Your account is not validate yet, please go to license validation page.');
+            
+            if(!req.car) throw new ItemNotFound('Incorrect request car');
+            const feeToPay = (req.body.period * req.car.price + req.car.price * 0.1).toFixed(2);
             
             
-            //Create bill
-            const bill = await _Bill.create({
-                user_id: req.user.id,
-                fee: feeToPay,
-                type: BillType.RentFee
-            })
+            
     
             //Create rent
             const rent = await _Rent.create({
@@ -57,8 +54,15 @@ router.post('/create', [OrderValidator.validate, verifyToken], async (req: Reque
                 user_id: req.user.id,
                 start_from: req.body.start_from,
                 period: req.body.period,
-                bill_id: bill.id
             });
+
+            //Create bill
+            const bill = await _Bill.create({
+                user_id: req.user.id,
+                fee: feeToPay,
+                type: BillType.RentFee,
+                rent_id: rent.id
+            })
     
             res.json({ bill, rent, feeToPay });
         } catch (err) {
@@ -111,6 +115,7 @@ router.post('/extend/:id', [ExtendRentValidator.validate, verifyToken], async (r
             res.json({ bill, newRent });
 
         } catch (err) {
+            console.log(err);
             res.sendStatus(404);
         }
     }
@@ -243,13 +248,16 @@ router.post('/pay', [PaymentValidator.validate, verifyToken], async (req: Reques
             if(!req.bill) throw new ItemNotFound('Bill not found');
             await _Bill.pay(req.bill);
 
-            //Send message to user only in production environment
-            if (process.env.NODE_ENV == 'production') {
-                const text: string = `Thanks for order our rent services. Your rent id: ${req.bill?.id} will start at ${req.bill?.rent.start_from}. You will soon receive a detail receipt in your email. `;
-                Message.sendMessage(req.user.contact_number, text);
+            if(req.body.type === 'rent'){ //If the type of payment is for rent
+                //Send message to user only in production environment
+                if (process.env.NODE_ENV == 'production') {
+                    const text: string = `Thanks for order our rent services. Your rent id: ${req.bill?.rent.id} will start at ${req.bill?.rent.start_from}. You will soon receive a detail receipt in your email. `;
+                    Message.sendMessage(req.user.contact_number, text);
+                }
+                
+                await _Car.deactivate(req.bill.rent.car.id);
             }
             
-            await _Car.deactivate(req.bill.rent.car.id);
 
             res.json({
                 message: "success"

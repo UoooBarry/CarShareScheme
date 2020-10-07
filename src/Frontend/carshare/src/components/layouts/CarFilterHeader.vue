@@ -47,12 +47,12 @@
                 aria-labelledby="navbarDropdown"
                 style="margin-left: 100px"
               >
-                <a class="dropdown-item" @click="filter('name','ASC')">{{ $t('byRange') }}</a>
-                <a class="dropdown-item" @click="filter('price','ASC')">{{ $t('byPriceLow') }}</a>
-                <a class="dropdown-item" @click="filter('price','DESC')">{{ $t('byPriceHigh') }}</a>
-                <a class="dropdown-item" @click="filter('createdAt','DESC')">{{ $t('byLatest') }}</a>
-                <a class="dropdown-item" @click="filter('brand','ASC')">{{ $t('byBrand') }}</a>
-                <a class="dropdown-item" @click="filter('viewed','DESC')">{{ $t('byPopular') }}</a>
+                <a class="dropdown-item" @click="sort_car('name','ASC')">{{ $t('byRange') }}</a>
+                <a class="dropdown-item" @click="sort_car('price','ASC')">{{ $t('byPriceLow') }}</a>
+                <a class="dropdown-item" @click="sort_car('price','DESC')">{{ $t('byPriceHigh') }}</a>
+                <a class="dropdown-item" @click="sort_car('createdAt','DESC')">{{ $t('byLatest') }}</a>
+                <a class="dropdown-item" @click="sort_car('brand','ASC')">{{ $t('byBrand') }}</a>
+                <a class="dropdown-item" @click="sort_car('viewed','DESC')">{{ $t('byPopular') }}</a>
               </div>
             </label>
           </li>

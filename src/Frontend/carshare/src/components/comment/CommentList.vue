@@ -5,18 +5,21 @@
 
 <template>
   <div class="review-section">
-    <div v-for="comment in comments" v-bind:key="comment.id">
-      <div>
-        <CommentRow :comment="comment" />
+    <div class="page-footer" v-if="comments.length">
+      <div v-for="comment in pageOfItems" v-bind:key="comment.id">
+        <div>
+          <CommentRow :comment="comment" />
+        </div>
       </div>
-    </div>
-    <div class="page-footer" :if="comments">
       <jw-pagination
         :items="comments"
         :pageSize="4"
         @changePage="onChangePage"
         :labels="customLabels"
       ></jw-pagination>
+    </div>
+    <div class="page-footer" v-else>
+      <h1>Be first to rent this car and leave review</h1>
     </div>
   </div>
 </template>
@@ -40,6 +43,9 @@ export default {
       pageOfItems: [],
       customLabels
     };
+  },
+  mounted() {
+    console.log(this.comments);
   },
   methods: {
     onChangePage(pageOfItems) {

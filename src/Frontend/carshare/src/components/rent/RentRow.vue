@@ -56,6 +56,9 @@
           <div v-else-if="this.rent.status === 'Wait for review'">
             <a class="pay-now collapsible" @click="showReviewBox">Review</a>
           </div>
+          <div v-else-if="this.rent.status === 'Overdue'">
+            <a class="pay-now overdue" href="/overdue">Overdue</a>
+          </div>
           <div v-else>{{ rent.status }}</div>
         </div>
         <div v-else>
@@ -65,11 +68,12 @@
             :rentId="rent.id"
             :fee="rent.bill.fee"
             :billId="rent.bill.id"
+            :billType="rent.bill.type"
             @close="closeModal"
           />
         </div>
       </div>
-      <ReviewBox :id="reviewBox" :carId="this.rent.car.id" :rentId="this.rent.id"/>
+      <ReviewBox :id="reviewBox" :carId="this.rent.car.id" :rentId="this.rent.id" />
     </div>
   </div>
 </template>
@@ -77,7 +81,7 @@
 <script>
 import PayNow from "./PayNow";
 import Extend from "./Extend";
-import ReviewBox from "./ReviewBox"
+import ReviewBox from "./ReviewBox";
 export default {
   name: "RentRow",
   components: {
@@ -108,8 +112,7 @@ export default {
       } else {
         content.style.display = "block";
       }
-    },
-    
+    }
   }
 };
 </script>
@@ -127,7 +130,5 @@ img {
   text-align: left;
   padding-left: 30px;
 }
-
-
 
 </style>

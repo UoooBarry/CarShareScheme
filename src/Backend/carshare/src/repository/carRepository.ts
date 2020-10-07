@@ -58,15 +58,6 @@ class carRepository implements DataRepository {
     }
   }
 
-  async getBySeats(seat: number) {
-    try {
-      const car: any = await Car.findAll({ where: { seats: seat } });
-      return Promise.resolve(car);
-    } catch (err) {
-      return Promise.reject(err);
-    }
-  }
-
   async get(id: number) {
     try {
       const car: any = await Car.findOne({
