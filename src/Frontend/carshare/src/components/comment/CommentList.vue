@@ -44,9 +44,6 @@ export default {
       customLabels
     };
   },
-  mounted() {
-    console.log(this.comments);
-  },
   methods: {
     onChangePage(pageOfItems) {
       // update page of items

@@ -13,6 +13,7 @@
     "@fortawesome/free-solid-svg-icons": "^5.14.0",
     "@fortawesome/vue-fontawesome": "^0.1.10",
     "@smartweb/vue-flash-message": "^0.6.4",
+    "@vue/preload-webpack-plugin": "^1.1.2",
     "axios": "^0.19.2",
     "bootstrap": "^4.5.0",
     "core-js": "^3.6.5",
@@ -45,6 +46,7 @@
     "babel-eslint": "^10.1.0",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.2.2",
+    "html-webpack-plugin": "^4.5.0",
     "sass": "^1.26.10",
     "sass-loader": "^9.0.3",
     "vue-template-compiler": "^2.6.11"

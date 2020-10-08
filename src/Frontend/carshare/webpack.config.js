@@ -1,14 +1,12 @@
-const path = require('path')
-const PrerenderSPAPlugin = require('prerender-spa-plugin')
+const PreloadWebpackPlugin = require('preload-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
-  plugins: [
-    ...
-    new PrerenderSPAPlugin({
-      // Required - The path to the webpack-outputted app to prerender.
-      staticDir: path.join(__dirname, 'dist'),
-      // Required - Routes to render.
-      routes: [ '/', '/about', '/some/deep/nested/route' ],
-    })
-  ]
+    plugins: [
+        new HtmlWebpackPlugin(),
+        new PreloadWebpackPlugin({
+            rel: 'preload',
+            include: 'all' // or 'initial'
+        })
+    ]
 }
