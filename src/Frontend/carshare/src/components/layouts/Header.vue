@@ -59,7 +59,7 @@
             <div class="dropdown-menu" role="menu">
               <a class="dropdown-item" role="presentation" href="/user/profile">{{ $t('profile') }}</a>
               <a class="dropdown-item" role="presentation" href="/rents">{{ $t('rentHistory') }}</a>
-              <a class="dropdown-item" role="presentation" href="/overdue">Over due bill</a>
+              <a class="dropdown-item" role="presentation" href="/overdue">Overdue bills</a>
               <a
                 class="dropdown-item"
                 role="presentation"
@@ -69,7 +69,7 @@
             </div>
           </li>
           <li class="nav-item" role="presentation" id="login" style="display: none">
-            <a class="nav-link" href="/login">Login/Register</a>
+            <a class="nav-link" href="/login">{{ $t('loginregister') }}</a>
           </li>
         </ul>
       </div>

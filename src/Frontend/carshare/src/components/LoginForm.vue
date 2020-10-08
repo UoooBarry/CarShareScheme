@@ -1,6 +1,7 @@
 /***********************************************************************
  *           @AUTHOR: Yongqian Huang, CREATED AT: 01/08/2020           *
 *           @Update: Bach Dao     : 03/08/2020                          *
+*           @Update: Dawaname Dawaname     : 01/10/2020                          *
  ***********************************************************************/
 <template>
   <div class="container">
@@ -29,7 +30,7 @@
         <div class="checkbox">
           <div class="form-check">
             <input class="form-check-input" type="checkbox" id="remember" v-model='remember' />
-            <label class="form-check-label" for="formCheck-2">Stay Sign In</label>
+            <label class="form-check-label" for="formCheck-2">Stay Signed In</label>
           </div>
         </div>
         <button
@@ -38,8 +39,8 @@
           style="background-color: rgb(126,184,208);"
         >Sign in</button>
       </form>
-      <a class="forgot-password" href="#">Forgot your password?</a>
-      <a class="forgot-password" style="margin-left:15px;" href="#" v-on:click="showRegister()">Sign up for free</a>
+      <a class="forgot-password" href="#">Forgot your password? Click here</a>
+      <a class="forgot-password" style="margin-left:15px;" href="#" v-on:click="showRegister()">Don't have an account? Sign up</a>
     </div>
   </div>
 </template>
