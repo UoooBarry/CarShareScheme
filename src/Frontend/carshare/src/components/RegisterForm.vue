@@ -309,7 +309,7 @@ export default {
           this.showLogin();
 
         })
-        .catch(err => console.log(err));
+        .catch();
     },
     get_code() {
       this.btn_countdown();
@@ -331,7 +331,7 @@ export default {
             });
           }
         })
-        .catch(err => console.log(err));
+        .catch();
     },
     btn_countdown() {
       const btn = document.getElementById("get_code");

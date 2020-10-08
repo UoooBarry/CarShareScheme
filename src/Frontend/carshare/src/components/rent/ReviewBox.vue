@@ -56,7 +56,6 @@ export default {
   props: ["carId", "rentId"],
   methods: {
     submitComment() {
-      console.log(this.stars);
       this.$axios
         .post(
           `${this.$carshare}/comments/create/${this.carId}`,

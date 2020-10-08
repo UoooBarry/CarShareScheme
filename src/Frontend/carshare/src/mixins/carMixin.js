@@ -50,7 +50,7 @@ export default {
           this.cars = this.getCarData(res);
           this.update();
         })
-        .catch((err) => console.log(err));
+        .catch();
     },
     allCar() {
       this.$axios
@@ -64,7 +64,7 @@ export default {
           this.temp_cars = this.cars;
           this.update();
         })
-        .catch((err) => console.log(err));
+        .catch();
     },
     search() {
       this.$axios
@@ -77,7 +77,7 @@ export default {
           this.cars = res.data.cars;
           this.update();
         })
-        .catch((err) => console.log(err));
+        .catch();
     },
     filterSeats(number, checked) {
       const cars = this.temp_cars.filter((car) => {

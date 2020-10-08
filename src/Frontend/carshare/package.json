@@ -21,6 +21,7 @@
     "jw-vue-pagination": "^1.0.3",
     "moment": "^2.27.0",
     "popper.js": "^1.16.1",
+    "prerender-spa-plugin": "^3.4.0",
     "serialize-javascript": "^4.0.0",
     "vue": "^2.6.11",
     "vue-fb-customer-chat": "^0.2.0",

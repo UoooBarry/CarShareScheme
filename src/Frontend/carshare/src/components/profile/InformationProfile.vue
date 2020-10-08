@@ -95,7 +95,7 @@ export default {
             message: "Update successfully!"
           });
         })
-        .catch(err => console.log(err));
+        .catch();
     }
   },
   created() {

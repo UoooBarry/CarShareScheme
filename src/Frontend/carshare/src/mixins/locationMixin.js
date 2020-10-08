@@ -23,7 +23,6 @@ export default{
                         address = res.data.results[0].formatted_address;
                     })
             });
-            console.log(address);
             return Promise.resolve(address);
         }
     }

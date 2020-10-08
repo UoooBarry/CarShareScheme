@@ -99,8 +99,7 @@ export default {
               this.cars = this.getCarData(res);
               this.temp_cars = this.cars;
             })
-            .catch(err => {
-              console.log(err);
+            .catch(() => {
             });
         });
     });
@@ -160,7 +159,7 @@ export default {
           //Update cars
           this.cars = this.getCarData(res);
         })
-        .catch(err => console.log(err));
+        .catch();
     }
   }
 };
