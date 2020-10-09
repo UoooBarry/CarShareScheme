@@ -19,7 +19,7 @@
 </p>
 
 ## Technical stack
-
+<img src='https://www.vippng.com/png/full/346-3469803_pevn-vue-js-node-js.png' />  
 Postgres + Express.js + Vue.js + Node.js<br>
 Backend and authroization servers are wirttern in typescript. Using sequelize library to interact with postgres. Frontend is written in Vue.js. using axios libary to interact with frontend.
 
