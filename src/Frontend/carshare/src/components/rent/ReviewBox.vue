@@ -1,4 +1,5 @@
 //  Bach Dao created 2/10/2020
+//  Yongqian Huang updated at 09/10/2020 redirect users
 <template>
   <div class="review-box">
     <hr class="user" />
@@ -17,7 +18,6 @@
           <input
             type="radio"
             id="star1"
-            name="https://codepen.io/pen/rate"
             value="1"
             v-model="stars"
           />
@@ -50,7 +50,7 @@ export default {
   data() {
     return {
       comment: "",
-      stars: 0
+      stars: 1
     };
   },
   props: ["carId", "rentId"],
@@ -74,9 +74,12 @@ export default {
               title: "Comment create successfully!",
               message: "Comment create successfully"
             });
-            setTimeout(function() {
-              window.location.reload();
-            }, 3000);
+ 
+            this.$router.push({
+                name: 'CarDetail', 
+                params:{ id: this.carId}
+            });
+  
           } else {
             res.data.errors.forEach(error => {
               this.flashMessage.error({
