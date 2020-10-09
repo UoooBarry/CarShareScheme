@@ -126,7 +126,6 @@ export default {
   },
   methods: {
     async addNewCar() {
-      console.log(this.header);
       this.$axios
         .post(
           `${this.$carshare}/cars/create`,
@@ -156,14 +155,12 @@ export default {
             });
             return;
           }
-          console.log("step 1");
           this.flashMessage.success({
             title: "Create car success!",
             message: "create car successfully!"
           });
         })
-        .catch(err => console.log(err));
-      console.log("error");
+        .catch();
     }
   }
 };

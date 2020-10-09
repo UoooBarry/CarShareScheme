@@ -50,7 +50,6 @@ export default {
       let formData = new FormData();
       formData.append("enctype", "multipart/form-data");
       formData.append("image", this.file);
-      console.log(this.header);
       this.$axios
         .patch(`${this.$carshare}/cars/image/${this.carid}`, formData, {
           headers: this.header

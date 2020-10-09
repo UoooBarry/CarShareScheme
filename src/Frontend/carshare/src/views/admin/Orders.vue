@@ -26,8 +26,7 @@ export default {
         .then((res) => {
             this.rents = res.data.rents;
         })
-        .catch((err)=> {
-            console.log(err);
+        .catch(()=> {
         });
 
         this.$axios.get(`${this.$carshare}/locations`, {
@@ -36,8 +35,7 @@ export default {
         .then((res) => {
             this.locations = res.data.locations;
         })
-        .catch((err)=> {
-            console.log(err);
+        .catch(()=> {
         });
     }
 }
