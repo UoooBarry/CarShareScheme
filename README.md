@@ -19,21 +19,54 @@
 </p>
 
 ## Technical stack
+
 Postgres + Express.js + Vue.js + Node.js<br>
-Backend and authroization servers are wirttern in typescript. Using sequelize library to interact with postgres. Frontend is wirttern in Vue.js. using axios libary to interact with frontend.
+Backend and authroization servers are wirttern in typescript. Using sequelize library to interact with postgres. Frontend is written in Vue.js. using axios libary to interact with frontend.
 
 ## Run the servers in development mode
+System requirement: Node Package Manager available
 Under windows environment, you can just run `make up` to start up 2 backend servers locally.<br>
-Before running the servers, ensure postgres is running. And config the .env files in the project, <a href='https://rmiteduau-my.sharepoint.com/:u:/r/personal/s3719368_student_rmit_edu_au/Documents/Capstone%20Project/secertkeys/Backend%20varibles/.env?csf=1&web=1&e=OhtbVB'>sample file</a> is in our team's onedrive.
-### Manually start servers
-In `src/Backend/authServer` and `src/Backend/carshare`, run `npm run start:dev` to start backend servers in development mode.
-In `src/Frontend/carshare` to start client side app in development mode.
+Before running the servers, ensure postgres is running, all package downloaded and config the .env files in the project, 
+```
+ACCESS_TOKEN_SECRET=4a94eb56ccb91df97f2ca632437947032d11b34c5d54c2fe54cb5b4f768c34690a54a92f7c4907eab1b132d0dd4e1158ac06b33b371daa352cefe3c503639650
+REFRESH_TOKEN_SECRET=13d1ab6a3439cdd952b30e4bb0c2b0b00ffa68765e3d409adb47c83918d6229d1e90274f1d76735f41900c00ae33535018c6ad4c22739ea21cbb92555952460c
+DEV_DBHOST=
+DEV_DBPORT=
+DEV_DBNAME=
+DEV_DBUSER=
+DEV_DBPASS=
+NEXMO_KEY=
+NEXMO_SECRET=
+NEXMO_ID=
+AWS_ACCESS_ID=
+AWS_ACCESS_SECRET=
+GOOGLE_MAPS_API_KEY=
+``` 
 
+### Manually start servers
+
+In `src/Backend/authServer` and `src/Backend/carshare`, run `npm run start:dev` to start backend servers in development mode.
+
+Same as backend, before run Frontend Server, make sure config .env file
+```
+VUE_APP_AUTH=http://localhost:4000/api
+VUE_APP_CARSHARE=http://localhost:3000/api
+VUE_APP_ADMIN=http://localhost:4000/api/admin
+VUE_APP_GOOGLE_API=
+```
+In `src/Frontend/carshare` to start client side app in development mode.
 
 ## Deployment
 ### How to deploy
 Workflow path: `.circleCi\config.yml`<br>
-We have setup an auto deployment for  `release` branch workflow via circleCi. Authentication server and car share system server will be deployed to our aws ec2 instance automatically. <h3>Need to click approve in circleCi workflow.</h3><br>
+We have setup an auto deployment for  `release` branch workflow via circleCi. Authentication server and car share system server will be deployed to our aws ec2 instance automatically. <h3>Need to click approve in circleCi workflow.</h3>
 The next thing to do is to just host the static frontend to S3 bucket. Run `npm run build` in dir 'src/Frontend/carshare'. Upload all the contents in the generated dist folder, to a public S3 bucket.
+
+For more information, please check technical solution document - implementation instruction part
+
 #### Release
-Release 1: 20/08/2020
+* Release 1: 20/08/2020
+* Release 2: 31/08/2020
+* Release 3: 14/09/2020
+* Release 4: 28/09/2020
+* First Major Release: 7/10/2020
