@@ -74,7 +74,6 @@
     opacity 0.3s 0.25s ease-out;
   will-change: transform, opacity;
 }
-
 .description-text.is-visible {
   opacity: 1;
   transform: rotateY(0);
@@ -101,14 +100,12 @@
   background: 0 0;
   outline: 0;
 }
-
 .description.family {
   text-align: left;
   top: 20%;
   left: 100%;
   color: black;
 }
-
 .description.purpose {
   text-align: right;
   color: black;
@@ -130,9 +127,7 @@ h1 {
 </style>
 <script>
 //Get the button
-
 import BackToTop from "@/components/BackToTop";
-
 export default {
   name: "Home",
   components: {
@@ -147,7 +142,6 @@ export default {
         window.setTimeout(callback, 1000 / 60);
       };
     var elementsToShow = document.querySelectorAll(".show-on-scroll");
-
     function loop() {
       Array.prototype.forEach.call(elementsToShow, function(element) {
         if (isElementInViewport(element)) {
@@ -158,9 +152,7 @@ export default {
       });
       scroll(loop);
     }
-
     loop();
-
     function isElementInViewport(el) {
       var rect = el.getBoundingClientRect();
       return (

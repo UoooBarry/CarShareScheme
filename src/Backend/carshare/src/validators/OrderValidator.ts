@@ -5,14 +5,13 @@
 import Validator from './Validator';
 import {Request, Response, NextFunction} from 'express';
 import _Car from '../repository/carRepository';
-import AccountUnavailable from '../exceptions/AccountUnavailable';
 
 class OrderValidator implements Validator{
 
     async validate(req: Request, res: Response, next: NextFunction){
        req.validationError = [];
        const car = await _Car.get(req.body.car_id);
-       if(!car.available) throw new AccountUnavailable('The car does not available yet');
+       if(!car.available) req.validationError.push('The car does not available yet');
        if(!req.body.car_id) req.validationError.push('Car cannot be empty');
        if(!req.body.period || req.body.period <= 0) req.validationError.push('Period cannot be empty');
        if(!req.body.start_from) req.validationError.push('Start from date cannot be empty');

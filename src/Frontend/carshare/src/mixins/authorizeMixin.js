@@ -24,7 +24,6 @@ const authorizeMixin = {
         logout() {
             sessionStorage.removeItem('authToken');
             localStorage.removeItem('authToken');
-            this.$session.remove('username');
             this.flashMessage.info({
               title: 'Logout success',
               message: 'See you!'

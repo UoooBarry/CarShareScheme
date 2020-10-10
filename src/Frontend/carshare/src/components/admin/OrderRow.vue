@@ -25,13 +25,16 @@
         <td>
             {{rent.status}}
         </td>
-        <td v-if="rent.status == 'In progress'">
+        <td v-if="!rent.bill.isPaid">
+            Wait for pay...
+        </td>
+        <td v-else-if="rent.status == 'In progress'">
             <select v-model="selectedLocation" class="form-control" >
                 <option v-for="location in locations" :key="location.id"  :value='location.id'>{{location.name}}</option>
             </select>
             <button class='btn btn-primary' @click="returnCar">Return Car</button>
         </td>
-        <td v-if="rent.status == 'Not picked'">
+        <td v-else-if="rent.status == 'Not picked'">
             <button class='btn btn-primary' @click="pickUpCar">Pickup Car</button>
         </td>
         <td v-else>

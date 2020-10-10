@@ -36,8 +36,7 @@ export default {
                     .then((res) => {
                         this.rent = res.data.rent;
                     })
-                    .catch((err) => {
-                        console.log(err);
+                    .catch(() => {
                     })
     }
 }

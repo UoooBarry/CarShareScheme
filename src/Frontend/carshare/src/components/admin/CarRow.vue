@@ -115,7 +115,7 @@ export default {
             message: "Update successfully!"
           });
         })
-        .catch(err => console.log(err));
+        .catch();
     },
     getInputValue(field) {
       return document.getElementById(`${field}.${this.car.id}`).value;
@@ -141,7 +141,7 @@ export default {
                 });
                 this.$router.go();
             })
-            .catch(err => console.log(err));
+            .catch();
        }
     }
   }
