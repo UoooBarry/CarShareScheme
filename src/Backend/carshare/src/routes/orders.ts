@@ -115,8 +115,7 @@ router.post('/extend/:id', [ExtendRentValidator.validate, verifyToken], async (r
             res.json({ bill, newRent });
 
         } catch (err) {
-            console.log(err);
-            res.sendStatus(404);
+            res.sendStatus(400);//return bad request
         }
     }
 })
@@ -245,7 +244,7 @@ router.post('/pay', [PaymentValidator.validate, verifyToken], async (req: Reques
             //If pass payment validator
             
             //Update bill status
-            if(!req.bill) throw new ItemNotFound('Bill not found');
+            if(!req.bill || req.bill.isPaid) throw new ItemNotFound('Bill not found'); //detect is the bill is already being paid, not resending message
             await _Bill.pay(req.bill);
 
             if(req.body.type === 'rent'){ //If the type of payment is for rent
@@ -262,10 +261,10 @@ router.post('/pay', [PaymentValidator.validate, verifyToken], async (req: Reques
             res.json({
                 message: "success"
             })
-        }catch(err){
+        } catch (err) {
             res.json({
                 message: "fail",
-                errors: {err},
+                errors: err.message,
             });
         }
     }

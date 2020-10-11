@@ -17,7 +17,7 @@ export interface CarI{
     brand: string
     model: string
     purchase_date: Date
-    location_id: number
+    location_id: number //current location
     seats: number
     luggages: number
     doors: number
@@ -82,6 +82,7 @@ export default class Car extends Model implements CarI{
     @Column
     viewed!: number;
 
+    @Default(true)
     @Column
     available!: boolean;
 
