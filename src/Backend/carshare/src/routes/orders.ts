@@ -215,7 +215,7 @@ router.patch('/pickup', [verifyToken], (req: Request, res: Response) => {
 
                 //Send message to user only in production environment
                 if (process.env.NODE_ENV == 'production') {
-                    const text: string = `Thanks for order our rent services. Your rent id: ${req.body.rent_id}, is successfully picked up. Thank you for using our service!.`;
+                    const text: string = `Thanks for order our car rent service. \nYou can check your receipt here: https://carshare.uooobarry.com/receipt/${req.bill?.rent.id} \n Please note that your rent will start at ${req.bill?.rent.start_from} . You should come to pick up location 30 mins in advanced.`;
                     Message.sendMessage(req.user.contact_number, text);
                 }
             
@@ -251,7 +251,7 @@ router.post('/pay', [PaymentValidator.validate, verifyToken], async (req: Reques
             if(req.body.type === 'rent'){ //If the type of payment is for rent
                 //Send message to user only in production environment
                 if (process.env.NODE_ENV == 'production') {
-                    const text: string = `Thanks for order our rent services. Your rent id: ${req.bill?.rent.id} will start at ${req.bill?.rent.start_from}. You will soon receive a detail receipt in your email. `;
+                    const text: string = `Thanks for order our car rent service. \nYou can check your receipt here: https://carshare.uooobarry.com/receipt/${req.bill?.rent.id} \n Please note that your rent will start at ${req.bill?.rent.start_from} . You should come to pick up location 30 mins in advanced.`;
                     Message.sendMessage(req.user.contact_number, text);
                 }
                 
