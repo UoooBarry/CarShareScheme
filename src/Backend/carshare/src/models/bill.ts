@@ -21,7 +21,7 @@ export interface BillI{
     id?: number | null;
     user_id: number;
     rent_id: number;
-    type: string;
+    type: BillType;
     fee: number;
     isPaid: boolean;
     rent: Rent;
@@ -53,7 +53,7 @@ export default class Bill extends Model implements BillI{
     
     @NotEmpty
     @Column
-    type!: string
+    type!: BillType
 
     @BelongsTo(() => Customer)
     user!: Customer
