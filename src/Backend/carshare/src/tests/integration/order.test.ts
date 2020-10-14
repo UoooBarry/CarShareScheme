@@ -14,6 +14,7 @@ import db from '../../config/db'
 import chaiHttp from 'chai-http';
 import { generateAccessToken } from '../../helpers/authorizationHelper';
 import Rent from '../../models/rent';
+import Comment from '../../models/comment'
 import Bill from '../../models/bill';
 import ItemNotFound from '../../exceptions/ItemNotFound';
 chai.use(chaiHttp);
@@ -32,6 +33,7 @@ describe('/api/order', () => {
       await Car.sync();
       await Rent.sync();
       await Bill.sync();
+      await Comment.sync();
       //Pre create a customer
       const customer = await Customer.create({
         first_name: "Dummy",
