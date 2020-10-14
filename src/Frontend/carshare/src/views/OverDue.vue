@@ -19,7 +19,7 @@
       <jw-pagination :items="bills" :pageSize="6" @changePage="onChangePage" :labels="customLabels"></jw-pagination>
     </div>
     <div v-else>
-      <div class="alert alert-dark" role="alert">You don't have any overdue bill in history</div>
+      <div class="container alert alert-dark" role="alert">You don't have any overdue bill in history</div>
     </div>
   </div>
 </template>

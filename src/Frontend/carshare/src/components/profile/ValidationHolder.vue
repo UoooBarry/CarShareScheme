@@ -5,6 +5,7 @@
 <template>
   <div>
     <div>
+      <div class="instruction" role="alert">To validate your license account, simply just upload your 2 license images. After both of them succeeded, please allow us 1 day to check your information. You will soon receive message about your activation application.</div>
       <div class="form-group">
         <label for="fname" class="control-label">License Holder First Name:</label>
         <input
@@ -91,5 +92,10 @@ export default {
 }
 .btn-scss-lg{
   margin-bottom: 10px;
+}
+.instruction{
+  margin: 10px;
+  font-style: italic;
+  font-weight: bold;
 }
 </style>

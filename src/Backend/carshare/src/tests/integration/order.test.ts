@@ -14,6 +14,7 @@ import db from '../../config/db'
 import chaiHttp from 'chai-http';
 import { generateAccessToken } from '../../helpers/authorizationHelper';
 import Rent from '../../models/rent';
+import Comment from '../../models/comment'
 import Bill from '../../models/bill';
 import ItemNotFound from '../../exceptions/ItemNotFound';
 chai.use(chaiHttp);
@@ -32,6 +33,7 @@ describe('/api/order', () => {
       await Car.sync();
       await Rent.sync();
       await Bill.sync();
+      await Comment.sync();
       //Pre create a customer
       const customer = await Customer.create({
         first_name: "Dummy",
@@ -90,7 +92,7 @@ describe('/api/order', () => {
       })
   })
 
-  it('Create an order with invalid information return 400', (done) => {
+  it('Create an order with invalid information return fail', (done) => {
     chai.request(app).post('/api/orders/create')
       .set('Authorization', token)
       .send({
@@ -118,7 +120,7 @@ describe('/api/order', () => {
       })
   })
 
-  it('Pay order with invalid amount', async() => {
+  it('Pay order with invalid amount returns fail', async() => {
     const bills = await Bill.findAll({ limit: 1 }); //get the random bill
     if (!bills[0]) throw new ItemNotFound('Not found bill');
     chai.request(app).post('/api/orders/create')

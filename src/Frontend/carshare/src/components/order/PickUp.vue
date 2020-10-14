@@ -6,7 +6,7 @@
     <div class="card border-0">
       <div class="card-header card-2">
         <p class="card-text text-muted mt-md-4 mb-2" style="font-size:30px">
-          <font-awesome-icon icon="chevron-left" id="b-2-car" @click='lastStep' />PICK UP INFORMATION
+          <font-awesome-icon icon="chevron-left" id="b-2-car" @click="lastStep" />PICK UP INFORMATION
         </p>
       </div>
     </div>
@@ -20,12 +20,22 @@
       <div class="form-group row">
         <label for="inputPassword" class="col-sm-2 col-form-label font-weight-bold">Return Date</label>
         <div class="col-sm-10">
-          <input type="input" class="form-control" :value="calculateDay(period).toISOString().substring(0, 10)" readonly/>
+          <input
+            type="input"
+            class="form-control"
+            :value="calculateDay(period).toISOString().substring(0, 10)"
+            readonly
+          />
         </div>
       </div>
     </div>
     <div class="space"></div>
-    <button id="btn-progress" type="button" class="btn btn-next customize-button" @click='nextStep()' >Confirm Order</button>
+    <button
+      id="btn-progress"
+      type="button"
+      class="btn btn-next customize-button"
+      @click="nextStep()"
+    >Confirm Order</button>
   </div>
 </template>
 
@@ -37,20 +47,33 @@ export default {
     return {};
   },
   methods: {
-    nextStep(){
-      this.$axios.post(`${this.$carshare}/orders/create`,{
-        car_id: this.$route.params.id,
-        start_from: this.start_from,
-        period: this.period,
-      },{headers: this.header})
-        .then((res) => {
+    nextStep() {
+      this.$axios
+        .post(
+          `${this.$carshare}/orders/create`,
+          {
+            car_id: this.$route.params.id,
+            start_from: this.start_from,
+            period: this.period
+          },
+          { headers: this.header }
+        )
+        .then(res => {
           if (res.data.message == "fail") {
-          
-              this.flashMessage.error({
-                title: "Order failed",
-                message: res.data.errors
-              });
-
+            this.flashMessage.error({
+              title: "Order failed",
+              message: res.data.errors
+            });
+            if (
+              res.data.errors ===
+              "Your account is not validate yet, please go to license validation page. Redirecting..."
+            ) {
+              setTimeout(() => {
+                 this.$router.push({
+                  name: "Profile"
+                });
+              }, 3000);
+            }
             return;
           }
 
@@ -59,19 +82,19 @@ export default {
             message: "Order confrimed successfully!"
           });
 
-          this.$emit('createRent', res.data.rent);
-          this.$emit('createBill', res.data.bill);
-          this.$emit('updateFee', res.data.bill.fee);
-          this.$emit('nextStep');
-        })
+          this.$emit("createRent", res.data.rent);
+          this.$emit("createBill", res.data.bill);
+          this.$emit("updateFee", res.data.bill.fee);
+          this.$emit("nextStep");
+        });
     },
-    lastStep(){
-      this.$emit('lastStep');
+    lastStep() {
+      this.$emit("lastStep");
     },
-    calculateDay(period){
+    calculateDay(period) {
       const date = new Date(this.start_from);
       //Add period to days
-      date.setTime(date.getTime() + period * 86400000)
+      date.setTime(date.getTime() + period * 86400000);
       return date;
     }
   },
