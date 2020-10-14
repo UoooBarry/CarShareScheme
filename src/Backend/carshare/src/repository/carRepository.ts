@@ -107,7 +107,7 @@ class carRepository implements DataRepository {
       const carsArr = cars.map((car: any) => {
         return car.id;
       })
-      console.log(carsArr);
+
       return Promise.resolve(carsArr);
     } catch (err) {
       return Promise.reject(err);
