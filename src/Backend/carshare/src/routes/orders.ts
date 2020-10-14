@@ -7,9 +7,9 @@
  * Yongqian Huang, 29/09/2020, Apply factor pattern
  *************************************************/
 
-import express,{Request, Response} from 'express';
+import express, { Request, Response } from 'express';
 const router = express.Router();
-import {verifyToken} from '../helpers/authorizationHelper';
+import { verifyToken } from '../helpers/authorizationHelper';
 import { BillType } from '../models/bill';
 import _Rent from '../repository/rentRepository';
 import _Bill from '../repository/billRepository';
@@ -30,24 +30,24 @@ import AccountUnavailable from '../exceptions/AccountUnavailable';
 router.post('/create', [OrderValidator.validate, verifyToken], async (req: Request, res: Response) => {
 
     const validationErrors = req.validationError;
-    if(validationErrors && validationErrors.length > 0){
+    if (validationErrors && validationErrors.length > 0) {
         res.json({
-          message: "fail",
-          errors: validationErrors,
+            message: "fail",
+            errors: validationErrors,
         });
-      }else{
+    } else {
         try {
             const pendingRents = await _Rent.getUserPendingRents(req.user.id); //Get not picked and in progress rent of the user.
-            if(pendingRents.length > 0) throw new AccountUnavailable("Your account already had one pending rent"); //Cannot have exsited rent
+            if (pendingRents.length > 0) throw new AccountUnavailable("Your account already had one pending rent"); //Cannot have exsited rent
             const license = await _License.getByUserId(req.user.id);
-            if (!license || !license.isValidated) throw new AccountUnavailable('Your account is not validate yet, please go to license validation page.');
-            
-            if(!req.car) throw new ItemNotFound('Incorrect request car');
+            if (!license || !license.isValidated) throw new AccountUnavailable('Your account is not validate yet, please go to license validation page. Redirecting...');
+
+            if (!req.car) throw new ItemNotFound('Incorrect request car');
             const feeToPay = (req.body.period * req.car.price + req.car.price * 0.1).toFixed(2);
-            
-            
-            
-    
+
+
+
+
             //Create rent
             const rent = await _Rent.create({
                 car_id: req.body.car_id,
@@ -63,7 +63,7 @@ router.post('/create', [OrderValidator.validate, verifyToken], async (req: Reque
                 type: BillType.RentFee,
                 rent_id: rent.id
             })
-    
+
             res.json({ bill, rent, feeToPay });
         } catch (err) {
             res.json({
@@ -71,7 +71,7 @@ router.post('/create', [OrderValidator.validate, verifyToken], async (req: Reque
                 errors: err.message,
             });
         }
-      }
+    }
 });
 
 //GET: api/orders/extend/:id
@@ -88,10 +88,10 @@ router.post('/extend/:id', [ExtendRentValidator.validate, verifyToken], async (r
             const feeToPay = (req.body.period * req.originalRent.car.price).toFixed(2);
             //If pass payment validator
             if (req.body.payment_total !== feeToPay) throw new IncorrectItem('Payment amount incorrect');
-            
+
             //Update to complete
             await _Rent.update(parseInt(req.params.id), { status: RentStatus.Extended });
-            
+
             //Create bill
             const bill = await _Bill.create({
                 user_id: req.user.id,
@@ -99,7 +99,7 @@ router.post('/extend/:id', [ExtendRentValidator.validate, verifyToken], async (r
                 isPaid: true,
                 type: BillType.RentFee
             });
-            
+
             const newPeriod: number = req.originalRent.period + parseInt(req.body.period);  //old period + new period = new period
             //Create rent
             const newRent = await _Rent.create({
@@ -124,139 +124,139 @@ router.post('/extend/:id', [ExtendRentValidator.validate, verifyToken], async (r
 //GET: api/orders/:id/
 router.get('/:id/', [verifyToken], (req: Request, res: Response) => {
     _Rent.get(parseInt(req.params.id))
-            .then((rent) => {
-                if(rent?.user_id != req.user.id) throw new IncorrectItem('Incorrect user');
-                res.json({rent});
-            })
-            .catch((err) => {
-                res.sendStatus(404);
-            })
+        .then((rent) => {
+            if (rent?.user_id != req.user.id) throw new IncorrectItem('Incorrect user');
+            res.json({ rent });
+        })
+        .catch((err) => {
+            res.sendStatus(404);
+        })
 })
 
 //Delete: /api/orders/:id
 router.delete('/:id/', [verifyToken], (req: Request, res: Response) => {
-    if(!req.user.admin) res.sendStatus(403);
+    if (!req.user.admin) res.sendStatus(403);
     _Rent.delete(parseInt(req.params.id))
-            .then(() => {
-                res.json({message: 'success'});
-            })
-            .catch((err) => {
-                res.sendStatus(404);
-            })
+        .then(() => {
+            res.json({ message: 'success' });
+        })
+        .catch((err) => {
+            res.sendStatus(404);
+        })
 })
 
 
 // GET: /api/orders/personal
 // Get all orders of the current user
-router.get('/list/personal',[verifyToken], (req: Request, res: Response) => {
-    _Rent.getByUserId(req.user.id) 
-            .then((rents) => {
-                res.json({
-                    rents
-                });
-            })
-            .catch((err) => {
-                res.json({
-                    message: "fail",
-                    errors: err,
-                });
-            })
+router.get('/list/personal', [verifyToken], (req: Request, res: Response) => {
+    _Rent.getByUserId(req.user.id)
+        .then((rents) => {
+            res.json({
+                rents
+            });
+        })
+        .catch((err) => {
+            res.json({
+                message: "fail",
+                errors: err,
+            });
+        })
 });
 
 // GET: /api/cars/
 // Get all orders for admin
 router.get('/', [verifyToken], (req: Request, res: Response) => {
-    if(!req.user.admin) res.sendStatus(403);
+    if (!req.user.admin) res.sendStatus(403);
     _Rent.getAll()
-            .then((rents) => {
-                res.json({
-                    rents
-                });
-            })
-            .catch((err) => {
-                res.json({
-                    message: "fail",
-                    errors: err,
-                });
-            })
+        .then((rents) => {
+            res.json({
+                rents
+            });
+        })
+        .catch((err) => {
+            res.json({
+                message: "fail",
+                errors: err,
+            });
+        })
 })
 
 //PATCH: /api/cars/return
 router.patch('/return', [verifyToken], (req: Request, res: Response) => {
-    if(!req.user.admin) res.sendStatus(403);
+    if (!req.user.admin) res.sendStatus(403);
     _Rent.return(req.body.rent_id, req.body.location_id)
         .then(() => {
 
-                //Send message to user only in production environment
-                if (process.env.NODE_ENV == 'production') {
-                    const text: string = `Thanks for order our rent services. Your rent id: ${req.body.rent_id}, is successfully returned. Thank you for using our service!.`;
-                    Message.sendMessage(req.user.contact_number, text);
-                }
-            
-                res.json({
-                    message: 'success'
-                });
-            })
-            .catch((err) => {
-                res.json({
-                    message: "fail",
-                    errors: err,
-                });
-                console.log(err);
-            })
+            //Send message to user only in production environment
+            if (process.env.NODE_ENV == 'production') {
+                const text: string = `Thanks for order our rent services. Your rent id: ${req.body.rent_id}, is successfully returned. Thank you for using our service!.`;
+                Message.sendMessage(req.user.contact_number, text);
+            }
+
+            res.json({
+                message: 'success'
+            });
+        })
+        .catch((err) => {
+            res.json({
+                message: "fail",
+                errors: err,
+            });
+            console.log(err);
+        })
 })
 
 //PATCH: /api/cars/pickup
 router.patch('/pickup', [verifyToken], (req: Request, res: Response) => {
-    if(!req.user.admin) res.sendStatus(403);
+    if (!req.user.admin) res.sendStatus(403);
     _Rent.pickUp(req.body.rent_id)
         .then(() => {
 
-                //Send message to user only in production environment
-                if (process.env.NODE_ENV == 'production') {
-                    const text: string = `Thanks for order our car rent service. \nYou can check your receipt here: https://carshare.uooobarry.com/receipt/${req.bill?.rent.id} \n Please note that your rent will start at ${req.bill?.rent.start_from} . You should come to pick up location 30 mins in advanced.`;
-                    Message.sendMessage(req.user.contact_number, text);
-                }
-            
-                res.json({
-                    message: 'success'
-                });
-            })
-            .catch((err) => {
-                res.json({
-                    message: "fail",
-                    errors: err,
-                });
-                console.log(err);
-            })
+            //Send message to user only in production environment
+            if (process.env.NODE_ENV == 'production') {
+                const text: string = `Thanks for order our car rent service. \nYou can check your receipt here: https://carshare.uooobarry.com/receipt/${req.bill?.rent.id} \n Please note that your rent will start at ${req.bill?.rent.start_from} . You should come to pick up location 30 mins in advanced.`;
+                Message.sendMessage(req.user.contact_number, text);
+            }
+
+            res.json({
+                message: 'success'
+            });
+        })
+        .catch((err) => {
+            res.json({
+                message: "fail",
+                errors: err,
+            });
+            console.log(err);
+        })
 })
 
 router.post('/pay', [PaymentValidator.validate, verifyToken], async (req: Request, res: Response) => {
     const validationErrors = req.validationError;
-    if(req.bill?.user_id != req.user.id) res.sendStatus(403);
-    if(validationErrors && validationErrors.length > 0){
+    if (req.bill?.user_id != req.user.id) res.sendStatus(403);
+    if (validationErrors && validationErrors.length > 0) {
         res.json({
-          message: "fail",
-          errors: validationErrors,
+            message: "fail",
+            errors: validationErrors,
         });
-      }else{
-        try{
+    } else {
+        try {
             //If pass payment validator
-            
+
             //Update bill status
-            if(!req.bill || req.bill.isPaid) throw new ItemNotFound('Bill not found'); //detect is the bill is already being paid, not resending message
+            if (!req.bill || req.bill.isPaid) throw new ItemNotFound('Bill not found'); //detect is the bill is already being paid, not resending message
             await _Bill.pay(req.bill);
 
-            if(req.body.type === 'rent'){ //If the type of payment is for rent
+            if (req.body.type === 'rent') { //If the type of payment is for rent
                 //Send message to user only in production environment
                 if (process.env.NODE_ENV == 'production') {
                     const text: string = `Thanks for order our car rent service. \nYou can check your receipt here: https://carshare.uooobarry.com/receipt/${req.bill?.rent.id} \n Please note that your rent will start at ${req.bill?.rent.start_from} . You should come to pick up location 30 mins in advanced.`;
                     Message.sendMessage(req.user.contact_number, text);
                 }
-                
+
                 await _Car.deactivate(req.bill.rent.car.id);
             }
-            
+
 
             res.json({
                 message: "success"
