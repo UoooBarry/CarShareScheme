@@ -145,7 +145,7 @@ class rentRepository implements DataRepository {
         where: { id: id },
       });
       if (!rent) throw new ItemNotFound('No rent error');
-
+      await rent.bill.destroy();
       await rent.destroy();
 
       return Promise.resolve(true);

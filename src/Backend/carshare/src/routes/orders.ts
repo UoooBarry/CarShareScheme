@@ -5,6 +5,7 @@
  *         Yongqian Huang, 22/09/2020, Extend rent and custom error *
  *         Yongqian Huang, 22/09/2020, Add validation of licenses *
  * Yongqian Huang, 29/09/2020, Apply factor pattern
+ * Yongqian Huang, 14/10/2020, Fix car status not update
  *************************************************/
 
 import express, { Request, Response } from 'express';
@@ -63,6 +64,12 @@ router.post('/create', [OrderValidator.validate, verifyToken], async (req: Reque
                 type: BillType.RentFee,
                 rent_id: rent.id
             })
+            
+            if (req.body.start_from <= new Date()) { //if the order is start today today
+                await rent.car.update({
+                    available: false
+                })
+            }
 
             res.json({ bill, rent, feeToPay });
         } catch (err) {
@@ -202,7 +209,6 @@ router.patch('/return', [verifyToken], (req: Request, res: Response) => {
                 message: "fail",
                 errors: err,
             });
-            console.log(err);
         })
 })
 
@@ -254,9 +260,11 @@ router.post('/pay', [PaymentValidator.validate, verifyToken], async (req: Reques
                     Message.sendMessage(req.user.contact_number, text);
                 }
 
-                await _Car.deactivate(req.bill.rent.car.id);
+                if (req.bill.rent.start_from <= new Date()) { //if the order is start today today
+                    await _Car.deactivate(req.bill.rent.car.id);
+                }
+                
             }
-
 
             res.json({
                 message: "success"

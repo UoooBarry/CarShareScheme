@@ -3,35 +3,30 @@
                       Yongqian Huang, add preview 24/08/2020           *
  ***********************************************************************/
 <template>
-  <div>
-      <div
-        class="card car"
-        style="width: 18rem;cursor: pointer;"
-        @mouseover="cardHover = true"
-        @mouseleave="cardHover = false"
-        :class="{hover: cardHover}"
-        v-on:click="$router.push({name: 'CarDetail', params:{ id: car.id}})"
-      >
-        <div
-          class="hover-info"
-          v-on:mousemove="draw"
-          v-on:mouseover="hover"
-          v-on:mouseleave="hover"
-        >
-          <img
-            class="card-img"
-            :src=" 'https://carshare-image-pbd.s3-ap-southeast-2.amazonaws.com/Car/' + car.id"
-            alt="Car"
-          />
-        </div>
-
-        <div class="card-body">
-          <h5 class="card-title car">{{car.model}}</h5>
-          <h6 class="card-subtitle mb-2 text-muted">{{car.brand}}</h6>
-          <p class="price">${{car.price}}/{{ $t('day') }}</p>
-        </div>
+  <div class="card-card-container">
+    <div
+      class="card car"
+      style="width: 18rem;cursor: pointer;"
+      @mouseover="cardHover = true"
+      @mouseleave="cardHover = false"
+      :class="{hover: cardHover}"
+      v-on:click="$router.push({name: 'CarDetail', params:{ id: car.id}})"
+    >
+      <div class="hover-info" v-on:mousemove="draw" v-on:mouseover="hover" v-on:mouseleave="hover">
+        <img
+          class="card-img"
+          :src=" 'https://carshare-image-pbd.s3-ap-southeast-2.amazonaws.com/Car/' + car.id"
+          alt="Car"
+        />
       </div>
-      <CarPreview :id="`preview${car.id}`" v-if="hovering" v-bind:car="this.car" />
+
+      <div class="card-body">
+        <h5 class="card-title car">{{car.model}}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">{{car.brand}}</h6>
+        <p class="price">${{car.price}}/{{ $t('day') }}</p>
+      </div>
+    </div>
+    <CarPreview :id="`preview${car.id}`" v-if="hovering" v-bind:car="this.car" />
   </div>
 </template>
 
@@ -117,5 +112,11 @@ a {
 .card.car:hover {
   /* cursor:pointer; */
   margin-top: -15px;
+}
+
+@media only screen and (max-width: 414px) {
+  .card-card-container {
+    padding-left: 60px;
+  }
 }
 </style>
