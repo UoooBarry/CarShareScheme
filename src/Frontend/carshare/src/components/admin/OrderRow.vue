@@ -99,7 +99,7 @@ export default {
                     message: "Update successfully!"
                 });
 
-                this.rent.status = 'Completed';
+                this.rent.status = 'Wait for review';
 
             })
         },

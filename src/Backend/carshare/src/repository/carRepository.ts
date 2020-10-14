@@ -1,8 +1,10 @@
 /******************************************************
  * @AUTHOR YONGQIAN HUANG, 19/08/2020, CAR SORT LOGIC *
  * updated in 27/09/2020 Bach Dao, get all cars/ car by id *
- * updated in 03/09/2020 migrate to typescript       
- * updated in 25/09/2020 filter helpers*
+ *                                    
+ * Yongqian Huang: updated in 03/09/2020 migrate to typescript       
+ * Yongqian Huang: updated in 25/09/2020 filter helpers*
+ * Yongqian Huang: updated in 25/09/2020 fixed most viewed*
  ******************************************************/
 
 import Car from '../models/car';
@@ -91,6 +93,11 @@ class carRepository implements DataRepository {
   async getMostViewed() {
     try {
       const cars = await Car.findAll({
+        where: {
+          'viewed': {
+            [Op.ne]: null
+          }
+        },
         attributes: ["id"],
         order: [["viewed", "DESC"]],
         limit: 3
@@ -100,7 +107,7 @@ class carRepository implements DataRepository {
       const carsArr = cars.map((car: any) => {
         return car.id;
       })
-
+      console.log(carsArr);
       return Promise.resolve(carsArr);
     } catch (err) {
       return Promise.reject(err);
