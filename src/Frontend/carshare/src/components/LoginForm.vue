@@ -39,7 +39,6 @@
           style="background-color: rgb(126,184,208);"
         >Sign in</button>
       </form>
-      <a class="forgot-password" href="#">Forgot your password? Click here</a>
       <a class="forgot-password" style="margin-left:15px;" href="#" v-on:click="showRegister()">Don't have an account? Sign up</a>
     </div>
   </div>

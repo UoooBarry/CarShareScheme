@@ -520,7 +520,7 @@ body {
 }
 
 ._vue-flash-msg-body {
-  z-index: 1;
+  z-index: 99999;
 }
 
 .page-item.active .page-link {

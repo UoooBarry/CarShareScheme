@@ -7,21 +7,16 @@
       <label>Rating</label>
       <div class="fieldset">
         <div class="rate">
-          <input type="radio" id="star5" name="rate" value="5" v-model="stars" />
-          <label for="star5" title="5 stars">5 stars</label>
-          <input type="radio" id="star4" name="rate" value="4" v-model="stars" />
-          <label for="star4" title="4 stars">4 stars</label>
-          <input type="radio" id="star3" name="rate" value="3" v-model="stars" />
-          <label for="star3" title="3 stars">3 stars</label>
-          <input type="radio" id="star2" name="rate" value="2" v-model="stars" />
-          <label for="star2" title="2 stars">2 stars</label>
-          <input
-            type="radio"
-            id="star1"
-            value="1"
-            v-model="stars"
-          />
-          <label for="star1" title="1 star">1 star</label>
+          <input type="radio" :id="star5" name="rate" value="5" v-model="stars" />
+          <label :for="star5" title="5 stars">5 stars</label>
+          <input type="radio" :id="star4" name="rate" value="4" v-model="stars" />
+          <label :for="star4" title="4 stars">4 stars</label>
+          <input type="radio" :id="star3" name="rate" value="3" v-model="stars" />
+          <label :for="star3" title="3 stars">3 stars</label>
+          <input type="radio" :id="star2" name="rate" value="2" v-model="stars" />
+          <label :for="star2" title="2 stars">2 stars</label>
+          <input type="radio" :id="star1" value="1" v-model="stars" />
+          <label :for="star1" title="1 star">1 star</label>
         </div>
       </div>
 
@@ -50,7 +45,12 @@ export default {
   data() {
     return {
       comment: "",
-      stars: 1
+      stars: 1,
+      star1: "star1" + this.rentId,
+      star2: "star2" + this.rentId,
+      star3: "star3" + this.rentId,
+      star4: "star4" + this.rentId,
+      star5: "star5" + this.rentId
     };
   },
   props: ["carId", "rentId"],
@@ -74,12 +74,11 @@ export default {
               title: "Comment create successfully!",
               message: "Comment create successfully"
             });
- 
+
             this.$router.push({
-                name: 'CarDetail', 
-                params:{ id: this.carId}
+              name: "CarDetail",
+              params: { id: this.carId }
             });
-  
           } else {
             res.data.errors.forEach(error => {
               this.flashMessage.error({

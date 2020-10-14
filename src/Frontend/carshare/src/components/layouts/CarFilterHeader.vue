@@ -164,4 +164,7 @@ input[type="radio"] {
   background-color: transparent;
   font-size: 1rem;
 }
+#navbarDropdown:hover{
+  color: black !important;
+}
 </style>

@@ -189,5 +189,8 @@ body {
   .car-list-col {
     width: 100%;
   }
+  .sub-header h1{
+    font-size: 36px;
+  }
 }
 </style>  
