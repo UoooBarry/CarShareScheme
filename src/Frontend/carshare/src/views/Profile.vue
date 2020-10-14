@@ -10,12 +10,13 @@
     <AvatarHolder v-bind:customer="this.customer"/>
 
     <ProfileAndValidation v-bind:customer="this.customer" />
+    <br> <br> <br>
     </div>
 </template>
 <style>
 
 .profile {
-  height: 1000px;
+  /* height: auto; */
   background-image: url("../assets/img/bg.jpg");
   background-color: transparent;
   background-repeat: repeat-y;
