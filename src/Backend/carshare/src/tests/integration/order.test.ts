@@ -90,7 +90,7 @@ describe('/api/order', () => {
       })
   })
 
-  it('Create an order with invalid information return 400', (done) => {
+  it('Create an order with invalid information return fail', (done) => {
     chai.request(app).post('/api/orders/create')
       .set('Authorization', token)
       .send({
@@ -118,7 +118,7 @@ describe('/api/order', () => {
       })
   })
 
-  it('Pay order with invalid amount', async() => {
+  it('Pay order with invalid amount returns fail', async() => {
     const bills = await Bill.findAll({ limit: 1 }); //get the random bill
     if (!bills[0]) throw new ItemNotFound('Not found bill');
     chai.request(app).post('/api/orders/create')

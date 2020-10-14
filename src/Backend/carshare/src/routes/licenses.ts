@@ -8,6 +8,7 @@ import _Customer from '../repository/customerRepository';
 import uploadFile from '../helpers/Uploader';
 import { verifyToken } from '../helpers/authorizationHelper';
 import _License from '../repository/licenseRepository';
+import Message from '../helpers/messageHelper';
 import multer from 'multer';
 const imageUpload = multer({ 
     dest: 'uploads/'
@@ -35,7 +36,11 @@ router.patch('/:id/accept', [verifyToken], (req: Request, res: Response) => {
   if (!req.user.admin) res.sendStatus(403); //Admin only
   
   _License.update(parseInt(req.params.id), {isValidated: true})
-    .then(() => {
+    .then(async () => {
+      const text: string = `Thanks for patient, Your license has been validated.`;
+      const customer = await _Customer.get(parseInt(req.params.id));
+      if(customer)
+        Message.sendMessage(customer.contact_number, text);
       res.json({message: 'success'})
     })
     .catch((err) => {
