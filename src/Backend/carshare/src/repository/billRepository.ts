@@ -92,7 +92,8 @@ class billRepository implements DataRepository {
       const bill = Bill.findAll({
         where: {
           isPaid: false,
-          createdAt: { [Op.lt]: new Date() }
+          type: BillType.RentFee, //get all unpaid rent bills
+          createdAt: { [Op.lt]: new Date() } //which is overdue < today, detect every 24 hours
         },
         include: [{
           model: Rent,

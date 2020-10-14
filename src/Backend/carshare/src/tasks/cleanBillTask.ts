@@ -20,13 +20,10 @@ export default class cleanBillTask implements TaskI{
         console.log('Now running clean outdated bill task...');
         const bills =  await _Bill.getUnPaidBills();
         for await(const bill of bills){
-            //Activate the car
-            await bill.rent.car.update({
-                available: true
-            })
             //Destroy the bill and rent
-            await bill.rent.destroy();
+            const rent = bill.rent;
             await bill.destroy();
+            await rent.destroy();
             tasks ++;
         }
         console.log('Cleaning task finished.' + ` ${tasks} cleaned...`);
