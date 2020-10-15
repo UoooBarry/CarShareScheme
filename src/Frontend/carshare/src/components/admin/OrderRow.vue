@@ -28,7 +28,7 @@
         <td v-if="!rent.bill.isPaid">
             Wait for pay...
         </td>
-        <td v-else-if="rent.status == 'In progress'">
+        <td v-else-if="rent.status == 'In progress' || rent.status == 'Overdue'">
             <select v-model="selectedLocation" class="form-control" >
                 <option v-for="location in locations" :key="location.id"  :value='location.id'>{{location.name}}</option>
             </select>

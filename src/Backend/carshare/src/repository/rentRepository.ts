@@ -198,10 +198,10 @@ class rentRepository implements DataRepository {
   async getReadyRents() {
     try {
       let scheduledDate = new Date();
-      scheduledDate.setDate(scheduledDate.getDate() - 1);
+      scheduledDate.setDate(scheduledDate.getDate() - 1); //1 days before the scheduled day
       const rents = Rent.findAll({
         where: {
-          start_from: { [Op.gte]: scheduledDate }
+          start_from: { [Op.gte]: scheduledDate } //find the bills that is time to start
         },
         include: [
           {
@@ -219,7 +219,7 @@ class rentRepository implements DataRepository {
     try {
       const rents = Rent.findAll({
         where: {
-          user_id: user_id,
+          user_id: user_id, //get all the pending rents of user by id
           [Op.or]: [
             {
               status: RentStatus.NotPicked,

@@ -95,9 +95,9 @@ class locationRepository implements DataRepository {
     }
 
     private swap(items: Location[], i:number, j:number) {
-        const temp = items[i];
-        items[i] = items[j];
-        items[j] = temp;
+        const temp = items[i]; //create temp var store i
+        items[i] = items[j];    //replace with i with j
+        items[j] = temp;    //replace j with i
     }
 
     async getAllValidateCars(from: string, sort: string | undefined, order: string | undefined) {
@@ -109,8 +109,8 @@ class locationRepository implements DataRepository {
             }
             const locations = await Location.findAll({
                 attributes: ['address'],
-                include: [{
-                    model: <any>Car,
+                include: [{ //get all available
+                    model: Car,
                     where: { available: true }
                 }],
                 order: [
@@ -120,7 +120,7 @@ class locationRepository implements DataRepository {
             for await (const location of locations) {
                 const result = await calculateDistance(from, location.address);
                 const distance = result.distance.value;
-                if (distance <= this.maximumRange) {
+                if (distance <= this.maximumRange) { //only push validate location base on input location
                     location.setDataValue('distance', distance);
                     validLocation.push(location);
                 }
