@@ -143,6 +143,11 @@ class rentRepository implements DataRepository {
     try {
       const rent = await Rent.findOne({
         where: { id: id },
+        include: [
+          {
+            model: Bill
+          }
+        ]
       });
       if (!rent) throw new ItemNotFound('No rent error');
       await rent.bill.destroy();

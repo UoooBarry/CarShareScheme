@@ -148,7 +148,8 @@ router.delete('/:id/', [verifyToken], (req: Request, res: Response) => {
             res.json({ message: 'success' });
         })
         .catch((err) => {
-            res.sendStatus(404);
+            console.log(err)
+            res.sendStatus(400);
         })
 })
 
