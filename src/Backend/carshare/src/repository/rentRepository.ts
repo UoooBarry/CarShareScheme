@@ -186,6 +186,10 @@ class rentRepository implements DataRepository {
         include: [
           {
             model: Car
+          },
+          {
+            model: Customer,
+            attributes: ['id', 'contact_number']
           }
         ]
       })
