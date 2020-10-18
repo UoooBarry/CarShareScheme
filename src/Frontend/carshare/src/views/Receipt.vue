@@ -35,6 +35,7 @@ export default {
         this.$axios.get(`${this.$carshare}/orders/${rent_id}`, {headers: this.header})
                     .then((res) => {
                         this.rent = res.data.rent;
+                        if(!this.rent.bill.isPaid) this.$router.push({name: 'NotFound'});
                     })
                     .catch(() => {
                     })

@@ -221,7 +221,7 @@ router.patch('/pickup', [verifyToken], (req: Request, res: Response) => {
 
             //Send message to user only in production environment
             if (process.env.NODE_ENV == 'production') {
-                const text: string = `Thanks for order our car rent service. \nYou can check your receipt here: https://carshare.uooobarry.com/receipt/${req.bill?.rent.id} \n Please note that your rent will start at ${req.bill?.rent.start_from} . You should come to pick up location 30 mins in advanced.`;
+                const text: string = `Thanks for order our car rent service. \nYou order ${req.bill?.rent.id} is successfully picked up!`;
                 Message.sendMessage(req.user.contact_number, text);
             }
 
