@@ -77,7 +77,7 @@
             </div>
             <div class="col">
               <div class="row package package-title">pick-up location</div>
-              <div class="row package">free shuttle service</div>
+              <div class="row package">{{ $route.query.address }}</div>
             </div>
           </div>
         </ul>

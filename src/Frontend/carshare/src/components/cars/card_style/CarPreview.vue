@@ -14,6 +14,10 @@
         {{value}}
       </div>
     </div>
+    <div>
+      <font-awesome-icon icon="map-marker-alt" />
+      {{ car.address }}
+    </div>
   </div>
 </template>
 

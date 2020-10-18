@@ -104,18 +104,3 @@ router.beforeEach((to, from, next) => {
 });
 
 
-//Global Mixin
-Vue.mixin({
-  methods: {
-    getCarData(res) {
-      let allCars = [];
-      const locations = res.data.locations;
-      for (const location of locations) {
-        for (const car of location.Cars) {
-          allCars.push(car);
-        }
-      }
-      return allCars;
-    },
-  },
-});

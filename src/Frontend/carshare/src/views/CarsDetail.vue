@@ -45,7 +45,7 @@ export default {
       .get(`${this.$carshare}/cars/${this.$route.params.id}`)
       .then(res => {
         this.car = res.data.car;
-      })
+     })
       .catch(() => {
         this.flashMessage.error({
           title: "Fail",

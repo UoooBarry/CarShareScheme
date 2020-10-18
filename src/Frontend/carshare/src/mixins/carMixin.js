@@ -31,6 +31,17 @@ export default {
     }
   },
   methods: {
+    getCarData(res) {//get all car data from the location
+        let allCars = [];
+        const locations = res.data.locations;
+        for (const location of locations) {
+          for (const car of location.Cars) {
+            car.address = location.address;
+            allCars.push(car);
+          }
+        }
+        return allCars;
+    },
     sort_car(item, order) {
       const target = event.target;
       document.getElementById("navbarDropdown").innerHTML = target.innerHTML;
