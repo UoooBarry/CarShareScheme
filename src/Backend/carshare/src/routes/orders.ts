@@ -99,13 +99,6 @@ router.post('/extend/:id', [ExtendRentValidator.validate, verifyToken], async (r
             //Update to complete
             await _Rent.update(parseInt(req.params.id), { status: RentStatus.Extended });
 
-            //Create bill
-            const bill = await _Bill.create({
-                user_id: req.user.id,
-                fee: feeToPay,
-                isPaid: true,
-                type: BillType.RentFee
-            });
 
             const newPeriod: number = req.originalRent.period + parseInt(req.body.period);  //old period + new period = new period
             //Create rent
@@ -114,9 +107,19 @@ router.post('/extend/:id', [ExtendRentValidator.validate, verifyToken], async (r
                 user_id: req.user.id,
                 start_from: req.originalRent.start_from, //Use the original start from date
                 period: newPeriod,
-                bill_id: bill.id,
                 status: RentStatus.InProgress
             });
+            
+            //Create bill
+            const bill = await _Bill.create({
+                user_id: req.user.id,
+                fee: feeToPay,
+                isPaid: true,
+                type: BillType.RentFee,
+                rent_id: newRent.id
+            });
+
+            
 
 
             res.json({ bill, newRent });
