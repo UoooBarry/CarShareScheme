@@ -53,6 +53,12 @@
             {{car.addons}}
           </div>
         </div>
+        <div class="row">
+          <div class="col function">
+            <font-awesome-icon icon="map-marker-alt" />
+            {{car.address}}
+          </div>
+        </div>
       </div>
     </div>
   </div>
