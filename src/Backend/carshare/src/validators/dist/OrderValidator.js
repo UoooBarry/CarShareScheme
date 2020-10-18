@@ -45,7 +45,7 @@ var OrderValidator = /** @class */ (function () {
     }
     OrderValidator.prototype.validate = function (req, res, next) {
         return __awaiter(this, void 0, void 0, function () {
-            var car;
+            var car, yesterday;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -61,7 +61,9 @@ var OrderValidator = /** @class */ (function () {
                             req.validationError.push('Period cannot be empty');
                         if (!req.body.start_from)
                             req.validationError.push('Start from date cannot be empty');
-                        if (new Date(req.body.start_from) < new Date())
+                        yesterday = new Date();
+                        yesterday.setDate(yesterday.getDate() - 1);
+                        if (new Date(req.body.start_from) < yesterday)
                             req.validationError.push('Start from date cannot be pass');
                         req.car = car;
                         next();

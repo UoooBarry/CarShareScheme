@@ -14,8 +14,10 @@ class OrderValidator implements Validator{
        if(!car.available) req.validationError.push('The car does not available yet');
        if(!req.body.car_id) req.validationError.push('Car cannot be empty');
        if(!req.body.period || req.body.period <= 0) req.validationError.push('Period cannot be empty');
-       if (!req.body.start_from) req.validationError.push('Start from date cannot be empty');
-       if (new Date(req.body.start_from) < new Date()) req.validationError.push('Start from date cannot be pass');
+        if (!req.body.start_from) req.validationError.push('Start from date cannot be empty');
+        let yesterday = new Date();
+        yesterday.setDate(yesterday.getDate() - 1);
+       if (new Date(req.body.start_from) < yesterday) req.validationError.push('Start from date cannot be pass');
        req.car = car;
        next();
     }
