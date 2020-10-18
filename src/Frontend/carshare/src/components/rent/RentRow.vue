@@ -1,11 +1,12 @@
 /***********************************************************************
  *           @AUTHOR: Bach Dao, Created AT: 15/08/2020                *
+Yongqian Huang, updated at 18/09/2020  Disable user from go to receipt page if not paid the bill
  ***********************************************************************/
 <template>
   <div class="shadow-sm p-3 mb-4 bg-white rounded">
     <div class="row bill-id">
       <a
-        :href="'/receipt/' + rent.id"
+        :href="this.rent.bill.isPaid ? '/receipt/' + rent.id : '#'"
         class="col-auto"
       >{{ rent.createdAt | formatDate }} - Rent ID: {{ rent.id }} - Period: {{ rent.period }} days</a>
       <div

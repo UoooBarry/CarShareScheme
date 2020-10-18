@@ -46,7 +46,7 @@ export default {
       },
       filterByStatus(){
         const filteredOrder = this.rents.filter((rent) => {
-          return rent.status !== 'Completed';
+          return rent.status !== 'Completed' || rent.status !== 'Wait for review';
         })
         this.rents = filteredOrder;
       }
