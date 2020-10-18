@@ -9,7 +9,7 @@
 ************************************************************************/
 
 import createError from 'http-errors';
-import express,{Application, Request, Response, NextFunction} from 'express';
+import express, { Application, Request, Response, NextFunction } from 'express';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import carsRouter from './routes/cars';
@@ -27,7 +27,7 @@ import RentDetector from './tasks/rentDetector';
 import db from './config/db';
 import seed from './data/seed';
 
-const app:Application = express();
+const app: Application = express();
 
 
 app.use(logger('dev'));
@@ -52,14 +52,16 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 
 // catch database connection
 db.authenticate()
-  .then(() =>{ 
+  .then(() => {
     console.log('Database connected...');
-    db.sync()
-      .then(() => {
-        seed.up().then(() => {
-          console.log('Database seeded.');
-        });    
-      });
+    if (process.env.NODE_ENV != 'test') {
+      db.sync()
+        .then(() => {
+          seed.up().then(() => {
+            console.log('Database seeded.');
+          });
+        });
+    }
   })
   .catch((err: any) => console.log(`DB err: ${err}`))
 
@@ -73,7 +75,7 @@ overdueDetect.run();
 rentDetector.run();
 
 // error handler
-app.use( (err: any, req: Request, res: Response, next: NextFunction) => {
+app.use((err: any, req: Request, res: Response, next: NextFunction) => {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};

@@ -13,7 +13,7 @@
                     <th scope="col">Location</th>
                     <th scope="col">User id</th>
                     <th scope="col">Fee</th>
-                    <th scope="col">Status</th>
+                    <th scope="col"> <a  @click="filterByStatus()" title='Only display not completed orders.' href="">Status</a> </th>
                     <th scope="col">Return</th>
                     <th scope="col">Delete</th>
                 </tr>
@@ -43,6 +43,12 @@ export default {
       },
       sortLocationsById(){
         this.rents.sort(this.compareId);
+      },
+      filterByStatus(){
+        const filteredOrder = this.rents.filter((rent) => {
+          return rent.status !== 'Completed' || rent.status !== 'Wait for review';
+        })
+        this.rents = filteredOrder;
       }
     }
 }

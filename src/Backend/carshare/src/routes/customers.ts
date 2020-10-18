@@ -36,7 +36,7 @@ router.get('/:id/', async (req, res) => {
 
 //GET /api/customers/overdue/
 router.get('/overdue/all', verifyToken, (req: Request,res: Response) => {
-    const caluse = {
+    const clause = {
         where:{
             user_id: req.user.id,
             type: BillType.OverdueFee
@@ -53,7 +53,7 @@ router.get('/overdue/all', verifyToken, (req: Request,res: Response) => {
             }
         ]
     }
-    _Bill.getBy(caluse)
+    _Bill.getBy(clause)
         .then((bills) => {
             res.json({bills});
         })

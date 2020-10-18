@@ -78,9 +78,9 @@ class billRepository implements DataRepository {
     }
   }
 
-  async getBy(caluse: any) {
+  async getBy(clause: any) {
     try {
-      const bill = Bill.findAll(caluse);
+      const bill = Bill.findAll(clause);
       return Promise.resolve(bill);
     } catch (err) {
       return Promise.reject(err);
