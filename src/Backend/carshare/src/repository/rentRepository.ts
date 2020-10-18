@@ -151,6 +151,15 @@ class rentRepository implements DataRepository {
       });
       if (!rent) throw new ItemNotFound('No rent error');
       await rent.bill.destroy();
+      const relatedBills = await Bill.findAll({
+        where: {
+          rent_id: id
+        }
+      });
+      relatedBills.forEach(async (bill) => {
+        await bill.destroy();
+      })
+      
       await rent.destroy();
 
       return Promise.resolve(true);
