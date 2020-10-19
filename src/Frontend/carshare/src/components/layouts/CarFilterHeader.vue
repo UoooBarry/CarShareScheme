@@ -1,6 +1,7 @@
 /***********************************************************************
  *           @AUTHOR: Bach Dao, CREATED AT: 24/08/2020
             Yongqian Huang updated at: 25/08/2020 Shorten code with better filter method                *
+               Yongqian Huang updated at: 19/10/2020 display all cars   *
  ***********************************************************************/
 <template>
   <div>
@@ -57,8 +58,9 @@
             </label>
           </li>
           <li>
-            <font-awesome-icon icon="border-all" id="list1" class="display-style" v-on:click.prevent="cardToggle($event)" />
-            <font-awesome-icon icon="bars" id="list2" class="display-style" v-on:click.prevent="cardToggle($event)"/>
+            <font-awesome-icon icon="border-all" id="list1" class="display-style" v-on:click.prevent="cardToggle($event)" title="Display in card style" />
+            <font-awesome-icon icon="bars" id="list2" class="display-style" v-on:click.prevent="cardToggle($event)" title="Display in row style"/>
+            <font-awesome-icon icon="globe-americas" id="list3" v-on:click.prevent="displayAllCars($event)" class="display-style" style="color: #6c757d" title="Show all cars"/>
           </li>
         </ul>
       </div>
@@ -75,7 +77,8 @@ export default {
   props: ["address"],
   data() {
     return {
-      cardStyle : true
+      cardStyle : true,
+      displayAll: false
     };
   },
   components: {
@@ -85,14 +88,21 @@ export default {
     changeAddress(address) {
       this.$emit("onAddressChange", address);
     },
-
     cardToggle(event) {
       if (event.currentTarget.id === "list1") {
         this.$emit("updateStyle", 1);
-      } else {
+      } else{
         this.$emit("updateStyle", 2);
       }
-    
+    },
+    displayAllCars(event){
+      if(!this.displayAll){
+        event.target.style.color = 'black';
+        this.$emit("displayAllCars", true);
+        this.displayAll = true;
+      }else{
+        this.$router.go();
+      }
     }
   }
 };

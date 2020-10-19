@@ -5,6 +5,7 @@
  *   Bach Dao, Updated AT: 27/08/2020      tool tips                    *  
  *Yongqian Huang updated at 27/08/2020 Add location check to display cars*
                Yongqian Huang updated at: 03/10/2020 rewrite filter     *
+               Yongqian Huang updated at: 19/10/2020 display all cars   *
  ***********************************************************************/
 <template>
   <div>
@@ -31,6 +32,7 @@
           :card="card"
           v-on:onAddressChange="changeAddress"
           v-on:updateStyle="displayStyle"
+          @displayAllCars="displayAllCars"
         />
         <CarList id="car-list-style" v-bind:cars="cars" />
         <CarRow id="car-row-style" v-bind:cars="cars"/>

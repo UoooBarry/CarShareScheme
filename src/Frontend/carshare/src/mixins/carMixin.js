@@ -90,6 +90,22 @@ export default {
         })
         .catch();
     },
+    displayAllCars(){
+      this.$axios
+            .get(`${this.$carshare}/cars`, {
+              params: {
+                all: true
+              }
+            })
+            .then(res => {
+              //Set all cars to current cars
+              this.update(res.data.cars);
+              this.temp_cars = this.cars;
+            })
+            .catch((err) => {
+              console.log(err)
+            });
+    },
     filterSeats(number, checked) {
       const cars = this.temp_cars.filter((car) => {
         return car.seats === number;
