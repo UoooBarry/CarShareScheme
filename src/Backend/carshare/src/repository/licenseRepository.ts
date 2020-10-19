@@ -1,4 +1,6 @@
-
+/*************************************************
+ * @AUTHOR YONGQIAN HUANG, CREATED AT 20/09/2020 *
+ *************************************************/
 import DataRepository from './dataRepository';
 import License from '../models/license';
 import Customer from '../models/customer'
