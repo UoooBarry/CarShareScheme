@@ -1,24 +1,30 @@
 <template>
-  <center>
-    <h1>Not Found!</h1>
-    <p>
-      <a href="/">Go home?</a>
-    </p>
-  </center>
+  <div class="notfound">
+    <div class="gobacktext">
+      <a href="javascript:history.back()">Go Back</a>
+    </div>
+  </div>
 </template>
 
 <script>
-  export default {
-    name: 'NotFound'
-  }
+export default {
+  name: "NotFound"
+};
 </script>
 
 <style scoped>
-  center {
-    margin: 15vw;
-  }
-  h1 {
-    color: var(--border);
-    font-size: 2em;
-  }
+.notfound {
+  margin-top: 0;
+  padding: 0;
+  text-align: center;
+  background: url("../assets/img/NotFound.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 1100px;
+  background-position: 100% 50%;
+}
+.gobacktext {
+  padding-top: 400px;
+  font-size: 30px;
+}
 </style>
