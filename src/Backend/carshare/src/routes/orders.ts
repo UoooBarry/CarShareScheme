@@ -224,7 +224,7 @@ router.patch('/pickup', [verifyToken], (req: Request, res: Response) => {
 
             //Send message to user only in production environment
             if (process.env.NODE_ENV == 'production') {
-                const text: string = `Thanks for order our car rent service. \nYou order ${req.bill?.rent.id} is successfully picked up!`;
+                const text: string = `Thanks for order our car rent service. \nYou order ${req.body.rent.id} is successfully picked up!`;
                 Message.sendMessage(req.user.contact_number, text);
             }
 
