@@ -109,38 +109,24 @@ var _default = {
       }).then(function (res) {
         _this.cars = _this.getCarData(res);
 
-        _this.update();
-      })["catch"]();
-    },
-    allCar: function allCar() {
-      var _this2 = this;
-
-      this.$axios.get("".concat(this.$carshare, "/cars"), {
-        params: {
-          all: true
-        }
-      }).then(function (res) {
-        _this2.cars = res.data.cars;
-        _this2.temp_cars = _this2.cars;
-
-        _this2.update();
+        _this.emitCarUpdate(_this.cars);
       })["catch"]();
     },
     search: function search() {
-      var _this3 = this;
+      var _this2 = this;
 
       this.$axios.get("".concat(this.$carshare, "/cars/search"), {
         params: {
           query: this.searchItem
         }
       }).then(function (res) {
-        _this3.cars = res.data.cars;
+        _this2.cars = res.data.cars;
 
-        _this3.update();
+        _this2.emitCarUpdate(_this2.cars);
       })["catch"]();
     },
     displayAllCars: function displayAllCars() {
-      var _this4 = this;
+      var _this3 = this;
 
       this.$axios.get("".concat(this.$carshare, "/cars"), {
         params: {
@@ -148,9 +134,10 @@ var _default = {
         }
       }).then(function (res) {
         //Set all cars to current cars
-        _this4.update(res.data.cars);
+        _this3.cars = res.data.cars;
+        _this3.temp_cars = _this3.cars;
 
-        _this4.temp_cars = _this4.cars;
+        _this3.emitCarUpdate();
       })["catch"](function (err) {
         console.log(err);
       });
@@ -265,7 +252,7 @@ var _default = {
         }
       }
     },
-    update: function update() {
+    emitCarUpdate: function emitCarUpdate() {
       this.$emit("onFilter", this.cars);
     }
   }

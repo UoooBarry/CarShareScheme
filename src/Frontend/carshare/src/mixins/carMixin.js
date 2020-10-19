@@ -59,21 +59,7 @@ export default {
         })
         .then((res) => {
           this.cars = this.getCarData(res);
-          this.update();
-        })
-        .catch();
-    },
-    allCar() {
-      this.$axios
-        .get(`${this.$carshare}/cars`, {
-          params: {
-            all: true,
-          },
-        })
-        .then((res) => {
-          this.cars = res.data.cars;
-          this.temp_cars = this.cars;
-          this.update();
+          this.emitCarUpdate(this.cars);
         })
         .catch();
     },
@@ -86,7 +72,7 @@ export default {
         })
         .then((res) => {
           this.cars = res.data.cars;
-          this.update();
+          this.emitCarUpdate(this.cars);
         })
         .catch();
     },
@@ -99,8 +85,9 @@ export default {
             })
             .then(res => {
               //Set all cars to current cars
-              this.update(res.data.cars);
+              this.cars = res.data.cars;
               this.temp_cars = this.cars;
+              this.emitCarUpdate();
             })
             .catch((err) => {
               console.log(err)
@@ -152,7 +139,7 @@ export default {
           }
       }
     },
-    update() {
+    emitCarUpdate() {
       this.$emit("onFilter", this.cars);
     },
   }

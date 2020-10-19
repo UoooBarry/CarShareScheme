@@ -28,7 +28,7 @@
                 :placeholder="$t('search')"
                 v-model="searchItem"
               />
-              <button class="btn btn-outline-success" type="submit" v-on:click="update">{{ $t('search') }}</button>
+              <button class="btn btn-outline-success" type="submit" >{{ $t('search') }}</button>
             </form>
           </li>
           <li class="nav-item dropdown">
