@@ -138,9 +138,7 @@ var _default = {
         _this3.temp_cars = _this3.cars;
 
         _this3.emitCarUpdate();
-      })["catch"](function (err) {
-        console.log(err);
-      });
+      })["catch"](function () {});
     },
     filterSeats: function filterSeats(number, checked) {
       var cars = this.temp_cars.filter(function (car) {

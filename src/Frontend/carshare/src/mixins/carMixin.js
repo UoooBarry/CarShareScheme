@@ -89,8 +89,7 @@ export default {
               this.temp_cars = this.cars;
               this.emitCarUpdate();
             })
-            .catch((err) => {
-              console.log(err)
+            .catch(() => {
             });
     },
     filterSeats(number, checked) {
