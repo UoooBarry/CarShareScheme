@@ -10,6 +10,7 @@
 import Car from '../models/car';
 import Sequelize from 'sequelize';
 const Op = Sequelize.Op;
+import Location from '../models/location';
 import DataRepository from './dataRepository';
 import ItemNotFound from '../exceptions/ItemNotFound';
 import Comment from '../models/comment';
@@ -73,6 +74,10 @@ class carRepository implements DataRepository {
                 attributes: ['id', 'first_name', 'family_name']
               }
             ]
+          },
+          {
+            model: Location,
+            attributes: ['name', 'address']
           }
         ]
       });

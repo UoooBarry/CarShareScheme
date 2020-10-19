@@ -10,7 +10,7 @@
       @mouseover="cardHover = true"
       @mouseleave="cardHover = false"
       :class="{hover: cardHover}"
-      v-on:click="$router.push({name: 'CarDetail', params:{ id: car.id}, query: {address: car.address}})"
+      v-on:click="$router.push({name: 'CarDetail', params:{ id: car.id}})"
     >
       <div class="hover-info" v-on:mousemove="draw" v-on:mouseover="hover" v-on:mouseleave="hover">
         <img
