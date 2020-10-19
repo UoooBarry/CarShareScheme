@@ -6,7 +6,7 @@
     <div
       class="container-fluid my-4 car"
       style="width: 100%; cursor: pointer;"
-      v-on:click="$router.push({name: 'CarDetail', params:{ id: car.id}, query: {address: car.address}})"
+      v-on:click="$router.push({name: 'CarDetail', params:{ id: car.id}})"
     >
       <img
         class="card-img"
