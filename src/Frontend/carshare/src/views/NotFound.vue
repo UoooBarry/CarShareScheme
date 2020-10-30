@@ -24,7 +24,7 @@ export default {
   background-position: 100% 50%;
 }
 .gobacktext {
-  padding-top: 400px;
+  padding-top: 300px;
   font-size: 30px;
 }
 </style>
