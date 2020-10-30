@@ -68,4 +68,7 @@ For more information, please check technical solution document - implementation 
 * Release 2: 31/08/2020
 * Release 3: 14/09/2020
 * Release 4: 28/09/2020
-* First Major Release: 7/10/2020
+* Release 5: 7/10/2020
+* Final deployment: 30/10/2020
+
+[PBD Car Share App](https://carshare.uooobarry.com)
