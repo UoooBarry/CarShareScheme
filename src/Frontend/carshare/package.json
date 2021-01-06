@@ -14,7 +14,7 @@
     "@fortawesome/vue-fontawesome": "^0.1.10",
     "@smartweb/vue-flash-message": "^0.6.4",
     "@vue/preload-webpack-plugin": "^1.1.2",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "bootstrap": "^4.5.0",
     "core-js": "^3.6.5",
     "gsap": "^3.5.1",
